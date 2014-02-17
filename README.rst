@@ -68,3 +68,21 @@ Initial starting point::
 
   def get (label)
         gets the reservation with the given label
+
+
+.. list-table:: REST Interface
+   :widths: 15 10 30
+   :header-rows: 1
+
+   * - HTTP Method
+     - URI
+     - Action
+   * - GET
+     - cm/v1.0/reservation/
+     - list all available reservations
+   * - GET
+     - cm/v1.0/reservation/<label>
+     - List all reservations with a given label
+   * - ...
+     - ...
+     - ...
