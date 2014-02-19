@@ -3,7 +3,7 @@
 
 .. _s-manual:
 
-|image0|  Cloudmesh MOOC Shell
+|image0|  Cloudmesh Researvation for OpenStack
 ================================================
 
 .. sidebar:: Authors
