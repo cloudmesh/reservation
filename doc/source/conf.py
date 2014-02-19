@@ -295,7 +295,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'CloudmeshReservation.tex', u'Cloudmesh Reservation Shell Documentation',
+    ('index', 'CloudmeshReservation.tex', u'Cloudmesh Reservation Documentation',
      u'Gregor von Laszewski', 'manual'),
 ]
 
@@ -325,7 +325,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'cloudmesh', u'Cloudmesh Reservation Shell Documentation',
+    ('index', 'cloudmesh', u'Cloudmesh Reservation Documentation',
      [u'Gregor von Laszewski'], 1)
 ]
 
