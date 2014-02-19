@@ -1,0 +1,8 @@
+docopts
+flask
+requests
+sphinx
+sphinx_bootstrap_theme
+
+
+
