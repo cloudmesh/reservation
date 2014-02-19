@@ -168,7 +168,7 @@ html_theme = 'bootstrap'
 # html_theme_options = {}
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "Cloudmesh Reservation Shell",
+    'navbar_title': "Cloudmesh Reservation",
 
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Site",
