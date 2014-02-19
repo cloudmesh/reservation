@@ -16,6 +16,18 @@ Deasign Features
 
 The system will provide two unique services discussed next.
 
+Code
+-----
+
+The code is located at:
+
+* https://github.com/cloudmesh/reservation 
+
+This documentation is located at:
+
+* http://cloudmesh.futuregrid.org/reservation
+
+
 User calanedar based scheduling of VMs
 ----------------------------------------------------------------------
 

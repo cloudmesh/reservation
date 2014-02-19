@@ -12,13 +12,23 @@
 
    If your name is missing please let us know and we will add it.
 
-**Unit 7: FutureGrid for Big Data Applications and Analytics Course**
+**Design Documentation**
 
 .. toctree::
    :numbered:
    :maxdepth: -1
 
    introduction
+
+**Progress Reports**
+
+.. toctree::
+   :numbered:
+   :maxdepth: -1
+
+   progress
+
+
 
 .. |image0| image:: /images/fg-logo-md.png
 
