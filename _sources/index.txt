@@ -18,8 +18,9 @@
    :numbered:
    :maxdepth: -1
 
+   deploy
    introduction
-
+    
 **Progress Reports**
 
 .. toctree::

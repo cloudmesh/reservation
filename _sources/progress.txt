@@ -1,7 +1,7 @@
 Progress
 ======================================================================
 
-This section is maintained by Aravandh and Oliver in whch they report in chronological reverse order 
+This section is maintained by Aravindh and Oliver in which they report in chronological reverse order 
 
 * What have we achieved this week?
 * What have we not achieved this week?
@@ -12,7 +12,7 @@ In addition a list of items and tasks are summarized that allow to easily identi
 
 * https://github.com/cloudmesh/reservation/issues
 
-When a task is done, please indicate it. In case you just use this list place [done] next to it in this summary and place the perons(s) mostly responsibel for them. If a task is done before it is added to the issues, ther eis no reason to add them to the github issues list.
+When a task is done, please indicate it. In case you just use this list place [done] next to it in this summary and place the persons(s) mostly responsible for them. If a task is done before it is added to the issues, there is no reason to add them to the github issues list.
 
 List of tasks
 ==============
@@ -25,8 +25,8 @@ List of tasks
 
 * DevStack
 
-  * Document instalation of devstack (one worker) in vagrant 
-  * Document instalation of devstack with multiple workers in vagrant
+  * Document installation of devstack (one worker) in vagrant 
+  * Document installation of devstack with multiple workers in vagrant
 
 * Design
 
