@@ -5,7 +5,7 @@ This is a project under development.
 
 Goal: Develop a reservation system for cloud virtual machines.
 
-Deasign Features
+Design Features
 ----------------------------------------------------------------------
 
 * REST interface 
