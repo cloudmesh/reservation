@@ -99,3 +99,5 @@ Once the file is saved, run the following commands to rebuilt the VM through Vag
 
 * **vagrant destroy**
 * **vagrant up**
+
+This would take some time to run as OpenStack installation takes around 10 - 15 minutes.
