@@ -48,6 +48,12 @@ parser = argparse.ArgumentParser(
 # application, including client_id and client_secret. You can see the Client ID
 # and Client secret on the APIs page in the Cloud Console:
 # <https://cloud.google.com/console#/project/855417837151/apiui>
+
+
+#
+# todo: is this not better off in ~/.futuregrid/client_seecret.json
+# todo: what is the difference to the reservation_config.json file???
+#
 CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 
 # Set up a Flow object to be used for authentication.
@@ -88,6 +94,10 @@ def main(argv):
          reservation = ReservationClient(service)
          #reservation.removeAllEvents()
          reservation.selectAllEvents()
+
+         #
+         # gvl: the next must not be used in this prg. all identifiers must be removed from code
+         #
          #reservation.removeEventFromCalendar('t2hpplpou4p7fkijm33rhu7ank')
          
 
