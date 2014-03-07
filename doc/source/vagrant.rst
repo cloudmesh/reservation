@@ -69,6 +69,10 @@ The VM created above was a very basic one without much software on
 it. The process of installing the necessary software on the fly while
 the system is booting is termed as **provisioning**. Vagrant does
 automated provisioning and runs some provisioners whenever we issue
-the **vagrant up** command. The details about provisioning a software
+the::
+
+  vagrant up
+
+command. The details about provisioning a software
 will be explained in details later.
 
