@@ -18,10 +18,16 @@
    :numbered:
    :maxdepth: -1
 
-   deploy
    introduction
+   deploy
+   rest
    api
-   vagrant 
+
+**Indices and Lists**
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
 **Progress Reports**
 
@@ -31,7 +37,14 @@
 
    progress
 
+**Appendix**
 
+.. toctree::
+   :numbered:
+   :maxdepth: -1
+
+   vagrant
+   devstack
 
 .. |image0| image:: /images/fg-logo-md.png
 
