@@ -16,12 +16,12 @@
 
 """Command-line skeleton application for Calendar API.
 Usage:
-  $ python sample.py
+  $ python cm-reservation.py
 
 You can also get help on all the command-line flags the program understands
 by running:
 
-  $ python sample.py --help
+  $ python cm-reservation.py --help
 
 """
 
@@ -70,7 +70,7 @@ def main(argv):
   # If the credentials don't exist or are invalid run through the native client
   # flow. The Storage object will ensure that if successful the good
   # credentials will get written back to the file.
-    storage = file.Storage('Main.dat')
+    storage = file.Storage('~/.futuregrid/reservation_config.json')
     credentials = storage.get()
     if credentials is None or credentials.invalid:
         credentials = tools.run_flow(FLOW, storage, flags)

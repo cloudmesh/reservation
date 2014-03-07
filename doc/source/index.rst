@@ -20,7 +20,9 @@
 
    deploy
    introduction
-    
+   api
+   vagrant 
+
 **Progress Reports**
 
 .. toctree::

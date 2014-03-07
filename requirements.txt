@@ -3,6 +3,7 @@ flask
 requests
 sphinx
 sphinx_bootstrap_theme
-
+google-api-python-client
+httplib2
 
 
