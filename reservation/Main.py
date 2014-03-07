@@ -29,7 +29,9 @@ import argparse
 import httplib2
 import os
 import sys
+import yaml
 
+from ReservationServiceEvents import ReservationClient
 from apiclient import discovery
 from oauth2client import file
 from oauth2client import client
@@ -59,56 +61,39 @@ FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
     ],
     message=tools.message_if_missing(CLIENT_SECRETS))
 
-
+        
+        
 def main(argv):
-	# Parse the command-line flags.
-	flags = parser.parse_args(argv[1:])
+    # Parse the command-line flags.
+    flags = parser.parse_args(argv[1:])
 
   # If the credentials don't exist or are invalid run through the native client
   # flow. The Storage object will ensure that if successful the good
   # credentials will get written back to the file.
-	storage = file.Storage('sample.dat')
-	credentials = storage.get()
-	if credentials is None or credentials.invalid:
-		credentials = tools.run_flow(FLOW, storage, flags)
+    storage = file.Storage('Main.dat')
+    credentials = storage.get()
+    if credentials is None or credentials.invalid:
+        credentials = tools.run_flow(FLOW, storage, flags)
 
   # Create an httplib2.Http object to handle our HTTP requests and authorize it
   # with our good Credentials.
-	http = httplib2.Http()
-	http = credentials.authorize(http)
+    http = httplib2.Http()
+    http = credentials.authorize(http)
 
   # Construct the service object for the interacting with the Calendar API.
-	service = discovery.build('calendar', 'v3', http=http)
+    service = discovery.build('calendar', 'v3', http=http)
 
-	try:
-	  	'''event = {
-		'summary': 'Appointment',
-		'location': 'Somewhere',
-		'start': {
-			'dateTime': '2014-02-26T10:00:00.000-07:00',
-			'timeZone': 'America/Los_Angeles'
-	  		},
-		'end': {
-			'dateTime': '2016-06-03T10:25:00.000-07:00',
-			'timeZone': 'America/Los_Angeles'
-			}
-		}
-		recurring_event = service.events().insert(calendarId='primary', body=event).execute()
-		print recurring_event['id']'''
-		#instances = service.events().instances(calendarId='primary', eventId='j007m5a7drdfrut67sa7lepsak')
-		#service.events().delete(calendarId='primary', eventId='j007m5a7drdfrut67sa7lepsak').execute()
-		page_token = None
-		while True:
-			events = service.events().list(calendarId='primary', pageToken=page_token).execute()
-			for event in events['items']:
-				print event['id'],"--",event['summary']
-			page_token = events.get('nextPageToken')
-			if not page_token:
-				break
+    try:
+        #val = service.calendarList().list(minAccessRole=None, maxResults=1, pageToken=None, showHidden=None).execute()
+         reservation = ReservationClient(service)
+         #reservation.removeAllEvents()
+         reservation.selectAllEvents()
+         #reservation.removeEventFromCalendar('t2hpplpou4p7fkijm33rhu7ank')
+         
 
-	except client.AccessTokenRefreshError:
-		print ("The credentials have been revoked or expired, please re-run"
-			"the application to re-authorize")
+    except client.AccessTokenRefreshError:
+        print ("The credentials have been revoked or expired, please re-run"
+            "the application to re-authorize")
 
 
 # For more information on the Calendar API you can visit:
