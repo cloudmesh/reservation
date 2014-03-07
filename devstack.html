@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FutureGrid &mdash; Cloudmesh 0.1 documentation</title>
+    <title>2. DevStack &mdash; Cloudmesh 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,6 +31,7 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="prev" title="1. Vagrant" href="vagrant.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -92,13 +93,13 @@
 <li class="toctree-l1"><a class="reference internal" href="progress.html">1. Progress</a></li>
 <li class="toctree-l1"><a class="reference internal" href="progress.html#list-of-tasks">2. List of tasks</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vagrant.html">1. Vagrant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">1.1. Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">1.2. Commands</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="devstack.html">2. DevStack</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">2. DevStack</a></li>
 </ul>
 </ul>
 </li>
@@ -112,7 +113,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">FutureGrid</a></li>
+<li><a class="reference internal" href="#">2. DevStack</a></li>
 </ul>
 </ul>
 </li>
@@ -121,6 +122,10 @@
             
               
                 
+  <li>
+    <a href="vagrant.html" title="Previous Chapter: 1. Vagrant"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; 1. Vagrant</span>
+    </a>
+  </li>
               
             
             
@@ -128,7 +133,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/futuregrid.txt"
+  <a href="_sources/devstack.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -152,9 +157,46 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="futuregrid">
-<h1>FutureGrid<a class="headerlink" href="#futuregrid" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+  <div class="section" id="devstack">
+<h1>2. DevStack<a class="headerlink" href="#devstack" title="Permalink to this headline">¶</a></h1>
+<p>We asume you have virtualbox and vagrant installed. This procedure will guide you to install OpenStack using DevStack. The procedure will be carried out using Shell Script Provisioner available with Vagrant. There are other standard Provisioning tools such as Chef and Puppet available. For now we will use the Shell Script Provisioner for ease of use. The steps to be followed in a nutshell is given below:</p>
+<ul class="simple">
+<li>Have Virtual Box and Vagrant installed</li>
+<li>Create Vagrantfile using <strong>vagrant init</strong> command</li>
+<li>Create a shell script named <strong>install.sh</strong> (or a different name) with the steps to install OpenStack</li>
+<li>Amend the Vagrantfile to call the script</li>
+</ul>
+<p>The install.sh script is shown below:</p>
+<div class="highlight-python"><pre>#! /usr/bin/env bash
+
+echo "Installing git ...."
+apt-get update &gt;/dev/null 2&gt;&amp;1
+apt-get install -y git &gt;/dev/null 2&gt;&amp;1
+echo "Cloning devstack from devstack ...."
+git clone https://github.com/openstack-dev/devstack.git
+echo "Deploying OpenStack Cloud ...."
+echo "This will take a while to setup ...."
+echo " "
+echo "####################################"
+echo "#        PLEASE BE PATIENT         #"
+echo "####################################"
+echo " "
+cd /home/vagrant/devstack/tools
+chmod +x create-stack-user.sh
+./create-stack-user.sh
+chown -R stack:stack /home/vagrant/devstack
+cd /home/vagrant/devstack
+sudo -u stack ./stack.sh</pre>
+</div>
+<p>The above script needs to be placed in the project directory where the Vagrantfile is present. The next task is to modify the Vagrant file to call the shell script just created.</p>
+<p>Add the following line to the Vagrantfile:</p>
+<div class="highlight-python"><pre>config.vm.provision "shell", path: "install.sh"</pre>
+</div>
+<p>Once the file is saved, run the following commands to rebuilt the VM through Vagrant:</p>
+<div class="highlight-python"><pre>vagrant destroy
+vagrant up</pre>
+</div>
+<p>This would take some time to run as OpenStack installation takes around 10 - 15 minutes.</p>
 </div>
 
 

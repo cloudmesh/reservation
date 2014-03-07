@@ -16,29 +16,37 @@ After you have set up virtualenv, you instal the requirements with::
 
   pip install -r requirements.txt
 
-Code Development
+
+Install
 ----------------------------------------------------------------------
 
-We have not yet set up a setup.py environment. Thus for now go into the::
+As the reservation interface is not yet uploaded to pip, you need to
+call in the main directory::
 
-  ./reservation 
+  python setup.py install
 
-directory and modify the code there.
 
-Controling the server
-======================================================================
+Directory Structure of the project
+----------------------------------------------------------------------
 
-The server can be started from the main repository directory with::
+The directory structure is as follows::
 
-  fab server.start
+  -------reservation
+               |
+               |-----reservation
+                         |---reservation.py
+                         |---cm_reservation.py
+               |-----etc
+                         |---researvation_config.json
 
-It can be stapped with::
 
-  fab server.stop
+
+
+
 
 
 Publishing the Documentation
-======================================================================
+----------------------------------------------------------------------
 
 Developers have the ability to change the documentation in the::
 

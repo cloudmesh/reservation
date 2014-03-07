@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FutureGrid &mdash; Cloudmesh 0.1 documentation</title>
+    <title>3. REST interfaces &mdash; Cloudmesh 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,6 +31,8 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="next" title="4. Python API" href="api.html" />
+    <link rel="prev" title="2. Deployment" href="deploy.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -66,7 +68,7 @@
      href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Cloudmesh Reservation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#design-features">1.1. Design Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#code">1.2. Code</a></li>
@@ -82,8 +84,8 @@
 <li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">2.5. Publishing the Documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rest.html">3. REST interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-rest">3.1. References for REST</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">3. REST interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#references-for-rest">3.1. References for REST</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">4. Python API</a></li>
@@ -112,7 +114,10 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">FutureGrid</a></li>
+<li><a class="reference internal" href="#">3. REST interfaces</a><ul>
+<li><a class="reference internal" href="#references-for-rest">3.1. References for REST</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -121,6 +126,14 @@
             
               
                 
+  <li>
+    <a href="deploy.html" title="Previous Chapter: 2. Deployment"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; 2. Deployment</span>
+    </a>
+  </li>
+  <li>
+    <a href="api.html" title="Next Chapter: 4. Python API"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">4. Python API &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -128,7 +141,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/futuregrid.txt"
+  <a href="_sources/rest.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -152,9 +165,78 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="futuregrid">
-<h1>FutureGrid<a class="headerlink" href="#futuregrid" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+  <div class="section" id="rest-interfaces">
+<h1>3. REST interfaces<a class="headerlink" href="#rest-interfaces" title="Permalink to this headline">¶</a></h1>
+<p>Initial starting point. THis text will be removed and put into the list-table:</p>
+<div class="highlight-python"><pre>cm/v1.0/reservation/
+
+def list
+      lists the reservation
+
+cm/v1.0/reservation/&lt;label&gt;
+
+def get (label)
+      gets the reservation with the given label
+
+cm/v1.0/reservation/add/&lt;label&gt;/&lt;resource&gt;/&lt;from&gt;/&lt;to&gt;
+
+def add (label)
+      adds the reservation with the given label
+
+cm/v1.0/reservation/delete/&lt;label&gt;
+
+def get (label)
+      gets the reservation with the given label
+
+
+cm/v1.0/reservation/delete/&lt;label&gt;/&lt;cell&gt;&lt;cloud&gt;/&lt;region&gt;/&lt;aggregate&gt;/&lt;numberofvms&gt;/&lt;from&gt;/&lt;to&gt;
+
+def get (label)
+      gets the reservation with the given label</pre>
+</div>
+<table border="1" class="docutils">
+<caption>REST Interface</caption>
+<colgroup>
+<col width="21%" />
+<col width="14%" />
+<col width="43%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">HTTP Method</th>
+<th class="head">URI</th>
+<th class="head">Action</th>
+<th class="head">Python Client</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>cm/v1.0/reservation/</td>
+<td>List all available reservations</td>
+<td>list()</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>cm/v1.0/reservation/&lt;label&gt;</td>
+<td>List all reservations with a given label</td>
+<td>list(label)</td>
+</tr>
+<tr class="row-even"><td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="references-for-rest">
+<h2>3.1. References for REST<a class="headerlink" href="#references-for-rest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Designing Flask REST Interfaces:
+<a class="reference external" href="http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask">http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask</a></li>
+<li>Designing Flask REST Interfaces, part2:</li>
+</ul>
+<p><a class="reference external" href="http://blog.miguelgrinberg.com/post/designing-a-restful-api-using-flask-restful">http://blog.miguelgrinberg.com/post/designing-a-restful-api-using-flask-restful</a>
+* Requests: <a class="reference external" href="http://requests.readthedocs.org/en/latest/">http://requests.readthedocs.org/en/latest/</a></p>
+</div>
 </div>
 
 
