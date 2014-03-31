@@ -16,7 +16,8 @@ class ReservationClient(object):
     
     def addEventToCalendar(self,event):
         '''An event is a JSON object that is passes to his method to be added to the calendar'''
-        self.service.events().insert(calendarId='primary', body=event).execute()
+        completedEvent = self.service.events().insert(calendarId='primary', body=event).execute()
+        return completedEvent['id']
         
     def removeAllEvents(self):
         '''Removes all the events from the calendar'''
@@ -28,15 +29,36 @@ class ReservationClient(object):
 
     def selectAllEvents(self):
         '''Selects all events in the calendar '''
+        eventsDict = dict()
+        page_token = None
+        i=0
+        while True:
+            events = self.service.events().list(calendarId='primary', pageToken=page_token).execute()
+            for event in events['items']:
+                innerDict = dict()
+                innerDict['id'] = event['id']
+                innerDict['label'] = event['summary']
+                eventsDict['event' + str(i)] = innerDict
+                i = i+1
+            page_token = events.get('nextPageToken')
+            if not page_token:
+                break
+        return eventsDict    
+    
+    def selectEventIdFromLabel(self, labelStr):
+        '''Assuming this label will return only one eventId'''
         page_token = None
         while True:
             events = self.service.events().list(calendarId='primary', pageToken=page_token).execute()
             for event in events['items']:
-                print event['id'],"--",event['summary']
+                if(event['summary'] == labelStr):
+                    return event['id']
             page_token = events.get('nextPageToken')
             if not page_token:
                 break
+        return 0
             
     def rescheduleEvent(self, oldEventId, newEvent):
         '''Used to update or modify an old event. Requires old event id and new Event object that will replace the old event'''
         self.service.events().update(calendarId='primary', eventId = oldEventId, body = newEvent).execute()
+        
