@@ -27,7 +27,7 @@ class ReservationClient(object):
         '''Removes a specific reservation from the calendar. Requires the reservationID'''
         print self.service.events().delete(calendarId='primary', eventId=reservationID, sendNotifications=True).execute()
 
-    def selectAll(self):
+    def getAll(self):
         '''Selects all reservations in the calendar '''
         eventsDict = dict()
         page_token = None
