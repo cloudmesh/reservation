@@ -4,7 +4,7 @@ Deployment
 For today
 ------------------------
 
-::
+Download repository and setup sphinx for documentation::
     mkdir ~/github
     git clone https://github.com/cloudmesh/reservation.git
 
