@@ -5,17 +5,16 @@ For today
 ------------------------
 
 Download repository and setup sphinx for documentation::
-    mkdir ~/github
-    git clone https://github.com/cloudmesh/reservation.git
-
-    cd reservation
-    virtualenv ~/ENV
-    . ~/ENV/bin/activate
-    pip install sphinx
-    pip install -r requirements.txt
-    make sphinx
-    sudo pip install sphinxcontrib.exceltable
-    sudo pip install sphinx_bootstrap_theme
+  mkdir ~/github
+  git clone https://github.com/cloudmesh/reservation.git
+  cd reservation
+  virtualenv ~/ENV
+  . ~/ENV/bin/activate
+  pip install sphinx
+  pip install -r requirements.txt
+  make sphinx
+  pip install sphinxcontrib-exceltable
+  pip install sphinx_bootstrap_theme
 
 Virtualenv
 ----------------------------------------------------------------------
