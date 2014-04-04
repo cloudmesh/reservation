@@ -19,6 +19,7 @@
    :maxdepth: -1
 
    introduction
+   multi
    deploy
    rest
    api
