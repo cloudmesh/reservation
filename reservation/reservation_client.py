@@ -14,21 +14,21 @@ class ReservationClient(object):
         '''The init method takes in the service object an initializes it'''
         self.service = serviceArg
     
-    def addEventToCalendar(self,event):
-        '''An event is a JSON object that is passes to his method to be added to the calendar'''
-        completedEvent = self.service.events().insert(calendarId='primary', body=event).execute()
-        return completedEvent['id']
+    def add(self,reservation):
+        '''A reservation is a JSON object that is passes to his method to be added to the calendar'''
+        completedReservation = self.service.events().insert(calendarId='primary', body=reservation).execute()
+        return completedReservation['id']
         
-    def removeAllEvents(self):
-        '''Removes all the events from the calendar'''
+    def removeAll(self):
+        '''Removes all the reservations from the calendar'''
         self.service.calendars().clear(calendarId='primary').execute()
 
-    def removeEventFromCalendar(self,eventID):
-        '''Removes a specific event from the calendar. Requires the eventID'''
-        print self.service.events().delete(calendarId='primary', eventId=eventID, sendNotifications=True).execute()
+    def removeReservation(self,reservationID):
+        '''Removes a specific reservation from the calendar. Requires the reservationID'''
+        print self.service.events().delete(calendarId='primary', eventId=reservationID, sendNotifications=True).execute()
 
-    def selectAllEvents(self):
-        '''Selects all events in the calendar '''
+    def getAll(self):
+        '''Selects all reservations in the calendar '''
         eventsDict = dict()
         page_token = None
         i=0
@@ -45,8 +45,8 @@ class ReservationClient(object):
                 break
         return eventsDict    
     
-    def selectEventIdFromLabel(self, labelStr):
-        '''Assuming this label will return only one eventId'''
+    def selectReservationIdFromLabel(self, labelStr):
+        '''Assuming this label will return only one reservationID'''
         page_token = None
         while True:
             events = self.service.events().list(calendarId='primary', pageToken=page_token).execute()
@@ -58,7 +58,7 @@ class ReservationClient(object):
                 break
         return 0
             
-    def rescheduleEvent(self, oldEventId, newEvent):
-        '''Used to update or modify an old event. Requires old event id and new Event object that will replace the old event'''
-        self.service.events().update(calendarId='primary', eventId = oldEventId, body = newEvent).execute()
+    def reschedule(self, oldReservationId, newReservation):
+        '''Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old event'''
+        self.service.events().update(calendarId='primary', eventId = oldReservationId, body = newReservation).execute()
         

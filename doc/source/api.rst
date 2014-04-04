@@ -1,45 +1,57 @@
-Python API
-----------------------------------------------------------------------
+**********************************************************************
+Python API 
+**********************************************************************
+
+.. sidebar:: Page Contents |video-hadoop|
+
+   .. contents::
+      :local:
 
 The Python API contains the following functions to work with the Google Calendar:
 Our current version uses only JSON objects to pass to the calendar.
 
-  * The addEventToCalendar():
+* The addEventToCalendar():
       Arguments: event object
       return value: return EventId (integer)
   
-  * removeEventFromCalendar(eventId):
+* removeEventFromCalendar(eventId):
       Argument: EventId (Integer)
   
-  * removeAllEvents():
+* removeAllEvents():
       This removes all the events from the primary calendar.
   
-  * selectAllEvents():
+* selectAllEvents():
       This lists all the events from the primary calendar.
       return: Dict containing all the events
   
-  * rescheduleEvent(oldEventId, newEvent):
+* rescheduleEvent(oldEventId, newEvent):
       Used to update or modify an old event.
           Args: oldEventId (Integer)
           newEvent (JSON object)
           
-  * selectEventIdFromLabel(label):
+* selectEventIdFromLabel(label):
       args: label which will be compared with the summary from the event
       return: returns the eventId (Integer)
   
- * WorkFlow: 
+WorkFlow
+======================================================================
   
-  *  1. We will add 3 events
-  *  2. select all events.
-  *  3. Reschedule event.
-  *  4. Remove event.
-  *  5. Select all events.
-  *  6. Remove all events.
-  *  7. Select all events
+*  1. We will add 3 events
+*  2. select all events.
+*  3. Reschedule event.
+*  4. Remove event.
+*  5. Select all events.
+*  6. Remove all events.
+*  7. Select all events
         
- * Sample code : 
+Sample code 
+======================================================================
+
    
-   * Creating 3 events:
+Creating 3 events
+----------------------------------------------------------------------
+
+::
    
      print reservation.addEventToCalendar({
                        'summary': 'Appointment1',
@@ -76,16 +88,19 @@ Our current version uses only JSON objects to pass to the calendar.
                           'timeZone': 'America/Los_Angeles'
                        }})
                        
-    Output :
+Output ::
     
-     * buta7destbamakidf9lm7agi5k
-     * 5bmlslq006dbv0lampjfeu75ec
-     * 2slbu96950v62krqh5lmthvc7s
+     buta7destbamakidf9lm7agi5k
+     5bmlslq006dbv0lampjfeu75ec
+     2slbu96950v62krqh5lmthvc7s
    
-   * Select all events:
+Select all events
+----------------------------------------------------------------------
+
+::
       print reservation.selectAllEvents()
       
-    Output :
+Output ::
       {'event2': 
         {'id': u'2slbu96950v62krqh5lmthvc7s', 'label': u'Appointment3'}, 
        'event0': 
@@ -95,12 +110,15 @@ Our current version uses only JSON objects to pass to the calendar.
       }
 
      
-   * Removing a specific event using a label:
+Removing a specific event using a label
+----------------------------------------------------------------------
+
+::
      
      reservation.removeEventFromCalendar(reservation.selectEventIdFromLabel('Appointment3'))
      print reservation.selectAllEvents()
      
-    Output :
+Output::
       {'event2': 
         'event0': 
          {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 
@@ -108,7 +126,7 @@ Our current version uses only JSON objects to pass to the calendar.
          {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Appointment2'}
       }
       
-   * Rescheduling an event using a label to first retrieve the event:
+Rescheduling an event using a label to first retrieve the event::
    
      Rescheduling Appointment 2 to AppointmentX with a new startTime and new endTime
    
@@ -126,21 +144,21 @@ Our current version uses only JSON objects to pass to the calendar.
                               
       print reservation.selectAllEvents()
     
-    Output: 
+Output::
     
      {'event0': {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 
       'event1': {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'AppointmentX'}}
   
-  * Deleting all events:
+Deleting all events::
   
     reservation.removeAllEvents()
 
      
                          
  
-* Specification of the entire JSON Calendar object: Referenced from the google documentation.
-      The Json Object must adhere to the following standard.
+Specification of the entire JSON Calendar object: Referenced from the
+google documentation. The Json Object must adhere to the following standard.
       
-     The complete structure of the object can be viewed from the link below: 
+The complete structure of the object can be viewed from the link below: 
     *  https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get
     
