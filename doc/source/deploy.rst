@@ -1,6 +1,22 @@
 Deployment
 ======================================================================
 
+For today
+------------------------
+
+::
+    mkdir ~/github
+    git clone https://github.com/cloudmesh/reservation.git
+
+    cd reservation
+    virtualenv ~/ENV
+    . ~/ENV/bin/activate
+    pip install sphinx
+    pip install -r requirements.txt
+    make sphinx
+    sudo pip install sphinxcontrib.exceltable
+    sudo pip install sphinx_bootstrap_theme
+
 Virtualenv
 ----------------------------------------------------------------------
 
