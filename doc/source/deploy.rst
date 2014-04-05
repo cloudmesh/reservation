@@ -119,7 +119,10 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
  end
 
 * Save the Vagranfile
-* Run the command: vagrant up 
+* Run the command: vagrant up
+* The command will bring up all the nodes: chef, controller, compute1, compute2 and cinder.
+* Horizon Dashboard should now be available at https://192.168.236.11/auth/login/. The user name is "**admin**" and password is "**secrete**" 
+* When we bring up the cluster for the second time, we can shutdown the chef node: **vagrant halt chef**
 
 For today
 ------------------------
