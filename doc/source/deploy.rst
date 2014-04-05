@@ -116,7 +116,7 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
    end
   end
   # End cinder
-end
+ end
 
 * Save the Vagranfile
 * Run the command: vagrant up 
