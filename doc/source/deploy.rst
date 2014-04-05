@@ -119,25 +119,10 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
  end
 
 * Save the Vagranfile
-* Run the command: vagrant up
+* Run the command: **vagrant up**
 * The command will bring up all the nodes: chef, controller, compute1, compute2 and cinder.
 * Horizon Dashboard should now be available at https://192.168.236.11/auth/login/. The user name is "**admin**" and password is "**secrete**" 
 * When we bring up the cluster for the second time, we can shutdown the chef node: **vagrant halt chef**
-
-For today
-------------------------
-
-Download repository and setup sphinx for documentation::
-  mkdir ~/github
-  git clone https://github.com/cloudmesh/reservation.git
-  cd reservation
-  virtualenv ~/ENV
-  . ~/ENV/bin/activate
-  pip install sphinx
-  pip install -r requirements.txt
-  make sphinx
-  pip install sphinxcontrib-exceltable
-  pip install sphinx_bootstrap_theme
 
 Virtualenv
 ----------------------------------------------------------------------
@@ -150,7 +135,7 @@ TBD
 Requirements
 ----------------------------------------------------------------------
 
-After you have set up virtualenv, you instal the requirements with::
+After you have set up virtualenv, you install the requirements with::
 
   pip install -r requirements.txt
 
@@ -188,7 +173,7 @@ Publishing the Documentation
 
 Developers have the ability to change the documentation in the::
 
-  ./doc/souce
+  ./doc/source
 
 directory. Once done they can create a local updated documenation for
 checking with::
@@ -207,3 +192,18 @@ To publish the new documentation to github they can say::
 	     upon request from a developer. Please make sure that
 	     **all** commits are merged and in the repository. Also
 	     the documentation has to be checked with a local make.
+
+Steps in a nutshell
+------------------------
+
+Download repository from github and setup sphinx for documentation::
+
+ mkdir ~/github
+ git clone https://github.com/cloudmesh/reservation.git
+ cd reservation
+ virtualenv ~/ENV
+ . ~/ENV/bin/activate
+ pip install sphinx
+ pip install -r requirements.txt
+ make sphinx
+ 
