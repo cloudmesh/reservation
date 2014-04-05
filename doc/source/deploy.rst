@@ -1,11 +1,18 @@
 Deployment
 ======================================================================
 
+OpenStack Distributions
+----------------------------------------------------------------------
+
+OpenStack is a opensource and a very complex code set. Due to the complexity involved in setting up an OpenStack Cloud, companies such as RackSpace, Redhat, Mirantis etc., took the OpenStack code and packaged it for easy deployment by clients. In addition to the core OpenStack code, the vendors would add addtional componenets to ease the deployment along with value add features such as monitoring etc. For example, Rackspace has taken the OpenStack code and packaged it along with value add features such as High Availability componenets, Chef Server etc. 
+
+There are various cookbooks made available by vendors which can be used to setup a cluster. 
+
+
 Multi-Node OpenStack Install
 ----------------------------------------------------------------------
 
-The vagrant script below uses the cookbooks from Rackspace to setup a 
-cluster with the following nodes:
+The vagrant script below uses the cookbooks from Rackspace to setup a cluster with the following nodes:
 
 * Chef
 * Controller
@@ -206,4 +213,5 @@ Download repository from github and setup sphinx for documentation::
  pip install sphinx
  pip install -r requirements.txt
  make sphinx
+ make view
  
