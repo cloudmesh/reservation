@@ -11,6 +11,15 @@ We asume you have virtualbox and vagrant installed. This procedure will guide yo
 The install.sh script is shown below::
 
  #!/bin/bash
+ #################################################################################################################
+ # Author        : Aravindh Varadharaju
+ # Date          : 6th March 2014
+ # Description   : I was strugging with running the stack.sh file as a vagrant user. Though I run the file using
+ #                 "sudo su vagrant" the installation of devstack setup was failing with an error "/root/.my.cnf" 
+ #                 permission denied. I was looking for a solution and the below mentioned site had a solution to 
+ #                 run certain parts as root and certain parts as vagrant. This was really a blessing.
+ # Script source : http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
+ #################################################################################################################
  case $(id -u) in
   0) 
    sudo ufw disable
