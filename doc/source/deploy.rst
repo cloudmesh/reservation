@@ -19,7 +19,8 @@ given below:
 * mkdir havana
 * cd havana
 * vagrant init
-* Replace the contents of the Vagrantfile generated in the previous step with the contents below::
+
+Replace the contents of the Vagrantfile generated in the previous step with the contents below::
 
   # -*- mode: ruby -*-
   # vi: set ft=ruby :
