@@ -10,32 +10,28 @@ We asume you have virtualbox and vagrant installed. This procedure will guide yo
 
 The install.sh script is shown below::
 
-#!/bin/bash
-case $(id -u) in
-    0) 
-        sudo ufw disable
-        sudo apt-get -q -y update
-        sudo apt-get install -y git
-        sudo apt-get install -y python-pip
-        # sudo pip install -q netaddr
-        git clone https://github.com/openstack-dev/devstack.git
-        chown -R vagrant:vagrant devstack
-        cd devstack
-
-        echo ADMIN_PASSWORD=1qaz2wsx > localrc
-        echo MYSQL_PASSWORD=1qaz2wsx >> localrc
-        echo RABBIT_PASSWORD=1qaz2wsx >> localrc
-        echo SERVICE_PASSWORD=1qaz2wsx >> localrc
-        echo SERVICE_TOKEN=1qaz2wsx >> localrc
-        source localrc
-
-        sudo -u vagrant -i $0  # script calling itself as the vagrant user
-        ;;
-    *) 
-        cd /home/vagrant/devstack
-        ./stack.sh
-        ;;
-esac
+ #!/bin/bash
+ case $(id -u) in
+  0) 
+   sudo ufw disable
+   sudo apt-get -q -y update
+   sudo apt-get install -y git
+   sudo apt-get install -y python-pip
+   # sudo pip install -q netaddr
+   git clone https://github.com/openstack-dev/devstack.git
+   chown -R vagrant:vagrant devstack
+   cd devstack
+   echo ADMIN_PASSWORD=1qaz2wsx > localrc
+   echo MYSQL_PASSWORD=1qaz2wsx >> localrc
+   echo RABBIT_PASSWORD=1qaz2wsx >> localrc
+   echo SERVICE_PASSWORD=1qaz2wsx >> localrc
+   echo SERVICE_TOKEN=1qaz2wsx >> localrc
+   source localrc
+   sudo -u vagrant -i $0  # script calling itself as the vagrant user
+  *) 
+   cd /home/vagrant/devstack
+   ./stack.sh
+ esac
 
 The above script needs to be placed in the project directory where the Vagrantfile is present. The next task is to modify the Vagrant file to call the shell script just created.
 
