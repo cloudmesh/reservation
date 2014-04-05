@@ -10,26 +10,57 @@ We asume you have virtualbox and vagrant installed. This procedure will guide yo
 
 The install.sh script is shown below::
 
- #! /usr/bin/env bash
+#!/bin/bash
 
- echo "Installing git ...."
- apt-get update >/dev/null 2>&1
- apt-get install -y git >/dev/null 2>&1
- echo "Cloning devstack from devstack ...."
- git clone https://github.com/openstack-dev/devstack.git
- echo "Deploying OpenStack Cloud ...."
- echo "This will take a while to setup ...."
- echo " "
- echo "####################################"
- echo "#        PLEASE BE PATIENT         #"
- echo "####################################"
- echo " "
- cd /home/vagrant/devstack/tools
- chmod +x create-stack-user.sh
- ./create-stack-user.sh
- chown -R stack:stack /home/vagrant/devstack
- cd /home/vagrant/devstack
- sudo -u stack ./stack.sh
+#################################################################################################################
+# Author        : Aravindh Varadharaju
+# Date          : 6th March 2014
+# Description   : I was strugging with running the stack.sh file as a vagrant user. Though I run the file using
+#                 "sudo su vagrant" the installation of devstack setup was failing with an error "/root/.my.cnf" 
+#                 permission denied. I was looking for a solution and the below mentioned site had a solution to 
+#                 run certain parts as root and certain parts as vagrant. This was really a blessing.
+# Script source : http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
+#################################################################################################################
+case $(id -u) in
+    0) 
+        #echo "first: running as root"
+        #echo "doing the root tasks..."
+
+        sudo ufw disable
+        sudo apt-get -q -y update
+        sudo apt-get install -y git
+        sudo apt-get install -y python-pip
+        # sudo pip install -q netaddr
+        git clone https://github.com/openstack-dev/devstack.git
+        chown -R vagrant:vagrant devstack
+        cd devstack
+   
+        # When creating the stack deployment for the first time,
+        # you are going to see prompts for multiple passwords.
+        # Your results will be stored in the localrc file.
+        # If you wish to bypass this, and provide the passwords up front,
+        # add in the following lines with your own password to the localrc file
+
+        #echo '[[local|localrc]]' > localrc
+        echo ADMIN_PASSWORD=1qaz2wsx > localrc
+        echo MYSQL_PASSWORD=1qaz2wsx >> localrc
+        echo RABBIT_PASSWORD=1qaz2wsx >> localrc
+        echo SERVICE_PASSWORD=1qaz2wsx >> localrc
+        echo SERVICE_TOKEN=1qaz2wsx >> localrc
+        source localrc
+
+        sudo -u vagrant -i $0  # script calling itself as the vagrant user
+        ;;
+    *) 
+        #echo "then: running as vagrant user"
+        #echo "doing the vagrant user's tasks"
+        #echo "########################################"
+        #echo "I going to run ./stack.sh as `whoami`"
+        #echo "########################################"
+        cd /home/vagrant/devstack
+        ./stack.sh
+        ;;
+esac
 
 The above script needs to be placed in the project directory where the Vagrantfile is present. The next task is to modify the Vagrant file to call the shell script just created.
 
