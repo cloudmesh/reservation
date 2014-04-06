@@ -6,6 +6,12 @@ OpenStack Distributions
 
 OpenStack is a opensource and a very complex code set. Due to the complexity involved in setting up an OpenStack Cloud, companies such as RackSpace, Redhat, Mirantis etc., took the OpenStack code and packaged it for easy deployment by clients. In addition to the core OpenStack code, the vendors would add addtional componenets to ease the deployment along with value add features such as monitoring etc. For example, Rackspace has taken the OpenStack code and packaged it along with value add features such as High Availability componenets, Chef Server etc. 
 
+An explanation about difference between OpenStack Distribution and Rackspace Private Cloud can be found in the links below:
+
+* http://www.rackspace.com/blog/openstack-the-project-the-rackspace-product-and-the-rackspace-service/
+* http://www.rackspace.com/blog/rackspace-private-cloud-is-open/
+* http://www.rackspace.com/information/legal/rpcswpackages
+
 There are various cookbooks made available by vendors which can be used to setup a cluster. 
 
 
