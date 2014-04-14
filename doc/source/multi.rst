@@ -1,6 +1,13 @@
 Deploying Openstack from devstack source with multiple workers using Vagrant
 ============================================================================
 
+Requirements:
+
+* VirtualBox
+* Vagrant
+* vagrant-hostmanager plugin
+
+
 Multi-Node OpenStack Install
 ----------------------------------------------------------------------
 
@@ -125,47 +132,51 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
   # Author      : Cloudmesh Team
   # Description : The code is based on the setup guide from the URL given: 
   #               http://devstack.org/guides/multinode-lab.html
-  # Note        : When new workers need to be added, an entry needs to be
-  #             : put under section $script and under workers = [] section
+  #             : Requires vagrant-hostmanager plugin
   ########################################################################
 
   # -*- mode: ruby -*-
   # vi: set ft=ruby :
-   
-  VAGRANTFILE_API_VERSION = "2"
-  $script = <<SCRIPT
-  echo root:vagrant | chpasswd
-  cat << EOF >> /etc/hosts
-  192.168.236.11 controller
-  192.168.236.12 compute1
-  192.168.236.13 compute2
-  EOF
-  SCRIPT
 
-  workers = [{name: 'compute1', ip: '192.168.236.12'},
-             {name: 'compute2', ip: '192.168.236.13'}]
+  controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '1'}]
+
+  #############################################################################
+  # Add details about new worker nodes to the list below:                     #
+  #############################################################################
+
+  workers = [{name: 'compute1', ip: '192.168.236.12', memory: '1024', cpu: '2'},
+             {name: 'compute2', ip: '192.168.236.13', memory: '1024', cpu: '2'}]
+
+  #############################################################################
+  #   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                             #
+  #############################################################################
+
+  VAGRANTFILE_API_VERSION = "2"
 
   Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    
     config.vm.box = "precise64"
-   
+    config.hostmanager.enabled = true
+     
     # Turn off shared folders
     config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
    
    # Begin controller
-    config.vm.define "controller" do |controller_config|
-      controller_config.vm.hostname = "controller"
-      controller_config.vm.boot_timeout = 600
-      controller_config.vm.provision "shell", inline: $script
-      # eth1 configured in the 192.168.236.0/24 network
-      controller_config.vm.network "private_network", ip: "192.168.236.11"
-      controller_config.vm.provision "shell", path: "installController.sh"
-      controller_config.vm.network "forwarded_port", guest: 80, host: 8000
-      controller_config.vm.network "forwarded_port", guest: 5000, host: 6000
+    controllers.each do |contrhost|
+      config.vm.define "controller" do |controller_config|
+        controller_config.vm.hostname = contrhost[:name]
+        controller_config.vm.boot_timeout = 600
+        # controller_config.vm.provision "shell", inline: $script
+        # eth1 configured in the 192.168.236.0/24 network
+        controller_config.vm.network "private_network", ip: contrhost[:ip]
+        controller_config.vm.provision "shell", path: "installController.sh"
+        controller_config.vm.network "forwarded_port", guest: 80, host: 8000
+        controller_config.vm.network "forwarded_port", guest: 5000, host: 6000
 
-      controller_config.vm.provider "virtualbox" do |v|
-          v.customize ["modifyvm", :id, "--memory", "2048"]
-          v.customize ["modifyvm", :id, "--cpus", "1"]
+        controller_config.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--memory", contrhost[:memory]]
+            v.customize ["modifyvm", :id, "--cpus", contrhost[:cpu]]
+        end
       end
     end
     # End controller
@@ -174,12 +185,12 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
     workers.each do |host|
       config.vm.define host[:name] do |node|
       node.vm.hostname = host[:name]
-      node.vm.provision "shell", inline: $script
+      # node.vm.provision "shell", inline: $script
       node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
       node.vm.provision "shell", path: "installCompute.sh"
       node.vm.provider "virtualbox" do |v|
-        v.customize ["modifyvm", :id, "--memory", "1024"]
-        v.customize ["modifyvm", :id, "--cpus", "2"]
+        v.customize ["modifyvm", :id, "--memory", host[:memory]]
+        v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
         v.customize ["modifyvm", :id, "--nic3", "intnet"]
       end
       end
@@ -187,9 +198,10 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
     # End Workers
   end
 
+
 * Save the Vagranfile
 * Run the command: **vagrant up**
 * The command will bring up all the nodes: controller, compute1 and compute2.
-* Horizon Dashboard should now be available at https://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
+* Horizon Dashboard should now be available at http://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
 * When the VMs are restarted, we need to run **rejoin-stack.sh** on all the nodes to kind of restart devstack. 
 
