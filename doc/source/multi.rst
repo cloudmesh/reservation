@@ -138,7 +138,13 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
   # -*- mode: ruby -*-
   # vi: set ft=ruby :
 
-  controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '1'}]
+  # Check if vagrant-hostmanager plugin is installed. If not raise an error
+
+  unless Vagrant.has_plugin?("vagrant-hostmanager")
+    raise 'Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager'
+  end
+
+  controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '2'}]
 
   #############################################################################
   # Add details about new worker nodes to the list below:                     #
@@ -197,6 +203,7 @@ Replace the contents of the Vagrantfile generated in the previous step with the 
     end
     # End Workers
   end
+
 
 
 * Save the Vagranfile
