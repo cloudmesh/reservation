@@ -177,5 +177,6 @@ pseudoxml:
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
 manpages:
+	mkdir -p source/man
 	../reservation/reservation.py --rst > source/man/man.rst
 	sphinx-apidoc -H "Modules and Classes" -o source/modules ../reservation
