@@ -26,7 +26,7 @@ given below:
 * create two scripts **installController.sh** and **installCompute.sh** (Steps are shown below)
 * vagrant init
 
-.. note:: All the three scripts are located under https://github.com/cloudmesh/reservation/tree/master/scripts/multinode
+Note:: All the three scripts are located under https://github.com/cloudmesh/reservation/tree/master/scripts/multinode
 
 Create a file **installController.sh** with the contents shown below::
 
