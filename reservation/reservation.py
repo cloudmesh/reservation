@@ -2,6 +2,7 @@
 """
 Usage:
     reservation -h | --help
+    reservation --rst
     reservation --version
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
@@ -41,62 +42,78 @@ from pytimeparse.timeparse import timeparse
 # from timestring import Date
 from cloudmesh.util.util import parse_time_interval
 from cloudmesh.util.util import yn_choice
+import textwrap
 
 def not_implemented():
     print "ERROR: not yet implemented"
 
 def rain_command(arguments):
 
-    for list in ["HOSTS", "IDS"]:
-        try:
-            expanded_list = hostlist.expand_hostlist(arguments[list])
-            arguments[list]=expanded_list
-        except:
-            pass
-        
-    print(arguments)
+    if arguments["--rst"]:
 
-    if arguments["add"] and arguments["--file"] is not None:
+        print 70*"*"
+        print "Manual Pages"
+        print 70*"*"
+        print
+        print "reservation"        
+        print 70*"="
+        print "\n::\n"        
+        lines = __doc__.split("\n")
+        for line in lines:
+            print "  ", line
+    else:
 
-        print "add file"
+        for list in ["HOSTS", "IDS"]:
+            try:
+                expanded_list = hostlist.expand_hostlist(arguments[list])
+                arguments[list]=expanded_list
+            except:
+                pass
 
-    elif arguments["add"]:
+        print(arguments)
 
-        print "add"
-        (time_start, time_end) = parse_time_interval(arguments["--start"],
-                                                     arguments["--end"])
-        print "From:", time_start
-        print "To  :", time_end
 
-    elif arguments["list"]:
+        if arguments["add"] and arguments["--file"] is not None:
 
-        print "add"
+            print "add file"
 
-        (time_start, time_end) = parse_time_interval(arguments["--start"],
-                                                     arguments["--end"])
-        print "From:", time_start
-        print "To  :", time_end
-        
-    elif arguments["id"]:
+        elif arguments["add"]:
 
-        print "id"
+            print "add"
+            (time_start, time_end) = parse_time_interval(arguments["--start"],
+                                                         arguments["--end"])
+            print "From:", time_start
+            print "To  :", time_end
 
-    elif arguments["delete"] or arguments["rm"] :
-        """rain [-i] delete LABELS"""
-        """rain [-i] rm LABELS"""            
+        elif arguments["list"]:
 
-        interactive = arguments["-i"]
-            
-        print "delete", interactive
+            print "list"
 
-        for label in arguments["LABELS"]:
-            if interactive:
-                keep = yn_choice("Do you want to delete the reservation <%s>?" % label)
-                if keep:
-                    print "delete %s" % label
-                else:
-                    print "keeping %s" % label
-        not_implemented()
+            (time_start, time_end) = parse_time_interval(arguments["--start"],
+                                                         arguments["--end"])
+            print "From:", time_start
+            print "To  :", time_end
+
+        elif arguments["id"]:
+
+            print "id"
+
+        elif arguments["delete"] or arguments["rm"] :
+            """rain [-i] delete LABELS"""
+            """rain [-i] rm LABELS"""            
+
+            interactive = arguments["-i"]
+
+            print "delete", interactive
+
+            for label in arguments["LABELS"]:
+                if interactive:
+                    keep = yn_choice("Do you want to delete the reservation <%s>?" % label)
+                    if keep:
+                        print "delete %s" % label
+                    else:
+                        print "keeping %s" % label
+            not_implemented()
 
 
 
