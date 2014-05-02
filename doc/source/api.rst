@@ -98,9 +98,11 @@ Select all events
 ----------------------------------------------------------------------
 
 ::
+
       print reservation.selectAllEvents()
       
 Output ::
+
       {'event2': 
         {'id': u'2slbu96950v62krqh5lmthvc7s', 'label': u'Appointment3'}, 
        'event0': 
@@ -119,6 +121,7 @@ Removing a specific event using a label
      print reservation.selectAllEvents()
      
 Output::
+
       {'event2': 
         'event0': 
          {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 

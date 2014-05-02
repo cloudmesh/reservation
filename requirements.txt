@@ -1,3 +1,8 @@
+d2to1>=0.2.10,<0.3
+pbr>=0.5.16,<0.6
+future
+pip
+fabric
 docopts
 flask
 requests
@@ -6,4 +11,6 @@ sphinx_bootstrap_theme
 google-api-python-client
 httplib2
 sphinxcontrib-exceltable
+pytimeparse
+timestring
 

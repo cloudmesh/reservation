@@ -24,6 +24,7 @@
    deploy
    rest
    api
+   man/man
 
 **Indices and Lists**
 
