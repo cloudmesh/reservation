@@ -5,17 +5,19 @@ Created on Mar 6, 2014
 '''
 
 class ReservationClient(object):
-    '''
-    This class contains all the events that the calendar supports
-    New events can be appended at the bottom
+    '''This class contains all the events that the calendar supports New events
+    can be appended at the bottom
     '''
 
     def __init__(self, serviceArg):
-        '''The init method takes in the service object an initializes it'''
-        self.service = serviceArg
+        '''The init method takes in the service object an initializes
+        it''' 
+	self.service = serviceArg
     
     def add(self,reservation):
-        '''A reservation is a JSON object that is passes to his method to be added to the calendar'''
+        '''A reservation is a JSON object that is passes to his method
+        to be added to the calendar'''
+        
         completedReservation = self.service.events().insert(calendarId='primary', body=reservation).execute()
         return completedReservation['id']
         
