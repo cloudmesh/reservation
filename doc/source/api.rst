@@ -10,19 +10,38 @@ Python API
 The Python API contains the following functions to work with the Google Calendar:
 Our current version uses only JSON objects to pass to the calendar.
 
-* The addEventToCalendar():
+* The addEventToCalendar(event):
       Arguments: event object
-      return value: return EventId (integer)
+      return value: return EventId (integer) only if event does not overlap
   
 * removeEventFromCalendar(eventId):
       Argument: EventId (Integer)
   
 * removeAllEvents():
       This removes all the events from the primary calendar.
-  
+
+* viewEventFromId(eventId):
+      returns the entire event object that is stored in the calendar.
+
+* selectEventIdsFromUser(userId):
+      Argument: user id (integer)
+      returns: all the reservations events made by the user.
+
 * selectAllEvents():
       This lists all the events from the primary calendar.
       return: Dict containing all the events
+
+* lstUsrProjRsvSTimeETime(userId, projId, sTime, eTime):
+      Arguments: userId, ProjectId, Start time, end time
+      returns: List of a users reservations made of a project between an interval of time 
+
+* lstRsvProj(projId):
+      Argument: projId
+      return value: returns all the reservation eventId's of a particular project.
+  
+* durationOfRsv(rsvId):
+      Argument: reservation event id.
+      returns: returns the duration of that particular event.
   
 * rescheduleEvent(oldEventId, newEvent):
       Used to update or modify an old event.
