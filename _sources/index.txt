@@ -3,7 +3,7 @@
 
 .. _s-manual:
 
-|image0|  Cloudmesh Researvation for OpenStack
+|image0|  Cloudmesh Reservation for OpenStack
 ================================================
 
 .. sidebar:: Authors
@@ -19,9 +19,12 @@
    :maxdepth: -1
 
    introduction
+   multi
+   multiUsingChef
    deploy
    rest
    api
+   man/man
 
 **Indices and Lists**
 

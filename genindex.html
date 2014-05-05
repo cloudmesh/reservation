@@ -75,19 +75,53 @@
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#a-system-wide-reservation-system-for-clouds">1.4. A system wide reservation system for clouds</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="deploy.html">2. Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#virtualenv">2.1. Virtualenv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#requirements">2.2. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#install">2.3. Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#directory-structure-of-the-project">2.4. Directory Structure of the project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">2.5. Publishing the Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">2. Multiworker Devstack for Vagarnt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#multi-node-openstack-install">2.1. Multi-Node OpenStack Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#prerequisits">2.1.1. Prerequisits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#setup">2.1.2. Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#something-else">2.1.3. SOMETHING ELSE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#shell-scripts">2.1.4. Shell Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="multi.html#controller-install-controller-sh">2.1.4.1. Controller - install-controller.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multi.html#compute-install-compute-sh">2.1.4.2. Compute - install-compute.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multi.html#vagrantfile">2.1.4.3. Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rest.html">3. REST interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-rest">3.1. References for REST</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">4. Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">3. Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">3.1. OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">3.2. Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">4. Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#virtualenv">4.1. Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#requirements">4.2. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#install">4.3. Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#directory-structure-of-the-project">4.4. Directory Structure of the project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">4.5. Publishing the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#steps-in-a-nutshell">4.6. Steps in a nutshell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">5. REST interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-rest">5.1. References for REST</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">6. Python API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#workflow">6.1. WorkFlow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#sample-code">6.2. Sample code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#creating-3-events">6.2.1. Creating 3 events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#select-all-events">6.2.2. Select all events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#removing-a-specific-event-using-a-label">6.2.3. Removing a specific event using a label</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="man/man.html">7. Manual Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">7.1. reservation</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="progress.html">1. Progress</a></li>
@@ -150,8 +184,130 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.add">add() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.add">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.checkRsvOverlap">checkRsvOverlap() (in module reservation.reservation_client)</a>, <a href="modules/reservation.html#reservation.reservation_client.checkRsvOverlap">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.durationOfRsv">durationOfRsv() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.durationOfRsv">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.getAll">getAll() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.getAll">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.lstRsvProj">lstRsvProj() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.lstRsvProj">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.lstUsrProjRsvSTimeETime">lstUsrProjRsvSTimeETime() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.lstUsrProjRsvSTimeETime">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.removeAll">removeAll() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.removeAll">[1]</a>
+  </dt>
+
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.removeReservation">removeReservation() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.removeReservation">[1]</a>
+  </dt>
+
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.reschedule">reschedule() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.reschedule">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#module-reservation">reservation (module)</a>, <a href="modules/reservation.html#module-reservation">[1]</a>
+  </dt>
+
+      
+  <dt><a href="modules/reservation-gvl.html#module-reservation.reservation_client">reservation.reservation_client (module)</a>, <a href="modules/reservation.html#module-reservation.reservation_client">[1]</a>
+  </dt>
+
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient">ReservationClient (class in reservation.reservation_client)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.selectRsvIdFromLabel">selectRsvIdFromLabel() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.selectRsvIdFromLabel">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.selectRsvIdsFromUser">selectRsvIdsFromUser() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.selectRsvIdsFromUser">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="modules/reservation-gvl.html#reservation.reservation_client.ReservationClient.viewReservationFromId">viewReservationFromId() (reservation.reservation_client.ReservationClient method)</a>, <a href="modules/reservation.html#reservation.reservation_client.ReservationClient.viewReservationFromId">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
 
 
     </div>
