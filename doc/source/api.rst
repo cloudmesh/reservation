@@ -73,39 +73,65 @@ Creating 3 events
 ::
    
      print reservation.addEventToCalendar({
-                       'summary': 'Appointment1',
-                       'location': 'Somewhere',
-                       'start': {
-                         'dateTime': '2011-06-03T10:00:00.000-07:00',
-                         'timeZone': 'America/Los_Angeles'
-                       },
-                       'end': {
-                           'dateTime': '2011-06-03T10:25:00.000-07:00',
-                           'timeZone': 'America/Los_Angeles'
-                         }
+                       'summary': 'oliver1',
+                        'description':'{
+                            'hosts': '100-103', 
+                            'kind':'vm-server', 
+                            'project':'xyz', 
+                            'userid':'1002', 
+                            'displayName':'oliverlewis', 
+                            'email':'lewiso@indiana.edu'
+                        },
+                        
+                        'start': {
+                            'dateTime': '2014-05-05T22:50:00.000',
+                            'timeZone': 'America/New_York'
+                        },
+                        
+                        'end': {
+                            'dateTime': '2014-05-05T23:51:00.000',
+                            'timeZone': 'America/New_York'
+                        }
                        })
      print reservation.addEventToCalendar({
-                       'summary': 'Appointment2',
-                       'location': 'Somewherenew',
-                       'start': {
-                         'dateTime': '2012-06-03T10:00:00.000-07:00',
-                         'timeZone': 'America/Los_Angeles'
-                       },
-                       'end': {
-                         'dateTime': '2012-06-03T10:25:00.000-07:00',
-                         'timeZone': 'America/Los_Angeles'
-                       }})
-     print reservation.addEventToCalendar({
-                       'summary': 'Appointment3',
-                       'location': 'Somewhereelse',
-                       'start': {
-                          'dateTime': '2013-06-03T10:00:00.000-07:00',
-                          'timeZone': 'America/Los_Angeles'
-                       },
-                       'end': {
-                          'dateTime': '2013-06-03T10:25:00.000-07:00',
-                          'timeZone': 'America/Los_Angeles'
-                       }})
+                       'summary': 'oliver2',
+                        'description':'{
+                            'hosts': '100-103', 
+                            'kind':'vm-server', 
+                            'project':'xyz', 
+                            'userid':'1001', 
+                            'displayName':'oliverlewis', 
+                            'email':'lewiso@indiana.edu'
+                        },
+                        
+                        'start': {
+                            'dateTime': '2014-05-05T22:50:00.000',
+                            'timeZone': 'America/New_York'
+                        },
+                        
+                        'end': {
+                            'dateTime': '2014-05-05T23:51:00.000',
+                            'timeZone': 'America/New_York'
+                        }})
+                             print reservation.addEventToCalendar('summary': 'oliver3',
+                              'description':'{
+                                  'hosts': '100-103', 
+                                  'kind':'vm-server', 
+                                  'project':'xyz', 
+                                  'userid':'1002', 
+                                  'displayName':'oliverlewis', 
+                                  'email':'lewiso@indiana.edu'
+                              },
+                              
+                              'start': {
+                                  'dateTime': '2014-05-05T22:50:00.000',
+                                  'timeZone': 'America/New_York'
+                              },
+                              
+                              'end': {
+                                  'dateTime': '2014-05-05T23:51:00.000',
+                                  'timeZone': 'America/New_York'
+                              }})
                        
 Output ::
     
