@@ -26,19 +26,23 @@ class ReservationClient(object):
         
     def removeAll(self):
         '''Removes all the events from the calendar'''
+        '''rename to remove_all'''
         self.service.calendars().clear(calendarId='primary').execute()
 
     def removeReservation(self,rsvId):
         '''Removes a specific event from the calendar. Requires the reservationID'''
+        '''rename to remove'''
         print self.service.events().delete(calendarId='primary', eventId=rsvId, sendNotifications=True).execute()
 
 
     def viewReservationFromId(self,rsvId):
         '''displays the reservation object'''
+        '''rename to get_from_id'''
         print self.service.events().get(calendarId='primary', eventId=rsvId).execute()
         
     def selectRsvIdsFromUser(self,userId):
         '''Selects all the reservations made by a user'''
+        '''rename to get_by_user'''
         page_token = None
         listIds = []
         while True:
@@ -56,6 +60,7 @@ class ReservationClient(object):
         
     def getAll(self):
         '''Selects all events in the calendar '''
+        '''rename to get_all'''
         page_token = None
         event_list = []
         while True:
@@ -69,6 +74,7 @@ class ReservationClient(object):
     
     def selectRsvIdFromLabel(self, labelStr):
         '''Assuming this label will return only one eventId'''
+        '''rename get_from_label'''
         page_token = None
         while True:
             events = self.service.events().list(calendarId='primary', pageToken=page_token).execute()
@@ -86,6 +92,7 @@ class ReservationClient(object):
         
     def lstUsrProjRsvSTimeETime(self, userId, projId, sTime,eTime):
         '''Lists all the users reservations made in a project from a start-time to a end time'''
+        '''reanme list_by_user_and_project'''
         page_token = None
         evt_list = []
         while True:
@@ -103,6 +110,7 @@ class ReservationClient(object):
     
     def lstRsvProj(self, projId):
         '''Lists all the reservations made in a particular project'''
+        '''rename list_by_project'''
         page_token = None
         evt_list = []
         while True:
@@ -120,12 +128,14 @@ class ReservationClient(object):
     
     def durationOfRsv(self, rsvId):
         '''Shows the duration of the reservation'''
+        '''rename duration'''
         rsvEvent = self.service.events().get(calendarId='primary', eventId=rsvId).execute()
         duration = rsvEvent['start']['dateTime']- rsvEvent['end']['dateTime']
         return duration
         
       
 def checkRsvOverlap(service, newRsv):
+    '''rename check_overlap'''
     page_token = None
     flag = False
     while True:
