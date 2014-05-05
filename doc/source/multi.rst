@@ -23,12 +23,16 @@ given below:
 
 * mkdir multiworker
 * cd multiworker
-* create two scripts **installController.sh** and **installCompute.sh** (Steps are shown below)
-* vagrant init
+* Download the three scripts from the location: https://github.com/cloudmesh/reservation/tree/master/scripts/multinode
+* Run the command: **vagrant up**
+* The command will bring up all the nodes: controller, compute1 and compute2.
+* Horizon Dashboard should now be available at http://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
+* When the VMs are restarted, we need to run **rejoin-stack.sh** on all the nodes to rejoin the screens started by stack.sh 
 
-Note:: All the three scripts are located under https://github.com/cloudmesh/reservation/tree/master/scripts/multinode
 
-Create a file **installController.sh** with the contents shown below::
+The content of the shell scripts are shown below for your reference
+-------------------------------------------------------------------
+**installController.sh**:: 
 
   #!/bin/bash
 
@@ -74,7 +78,7 @@ Create a file **installController.sh** with the contents shown below::
           ;;
   esac
 
-Create a file **installCompute.sh** with the contents shown below::
+**installCompute.sh**::
 
   #!/bin/bash
 
@@ -127,7 +131,7 @@ Create a file **installCompute.sh** with the contents shown below::
   esac
 
 
-Replace the contents of the Vagrantfile generated in the previous step with the contents below::
+**Vagrantfile**::
 
   ########################################################################
   # Name        : Vagrantfile
