@@ -63,15 +63,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Begin Workers
   workers.each do |host|
     config.vm.define host[:name] do |node|
-    node.vm.hostname = host[:name]
-    # node.vm.provision "shell", inline: $script
-    node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
-    node.vm.provision "shell", path: "installCompute.sh"
-    node.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--memory", host[:memory]]
-      v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
-      v.customize ["modifyvm", :id, "--nic3", "intnet"]
-    end
+      node.vm.hostname = host[:name]
+      # node.vm.provision "shell", inline: $script
+      node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
+      node.vm.provision "shell", path: "installCompute.sh"
+      node.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--memory", host[:memory]]
+        v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
+        v.customize ["modifyvm", :id, "--nic3", "intnet"]
+      end
     end
   end
   # End Workers

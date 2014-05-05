@@ -1,11 +1,13 @@
 #!/bin/bash
 
-#################################################################################################################
+######################################################################
 # Author        : Aravindh Varadharaju
 # Date          : 6th April 2014
 # Purpose       : Controller Script
-# Script source : http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
-#################################################################################################################
+# Description : This script is modified from 
+#        http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
+######################################################################
+
 case $(id -u) in
     0) 
         #echo "first: running as root"

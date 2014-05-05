@@ -1,4 +1,12 @@
-Deploying Openstack from devstack source with multiple workers using Vagrant
+.. sidebar:: 
+   . 
+
+  .. contents:: Table of Contents
+     :depth: 5
+
+..
+
+Multiworker Devstack for Vagarnt
 ============================================================================
 
 Requirements:
@@ -17,204 +25,106 @@ The procedure below deploys Devstack with multiple workers from devstack source 
 * Compute1
 * Compute2
 
+Prerequisits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before you start you need to make sure you have vagrant
+installed. Make sure you have at least the version `1.5.4` which you
+can find out via::
+
+  vagrant --version
+
+To execute the steps documented her, yo uwill first need to make sure
+that you have the vagrant-hostmanage installed::
+
+   vagrant plugin install vagrant-hostmanager
+
+Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The steps to be followed to create a cluster for the above nodes are 
-given below:
+given below::
 
-* mkdir multiworker
-* cd multiworker
-* Download the three scripts from the location: https://github.com/cloudmesh/reservation/tree/master/scripts/multinode
-* Run the command: **vagrant up**
-* The command will bring up all the nodes: controller, compute1 and compute2.
-* Horizon Dashboard should now be available at http://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
-* When the VMs are restarted, we need to run **rejoin-stack.sh** on all the nodes to rejoin the screens started by stack.sh 
+  $ mkdir multiworker
+  $ cd multiworker
 
+Download the three scripts from the location:
+https://github.com/cloudmesh/reservation/tree/master/scripts/multinode::
 
-The content of the shell scripts are shown below for your reference
--------------------------------------------------------------------
-**installController.sh**:: 
+  $ wget https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/Vagrantfile
+  $ wget https://github.com/cloudmesh/reservation/tree/master/scripts/multinode/install-compute.sh 
+  $ wget https://github.com/cloudmesh/reservation/tree/master/scripts/multinode/install-controller.sh 
 
-  #!/bin/bash
+Run the command:: 
 
-  #################################################################################################################
-  # Author        : Aravindh Varadharaju
-  # Date          : 6th April 2014
-  # Purpose       : Controller Script to setup the controller node
-  # Script source : http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
-  #################################################################################################################
-  case $(id -u) in
-      0) 
-          sudo ufw disable
-          sudo apt-get -q -y update
-          sudo apt-get install -y git
-          sudo apt-get install -y python-pip
-          
-          git clone https://github.com/openstack-dev/devstack.git
-          chown -R vagrant:vagrant devstack
-     
-          # When creating the stack deployment for the first time,
-          # you are going to see prompts for multiple passwords.
-          # Your results will be stored in the localrc file.
-          # If you wish to bypass this, and provide the passwords up front,
-          # add in the following lines with your own password to the localrc file
-
-          echo '[[local|localrc]]' > local.conf
-          echo MULTI_HOST=1 >> local.conf
-          echo LOGFILE=/home/vagrant/stack.sh.log >> local.conf
-          echo ADMIN_PASSWORD=labstack >> local.conf
-          echo MYSQL_PASSWORD=supersecret >> local.conf
-          echo RABBIT_PASSWORD=supersecrete >> local.conf
-          echo SERVICE_PASSWORD=supersecrete >> local.conf
-          echo SERVICE_TOKEN=1qaz2wsx >> local.conf
-
-          mv local.conf /home/vagrant/devstack
-          chown vagrant:vagrant /home/vagrant/devstack/local.conf
-          
-          sudo -u vagrant -i $0  # script calling itself as the vagrant user
-          ;;
-      *) 
-          cd /home/vagrant/devstack
-          ./stack.sh
-          ;;
-  esac
-
-**installCompute.sh**::
-
-  #!/bin/bash
-
-  #################################################################################################################
-  # Author        : Aravindh Varadharaju
-  # Date          : 6th April 2014
-  # Purpose       : Compute Script to set up Compute Nodes
-  # Script source : http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
-  #################################################################################################################
-  case $(id -u) in
-      0) 
-          sudo ufw disable
-          sudo apt-get -q -y update
-          sudo apt-get install -y git
-          sudo apt-get install -y python-pip
-          
-          git clone https://github.com/openstack-dev/devstack.git
-          chown -R vagrant:vagrant devstack
-     
-          # When creating the stack deployment for the first time,
-          # you are going to see prompts for multiple passwords.
-          # Your results will be stored in the localrc file.
-          # If you wish to bypass this, and provide the passwords up front,
-          # add in the following lines with your own password to the localrc file
-
-          echo '[[local|localrc]]' > local.conf
-          echo MULTI_HOST=1 >> local.conf
-          echo LOGFILE=/home/vagrant/stack.sh.log >> local.conf
-          echo ADMIN_PASSWORD=labstack >> local.conf
-          echo MYSQL_PASSWORD=supersecret >> local.conf
-          echo RABBIT_PASSWORD=supersecrete >> local.conf
-          echo SERVICE_PASSWORD=supersecrete >> local.conf
-          echo SERVICE_TOKEN=1qaz2wsx >> local.conf
-          echo DATABASE_TYPE=mysql >> local.conf
-          echo SERVICE_HOST=192.168.236.11 >> local.conf
-          echo MYSQL_HOST=192.168.236.11 >> local.conf
-          echo RABBIT_HOST=192.168.236.11 >> local.conf
-          echo GLANCE_HOSTPORT=192.168.236.11:9292 >> local.conf
-          echo ENABLED_SERVICES=n-cpu,n-net,n-api,c-sch,c-api,c-vol >> local.conf
-
-          mv local.conf /home/vagrant/devstack
-          chown vagrant:vagrant /home/vagrant/devstack/local.conf
-          
-          sudo -u vagrant -i $0  # script calling itself as the vagrant user
-          ;;
-      *) 
-          cd /home/vagrant/devstack
-          ./stack.sh
-          ;;
-  esac
+  $ vagrant up
 
 
-**Vagrantfile**::
+The command will bring up all the nodes: controller, compute1 and compute2.
 
-  ########################################################################
-  # Name        : Vagrantfile
-  # Author      : Cloudmesh Team
-  # Description : The code is based on the setup guide from the URL given: 
-  #               http://devstack.org/guides/multinode-lab.html
-  #             : Requires vagrant-hostmanager plugin
-  ########################################################################
+After the successful instalation, the Horizon Dashboard will be
+available at::
 
-  # -*- mode: ruby -*-
-  # vi: set ft=ruby :
+  http://192.168.236.11 
 
-  # Check if vagrant-hostmanager plugin is installed. If not raise an error
+.. note: 
 
-  unless Vagrant.has_plugin?("vagrant-hostmanager")
-    raise 'Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager'
-  end
+   THIS IS WRONG
 
-  controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '2'}]
+The user name is "**admin**" and password is "**labstack**" 
+When the VMs are restarted, we need to run::
 
-  #############################################################################
-  # Add details about new worker nodes to the list below:                     #
-  #############################################################################
+  rejoin-stack.sh
 
-  workers = [{name: 'compute1', ip: '192.168.236.12', memory: '1024', cpu: '2'},
-             {name: 'compute2', ip: '192.168.236.13', memory: '1024', cpu: '2'}]
+on all the nodes to rejoin the screens started by stack.sh 
 
-  #############################################################################
-  #   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                             #
-  #############################################################################
-
-  VAGRANTFILE_API_VERSION = "2"
-
-  Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-   
-    config.vm.box = "precise64"
-    config.hostmanager.enabled = true
-     
-    # Turn off shared folders
-    config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
-   
-   # Begin controller
-    controllers.each do |contrhost|
-      config.vm.define "controller" do |controller_config|
-        controller_config.vm.hostname = contrhost[:name]
-        controller_config.vm.boot_timeout = 600
-        # controller_config.vm.provision "shell", inline: $script
-        # eth1 configured in the 192.168.236.0/24 network
-        controller_config.vm.network "private_network", ip: contrhost[:ip]
-        controller_config.vm.provision "shell", path: "installController.sh"
-        controller_config.vm.network "forwarded_port", guest: 80, host: 8000
-        controller_config.vm.network "forwarded_port", guest: 5000, host: 6000
-
-        controller_config.vm.provider "virtualbox" do |v|
-            v.customize ["modifyvm", :id, "--memory", contrhost[:memory]]
-            v.customize ["modifyvm", :id, "--cpus", contrhost[:cpu]]
-        end
-      end
-    end
-    # End controller
-
-    # Begin Workers
-    workers.each do |host|
-      config.vm.define host[:name] do |node|
-      node.vm.hostname = host[:name]
-      # node.vm.provision "shell", inline: $script
-      node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
-      node.vm.provision "shell", path: "installCompute.sh"
-      node.vm.provider "virtualbox" do |v|
-        v.customize ["modifyvm", :id, "--memory", host[:memory]]
-        v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
-        v.customize ["modifyvm", :id, "--nic3", "intnet"]
-      end
-      end
-    end
-    # End Workers
-  end
-
-
+SOMETHING ELSE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Save the Vagranfile
 * Run the command: **vagrant up**
 * The command will bring up all the nodes: controller, compute1 and compute2.
 * Horizon Dashboard should now be available at http://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
 * When the VMs are restarted, we need to run **rejoin-stack.sh** on all the nodes to kind of restart devstack. 
+
+
+
+
+Shell Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Controller - install-controller.sh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`install-controller.sh <https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/install-controller.sh>`_
+
+
+
+.. include:: ../../scripts/multinode/install-controller.sh
+   :literal:
+
+
+Compute - install-compute.sh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`install-compute.sh <https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/install-compute.sh>`_
+
+
+
+.. include:: ../../scripts/multinode/install-compute.sh
+   :literal:
+
+Vagrantfile
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`Vagrantfile <https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/Vagrantfile>`_
+
+
+
+.. include:: ../../scripts/multinode/Vagrantfile
+   :literal:
+
+
+
+
 
