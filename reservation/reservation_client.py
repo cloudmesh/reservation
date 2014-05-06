@@ -17,20 +17,20 @@ class ReservationClient(object):
         self.service = serviceArg
     
     def add(self,rsv):
-        '''An event is a JSON object that is passes to his method to be added to the calendar'''
+        '''A reservation is a JSON object that is passes to his method to be added to the calendar'''
         if(checkRsvOverlap(self.service,rsv)==True):
-            return "Event overlaps: cannot schedule at this time"
+            return "Reservations overlap: cannot schedule at this time"
         else:
-            completedEvent = self.service.events().insert(calendarId='primary', body=rsv).execute()
-            return completedEvent['id']
+            completedRsv = self.service.events().insert(calendarId='primary', body=rsv).execute()
+            return completedRsv['id']
         
     def removeAll(self):
-        '''Removes all the events from the calendar'''
+        '''Removes all the reservations from the calendar'''
         '''rename to remove_all'''
         self.service.calendars().clear(calendarId='primary').execute()
 
     def removeReservation(self,rsvId):
-        '''Removes a specific event from the calendar. Requires the reservationID'''
+        '''Removes a specific reservation from the calendar. Requires the reservationID'''
         '''rename to remove'''
         print self.service.events().delete(calendarId='primary', eventId=rsvId, sendNotifications=True).execute()
 
@@ -59,7 +59,7 @@ class ReservationClient(object):
         return listIds
         
     def getAll(self):
-        '''Selects all events in the calendar '''
+        '''Selects all reservations in the calendar '''
         '''rename to get_all'''
         page_token = None
         event_list = []
@@ -87,7 +87,7 @@ class ReservationClient(object):
         return 0
             
     def reschedule(self, oldRsvId, newRsv):
-        '''Used to update or modify an old event. Requires old event id and new Event object that will replace the old event'''
+        '''Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old reservation'''
         self.service.events().update(calendarId='primary', eventId = oldRsvId, body = newRsv).execute()
         
     def lstUsrProjRsvSTimeETime(self, userId, projId, sTime,eTime):
