@@ -1,33 +1,37 @@
-########################################################################
+######################################################################
 # Name        : Vagrantfile
 # Author      : Cloudmesh Team
 # Description : The code is based on the setup guide from the URL given: 
 #               http://devstack.org/guides/multinode-lab.html
 #             : Requires vagrant-hostmanager plugin
-########################################################################
+######################################################################
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+######################################################################
 
-# Check if vagrant-hostmanager plugin is installed. If not raise an error
+# Check if vagrant-hostmanager plugin is installed. 
+# If not raise an error.
 
 unless Vagrant.has_plugin?("vagrant-hostmanager")
   raise 'Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager'
 end
 
-#############################################################################
+######################################################################
 # Add details about the controler node:
-#############################################################################
+######################################################################
 
 controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '2'}]
 
-#############################################################################
-# Add details about new worker nodes to the list below:                     #
-#############################################################################
+######################################################################
+# Add details about new worker nodes to the list below:               
+######################################################################
 
 workers = [{name: 'compute1', ip: '192.168.236.12', memory: '1024', cpu: '2'},
            {name: 'compute2', ip: '192.168.236.13', memory: '1024', cpu: '2'}]
 
-#############################################################################
-#   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                             #
-#############################################################################
+######################################################################
+#   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                       
+######################################################################
 
 VAGRANTFILE_API_VERSION = "2"
 
