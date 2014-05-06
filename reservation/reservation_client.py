@@ -24,25 +24,21 @@ class ReservationClient(object):
             completedRsv = self.service.events().insert(calendarId='primary', body=rsv).execute()
             return completedRsv['id']
         
-    def removeAll(self):
+    def remove_all(self):
         '''Removes all the reservations from the calendar'''
-        '''rename to remove_all'''
         self.service.calendars().clear(calendarId='primary').execute()
 
-    def removeReservation(self,rsvId):
+    def remove(self,rsvId):
         '''Removes a specific reservation from the calendar. Requires the reservationID'''
-        '''rename to remove'''
         print self.service.events().delete(calendarId='primary', eventId=rsvId, sendNotifications=True).execute()
 
 
-    def viewReservationFromId(self,rsvId):
+    def get_from_id(self,rsvId):
         '''displays the reservation object'''
-        '''rename to get_from_id'''
         print self.service.events().get(calendarId='primary', eventId=rsvId).execute()
         
-    def selectRsvIdsFromUser(self,userId):
+    def get_by_user(self,userId):
         '''Selects all the reservations made by a user'''
-        '''rename to get_by_user'''
         page_token = None
         listIds = []
         while True:
@@ -58,9 +54,8 @@ class ReservationClient(object):
                 break 
         return listIds
         
-    def getAll(self):
+    def get_all(self):
         '''Selects all reservations in the calendar '''
-        '''rename to get_all'''
         page_token = None
         event_list = []
         while True:
@@ -72,9 +67,8 @@ class ReservationClient(object):
                 break
         return event_list    
     
-    def selectRsvIdFromLabel(self, labelStr):
+    def get_from_label(self, labelStr):
         '''Assuming this label will return only one eventId'''
-        '''rename get_from_label'''
         page_token = None
         while True:
             events = self.service.events().list(calendarId='primary', pageToken=page_token).execute()
@@ -90,9 +84,8 @@ class ReservationClient(object):
         '''Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old reservation'''
         self.service.events().update(calendarId='primary', eventId = oldRsvId, body = newRsv).execute()
         
-    def lstUsrProjRsvSTimeETime(self, userId, projId, sTime,eTime):
+    def list_by_user_and_project(self, userId, projId, sTime,eTime):
         '''Lists all the users reservations made in a project from a start-time to a end time'''
-        '''reanme list_by_user_and_project'''
         page_token = None
         evt_list = []
         while True:
@@ -108,9 +101,8 @@ class ReservationClient(object):
                 break
         return evt_list
     
-    def lstRsvProj(self, projId):
+    def list_by_project(self, projId):
         '''Lists all the reservations made in a particular project'''
-        '''rename list_by_project'''
         page_token = None
         evt_list = []
         while True:
@@ -126,16 +118,14 @@ class ReservationClient(object):
                 break
         return evt_list
     
-    def durationOfRsv(self, rsvId):
+    def duration(self, rsvId):
         '''Shows the duration of the reservation'''
-        '''rename duration'''
         rsvEvent = self.service.events().get(calendarId='primary', eventId=rsvId).execute()
         duration = rsvEvent['start']['dateTime']- rsvEvent['end']['dateTime']
         return duration
         
       
-def checkRsvOverlap(service, newRsv):
-    '''rename check_overlap'''
+def check_overlap(service, newRsv):
     page_token = None
     flag = False
     while True:
