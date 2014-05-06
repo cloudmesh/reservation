@@ -1,5 +1,6 @@
+**********************************************************************
 Multiworker Devstack for Vagarnt
-============================================================================
+**********************************************************************
 
 .. sidebar:: 
    . 
@@ -9,28 +10,37 @@ Multiworker Devstack for Vagarnt
 
 ..
 
-
-Requirements:
-
-* VirtualBox
-* Vagrant
-* vagrant-hostmanager plugin
-
-
-Multi-Node OpenStack Install
-----------------------------------------------------------------------
-
 The procedure below deploys Devstack with multiple workers from devstack source code. The vagrant script below sets up a cluster with the following nodes:
 
 * Controller
 * Compute1
 * Compute2
 
-Prerequisits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requirements
+===============================
+
+VirtualBox
+----------------------------------------------------------------------
+
+You must have virtualbox installed. Please follow the documentation at
+http://www.virtualbox.org to install it.
+
+Cookiecutter
+----------------------------------------------------------------------
+You need to have cookiecutter installed, please do this with::
+
+  pip install cookiecutter
+
+
+Vagrant
+----------------------------------------------------------------------
 
 Before you start you need to make sure you have vagrant
-installed. Make sure you have at least the version `1.5.4` which you
+installed. Please follow the instructions provided at 
+http://www.vagrantup.com/downloads.html. 
+
+Make sure you have at least the version `1.5.4` which you
 can find out via::
 
   vagrant --version
@@ -40,22 +50,34 @@ that you have the vagrant-hostmanage installed::
 
    vagrant plugin install vagrant-hostmanager
 
-Setup
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The steps to be followed to create a cluster for the above nodes are 
-given below::
+
+Setup
+======================================================================
+
+The setup is easily achieved via cookiecutter, which will
+create a new directory with the appropriate scripts and configuration
+parameters. It will ask you for a number of parameters such as
+
+* a label, that will be appended to the directory name where the
+  scripts are located
+* a password for the admin
+* a password for the services
+* a token for the services
+
+Please do not use the defaults for the passwords and teh tokens, but
+define your own strong versions.
+
+To create the directory with the scripts, simply call::
+
+  cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git
+
+Than you will find a directory called multinode-<label> 
+
+You can than cd in this directory and inspect the scripts::
 
   $ mkdir multiworker
-  $ cd multiworker
-
-Download the three scripts from the location:
-https://github.com/cloudmesh/reservation/tree/master/scripts/multinode::
-
-  $ export GITHUB_DIR=https://github.com/cloudmesh/reservation/tree/master
-  $ wget $GITHUB_DIR/scripts/multinode/Vagrantfile
-  $ wget $GITHUB_DIR/scripts/multinode/install-compute.sh 
-  $ wget $GITHUB_DIR/scripts/multinode/install-controller.sh 
+  $ cd multiworker-<TAB>
 
 Run the command:: 
 
@@ -69,13 +91,9 @@ available at::
 
   http://192.168.236.11 
 
-.. note::
-
-   THIS IS WRONG. we want in the exampl to be able to configure
-   username and password. and not just take some default values.
-
-The user name is "**admin**" and password is "**labstack**" 
-When the VMs are restarted, we need to run::
+You can use the username "**admin**" and password that you have
+defined with the help of cookiecutter. When the VMs are restarted, we
+need to run::
 
   rejoin-stack.sh
 
