@@ -4,10 +4,8 @@ Deployment
 Virtualenv
 ----------------------------------------------------------------------
 
-set up virtualenv as documented in the main cloudmesh documentation
+Set up `virtual env as described in the main cloudmesh documentation <http://cloudmesh.futuregrid.org/cloudmesh/developer.html#virtualenv>`_.
 
-put link here
-TBD
 
 Requirements
 ----------------------------------------------------------------------

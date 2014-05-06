@@ -52,9 +52,10 @@ given below::
 Download the three scripts from the location:
 https://github.com/cloudmesh/reservation/tree/master/scripts/multinode::
 
-  $ wget https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/Vagrantfile
-  $ wget https://github.com/cloudmesh/reservation/tree/master/scripts/multinode/install-compute.sh 
-  $ wget https://github.com/cloudmesh/reservation/tree/master/scripts/multinode/install-controller.sh 
+  $ export GITHUB_DIR=https://github.com/cloudmesh/reservation/tree/master
+  $ wget $GITHUB_DIR/scripts/multinode/Vagrantfile
+  $ wget $GITHUB_DIR/scripts/multinode/install-compute.sh 
+  $ wget $GITHUB_DIR/scripts/multinode/install-controller.sh 
 
 Run the command:: 
 
@@ -63,14 +64,15 @@ Run the command::
 
 The command will bring up all the nodes: controller, compute1 and compute2.
 
-After the successful instalation, the Horizon Dashboard will be
+After the successful instalation, the Horizon dashboard will be
 available at::
 
   http://192.168.236.11 
 
-.. note: 
+.. note::
 
-   THIS IS WRONG
+   THIS IS WRONG. we want in the exampl to be able to configure
+   username and password. and not just take some default values.
 
 The user name is "**admin**" and password is "**labstack**" 
 When the VMs are restarted, we need to run::
