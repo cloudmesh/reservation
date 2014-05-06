@@ -6,14 +6,15 @@
 #             : Requires vagrant-hostmanager plugin
 ########################################################################
 
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 # Check if vagrant-hostmanager plugin is installed. If not raise an error
 
 unless Vagrant.has_plugin?("vagrant-hostmanager")
   raise 'Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager'
 end
+
+#############################################################################
+# Add details about the controler node:
+#############################################################################
 
 controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '2'}]
 
