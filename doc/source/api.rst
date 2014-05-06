@@ -10,69 +10,72 @@ Python API
 The Python API contains the following functions to work with the Google Calendar:
 Our current version uses only JSON objects to pass to the calendar.
 
-* The addEventToCalendar(event):
-      Arguments: event object
-      return value: return EventId (integer) only if event does not overlap
+* The add(self,rsv):
+      Argument: A reservation is a JSON object that is passes to his method to be added to the calendar
+      return value: return ReservationId (integer) only if reservation does not overlap
   
-* removeEventFromCalendar(eventId):
-      Argument: EventId (Integer)
+* remove(self,rsvId):
+      Removes a specific reservation from the calendar. Requires the reservationID
   
-* removeAllEvents():
-      This removes all the events from the primary calendar.
+* remove_all(self):
+      Removes all the reservations from the calendar
 
-* viewEventFromId(eventId):
-      returns the entire event object that is stored in the calendar.
+* get_from_id(self,rsvId):
+        displays the reservation object
 
-* selectEventIdsFromUser(userId):
-      Argument: user id (integer)
+* get_by_user(self,userId):
+      Selects all the reservations made by a user
       returns: all the reservations events made by the user.
 
-* selectAllEvents():
-      This lists all the events from the primary calendar.
-      return: Dict containing all the events
+* get_all(self):
+      Selects all reservations in the calendar.
+      return: Dict containing all the reservations
 
-* lstUsrProjRsvSTimeETime(userId, projId, sTime, eTime):
+* list_by_user_and_project(self, userId, projId, sTime,eTime):
+      Lists all the users reservations made in a project from a start-time to a end time
       Arguments: userId, ProjectId, Start time, end time
       returns: List of a users reservations made of a project between an interval of time 
 
-* lstRsvProj(projId):
+* list_by_project(self, projId):
+      Lists all the reservations made in a particular project
       Argument: projId
       return value: returns all the reservation eventId's of a particular project.
   
-* durationOfRsv(rsvId):
-      Argument: reservation event id.
-      returns: returns the duration of that particular event.
+* duration(self, rsvId):
+      Shows the duration of the reservation
+      Argument: reservation reservation id.
+      returns: returns the duration of that particular reservation.
   
-* rescheduleEvent(oldEventId, newEvent):
-      Used to update or modify an old event.
-          Args: oldEventId (Integer)
+* reschedule(self, oldRsvId, newRsv):
+          Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old reservation
+          Args: oldRsvId (Integer)
           newEvent (JSON object)
           
-* selectEventIdFromLabel(label):
-      args: label which will be compared with the summary from the event
-      return: returns the eventId (Integer)
+* get_from_label(self, labelStr):
+      Assuming this label will return only one reservationId.
+      return: returns the reservationId (Integer)
   
 WorkFlow
 ======================================================================
   
-*  1. We will add 3 events
-*  2. select all events.
-*  3. Reschedule event.
-*  4. Remove event.
-*  5. Select all events.
-*  6. Remove all events.
-*  7. Select all events
+*  1. We will add 3 reservations
+*  2. select all reservations.
+*  3. Reschedule reservation.
+*  4. Remove reservation.
+*  5. Select all reservations.
+*  6. Remove all reservations.
+*  7. Select all reservations
         
 Sample code 
 ======================================================================
 
    
-Creating 3 events
+Creating 3 reservations
 ----------------------------------------------------------------------
 
 ::
    
-     print reservation.addEventToCalendar({
+     print reservation.add({
                        'summary': 'oliver1',
                         'description':'{
                             'hosts': '100-103', 
@@ -93,7 +96,7 @@ Creating 3 events
                             'timeZone': 'America/New_York'
                         }
                        })
-     print reservation.addEventToCalendar({
+     print reservation.add({
                        'summary': 'oliver2',
                         'description':'{
                             'hosts': '100-103', 
@@ -113,7 +116,7 @@ Creating 3 events
                             'dateTime': '2014-05-05T23:51:00.000',
                             'timeZone': 'America/New_York'
                         }})
-                             print reservation.addEventToCalendar('summary': 'oliver3',
+                             print reservation.add('summary': 'oliver3',
                               'description':'{
                                   'hosts': '100-103', 
                                   'kind':'vm-server', 
@@ -139,12 +142,12 @@ Output ::
      5bmlslq006dbv0lampjfeu75ec
      2slbu96950v62krqh5lmthvc7s
    
-Select all events
+Select all reservations
 ----------------------------------------------------------------------
 
 ::
 
-      print reservation.selectAllEvents()
+      print reservation.get_all()
       
 Output ::
 
@@ -157,13 +160,13 @@ Output ::
       }
 
      
-Removing a specific event using a label
+Removing a specific reservation using a label
 ----------------------------------------------------------------------
 
 ::
      
-     reservation.removeEventFromCalendar(reservation.selectEventIdFromLabel('Appointment3'))
-     print reservation.selectAllEvents()
+     reservation.remove(reservation.get_from_label('Appointment3'))
+     print reservation.get_all()
      
 Output::
 
@@ -178,7 +181,7 @@ Rescheduling an event using a label to first retrieve the event::
    
      Rescheduling Appointment 2 to AppointmentX with a new startTime and new endTime
    
-      reservation.rescheduleEvent(reservation.selectEventIdFromLabel('Appointment2'), {
+      reservation.reschedule(reservation.get_from_label('Appointment2'), {
                              'summary': 'AppointmentX',
                               'location': 'Somewherenew',
                               'start': {
@@ -190,7 +193,7 @@ Rescheduling an event using a label to first retrieve the event::
                                 'timeZone': 'America/Los_Angeles'
                               }})
                               
-      print reservation.selectAllEvents()
+      print reservation.get_all()
     
 Output::
     
@@ -199,7 +202,7 @@ Output::
   
 Deleting all events::
   
-    reservation.removeAllEvents()
+    reservation.remove_all()
 
      
                          
