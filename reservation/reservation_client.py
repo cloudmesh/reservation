@@ -10,6 +10,32 @@ class ReservationClient(object):
     '''
     This class contains all the reservations that the calendar supports
     New reservation related functions can be appended at the bottom
+    
+    New template of the Json object to support multi-user reservations
+    
+    {
+                  'summary': 'oliver1',
+                   'description':'{
+                       'hosts': '100-103',
+                       'kind':'vm-server',
+                       'project':'xyz',
+                       'userid':'1002',
+                       'displayName':'oliverlewis',
+                       'email':'lewiso@indiana.edu'
+                   },
+
+                   'start': {
+                       'dateTime': '2014-05-05T22:50:00.000',
+                       'timeZone': 'America/New_York'
+                   },
+
+                   'end': {
+                       'dateTime': '2014-05-05T23:51:00.000',
+                       'timeZone': 'America/New_York'
+                   }
+    }
+    
+    
     '''
 
     def __init__(self, serviceArg):
