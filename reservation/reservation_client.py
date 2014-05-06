@@ -8,8 +8,8 @@ import json
 
 class ReservationClient(object):
     '''
-    This class contains all the events that the calendar supports
-    New events can be appended at the bottom
+    This class contains all the reservations that the calendar supports
+    New reservation related functions can be appended at the bottom
     '''
 
     def __init__(self, serviceArg):
