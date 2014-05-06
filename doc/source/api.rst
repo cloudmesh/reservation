@@ -1,141 +1,236 @@
 **********************************************************************
 Python API 
 **********************************************************************
+.. sidebar:: 
+   . 
 
-.. sidebar:: Page Contents |video-hadoop|
+  .. contents:: Table of Contents
+     :depth: 5
 
-   .. contents::
-      :local:
+..
+
 
 The Python API contains the following functions to work with the Google Calendar:
 Our current version uses only JSON objects to pass to the calendar.
 
-* The add(self,rsv):
-      Argument: A reservation is a JSON object that is passes to his method to be added to the calendar
-      return value: return ReservationId (integer) only if reservation does not overlap
+First you need to import the client::
+
+   from reservation.reservation_client import ReservationClent 
+
+Than you decaler a reseration object::
+
+  reservation = ReservationClient(...)
+
+
+.. note::
+
+   * how do i know which google calendar to use
+   * how do i know how to authenticate
+
+
+Now you can use various api calls
+
+::
+
+  reservation.add (rsv)
+
+Adds a reservatuion.
+Argument: A reservation is a JSON object that is passes to his method
+to be added to the calendar return value: return ReservationId
+(integer) only if reservation does not overlap
   
-* remove(self,rsvId):
-      Removes a specific reservation from the calendar. Requires the reservationID
+::
+
+  reservation.remove (rsvId):
+
+Removes a specific reservation from the calendar. Requires the
+reservationID
   
-* remove_all(self):
-      Removes all the reservations from the calendar
+::
 
-* get_from_id(self,rsvId):
-        displays the reservation object
+  reservation.remove_all ():
 
-* get_by_user(self,userId):
-      Selects all the reservations made by a user
-      returns: all the reservations events made by the user.
+Removes all the reservations from the calendar.
 
-* get_all(self):
-      Selects all reservations in the calendar.
-      return: Dict containing all the reservations
+::
 
-* list_by_user_and_project(self, userId, projId, sTime,eTime):
-      Lists all the users reservations made in a project from a start-time to a end time
-      Arguments: userId, ProjectId, Start time, end time
-      returns: List of a users reservations made of a project between an interval of time 
+  reservation.get_from_id (rsvId):
 
-* list_by_project(self, projId):
-      Lists all the reservations made in a particular project
-      Argument: projId
-      return value: returns all the reservation eventId's of a particular project.
+Displays the reservation object.
+
+::
+
+  reservation.get_by_user (userId):
+
+Selects all the reservations made by a user returns: all the
+reservations events made by the user.
+
+::
+
+  reservation.get_all ():
+
+Selects all reservations in the calendar.
+return: Dict containing all the reservations
+
+::
+
+   reservation.list_by_user_and_project (userId, projId, sTime,eTime):
+
+Lists all the users reservations made in a project from a start-time to a end time.
+
+Arguments: userId, ProjectId, Start time, end time
+
+Returns: List of a users reservations made of a project between an interval of time 
+
+::
+
+  reservation.list_by_project (projId):
+
+Lists all the reservations made in a particular project
+
+Argument: projId
+
+Returns: returns all the reservation eventId's of a particular project.
   
-* duration(self, rsvId):
-      Shows the duration of the reservation
-      Argument: reservation reservation id.
-      returns: returns the duration of that particular reservation.
+:: 
+
+  reservation.duration (rsvId):
+
+Shows the duration of the reservation.
+
+Argument: reservation reservation id.
+
+Returns: returns the duration of that particular reservation.
   
-* reschedule(self, oldRsvId, newRsv):
-          Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old reservation
-          Args: oldRsvId (Integer)
-          newEvent (JSON object)
+::
+
+  reservation.reschedule (oldRsvId, newRsv):
+
+Used to update or modify an old reservation. Requires old reservation id and new reservation object that will replace the old reservation.
+
+Arguments: oldRsvId (Integer) newEvent (JSON object)
+
+::
           
-* get_from_label(self, labelStr):
-      Assuming this label will return only one reservationId.
-      return: returns the reservationId (Integer)
+  reservation.get_from_label (labelStr):
+
+Assuming this label will return only one reservationId.
+
+Return: returns the reservationId (Integer)
   
-WorkFlow
-======================================================================
-  
-*  1. We will add 3 reservations
-*  2. select all reservations.
-*  3. Reschedule reservation.
-*  4. Remove reservation.
-*  5. Select all reservations.
-*  6. Remove all reservations.
-*  7. Select all reservations
         
-Sample code 
+Example
 ======================================================================
+
+In this example, we will conduct the following steps:
+  
+#. We will add 3 reservations
+#. select all reservations.
+#. Reschedule reservation.
+#. Remove reservation.
+#. Select all reservations.
+#. Remove all reservations.
+#. Select all reservations
 
    
 Creating 3 reservations
 ----------------------------------------------------------------------
 
+.. note::
+
+   * why use the name oliver1,2, ... and not reservation 1, 2 in summary
+   * why is there a { in description but no } close
+   * why do you use inconsistent and illegal python usage of ' in definitions
+   * there is no example.py in the code that allows me to run and test
+     this exact example
+   * we need a link to the example ...
+   * in addition to your nice formatted documentation i would give a
+     complete example in a .py filr and use a literal include, see
+     Aravindhas multi.rst for example 
+   * is the reservatiion.json documented?
+   * the indentation needs to be space saving 4 spaces is enough
+   * code in
+     file:///Users/flat/github/reservation/doc/build/html/_modules/reservation/reservation_client.html#check_overlap
+     is no nicely formated. e.g. can you try to be closer to 70
+     columns, run over where you must, but the other stuff should be
+     better formatted
+   * is there a better way in python to format this file:///Users/flat/github/reservation/doc/build/html/modules/reservation-gvl.html#reservation.reservation_client.ReservationClient
+    * indentation between oliver1,2,3 must be consistent
+
 ::
    
-     print reservation.add({
-                       'summary': 'oliver1',
-                        'description':'{
-                            'hosts': '100-103', 
-                            'kind':'vm-server', 
-                            'project':'xyz', 
-                            'userid':'1002', 
-                            'displayName':'oliverlewis', 
-                            'email':'lewiso@indiana.edu'
-                        },
-                        
-                        'start': {
-                            'dateTime': '2014-05-05T22:50:00.000',
-                            'timeZone': 'America/New_York'
-                        },
-                        
-                        'end': {
-                            'dateTime': '2014-05-05T23:51:00.000',
-                            'timeZone': 'America/New_York'
-                        }
-                       })
-     print reservation.add({
-                       'summary': 'oliver2',
-                        'description':'{
-                            'hosts': '100-103', 
-                            'kind':'vm-server', 
-                            'project':'xyz', 
-                            'userid':'1001', 
-                            'displayName':'oliverlewis', 
-                            'email':'lewiso@indiana.edu'
-                        },
-                        
-                        'start': {
-                            'dateTime': '2014-05-05T22:50:00.000',
-                            'timeZone': 'America/New_York'
-                        },
-                        
-                        'end': {
-                            'dateTime': '2014-05-05T23:51:00.000',
-                            'timeZone': 'America/New_York'
-                        }})
-                             print reservation.add('summary': 'oliver3',
-                              'description':'{
-                                  'hosts': '100-103', 
-                                  'kind':'vm-server', 
-                                  'project':'xyz', 
-                                  'userid':'1002', 
-                                  'displayName':'oliverlewis', 
-                                  'email':'lewiso@indiana.edu'
-                              },
-                              
-                              'start': {
-                                  'dateTime': '2014-05-05T22:50:00.000',
-                                  'timeZone': 'America/New_York'
-                              },
-                              
-                              'end': {
-                                  'dateTime': '2014-05-05T23:51:00.000',
-                                  'timeZone': 'America/New_York'
-                              }})
-                       
+   print reservation.add({
+            'summary': 'oliver1',
+            'description':'{
+            'hosts': '100-103', 
+            'kind':'vm-server', 
+            'project':'xyz', 
+            'userid':'1002', 
+            'displayName':'oliverlewis', 
+            'email':'lewiso@indiana.edu'
+          },
+                      
+        'start': {
+            'dateTime': '2014-05-05T22:50:00.000',
+            'timeZone': 'America/New_York'
+           },
+            
+        'end': {
+            'dateTime': '2014-05-05T23:51:00.000',
+            'timeZone': 'America/New_York'
+          }
+        })
+
+::
+
+   print reservation.add({
+            'summary': 'oliver2',
+            'description':'{
+            'hosts': '100-103', 
+            'kind':'vm-server', 
+            'project':'xyz', 
+            'userid':'1001', 
+            'displayName':'oliverlewis', 
+            'email':'lewiso@indiana.edu'
+          },
+             
+        'start': {
+            'dateTime': '2014-05-05T22:50:00.000',
+            'timeZone': 'America/New_York'
+          },
+             
+        'end': {
+             'dateTime': '2014-05-05T23:51:00.000',
+             'timeZone': 'America/New_York'
+          }
+        })
+
+::
+
+   print reservation.add({
+      'summary': 'oliver3',
+      'description':'{
+      'hosts': '100-103', 
+      'kind':'vm-server', 
+      'project':'xyz', 
+      'userid':'1002', 
+      'displayName':'oliverlewis', 
+      'email':'lewiso@indiana.edu'
+      },
+
+      {
+                          
+         'start': {
+           'dateTime': '2014-05-05T22:50:00.000',
+           'timeZone': 'America/New_York'
+         },                              
+         'end': {
+            'dateTime': '2014-05-05T23:51:00.000',
+            'timeZone': 'America/New_York'
+          }    
+      })
+         
+
 Output ::
     
      buta7destbamakidf9lm7agi5k
@@ -205,11 +300,13 @@ Deleting all events::
     reservation.remove_all()
 
      
-                         
+
+Google Calendar API                         
+======================================================================
  
-Specification of the entire JSON Calendar object: Referenced from the
-google documentation. The Json Object must adhere to the following standard.
-      
-The complete structure of the object can be viewed from the link below: 
-    *  https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get
+The specification of the researvation is based on the JSON Calendar
+object defined in the google documentation. Additional information is
+included as part of the description field.  The Google API
+documentation can be found `here
+<https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
     
