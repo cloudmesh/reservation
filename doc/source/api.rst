@@ -247,11 +247,11 @@ Select all reservations
 Output ::
 
       {'event2': 
-        {'id': u'2slbu96950v62krqh5lmthvc7s', 'label': u'Appointment3'}, 
+        {'id': u'2slbu96950v62krqh5lmthvc7s', 'label': u'Reservation_3'}, 
        'event0': 
-        {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 
+        {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
        'event1': 
-        {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Appointment2'}
+        {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_2'}
       }
 
      
@@ -260,24 +260,24 @@ Removing a specific reservation using a label
 
 ::
      
-     reservation.remove(reservation.get_from_label('Appointment3'))
+     reservation.remove(reservation.get_from_label('Reservation_3'))
      print reservation.get_all()
      
 Output::
 
       {'event2': 
         'event0': 
-         {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 
+         {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
         'event1': 
-         {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Appointment2'}
+         {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_2'}
       }
       
 Rescheduling an event using a label to first retrieve the event::
    
-     Rescheduling Appointment 2 to AppointmentX with a new startTime and new endTime
+     Rescheduling Reservation_2 to Reservation_X with a new startTime and new endTime
    
-      reservation.reschedule(reservation.get_from_label('Appointment2'), {
-                             'summary': 'AppointmentX',
+      reservation.reschedule(reservation.get_from_label('Reservation_2'), {
+                             'summary': 'Reservation_X',
                               'location': 'Somewherenew',
                               'start': {
                                 'dateTime': '2014-06-03T10:00:00.000-07:00',
@@ -292,8 +292,8 @@ Rescheduling an event using a label to first retrieve the event::
     
 Output::
     
-     {'event0': {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Appointment1'}, 
-      'event1': {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'AppointmentX'}}
+     {'event0': {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
+      'event1': {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_X'}}
   
 Deleting all events::
   
