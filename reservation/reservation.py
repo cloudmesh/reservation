@@ -40,8 +40,8 @@ import hostlist
 from pytimeparse.timeparse import timeparse
 # from timestring import Range
 # from timestring import Date
-from cloudmesh.util.util import parse_time_interval
-from cloudmesh.util.util import yn_choice
+from cloudmesh_common.util import parse_time_interval
+from cloudmesh_common.util import yn_choice
 import textwrap
 
 def not_implemented():
