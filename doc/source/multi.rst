@@ -76,8 +76,7 @@ Than you will find a directory called multinode-<label>
 
 You can than cd in this directory and inspect the scripts::
 
-  $ mkdir multiworker
-  $ cd multiworker-<TAB>
+  $ cd multidevstack-<TAB>
 
 Run the command:: 
 
@@ -93,9 +92,10 @@ available at::
 
 You can use the username "**admin**" and password that you have
 defined with the help of cookiecutter. When the VMs are restarted, we
-need to run::
-
-  rejoin-stack.sh
+will need to run the following::
+  
+  $ cd ~/devstack
+  $ ./rejoin-stack.sh
 
 on all the nodes to rejoin the screens started by stack.sh 
 
