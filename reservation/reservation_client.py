@@ -44,7 +44,7 @@ class ReservationClient(object):
     
     def add(self,rsv):
         '''A reservation is a JSON object that is passes to his method to be added to the calendar'''
-        if(checkRsvOverlap(self.service,rsv)==True):
+        if(check_overlap(self.service,rsv)==True):
             return "Reservations overlap: cannot schedule at this time"
         else:
             completedRsv = self.service.events().insert(calendarId='primary', body=rsv).execute()
@@ -61,7 +61,7 @@ class ReservationClient(object):
 
     def get_from_id(self,rsvId):
         '''displays the reservation object'''
-        print self.service.events().get(calendarId='primary', eventId=rsvId).execute()
+        return self.service.events().get(calendarId='primary', eventId=rsvId).execute()
         
     def get_by_user(self,userId):
         '''Selects all the reservations made by a user'''
@@ -147,8 +147,8 @@ class ReservationClient(object):
     def duration(self, rsvId):
         '''Shows the duration of the reservation'''
         rsvEvent = self.service.events().get(calendarId='primary', eventId=rsvId).execute()
-        duration = rsvEvent['start']['dateTime']- rsvEvent['end']['dateTime']
-        return duration
+        duration_time = {'start_time:': rsvEvent['start']['dateTime'], 'end_time:':rsvEvent['end']['dateTime']}  
+        return duration_time
         
       
 def check_overlap(service, newRsv):
