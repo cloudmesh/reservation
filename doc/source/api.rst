@@ -302,9 +302,9 @@ documentation can be found `here
 Google Client Secrets
 ======================================================================
 
-To authenticate with the google calendar follow the steps listed below
+To authenticate with the google calendar follow the steps listed below::
 
-   * Go to the Google Developers Console that can be found `here
+Go to the Google Developers Console that can be found `here
 <https://console.developers.google.com/project>`_.
    * Select a project.
    * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
