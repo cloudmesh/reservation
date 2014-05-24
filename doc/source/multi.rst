@@ -5,7 +5,7 @@ Multiworker Devstack for Vagarnt
 .. sidebar:: Table of Contents 
 
   
-  .. contents:: Table of Contents
+  .. contents::
      :depth: 5
 
 ..
