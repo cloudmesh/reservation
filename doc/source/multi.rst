@@ -99,17 +99,6 @@ need to run::
 
 on all the nodes to rejoin the screens started by stack.sh 
 
-SOMETHING ELSE
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Save the Vagranfile
-* Run the command: **vagrant up**
-* The command will bring up all the nodes: controller, compute1 and compute2.
-* Horizon Dashboard should now be available at http://192.168.236.11. The user name is "**admin**" and password is "**labstack**" 
-* When the VMs are restarted, we need to run **rejoin-stack.sh** on all the nodes to kind of restart devstack. 
-
-
-
 
 Shell Scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
