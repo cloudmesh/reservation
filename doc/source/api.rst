@@ -17,16 +17,20 @@ First you need to import the client::
 
    from reservation.reservation_client import ReservationClent 
 
-Than you decaler a reseration object::
+Than you declare a reseration object::
 
   reservation = ReservationClient(...)
 
 
-.. note::
+.. To authenticate with the google calendar follow the steps listed below::
 
-   * how do i know which google calendar to use
-   * how do i know how to authenticate
-
+   * Go to the Google Developers Console that can be found `here
+<https://console.developers.google.com/project>`_.
+   * Select a project.
+   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+   * In the sidebar on the left, select Credentials.
+   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+   * Download the JSON file and then place it on the same directory level as the reservation.py class
 
 Now you can use various api calls
 
@@ -138,8 +142,6 @@ Creating 3 reservations
 
 .. note::
 
-   * why use the name oliver1,2, ... and not reservation 1, 2 in summary
-   * why is there a { in description but no } close
    * why do you use inconsistent and illegal python usage of ' in definitions
    * there is no example.py in the code that allows me to run and test
      this exact example
@@ -147,7 +149,6 @@ Creating 3 reservations
    * in addition to your nice formatted documentation i would give a
      complete example in a .py filr and use a literal include, see
      Aravindhas multi.rst for example 
-   * is the reservatiion.json documented?
    * the indentation needs to be space saving 4 spaces is enough
    * code in
      file:///Users/flat/github/reservation/doc/build/html/_modules/reservation/reservation_client.html#check_overlap
@@ -160,15 +161,15 @@ Creating 3 reservations
 ::
    
    print reservation.add({
-            'summary': 'oliver1',
+            'summary': 'reservation1',
             'description':'{
             'hosts': '100-103', 
             'kind':'vm-server', 
             'project':'xyz', 
-            'userid':'1002', 
-            'displayName':'oliverlewis', 
-            'email':'lewiso@indiana.edu'
-          },
+            'userid':'1001', 
+            'displayName':'User1', 
+            'email':'user1@indiana.edu'
+             },
                       
         'start': {
             'dateTime': '2014-05-05T22:50:00.000',
@@ -179,20 +180,20 @@ Creating 3 reservations
             'dateTime': '2014-05-05T23:51:00.000',
             'timeZone': 'America/New_York'
           }
-        })
+      })
 
 ::
 
    print reservation.add({
-            'summary': 'oliver2',
+            'summary': 'reservation2',
             'description':'{
             'hosts': '100-103', 
             'kind':'vm-server', 
             'project':'xyz', 
             'userid':'1001', 
-            'displayName':'oliverlewis', 
-            'email':'lewiso@indiana.edu'
-          },
+            'displayName':'User1', 
+            'email':'user1@indiana.edu'
+            },
              
         'start': {
             'dateTime': '2014-05-05T22:50:00.000',
@@ -203,32 +204,31 @@ Creating 3 reservations
              'dateTime': '2014-05-05T23:51:00.000',
              'timeZone': 'America/New_York'
           }
-        })
+      })
 
 ::
 
    print reservation.add({
-      'summary': 'oliver3',
-      'description':'{
-      'hosts': '100-103', 
-      'kind':'vm-server', 
-      'project':'xyz', 
-      'userid':'1002', 
-      'displayName':'oliverlewis', 
-      'email':'lewiso@indiana.edu'
-      },
-
-      {
+             'summary': 'reservation3',
+             'description':'{
+             'hosts': '100-103', 
+             'kind':'vm-server', 
+             'project':'xyz', 
+             'userid':'1002', 
+             'displayName':'User2', 
+             'email':'user2@indiana.edu'
+             },
                           
          'start': {
-           'dateTime': '2014-05-05T22:50:00.000',
-           'timeZone': 'America/New_York'
-         },                              
-         'end': {
-            'dateTime': '2014-05-05T23:51:00.000',
+            'dateTime': '2014-05-05T22:50:00.000',
             'timeZone': 'America/New_York'
+         },
+         
+         'end': {
+               'dateTime': '2014-05-05T23:51:00.000',
+               'timeZone': 'America/New_York'
           }    
-      })
+     })
          
 
 Output ::
@@ -310,3 +310,7 @@ included as part of the description field.  The Google API
 documentation can be found `here
 <https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
     
+Google Client Secrets
+======================================================================
+
+To find your project's client ID and client secret, do the following:
