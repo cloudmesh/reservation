@@ -1,0 +1,7 @@
+{"summary":"olivertemp","description":
+	{"hosts":"100-103","kind":"vm-server","project":"xyz","userid":"1005","displayName":"oliverlewistemp","email":"lewisoa7@indiana.edu"},
+	"start":
+		{"dateTime":"2014-05-21T22:50:00.000","timeZone": "America/New_York"},
+	"end":
+		{"dateTime":"2014-05-21T23:51:00.000","timeZone":"America/New_York"}
+}
