@@ -2,7 +2,7 @@
 Multiworker Devstack for Vagarnt
 **********************************************************************
 
-.. sidebar:: 
+.. sidebar:: Table of Contents 
   .
   
   .. contents:: Table of Contents
