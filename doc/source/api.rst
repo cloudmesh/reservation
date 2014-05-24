@@ -131,7 +131,6 @@ Creating 3 reservations
 
 .. note::
 
-   * why do you use inconsistent and illegal python usage of ' in definitions
    * there is no example.py in the code that allows me to run and test
      this exact example
    * we need a link to the example ...
@@ -150,72 +149,72 @@ Creating 3 reservations
 ::
    
    print reservation.add({
-            'summary': 'reservation1',
-            'description':'{
-            'hosts': '100-103', 
-            'kind':'vm-server', 
-            'project':'xyz', 
-            'userid':'1001', 
-            'displayName':'User1', 
-            'email':'user1@indiana.edu'
+            "summary": "reservation1",
+            "description":"{
+            "hosts": "100-103", 
+            "kind":"vm-server", 
+            "project":"xyz", 
+            "userid":"1001", 
+            "displayName":"User1", 
+            "email":"user1@indiana.edu"
              },
                       
-        'start': {
-            'dateTime': '2014-05-05T22:50:00.000',
-            'timeZone': 'America/New_York'
+        "start": {
+            "dateTime": "2014-05-05T22:50:00.000",
+            "timeZone": "America/New_York"
            },
             
-        'end': {
-            'dateTime': '2014-05-05T23:51:00.000',
-            'timeZone': 'America/New_York'
+        "end": {
+            "dateTime": "2014-05-05T23:51:00.000",
+            "timeZone": "America/New_York"
           }
       })
 
 ::
 
    print reservation.add({
-            'summary': 'reservation2',
-            'description':'{
-            'hosts': '100-103', 
-            'kind':'vm-server', 
-            'project':'xyz', 
-            'userid':'1001', 
-            'displayName':'User1', 
-            'email':'user1@indiana.edu'
+            "summary": "reservation2",
+            "description":"{
+            "hosts": "100-103", 
+            "kind":"vm-server", 
+            "project":"xyz", 
+            "userid":"1001", 
+            "displayName":"User1", 
+            "email":"user1@indiana.edu"
             },
              
-        'start': {
-            'dateTime': '2014-05-05T22:50:00.000',
-            'timeZone': 'America/New_York'
+        "start": {
+            "dateTime": "2014-05-05T22:50:00.000",
+            "timeZone": "America/New_York"
           },
              
-        'end': {
-             'dateTime': '2014-05-05T23:51:00.000',
-             'timeZone': 'America/New_York'
+        "end": {
+             "dateTime": "2014-05-05T23:51:00.000",
+             "timeZone": "America/New_York"
           }
       })
 
 ::
 
    print reservation.add({
-             'summary': 'reservation3',
-             'description':'{
-             'hosts': '100-103', 
-             'kind':'vm-server', 
-             'project':'xyz', 
-             'userid':'1002', 
-             'displayName':'User2', 
-             'email':'user2@indiana.edu'
+             "summary": "reservation3",
+             "description":"{
+             "hosts": "100-103", 
+             "kind":"vm-server", 
+             "project":"xyz", 
+             "userid":"1002", 
+             "displayName":"User2", 
+             "email":"user2@indiana.edu"
              },
                           
-         'start': {
-            'dateTime': '2014-05-05T22:50:00.000',
-            'timeZone': 'America/New_York'
+         "start": {
+            "dateTime": "2014-05-05T22:50:00.000",
+            "timeZone": "America/New_York"
          },
          
-         'end': {
-               'dateTime': '2014-05-05T23:51:00.000',
-               'timeZone': 'America/New_York'
+         "end": {
+               "dateTime": "2014-05-05T23:51:00.000",
+               "timeZone": "America/New_York"
           }    
      })
          
