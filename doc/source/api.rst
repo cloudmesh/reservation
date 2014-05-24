@@ -21,17 +21,6 @@ Than you declare a reseration object::
 
   reservation = ReservationClient(...)
 
-
-.. To authenticate with the google calendar follow the steps listed below::
-
-   * Go to the Google Developers Console that can be found `here
-<https://console.developers.google.com/project>`_.
-   * Select a project.
-   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-   * In the sidebar on the left, select Credentials.
-   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-   * Download the JSON file and then place it on the same directory level as the reservation.py class
-
 Now you can use various api calls
 
 ::
@@ -313,4 +302,13 @@ documentation can be found `here
 Google Client Secrets
 ======================================================================
 
-To find your project's client ID and client secret, do the following:
+To authenticate with the google calendar follow the steps listed below::
+
+   * Go to the Google Developers Console that can be found `here
+<https://console.developers.google.com/project>`_.
+   * Select a project.
+   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+   * In the sidebar on the left, select Credentials.
+   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+   * Download the JSON file and then place it on the same directory level as the reservation.py class
+
