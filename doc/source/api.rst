@@ -302,7 +302,7 @@ documentation can be found `here
 Google Client Secrets
 ======================================================================
 
-To authenticate with the google calendar follow the steps listed below::
+To authenticate with the google calendar follow the steps listed below
 
    * Go to the Google Developers Console that can be found `here
 <https://console.developers.google.com/project>`_.
