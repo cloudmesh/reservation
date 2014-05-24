@@ -112,6 +112,20 @@ Assuming this label will return only one reservationId.
 Return: returns the reservationId (Integer)
   
         
+Google Client Secrets
+======================================================================
+
+To authenticate with the google calendar follow the steps listed below::
+
+Go to the Google Developers Console that can be found `here
+<https://console.developers.google.com/project>`_.
+   * Select a project.
+   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+   * In the sidebar on the left, select Credentials.
+   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+   * Download the JSON file and then place it on the same directory level as the reservation.py class
+
+
 Example
 ======================================================================
 
@@ -298,16 +312,4 @@ included as part of the description field.  The Google API
 documentation can be found `here
 <https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
     
-Google Client Secrets
-======================================================================
-
-To authenticate with the google calendar follow the steps listed below::
-
-Go to the Google Developers Console that can be found `here
-<https://console.developers.google.com/project>`_.
-   * Select a project.
-   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-   * In the sidebar on the left, select Credentials.
-   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-   * Download the JSON file and then place it on the same directory level as the reservation.py class
 
