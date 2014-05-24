@@ -92,7 +92,7 @@ available at::
 
 You can use the username "**admin**" and password that you have
 defined with the help of cookiecutter. When the VMs are restarted, we
-will need to run the following::
+will need to run the following on all the nodes::
   
   $ cd devstack
   $ ./rejoin-stack.sh
