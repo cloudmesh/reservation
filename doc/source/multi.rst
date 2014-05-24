@@ -3,7 +3,7 @@ Multiworker Devstack for Vagarnt
 **********************************************************************
 
 .. sidebar::  
-
+  .
   
   .. contents::
      :depth: 5
