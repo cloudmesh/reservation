@@ -99,6 +99,8 @@ will need to run the following::
 
 on all the nodes to rejoin the screens started by stack.sh 
 
+... note ::
+  The section below shows the contents of the three scripts that would be created when you do "cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git".
 
 Shell Scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
