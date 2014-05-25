@@ -312,4 +312,19 @@ included as part of the description field.  The Google API
 documentation can be found `here
 <https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
     
+Example                         
+======================================================================
+`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation1.json>`_
 
+.. include:: ../../reservation_json_files/reservation1.json
+   :literal:
+   
+`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
+
+.. include:: ../../reservation_json_files/reservation2.json
+   :literal:
+   
+`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
+
+.. include:: ../../reservation_json_files/reservation3.json
+   :literal:
