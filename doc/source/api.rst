@@ -319,12 +319,12 @@ Example
 .. include:: ../../reservation_json_files/reservation1.json
    :literal:
    
-`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
+`reservation2.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
 
 .. include:: ../../reservation_json_files/reservation2.json
    :literal:
    
-`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
+`reservation3.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
 
 .. include:: ../../reservation_json_files/reservation3.json
    :literal:
