@@ -314,17 +314,22 @@ documentation can be found `here
     
 Example                         
 ======================================================================
-`reservation1.json By user 1<https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation1.json>`_
+
+Reservation made by user1:
+
+`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation1.json>`_
 
 .. include:: ../../reservation_json_files/reservation1.json
    :literal:
    
-`reservation2.json By user 1 at a different time<https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
+`reservation2.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
 
 .. include:: ../../reservation_json_files/reservation2.json
    :literal:
    
-`reservation3.json By User 2<https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
+Reservation made by User2:
+   
+`reservation3.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
 
 .. include:: ../../reservation_json_files/reservation3.json
    :literal:
