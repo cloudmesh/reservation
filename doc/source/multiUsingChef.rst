@@ -1,4 +1,4 @@
-Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks
+Multi worker DevStack using Vagrant and Chef Cookbooks
 ================================================================================
 
 OpenStack Distributions
