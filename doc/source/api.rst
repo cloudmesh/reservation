@@ -129,177 +129,9 @@ Go to the Google Developers Console that can be found `here
 Example
 ======================================================================
 
-In this example, we will conduct the following steps:
-  
-#. We will add 3 reservations
-#. select all reservations.
-#. Reschedule reservation.
-#. Remove reservation.
-#. Select all reservations.
-#. Remove all reservations.
-#. Select all reservations
+
 
    
-Creating 3 reservations
-----------------------------------------------------------------------
-
-.. note::
-
-   * there is no example.py in the code that allows me to run and test
-     this exact example
-   * we need a link to the example ...
-   * in addition to your nice formatted documentation i would give a
-     complete example in a .py filr and use a literal include, see
-     Aravindhas multi.rst for example 
-   * the indentation needs to be space saving 4 spaces is enough
-   * code in
-     file:///Users/flat/github/reservation/doc/build/html/_modules/reservation/reservation_client.html#check_overlap
-     is no nicely formated. e.g. can you try to be closer to 70
-     columns, run over where you must, but the other stuff should be
-     better formatted
-   * is there a better way in python to format this file:///Users/flat/github/reservation/doc/build/html/modules/reservation-gvl.html#reservation.reservation_client.ReservationClient
-    * indentation between oliver1,2,3 must be consistent
-
-::
-   
-   print reservation.add({
-            "summary": "reservation1",
-            "description":"{
-            "hosts": "100-103", 
-            "kind":"vm-server", 
-            "project":"xyz", 
-            "userid":"1001", 
-            "displayName":"User1", 
-            "email":"user1@indiana.edu"
-             },
-                      
-        "start": {
-            "dateTime": "2014-05-05T22:50:00.000",
-            "timeZone": "America/New_York"
-           },
-            
-        "end": {
-            "dateTime": "2014-05-05T23:51:00.000",
-            "timeZone": "America/New_York"
-          }
-      })
-
-::
-
-   print reservation.add({
-            "summary": "reservation2",
-            "description":"{
-            "hosts": "100-103", 
-            "kind":"vm-server", 
-            "project":"xyz", 
-            "userid":"1001", 
-            "displayName":"User1", 
-            "email":"user1@indiana.edu"
-            },
-             
-        "start": {
-            "dateTime": "2014-05-05T22:50:00.000",
-            "timeZone": "America/New_York"
-          },
-             
-        "end": {
-             "dateTime": "2014-05-05T23:51:00.000",
-             "timeZone": "America/New_York"
-          }
-      })
-
-::
-
-   print reservation.add({
-             "summary": "reservation3",
-             "description":"{
-             "hosts": "100-103", 
-             "kind":"vm-server", 
-             "project":"xyz", 
-             "userid":"1002", 
-             "displayName":"User2", 
-             "email":"user2@indiana.edu"
-             },
-                          
-         "start": {
-            "dateTime": "2014-05-05T22:50:00.000",
-            "timeZone": "America/New_York"
-         },
-         
-         "end": {
-               "dateTime": "2014-05-05T23:51:00.000",
-               "timeZone": "America/New_York"
-          }    
-     })
-         
-
-Output ::
-    
-     buta7destbamakidf9lm7agi5k
-     5bmlslq006dbv0lampjfeu75ec
-     2slbu96950v62krqh5lmthvc7s
-   
-Select all reservations
-----------------------------------------------------------------------
-
-::
-
-      print reservation.get_all()
-      
-Output ::
-
-      {'event2': 
-        {'id': u'2slbu96950v62krqh5lmthvc7s', 'label': u'Reservation_3'}, 
-       'event0': 
-        {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
-       'event1': 
-        {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_2'}
-      }
-
-     
-Removing a specific reservation using a label
-----------------------------------------------------------------------
-
-::
-     
-     reservation.remove(reservation.get_from_label('Reservation_3'))
-     print reservation.get_all()
-     
-Output::
-
-      {'event2': 
-        'event0': 
-         {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
-        'event1': 
-         {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_2'}
-      }
-      
-Rescheduling an event using a label to first retrieve the event::
-   
-     Rescheduling Reservation_2 to Reservation_X with a new startTime and new endTime
-   
-      reservation.reschedule(reservation.get_from_label('Reservation_2'), {
-                             'summary': 'Reservation_X',
-                              'location': 'Somewherenew',
-                              'start': {
-                                'dateTime': '2014-06-03T10:00:00.000-07:00',
-                                'timeZone': 'America/Los_Angeles'
-                              },
-                                                                     'end': {
-                                'dateTime': '2014-06-03T10:25:00.000-07:00',
-                                'timeZone': 'America/Los_Angeles'
-                              }})
-                              
-      print reservation.get_all()
-    
-Output::
-    
-     {'event0': {'id': u'buta7destbamakidf9lm7agi5k', 'label': u'Reservation_1'}, 
-      'event1': {'id': u'5bmlslq006dbv0lampjfeu75ec', 'label': u'Reservation_X'}}
-  
-Deleting all events::
-  
-    reservation.remove_all()
 
      
 
@@ -333,3 +165,28 @@ Reservation made by User2:
 
 .. include:: ../../reservation_json_files/reservation3.json
    :literal:
+
+Reservation client api file:
+
+`reservation_client.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation_client.py>`_
+
+.. include:: ../../reservation/reservation_client.py
+   :literal:
+
+Reservation Main Controller:
+
+`reservation.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation.py>`_
+
+.. include:: ../../reservation/reservation.py
+   :literal:
+
+
+In this example, we will conduct the following steps:
+  
+#. We will add 3 reservations
+#. select all reservations.
+#. Reschedule reservation.
+#. Remove reservation.
+#. Select all reservations.
+#. Remove all reservations.
+#. Select all reservations
