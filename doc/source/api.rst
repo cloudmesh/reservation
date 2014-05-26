@@ -1,5 +1,5 @@
 **********************************************************************
-Python API 
+Google Calendar API
 **********************************************************************
 .. sidebar:: 
    . 
@@ -10,6 +10,8 @@ Python API
 ..
 
 
+Python API 
+======================================================================
 The Python API contains the following functions to work with the Google Calendar:
 Our current version uses only JSON objects to pass to the calendar.
 
@@ -110,24 +112,8 @@ Arguments: oldRsvId (Integer) newEvent (JSON object)
 Assuming this label will return only one reservationId.
 
 Return: returns the reservationId (Integer)
-  
-        
-Google Client Secrets
-======================================================================
 
-To authenticate with the google calendar follow the steps listed below::
-
-Go to the Google Developers Console that can be found `here
-<https://console.developers.google.com/project>`_.
-   * Select a project.
-   * In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-   * In the sidebar on the left, select Credentials.
-   * Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-   * Download the JSON file and then place it on the same directory level as the reservation.py class
-
-
-
-Google Calendar API                         
+Google Calendar Event Object
 ======================================================================
  
 The specification of the researvation is based on the JSON Calendar
@@ -135,6 +121,37 @@ object defined in the google documentation. Additional information is
 included as part of the description field.  The Google API
 documentation can be found `here
 <https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
+  
+
+Steps to follow to set up the environment
+======================================================================
+Before starting with the example it is necessary to prepare the environment.
+
+	Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
+
+	Step 2: Register the project on Google to run the sample example
+		1) `Create a Project <https://console.developers.google.com/project>`_.
+		2) Select the project then under the Api's & Auth Tab select API.
+		3) Enable the Calendar API.
+
+	Step 3: Authorization- Get Client Secrets JSON file
+		1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
+		2) Select a project.
+		3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+		4) In the sidebar on the left, select Credentials.
+		5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+		6) Download the JSON file and then place it on the same directory level as the reservation.py class
+
+	Step 4: Running the Python Reservation command line
+		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
+
+Google Client Secrets
+======================================================================
+
+To authenticate with the google calendar follow the steps listed below::
+
+
+
     
 Example                         
 ======================================================================
