@@ -14,9 +14,9 @@ An explanation about difference between OpenStack Distribution and Rackspace Pri
 
 There are various cookbooks made available by vendors which can be used to setup a cluster. 
 
-Note: 
+.. note:: 
 
-We are trying to plugin a new scheduler which works based on Calendar events. When the cluster is being setup using Cookbooks as shown in the steps below, we will not be able to plugin a new scheduler as there is no provision to do one. This has been clarified with people from Rackspace. Aravindh had raised a query with Rackspace and they confirmed that they is no provision at the moment and they had asked Aravindh to see if he could look into the Cookbooks and start from there.
+  We are trying to plugin a new scheduler which works based on Calendar events. When the cluster is being setup using Cookbooks as shown in the steps below, we will not be able to plugin a new scheduler as there is no provision to do one. This has been clarified with people from Rackspace. Aravindh had raised a query with Rackspace and they confirmed that they is no provision at the moment and they had asked Aravindh to see if he could look into the Cookbooks and start from there.
 
 
 Multi-Node OpenStack Install
