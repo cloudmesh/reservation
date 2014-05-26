@@ -12,15 +12,30 @@
 
    If your name is missing please let us know and we will add it.
 
-**Design Documentation**
+
+OpenStack Cloud in Vagrant
+----------------------------------------------------------------------
 
 .. toctree::
    :numbered:
    :maxdepth: -1
 
-   introduction
    multi
    multiUsingChef
+   vagrant
+   devstack
+
+
+
+Cloudmesh Reservation
+----------------------------------------------------------------------
+
+.. toctree::
+   :numbered:
+   :maxdepth: -1
+
+   progress
+   introduction
    deploy
    rest
    api
@@ -32,22 +47,6 @@
 * :ref:`modindex`
 * :ref:`search`
 
-**Progress Reports**
-
-.. toctree::
-   :numbered:
-   :maxdepth: -1
-
-   progress
-
-**Appendix**
-
-.. toctree::
-   :numbered:
-   :maxdepth: -1
-
-   vagrant
-   devstack
 
 .. |image0| image:: /images/fg-logo-md.png
 
