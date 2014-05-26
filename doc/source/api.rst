@@ -145,13 +145,6 @@ Before starting with the example it is necessary to prepare the environment.
 	Step 4: Running the Python Reservation command line
 		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
 
-Google Client Secrets
-======================================================================
-
-To authenticate with the google calendar follow the steps listed below::
-
-
-
     
 Example                         
 ======================================================================
