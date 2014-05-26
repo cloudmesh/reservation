@@ -193,7 +193,7 @@ Step1: Adding the 3 reservations to the google calendar::
      /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation3.json
      
 Step2: Get all the reservation from the calendar
-  
+
 ::
   /github/reservation/reservation$ python reservation.py get_all
    
