@@ -126,14 +126,6 @@ Go to the Google Developers Console that can be found `here
    * Download the JSON file and then place it on the same directory level as the reservation.py class
 
 
-Example
-======================================================================
-
-
-
-   
-
-     
 
 Google Calendar API                         
 ======================================================================
@@ -187,6 +179,8 @@ In this example, we will conduct the following steps:
 #. select all reservations.
 #. Reschedule reservation.
 #. Remove reservation.
-#. Select all reservations.
+#. Select all reservations by user id.
 #. Remove all reservations.
-#. Select all reservations
+#. Select all reservations by user id.
+
+
