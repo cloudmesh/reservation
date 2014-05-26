@@ -188,25 +188,25 @@ In this example, we will conduct the following steps:
   All the commands are executed via the command line
 
 Step1: Adding the 3 reservations to the google calendar::
-   /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation1.json
-   /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation2.json
-   /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation3.json
-   
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation1.json
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation2.json
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation3.json
+     
 Step2: Get all the reservation from the calendar::
-   /github/reservation/reservation$ python reservation.py get_all
+    /github/reservation/reservation$ python reservation.py get_all
    
 Step3: Reschedule reservation 1 with reservation 2::
-   /github/reservation/reservation$ python reservation.py reschedule --reservation_id=c19qpuhq7g63urslvhi39d82h0 --file=../reservation_json_files/reservation2.json
-
+     /github/reservation/reservation$ python reservation.py reschedule --reservation_id=c19qpuhq7g63urslvhi39d82h0 --file=../reservation_json_files/reservation2.json
+   
 
 Step4: Remove reservation 1::
-   /github/reservation/reservation$ python reservation.py remove --reservation_id=c19qpuhq7g63urslvhi39d82h0
+     /github/reservation/reservation$ python reservation.py remove --reservation_id=c19qpuhq7g63urslvhi39d82h0
    
 Step5: Get the reservations by user id::
-   /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
+     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
 
 Step6: Remove all reservations::
-   /github/reservation/reservation$ python reservation.py remove_all
+     /github/reservation/reservation$ python reservation.py remove_all
    
 Step7: Get the reservations by user id::
-   /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
+     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
