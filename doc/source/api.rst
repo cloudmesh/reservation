@@ -144,6 +144,7 @@ Before starting with the example it is necessary to prepare the environment.
 
 	Step 4: Running the Python Reservation command line
 		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
+		2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
 
     
 Example                         
