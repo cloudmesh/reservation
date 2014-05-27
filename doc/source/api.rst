@@ -10,6 +10,127 @@ Google Calendar API
 ..
 
 
+Steps to follow to set up the environment
+======================================================================
+Before starting with the example it is necessary to prepare the environment.
+
+	Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
+
+	Step 2: Register the project on Google to run the sample example
+		1) `Create a Project <https://console.developers.google.com/project>`_.
+		2) Select the project then under the Api's & Auth Tab select API.
+		3) Enable the Calendar API.
+
+	Step 3: Authorization- Get Client Secrets JSON file
+		1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
+		2) Select a project.
+		3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+		4) In the sidebar on the left, select Credentials.
+		5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+		6) Download the JSON file and then place it on the same directory level as the reservation.py class
+
+	Step 4: Running the Python Reservation command line
+		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
+		2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
+
+    
+Example                         
+======================================================================
+
+In this example, we will conduct the following steps:
+  
+#. We will add 3 reservations
+#. select all reservations.
+#. Reschedule reservation.
+#. Remove reservation.
+#. Select all reservations by user id.
+#. Remove all reservations.
+#. Select all reservations by user id.
+
+.. note ::
+  
+  All the commands are executed via the command line
+
+Step1: Adding the 3 reservations to the google calendar
+
+::
+
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation1.json
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation2.json
+     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation3.json
+     
+Step2: Get all the reservation from the calendar
+  
+::
+
+  /github/reservation/reservation$ python reservation.py get_all
+   
+Step3: Reschedule reservation 1 with reservation 2
+
+::
+
+     /github/reservation/reservation$ python reservation.py reschedule --reservation_id=c19qpuhq7g63urslvhi39d82h0 --file=../reservation_json_files/reservation2.json
+   
+
+Step4: Remove reservation 1
+
+::
+
+     /github/reservation/reservation$ python reservation.py remove --reservation_id=c19qpuhq7g63urslvhi39d82h0
+   
+Step5: Get the reservations by user id
+
+::
+
+     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
+
+Step6: Remove all reservations
+
+::
+
+     /github/reservation/reservation$ python reservation.py remove_all
+   
+Step7: Get the reservations by user id
+
+::
+
+     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
+
+
+Reservation made by user1:
+
+`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation1.json>`_
+
+.. include:: ../../reservation_json_files/reservation1.json
+   :literal:
+   
+`reservation2.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
+
+.. include:: ../../reservation_json_files/reservation2.json
+   :literal:
+   
+Reservation made by User2:
+   
+`reservation3.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
+
+.. include:: ../../reservation_json_files/reservation3.json
+   :literal:
+
+Reservation client api file:
+
+`reservation_client.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation_client.py>`_
+
+.. include:: ../../reservation/reservation_client.py
+   :literal:
+
+Reservation Main Controller:
+
+`reservation.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation.py>`_
+
+.. include:: ../../reservation/reservation.py
+   :literal:
+
+
 Python API 
 ======================================================================
 The Python API contains the following functions to work with the Google Calendar:
@@ -122,123 +243,3 @@ included as part of the description field.  The Google API
 documentation can be found `here
 <https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#get>`_.
   
-
-Steps to follow to set up the environment
-======================================================================
-Before starting with the example it is necessary to prepare the environment.
-
-	Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
-
-	Step 2: Register the project on Google to run the sample example
-		1) `Create a Project <https://console.developers.google.com/project>`_.
-		2) Select the project then under the Api's & Auth Tab select API.
-		3) Enable the Calendar API.
-
-	Step 3: Authorization- Get Client Secrets JSON file
-		1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
-		2) Select a project.
-		3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-		4) In the sidebar on the left, select Credentials.
-		5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-		6) Download the JSON file and then place it on the same directory level as the reservation.py class
-
-	Step 4: Running the Python Reservation command line
-		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
-		2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
-
-    
-Example                         
-======================================================================
-
-Reservation made by user1:
-
-`reservation1.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation1.json>`_
-
-.. include:: ../../reservation_json_files/reservation1.json
-   :literal:
-   
-`reservation2.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation2.json>`_
-
-.. include:: ../../reservation_json_files/reservation2.json
-   :literal:
-   
-Reservation made by User2:
-   
-`reservation3.json <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation3.json>`_
-
-.. include:: ../../reservation_json_files/reservation3.json
-   :literal:
-
-Reservation client api file:
-
-`reservation_client.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation_client.py>`_
-
-.. include:: ../../reservation/reservation_client.py
-   :literal:
-
-Reservation Main Controller:
-
-`reservation.py <https://github.com/cloudmesh/reservation/blob/master/reservation/reservation.py>`_
-
-.. include:: ../../reservation/reservation.py
-   :literal:
-
-
-In this example, we will conduct the following steps:
-  
-#. We will add 3 reservations
-#. select all reservations.
-#. Reschedule reservation.
-#. Remove reservation.
-#. Select all reservations by user id.
-#. Remove all reservations.
-#. Select all reservations by user id.
-
-.. note ::
-  
-  All the commands are executed via the command line
-
-Step1: Adding the 3 reservations to the google calendar
-
-::
-
-     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation1.json
-     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation2.json
-     /github/reservation/reservation$ python reservation.py add --file=../reservation_json_files/reservation3.json
-     
-Step2: Get all the reservation from the calendar
-  
-::
-
-  /github/reservation/reservation$ python reservation.py get_all
-   
-Step3: Reschedule reservation 1 with reservation 2
-
-::
-
-     /github/reservation/reservation$ python reservation.py reschedule --reservation_id=c19qpuhq7g63urslvhi39d82h0 --file=../reservation_json_files/reservation2.json
-   
-
-Step4: Remove reservation 1
-
-::
-
-     /github/reservation/reservation$ python reservation.py remove --reservation_id=c19qpuhq7g63urslvhi39d82h0
-   
-Step5: Get the reservations by user id
-
-::
-
-     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
-
-Step6: Remove all reservations
-
-::
-
-     /github/reservation/reservation$ python reservation.py remove_all
-   
-Step7: Get the reservations by user id
-
-::
-
-     /github/reservation/reservation$ python reservation.py get_by_user --user_id=1001
