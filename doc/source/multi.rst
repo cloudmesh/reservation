@@ -20,37 +20,19 @@ The procedure below deploys Devstack with multiple workers from devstack source 
 Requirements
 ===============================
 
-VirtualBox
+Install the requirements::
 ----------------------------------------------------------------------
 
-You must have virtualbox installed. Please follow the documentation at
-http://www.virtualbox.org to install it.
+  $ mkdir ~/github
+  $ cd ~/github
+  $ git clone https://github.com/cloudmesh/reservation.git
+  $ cd reservation
+  $ pip install -r requirements.txt
 
-Cookiecutter
-----------------------------------------------------------------------
-You need to have cookiecutter installed, please do this with::
-
-  pip install cookiecutter
-
-
-Vagrant
+Install VirtualBox and Vagrant::
 ----------------------------------------------------------------------
 
-Before you start you need to make sure you have vagrant
-installed. Please follow the instructions provided at 
-http://www.vagrantup.com/downloads.html. 
-
-Make sure you have at least the version `1.5.4` which you
-can find out via::
-
-  vagrant --version
-
-To execute the steps documented her, yo uwill first need to make sure
-that you have the vagrant-hostmanage installed::
-
-   vagrant plugin install vagrant-hostmanager
-
-
+  $ ./install-prereq.sh
 
 Setup
 ======================================================================
