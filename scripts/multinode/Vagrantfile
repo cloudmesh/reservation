@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # controller_config.vm.provision "shell", inline: $script
       # eth1 configured in the 192.168.236.0/24 network
       controller_config.vm.network "private_network", ip: contrhost[:ip]
-      controller_config.vm.provision "shell", path: "installController.sh"
+      controller_config.vm.provision "shell", path: "install-controller.sh"
       controller_config.vm.network "forwarded_port", guest: 80, host: 8000
       controller_config.vm.network "forwarded_port", guest: 5000, host: 6000
       controller_config.vm.network "forwarded_port", guest: 8774, host: 8774
@@ -71,7 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.hostname = host[:name]
       # node.vm.provision "shell", inline: $script
       node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
-      node.vm.provision "shell", path: "installCompute.sh"
+      node.vm.provision "shell", path: "install-compute.sh"
       node.vm.provider "virtualbox" do |v|
         v.customize ["modifyvm", :id, "--memory", host[:memory]]
         v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
