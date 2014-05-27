@@ -13,7 +13,17 @@ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.2_x86_64.deb
 sudo dpkg -i vagrant_1.6.2_x86_64.deb
 sudo vagrant plugin install vagrant-hostmanager
 echo "------------------------------------------------"
+echo "Installing Virtualenv.....Please be patient....."
+echo "------------------------------------------------"
+sudo apt-get install python-virtualenv
+echo "------------------------------------------------"
+echo "Installing Git........Please be patient........."
+echo "------------------------------------------------"
+sudo apt-get install git
+echo "------------------------------------------------"
 echo "Installed VirtualBox Version: " && vboxmanage --version
 echo "Installed Vagrant Version: " && vagrant --version
+echo "Installed Virtualenv Version: " && virtualenv --version
+echo "Installed Git Version: " && git --version
 echo "Installation complete!!"
 echo "------------------------------------------------"
