@@ -11,6 +11,7 @@ echo "Installing Vagrant........Please be patient....."
 echo "------------------------------------------------"
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.2_x86_64.deb
 sudo dpkg -i vagrant_1.6.2_x86_64.deb
+sudo vagrant plugin install vagrant-hostmanager
 echo "------------------------------------------------"
 echo "Installed VirtualBox Version: " && vboxmanage --version
 echo "Installed Vagrant Version: " && vagrant --version
