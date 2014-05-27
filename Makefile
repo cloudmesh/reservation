@@ -17,6 +17,9 @@ FILE=index
 watchdog:
 	watchmedo shell-command --patterns="*.rst" --recursive --command="make; open doc/build/html/$(FILE).html" . 
 
+c:
+	/usr/bin/google-chrome-stable doc/build/html/index.html
+
 f: 
 	firefox doc/build/html/index.html 
 

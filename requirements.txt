@@ -13,4 +13,5 @@ httplib2
 sphinxcontrib-exceltable
 pytimeparse
 timestring
+apiclient
 
