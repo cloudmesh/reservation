@@ -85,19 +85,18 @@ Run the command::
 
 The command will bring up all the nodes: controller, compute1 and compute2.
 
-After the successful instalation, the Horizon dashboard will be
-available at::
+After the successful installation, the Horizon dashboard will be available at::
 
   http://192.168.236.11 
 
 You can use the username "**admin**" and password that you have
 defined with the help of cookiecutter. When the VMs are restarted, we
-will need to run the following on all the nodes::
+will need to run the following on all the nodes to rejoin the screens started by stack.sh::
   
   $ cd devstack
   $ ./rejoin-stack.sh
 
-on all the nodes to rejoin the screens started by stack.sh 
+
 
 .. note ::
   
