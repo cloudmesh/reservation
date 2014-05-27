@@ -20,8 +20,7 @@ The procedure below deploys Devstack with multiple workers from devstack source 
 Requirements
 ===============================
 
-Install the requirements::
-----------------------------------------------------------------------
+Get reservation code and setup the requirements::
 
   $ mkdir ~/github
   $ cd ~/github
@@ -30,7 +29,6 @@ Install the requirements::
   $ pip install -r requirements.txt
 
 Install VirtualBox and Vagrant::
-----------------------------------------------------------------------
 
   $ ./install-prereq.sh
 
