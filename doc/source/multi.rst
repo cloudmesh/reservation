@@ -20,21 +20,18 @@ The procedure below deploys Devstack with multiple workers from devstack source 
 Requirements
 ===============================
 
-Install VirtualBox, Vagrant and Virtualenv::
-
-  $ ./install-prereq.sh
-
 Setup a virtual environment using VirtualEnv and activate the environment::
 
   $ virtualenv  --no-site-packages ~/ENV
   $ source ~/ENV/bin/activate
 
-Get reservation code and setup the requirements::
+Get reservation code, VirtualBox, Vagrant, Virtualenv and setup the requirements::
 
   $ mkdir ~/github
   $ cd ~/github
   $ git clone https://github.com/cloudmesh/reservation.git
   $ cd reservation
+  $ ./install-prereq.sh
   $ pip install -r requirements.txt
 
 Setup
