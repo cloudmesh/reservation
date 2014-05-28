@@ -50,9 +50,10 @@ parameters. It will ask you for a number of parameters such as
 Please do not use the defaults for the passwords and teh tokens, but
 define your own strong versions.
 
-To create the directory with the scripts, simply call::
+To create the directory with the scripts::
 
-  cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git
+  $ cd ~/github
+  $ cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git
 
 Than you will find a directory called multinode-<label> 
 
