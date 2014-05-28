@@ -20,6 +20,7 @@ echo "------------------------------------------------"
 echo "Installing Git........Please be patient........."
 echo "------------------------------------------------"
 sudo apt-get install git
+sudo apt-get install python-dev
 echo "------------------------------------------------"
 echo "Installed VirtualBox Version: " && vboxmanage --version
 echo "Installed Vagrant Version: " && vagrant --version
