@@ -10,17 +10,17 @@ echo "------------------------------------------------"
 echo "Installing Vagrant........Please be patient....."
 echo "------------------------------------------------"
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.2_x86_64.deb
-dpkg -i vagrant_1.6.2_x86_64.deb
+sudo dpkg -i vagrant_1.6.2_x86_64.deb
 vagrant plugin install vagrant-hostmanager
 echo "------------------------------------------------"
 echo "Installing Virtualenv.....Please be patient....."
 echo "------------------------------------------------"
-apt-get install python-virtualenv
+sudo apt-get install python-virtualenv
 echo "------------------------------------------------"
 echo "Installing Git........Please be patient........."
 echo "------------------------------------------------"
-apt-get install git
-apt-get install python-dev
+sudo apt-get install git
+sudo apt-get install python-dev
 echo "------------------------------------------------"
 echo "Installed VirtualBox Version: " && vboxmanage --version
 echo "Installed Vagrant Version: " && vagrant --version
