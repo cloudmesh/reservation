@@ -27,5 +27,3 @@ echo "Installed Virtualenv Version: " && virtualenv --version
 echo "Installed Git Version: " && git --version
 echo "Installation complete!!"
 echo "------------------------------------------------"
-virtualenv --no-site-packages ~/ENV
-source ~/ENV/bin/activate
