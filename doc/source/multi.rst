@@ -72,7 +72,8 @@ After the successful installation, the Horizon dashboard will be available at::
 
 You can use the username "**admin**" and password that you have defined with the help of cookiecutter. 
 
-Run the following steps to test the installation. 
+Testing the setup
+======================================================================
 
 Log into the controller node::
   
@@ -86,6 +87,16 @@ Source the "openrc" file for admin::
 To list the images available in the setup::
 
   $ nova image-list
+
+Output of the above command is shown below:
+
++--------------------------------------+---------------------------------+--------+--------+
+| ID                                   | Name                            | Status | Server |
++--------------------------------------+---------------------------------+--------+--------+
+| d429f0f7-cf54-4654-b2ae-786aafe35ef6 | cirros-0.3.1-x86_64-uec         | ACTIVE |        |
+| 7d76fd5c-4431-42f8-9976-e0bc82d55c85 | cirros-0.3.1-x86_64-uec-kernel  | ACTIVE |        |
+| 0cc7c431-d6cd-41e9-acd7-236fdfceb097 | cirros-0.3.1-x86_64-uec-ramdisk | ACTIVE |        |
++--------------------------------------+---------------------------------+--------+--------+
 
 To list the flavors available in the setup::
 
