@@ -47,8 +47,7 @@ parameters. It will ask you for a number of parameters such as
 * a password for the services
 * a token for the services
 
-Please do not use the defaults for the passwords and teh tokens, but
-define your own strong versions.
+Please do not use the defaults for the passwords and the tokens, but define your own strong versions.
 
 To create the directory with the scripts::
 
@@ -73,9 +72,28 @@ After the successful installation, the Horizon dashboard will be available at::
 
 You can use the username "**admin**" and password that you have defined with the help of cookiecutter. 
 
-To log into the Virtual Machine, run the following command::
+Run the following steps to test the installation. 
+
+Log into the controller node::
   
-    vagrant ssh <hostname>
+    vagrant ssh controller
+
+Source the "openrc" file for admin::
+
+  $ cd devstack
+  $ source openrc admin admin
+
+To list the images available in the setup::
+
+  $ nova image-list
+
+To list the flavors available in the setup::
+
+  $ nova flavor-list
+
+To boot an instance in the setup::
+
+  $ nova boot --flavor 1 --image "cirros" testvm
 
 When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh::
 
