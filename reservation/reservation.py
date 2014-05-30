@@ -69,7 +69,7 @@ from oauth2client import client
 from oauth2client import tools
 
 
-CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
+CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), '~/.futuregrid/cloudmesh/client_secrets.json')
 
 # Set up a Flow object to be used for authentication.
 # Add one or more of the following scopes. PLEASE ONLY ADD THE SCOPES YOU
