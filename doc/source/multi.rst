@@ -128,7 +128,7 @@ To shutdown the VMs started by Vagrant:
 
   $ vagrant halt
 
-To destroyed the VMs provisioned by "vagrant up" command::
+To destroy the VMs provisioned by <vagrant up> command::
 
   $ vagrant destroy
 
