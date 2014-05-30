@@ -3,7 +3,7 @@
 
 .. _s-manual:
 
-|image0|  Cloudmesh Reservation for OpenStack
+Cloudmesh Reservation for OpenStack
 ================================================
 
 .. sidebar:: Authors
@@ -25,6 +25,14 @@ OpenStack Cloud in Vagrant
    vagrant
    devstack
 
+OpenStack Scheduler
+----------------------------------------------------------------------
+
+.. toctree::
+   :numbered:
+   :maxdepth: -1
+
+    scheduler 
 
 
 Cloudmesh Reservation
@@ -48,5 +56,4 @@ Cloudmesh Reservation
 * :ref:`search`
 
 
-.. |image0| image:: /images/fg-logo-md.png
 
