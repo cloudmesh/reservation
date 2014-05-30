@@ -79,7 +79,7 @@ Log into the controller node::
   
   $ vagrant ssh controller
 
-Source the "openrc" file for admin::
+Source the openrc file for user admin (openrc configures login credentials suitable for use with the OpenStack command-line tools)::
 
   $ cd devstack
   $ source openrc admin admin
