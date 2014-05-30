@@ -124,7 +124,7 @@ Logout of the controller VM::
 
   $ exit
 
-To shutdown the VMs started by Vagrant:
+To shutdown the VMs started by Vagrant::
 
   $ vagrant halt
 
