@@ -27,6 +27,9 @@ by running:
 
 """
 
+from pprint import pprint
+from cloudmesh_install import config_file
+
 import argparse
 import os
 import sys
@@ -48,7 +51,10 @@ parser = argparse.ArgumentParser(
 # application, including client_id and client_secret. You can see the Client ID
 # and Client secret on the APIs page in the Cloud Console:
 # <https://cloud.google.com/console#/project/855417837151/apiui>
-CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
+#CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
+
+CLIENT_SECRETS = config_file('/client_secrets.json')
+
 
 # Set up a Flow object to be used for authentication.
 # Add one or more of the following scopes. PLEASE ONLY ADD THE SCOPES YOU
@@ -63,8 +69,16 @@ FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
     
         
 def main(argv):
+    print(argv)
+
     # Parse the command-line flags.
     flags = parser.parse_args(argv[1:])
+    print 70 * '='
+    print type(flags)
+    print 70 * '='
+    
+    pprint(flags)
+    print 70 * '='
     
   # If the credentials don't exist or are invalid run through the native client
   # flow. The Storage object will ensure that if successful the good
@@ -73,6 +87,8 @@ def main(argv):
     credentials = storage.get()
     if credentials is None or credentials.invalid:
         credentials = tools.run_flow(FLOW, storage, flags)
+
+    sys.exit()
 
   # Create an httplib2.Http object to handle our HTTP requests and authorize it
   # with our good Credentials.

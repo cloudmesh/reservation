@@ -2,6 +2,7 @@
 """
 Usage:
     reservation -h | --help
+    reservation login
     reservation --rst
     reservation --version
     reservation add [--start=TIME_START]
@@ -47,6 +48,10 @@ Options:
                            the start time. [default: +1d]
     --format=FORMAT        Format of the output json, cfg. [default:json]
 """
+
+from cloudmesh_install import config_file
+
+
 from datetime import datetime, timedelta
 from docopt import docopt
 from reservation_client import ReservationClient
@@ -69,10 +74,11 @@ from oauth2client import client
 from oauth2client import tools
 
 
+
 def not_implemented():
     print "ERROR: not yet implemented"
 
-def rain_command(arguments):
+def rain_command(arguments,argv=None):
     if arguments["--rst"]:
 
         print 70*"*"
@@ -89,7 +95,8 @@ def rain_command(arguments):
     elif arguments["--version"]:
 
         not_implemented()
-        
+    elif arguments["login"]:
+        execute_login(argv)
     else:
         
         for list in ["HOSTS", "IDS"]:
@@ -235,9 +242,34 @@ def get_service_object():
     reservation = ReservationClient(service)
     return reservation
 
+def execute_login(argv):
+
+    if argv is None:
+        print "Error: You have not specified argv parameters"
+        sys.exit()
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        parents=[tools.argparser])
+    CLIENT_SECRETS = config_file('/client_secrets.json')
+    FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
+      scope=[
+          'https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/calendar.readonly',
+        ],
+        message=tools.message_if_missing(CLIENT_SECRETS))
+    # Flags??????
+
+    flags=parser.parse_args(argv[1:])
+    pprint(flags)
+    storage = file.Storage('Main.dat')
+    credentials = storage.get()
+    if credentials is None or credentials.invalid:
+        credentials = tools.run_flow(FLOW, storage, flags)
 
 if __name__ == '__main__':
+    print(sys.argv)
     arguments = docopt(__doc__)
 
-    rain_command(arguments)
+    rain_command(arguments,sys.argv)
     
