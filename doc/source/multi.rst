@@ -134,7 +134,7 @@ To delete the provisioned VM::
   The section below shows the contents of the three scripts that would be created when you do "cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git".
 
 Shell Scripts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+======================================================================
 
 Controller: install-controller.sh
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
