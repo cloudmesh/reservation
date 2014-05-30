@@ -135,8 +135,10 @@ To destroy the VMs provisioned by <vagrant up> command::
 .. note ::
 
   When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh::
-
-  $ cd devstack && ./rejoin-stack.sh
+  
+  $ vagrant ssh <node name>
+  $ cd devstack
+  $ ./rejoin-stack.sh
 
 Shell Scripts
 ======================================================================
