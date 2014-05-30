@@ -4,16 +4,16 @@
 from pprint import pprint
 from cloudmesh_install import config_file
 import argparse
-import os
 import sys  
 import httplib2
-import json
 from apiclient import discovery
 from oauth2client import file
 from oauth2client import client
 from oauth2client import tools
 
-def login_command(argv):
+def login_command(argv=None):
+    if argv is None:
+        argv = sys.argv
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -25,8 +25,6 @@ def login_command(argv):
           'https://www.googleapis.com/auth/calendar.readonly',
         ],
         message=tools.message_if_missing(CLIENT_SECRETS))
-    # Flags??????
-
     flags=parser.parse_args(argv[1:])
     pprint(flags)
     storage = file.Storage('Main.dat')
