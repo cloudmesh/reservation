@@ -1,5 +1,5 @@
 Changing the scheduler in openstack
-=============================
+======================================================================
 
 This section expects a devstack deployment. 
 
@@ -72,9 +72,9 @@ to be implemented. This class has the following methods
 #. update_service_capabilities
 #. hosts_up
 #. group_hosts
-#. *schedule_run_instance - This is the method which schedules an
+#. schedule_run_instance - This is the method which schedules an
    instance. It contains a remote procedure call.
-#. *select_destinations - This gives a list of destination hosts that
+#. select_destinations - This gives a list of destination hosts that
    can be used.
 
 The methods with the * need to be implemented. The others have a
@@ -235,7 +235,8 @@ Deployment: Building a new scheduler
 
 #. Add the following to the configuration file( /etc/nova/nova.conf)::
 
-   scheduler_driver=nova.scheduler.ip_scheduler.IPScheduler
+     scheduler_driver=nova.scheduler.ip_scheduler.IPScheduler
+
 
 Deployment - Using existing filtered scheduler with new filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
