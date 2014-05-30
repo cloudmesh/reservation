@@ -85,6 +85,11 @@ def rain_command(arguments):
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
+
+    elif arguments["--version"]:
+
+        not_implemented()
+        
     else:
         
         for list in ["HOSTS", "IDS"]:
@@ -96,8 +101,18 @@ def rain_command(arguments):
 
         #print(arguments)
 
-        reservation = get_service_object()
-        
+        try:
+            
+            reservation = get_service_object()
+
+        except Exception, e:
+            print "ERROR: could not connect to the calendar service"
+
+            print
+            print e
+            print
+            sys.exit(1)
+            
         if arguments["add"] and arguments["--file"] is not None:
 
             print "add file"
@@ -161,18 +176,19 @@ def rain_command(arguments):
                 print "************************************************************"
             
         elif arguments["get_all"]:
+
             print "Get all reservations from calendar"
             list = reservation.get_all()
             for value in list:
-		for key, value in value.iteritems():
-			if isinstance(value, dict):
-				for key, value in value.iteritems():
-					print key,'\t', value
-			else:
-				print key,'\t\t', value
-                	#print value
-                print "************************************************************"
-                
+                for key, value in value.iteritems():
+                    if isinstance(value, dict):
+                        for key, value in value.iteritems():
+                            print key,'\t', value
+                    else:
+                        print key,'\t\t', value
+                            #print value
+                        print "************************************************************"
+
         elif arguments["reschedule"]:
             print "Reschedule reservation"
             try:
