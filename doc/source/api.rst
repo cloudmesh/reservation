@@ -35,17 +35,17 @@ Step 4: Running the Python Reservation command line
 
 Command-line commands                         
 ======================================================================
-	1) reservation add --file=FILE
-    	2) reservation remove --reservation_id=RESERVATION_ID
-    	3) reservation remove_all
-    	4) reservation get_all
-    	5) reservation get_from_label --label=LABEL
-    	6) reservation get_by_user --user_id=USER_ID
-    	7) reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
-    	8) reservation get_from_id --reservation_id=RESERVATION_ID
-    	9) reservation duration --reservation_id=RESERVATION_ID
-    	10) reservation list_by_project --proj_id=PROJ_ID
-    	11) reservation list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
+	1) reservation.py add --file=FILE
+    	2) reservation.py remove --reservation_id=RESERVATION_ID
+    	3) reservation.py remove_all
+    	4) reservation.py get_all
+    	5) reservation.py get_from_label --label=LABEL
+    	6) reservation.py get_by_user --user_id=USER_ID
+    	7) reservation.py reschedule --reservation_id=RESERVATION_ID --file=FILE
+    	8) reservation.py get_from_id --reservation_id=RESERVATION_ID
+    	9) reservation.py duration --reservation_id=RESERVATION_ID
+    	10) reservation.py list_by_project --proj_id=PROJ_ID
+    	11) reservation.py list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
     
 Example                         
 ======================================================================
