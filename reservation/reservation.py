@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """
 Usage:
     reservation -h | --help
@@ -69,23 +68,10 @@ from oauth2client import client
 from oauth2client import tools
 
 
-CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), '~/.futuregrid/cloudmesh/client_secrets.json')
-
-# Set up a Flow object to be used for authentication.
-# Add one or more of the following scopes. PLEASE ONLY ADD THE SCOPES YOU
-# NEED. For more information on using scopes please see
-# <https://developers.google.com/+/best-practices>.
-FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
-  scope=[
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.readonly',
-    ],
-    message=tools.message_if_missing(CLIENT_SECRETS))
-
 def not_implemented():
     print "ERROR: not yet implemented"
 
-def rain_command(arguments, argv):
+def rain_command(arguments):
     if arguments["--rst"]:
 
         print 70*"*"
@@ -109,7 +95,7 @@ def rain_command(arguments, argv):
 
         #print(arguments)
 
-        reservation = get_service_object(argv)
+        reservation = get_service_object()
         
         if arguments["add"] and arguments["--file"] is not None:
 
@@ -218,12 +204,10 @@ def rain_command(arguments, argv):
             not_implemented()
 
 
-def get_service_object(argv):
+def get_service_object():
     '''Get calendar object'''
     storage = file.Storage('reservation_config.dat')
     credentials = storage.get()
-    if credentials is None or credentials.invalid:
-        credentials = tools.run_flow(FLOW, storage, flags)
     # Create an httplib2.Http object to handle our HTTP requests and authorize it
     # with our good Credentials.
     http = httplib2.Http()
@@ -238,5 +222,5 @@ def get_service_object(argv):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
 
-    rain_command(arguments, sys.argv)
+    rain_command(arguments)
     
