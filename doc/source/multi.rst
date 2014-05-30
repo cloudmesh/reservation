@@ -120,6 +120,18 @@ To delete the provisioned VM::
 
   $ nova delete testvm
 
+Logout of the controller VM::
+
+  $ exit
+
+To shutdown the VMs started by Vagrant:
+
+  $ vagrant halt
+
+To destroyed the VMs provisioned by "vagrant up" command::
+
+  $ vagrant destroy
+
 .. note ::
 
   When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh:
