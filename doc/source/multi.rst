@@ -124,7 +124,7 @@ To delete the provisioned VM::
 
   When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh:
 
-  $ cd devstack
+  $ cd devstack |
   $ ./rejoin-stack.sh
 
 
