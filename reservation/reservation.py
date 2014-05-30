@@ -60,7 +60,7 @@ from cloudmesh_common.util import yn_choice
 import textwrap
 import argparse
 import os
-import sys  
+import sys
 import httplib2
 import json
 from apiclient import discovery
@@ -72,32 +72,33 @@ from oauth2client import tools
 def not_implemented():
     print "ERROR: not yet implemented"
 
+
 def rain_command(arguments):
     if arguments["--rst"]:
 
-        print 70*"*"
+        print 70 * "*"
         print "Manual Pages"
-        print 70*"*"
+        print 70 * "*"
         print
-        print "reservation"        
-        print 70*"="
-        print "\n::\n"        
+        print "reservation"
+        print 70 * "="
+        print "\n::\n"
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
     else:
-        
+
         for list in ["HOSTS", "IDS"]:
             try:
                 expanded_list = hostlist.expand_hostlist(arguments[list])
-                arguments[list]=expanded_list
+                arguments[list] = expanded_list
             except:
                 pass
 
-        #print(arguments)
+        # print(arguments)
 
         reservation = get_service_object()
-        
+
         if arguments["add"] and arguments["--file"] is not None:
 
             print "add file"
@@ -128,68 +129,69 @@ def rain_command(arguments):
         elif arguments["id"]:
 
             print "id"
-            
+
         elif arguments["remove_all"]:
             print "Remove all reservations from calendar"
             reservation.remove_all()
-            
+
         elif arguments["remove"]:
             print "Removed the reservation from calendar"
             reservation.remove(arguments["--reservation_id"])
-            
+
         elif arguments["get_from_id"]:
             print "Reservation object from calendar by id"
             print reservation.get_from_id(arguments["--reservation_id"])
-            
+
         elif arguments["get_from_label"]:
             print "Reservation object from calendar by label"
             print reservation.get_from_label(arguments["--label"])
-            
+
         elif arguments["get_by_user"]:
             print "Reservation object from calendar by user"
             print reservation.get_by_user(arguments["--user_id"])
-            
+
         elif arguments["list_by_project"]:
             print "Reservation object from calendar by project"
             print reservation.list_by_project(arguments["--proj_id"])
-            
+
         elif arguments["list_by_user_and_project"]:
             print "Lists all the users reservations made in a project from a start-time to a end time"
-            list = reservation.list_by_user_and_project(arguments["--user_id"], arguments["--proj_id"], arguments["--start"], arguments["--end"])
+            list = reservation.list_by_user_and_project(
+                arguments["--user_id"], arguments["--proj_id"], arguments["--start"], arguments["--end"])
             for value in list:
                 print value
                 print "************************************************************"
-            
+
         elif arguments["get_all"]:
             print "Get all reservations from calendar"
             list = reservation.get_all()
             for value in list:
-		for key, value in value.iteritems():
-			if isinstance(value, dict):
-				for key, value in value.iteritems():
-					print key,'\t', value
-			else:
-				print key,'\t\t', value
-                	#print value
+                for key, value in value.iteritems():
+                    if isinstance(value, dict):
+                        for key, value in value.iteritems():
+                            print key, '\t', value
+                    else:
+                        print key, '\t\t', value
+                    # print value
                 print "************************************************************"
-                
+
         elif arguments["reschedule"]:
             print "Reschedule reservation"
             try:
                 with open(arguments["--file"]) as json_file:
                     json_data = json.load(json_file)
-                    reservation.reschedule(arguments["--reservation_id"], json_data)
+                    reservation.reschedule(
+                        arguments["--reservation_id"], json_data)
             except:
                 print "File doesn't exist"
-                
+
         elif arguments["duration"]:
             print "Shows the duration of the reservation"
             print reservation.duration(arguments["--reservation_id"])
-            
 
-        elif arguments["delete"] or arguments["rm"] :
+        elif arguments["delete"] or arguments["rm"]:
             """rain [-i] delete LABELS"""
-            """rain [-i] rm LABELS"""            
+            """rain [-i] rm LABELS"""
 
             interactive = arguments["-i"]
 
@@ -197,7 +199,8 @@ def rain_command(arguments):
 
             for label in arguments["LABELS"]:
                 if interactive:
-                    keep = yn_choice("Do you want to delete the reservation <%s>?" % label)
+                    keep = yn_choice(
+                        "Do you want to delete the reservation <%s>?" % label)
                     if keep:
                         print "delete %s" % label
                     else:
@@ -213,7 +216,7 @@ def get_service_object():
     # with our good Credentials.
     http = httplib2.Http()
     http = credentials.authorize(http)
-    
+
     # Construct the service object for the interacting with the Calendar API.
     service = discovery.build('calendar', 'v3', http=http)
     reservation = ReservationClient(service)
@@ -224,4 +227,3 @@ if __name__ == '__main__':
     arguments = docopt(__doc__)
 
     rain_command(arguments)
-    

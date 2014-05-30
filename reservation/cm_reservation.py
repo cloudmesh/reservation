@@ -61,14 +61,13 @@ CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 # NEED. For more information on using scopes please see
 # <https://developers.google.com/+/best-practices>.
 FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
-  scope=[
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.readonly',
-    ],
-    message=tools.message_if_missing(CLIENT_SECRETS))
+                                      scope=[
+                                          'https://www.googleapis.com/auth/calendar',
+                                          'https://www.googleapis.com/auth/calendar.readonly',
+                                      ],
+                                      message=tools.message_if_missing(CLIENT_SECRETS))
 
-        
-        
+
 def main(argv):
     # Parse the command-line flags.
     flags = parser.parse_args(argv[1:])
@@ -91,19 +90,18 @@ def main(argv):
 
     try:
         #val = service.calendarList().list(minAccessRole=None, maxResults=1, pageToken=None, showHidden=None).execute()
-         reservation = ReservationClient(service)
-         #reservation.removeAllEvents()
-         reservation.selectAllEvents()
+        reservation = ReservationClient(service)
+        # reservation.removeAllEvents()
+        reservation.selectAllEvents()
 
-         #
-         # gvl: the next must not be used in this prg. all identifiers must be removed from code
-         #
-         #reservation.removeEventFromCalendar('t2hpplpou4p7fkijm33rhu7ank')
-         
+        #
+        # gvl: the next must not be used in this prg. all identifiers must be removed from code
+        #
+        # reservation.removeEventFromCalendar('t2hpplpou4p7fkijm33rhu7ank')
 
     except client.AccessTokenRefreshError:
         print ("The credentials have been revoked or expired, please re-run"
-            "the application to re-authorize")
+               "the application to re-authorize")
 
 
 # For more information on the Calendar API you can visit:
@@ -119,4 +117,4 @@ def main(argv):
 #
 #   https://developers.google.com/api-client-library/python/start/get_started
 if __name__ == '__main__':
-  main(sys.argv)
+    main(sys.argv)
