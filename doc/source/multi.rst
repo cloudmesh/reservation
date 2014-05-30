@@ -120,7 +120,9 @@ To delete the provisioned VM::
 
   $ nova delete testvm
   
-To boot an instance on a particular node::
+.. note ::
+
+  To boot an instance on a particular node::
 
   $ nova boot --image cirros-0.3.1-x86_64-uec --flavor 1 --availability-zone nova:compute1 testvm
 
