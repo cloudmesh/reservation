@@ -2,6 +2,7 @@
 """
 Usage:
     reservation -h | --help
+    reservation login
     reservation --rst
     reservation --version
     reservation add [--start=TIME_START]
@@ -47,6 +48,10 @@ Options:
                            the start time. [default: +1d]
     --format=FORMAT        Format of the output json, cfg. [default:json]
 """
+
+from cloudmesh_install import config_file
+
+
 from datetime import datetime, timedelta
 from docopt import docopt
 from reservation_client import ReservationClient
@@ -69,23 +74,11 @@ from oauth2client import client
 from oauth2client import tools
 
 
-CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), '~/.futuregrid/cloudmesh/client_secrets.json')
-
-# Set up a Flow object to be used for authentication.
-# Add one or more of the following scopes. PLEASE ONLY ADD THE SCOPES YOU
-# NEED. For more information on using scopes please see
-# <https://developers.google.com/+/best-practices>.
-FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
-  scope=[
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.readonly',
-    ],
-    message=tools.message_if_missing(CLIENT_SECRETS))
 
 def not_implemented():
     print "ERROR: not yet implemented"
 
-def rain_command(arguments, argv):
+def rain_command(arguments):
     if arguments["--rst"]:
 
         print 70*"*"
@@ -98,6 +91,16 @@ def rain_command(arguments, argv):
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
+
+    elif arguments["--version"]:
+
+        not_implemented()
+    elif arguments["login"]:
+        try:
+            os.system('cm-reservation-login')
+        except Exception, e:
+            print "Could not find the command cm-reservation-login. Make sure the cloudmesh code is properly installed."
+
     else:
         
         for list in ["HOSTS", "IDS"]:
@@ -109,8 +112,18 @@ def rain_command(arguments, argv):
 
         #print(arguments)
 
-        reservation = get_service_object(argv)
-        
+        try:
+            
+            reservation = get_service_object()
+
+        except Exception, e:
+            print "ERROR: could not connect to the calendar service"
+
+            print
+            print e
+            print
+            sys.exit(1)
+            
         if arguments["add"] and arguments["--file"] is not None:
 
             print "add file"
@@ -174,18 +187,19 @@ def rain_command(arguments, argv):
                 print "************************************************************"
             
         elif arguments["get_all"]:
+
             print "Get all reservations from calendar"
             list = reservation.get_all()
             for value in list:
-		for key, value in value.iteritems():
-			if isinstance(value, dict):
-				for key, value in value.iteritems():
-					print key,'\t', value
-			else:
-				print key,'\t\t', value
-                	#print value
-                print "************************************************************"
-                
+                for key, value in value.iteritems():
+                    if isinstance(value, dict):
+                        for key, value in value.iteritems():
+                            print key,'\t', value
+                    else:
+                        print key,'\t\t', value
+                            #print value
+                        print "************************************************************"
+
         elif arguments["reschedule"]:
             print "Reschedule reservation"
             try:
@@ -218,12 +232,10 @@ def rain_command(arguments, argv):
             not_implemented()
 
 
-def get_service_object(argv):
+def get_service_object():
     '''Get calendar object'''
     storage = file.Storage('reservation_config.dat')
     credentials = storage.get()
-    if credentials is None or credentials.invalid:
-        credentials = tools.run_flow(FLOW, storage, flags)
     # Create an httplib2.Http object to handle our HTTP requests and authorize it
     # with our good Credentials.
     http = httplib2.Http()
@@ -236,7 +248,8 @@ def get_service_object(argv):
 
 
 if __name__ == '__main__':
+    print(sys.argv)
     arguments = docopt(__doc__)
 
-    rain_command(arguments, sys.argv)
+    rain_command(arguments)
     

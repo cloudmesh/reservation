@@ -19,20 +19,33 @@ Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
 Step 2: Register the project on Google to run the sample example
         1) `Create a Project <https://console.developers.google.com/project>`_.
 	2) Select the project then under the Api's & Auth Tab select API.
-	3) Enable the Calendar API.
+	3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
 
 Step 3: Authorization- Get Client Secrets JSON file
 	1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
 	2) Select a project.
-	3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-	4) In the sidebar on the left, select Credentials.
-	5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-	6) Download the JSON file and then place it on the same directory level as the reservation.py class
+	3) In the sidebar on the left, select Credentials.
+	4) Download the JSON file and rename the file as client_secrets.json.
+	5) move clients_secrets.json file to ~/.futuregrid/cloudmesh/. If the directory isn't present create the directory using : mkdir ~/.futuregrid/cloudmesh/ and then run the move : mv client_secrets.json ~/.futuregrid/cloudmesh/
 
 Step 4: Running the Python Reservation command line
 	1) After doing a git clone of the project run the command line arguments given in the example in the same order.
 	2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
 
+
+Command-line commands                         
+======================================================================
+	1) reservation.py add --file=FILE
+    	2) reservation.py remove --reservation_id=RESERVATION_ID
+    	3) reservation.py remove_all
+    	4) reservation.py get_all
+    	5) reservation.py get_from_label --label=LABEL
+    	6) reservation.py get_by_user --user_id=USER_ID
+    	7) reservation.py reschedule --reservation_id=RESERVATION_ID --file=FILE
+    	8) reservation.py get_from_id --reservation_id=RESERVATION_ID
+    	9) reservation.py duration --reservation_id=RESERVATION_ID
+    	10) reservation.py list_by_project --proj_id=PROJ_ID
+    	11) reservation.py list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
     
 Example                         
 ======================================================================
