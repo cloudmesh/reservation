@@ -27,7 +27,7 @@ def login_command(argv=None):
         message=tools.message_if_missing(CLIENT_SECRETS))
     flags=parser.parse_args(argv[1:])
     pprint(flags)
-    storage = file.Storage('Main.dat')
+    storage = file.Storage(config_file('/cloudmesh_reservation.dat'))
     credentials = storage.get()
     if credentials is None or credentials.invalid:
         credentials = tools.run_flow(FLOW, storage, flags)
