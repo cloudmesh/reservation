@@ -124,17 +124,12 @@ To delete the provisioned VM::
 
   When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh:
 
-  $ cd devstack |
-  $ ./rejoin-stack.sh
-
-
-
-.. note ::
-  
-  The section below shows the contents of the three scripts that would be created when you do "cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git".
+  $ cd devstack && ./rejoin-stack.sh
 
 Shell Scripts
 ======================================================================
+
+The section below shows the contents of the three scripts that would be created when you do "cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git".
 
 Controller: install-controller.sh
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
