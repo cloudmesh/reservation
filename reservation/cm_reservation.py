@@ -31,7 +31,6 @@ import os
 import sys
 import yaml
 
-from ReservationServiceEvents import ReservationClient
 from apiclient import discovery
 from oauth2client import file
 from oauth2client import client

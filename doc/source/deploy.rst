@@ -1,6 +1,14 @@
 Deployment
 ======================================================================
 
+.. sidebar:: 
+   . 
+
+  .. contents:: Table of Contents
+     :depth: 5
+
+..
+
 Virtualenv
 ----------------------------------------------------------------------
 
@@ -69,7 +77,7 @@ To publish the new documentation to github they can say::
 	     the documentation has to be checked with a local make.
 
 Steps in a nutshell
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Download repository from github and setup sphinx for documentation::
 

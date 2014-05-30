@@ -14,24 +14,24 @@ Steps to follow to set up the environment
 ======================================================================
 Before starting with the example it is necessary to prepare the environment.
 
-	Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
+Step 1: `Create a Google Account <https://accounts.google.com/SignUp>`_.
 
-	Step 2: Register the project on Google to run the sample example
-		1) `Create a Project <https://console.developers.google.com/project>`_.
-		2) Select the project then under the Api's & Auth Tab select API.
-		3) Enable the Calendar API.
+Step 2: Register the project on Google to run the sample example
+        1) `Create a Project <https://console.developers.google.com/project>`_.
+	2) Select the project then under the Api's & Auth Tab select API.
+	3) Enable the Calendar API.
 
-	Step 3: Authorization- Get Client Secrets JSON file
-		1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
-		2) Select a project.
-		3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
-		4) In the sidebar on the left, select Credentials.
-		5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
-		6) Download the JSON file and then place it on the same directory level as the reservation.py class
+Step 3: Authorization- Get Client Secrets JSON file
+	1) Go to the Google Developers Console that can be found `here <https://console.developers.google.com/project>`_.
+	2) Select a project.
+	3) In the sidebar on the left, select APIs & auth. In the list of APIs, make sure the status is ON for the Google Calendar API.
+	4) In the sidebar on the left, select Credentials.
+	5) Find the correct set of OAuth 2.0 credentials in the list, and then find the Client ID and Client secret for those credentials.
+	6) Download the JSON file and then place it on the same directory level as the reservation.py class
 
-	Step 4: Running the Python Reservation command line
-		1) After doing a git clone of the project run the command line arguments given in the example in the same order.
-		2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
+Step 4: Running the Python Reservation command line
+	1) After doing a git clone of the project run the command line arguments given in the example in the same order.
+	2) New reservations can be added to the reservation_json_files folder using the `JSON Template <https://github.com/cloudmesh/reservation/blob/master/reservation_json_files/reservation_template>`_.
 
     
 Example                         
