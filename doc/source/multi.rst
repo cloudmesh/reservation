@@ -77,7 +77,7 @@ Testing the setup
 
 Log into the controller node::
   
-    vagrant ssh controller
+  $ vagrant ssh controller
 
 Source the "openrc" file for admin::
 
@@ -88,25 +88,39 @@ To list the images available in the setup::
 
   $ nova image-list
 
-Output of the above command is shown below:
-
-+--------------------------------------+---------------------------------+--------+--------+
-| ID                                   | Name                            | Status | Server |
-+======================================+=================================+========+========+
-| d429f0f7-cf54-4654-b2ae-786aafe35ef6 | cirros-0.3.1-x86_64-uec         | ACTIVE |        |
-+--------------------------------------+---------------------------------+--------+--------+
-| 7d76fd5c-4431-42f8-9976-e0bc82d55c85 | cirros-0.3.1-x86_64-uec-kernel  | ACTIVE |        |
-+--------------------------------------+---------------------------------+--------+--------+
-| 0cc7c431-d6cd-41e9-acd7-236fdfceb097 | cirros-0.3.1-x86_64-uec-ramdisk | ACTIVE |        |
-+--------------------------------------+---------------------------------+--------+--------+
-
 To list the flavors available in the setup::
 
   $ nova flavor-list
 
 To boot an instance in the setup::
 
-  $ nova boot --flavor 1 --image "cirros" testvm
+  $ nova boot --flavor 1 --image "cirros-0.3.1-x86_64-uec" testvm
+  
+The above command will boot a VM according to the specification given in the above command. 
+
+To view the status of the "nova boot" command::
+
+  $ nova list
+
+When the VM is provisioned successfully, the status of the VM will be set to "ACTIVE".
+
+To log into the provisioned VM, use the login name "cirros" and password "cubswin:)"::
+
+  $ ssh <private-ip> -i cirros
+
+To shutdown the provisioned VM::
+
+  $ nova stop testvm
+  
+To start the provisioned VM::
+
+  $ nova start testvm
+
+To delete the provisioned VM::
+
+  $ nova delete testvm
+
+.. note ::
 
 When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh::
 
