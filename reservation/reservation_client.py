@@ -45,7 +45,7 @@ class ReservationClient(object):
         self.service = serviceArg
 
     def add(self, rsv):
-        '''A reservation is a JSON object that is passes to his method to be added to the calendar'''
+        '''A reservation is a JSON object that is passes to this method to be added to the calendar'''
         if(check_overlap(self.service, rsv) == True):
             return "Reservations overlap: cannot schedule at this time"
         else:

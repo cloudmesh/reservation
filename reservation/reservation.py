@@ -35,6 +35,7 @@ Options:
     --label=LABEL  the label pf the reservation
     -f FILE, --file=FILE  file to be specified
     --reservation_id=RESERVATION_ID                RESERVATION_ID
+    --hosts=HOSTS        SERVER NUMBERS
     --user_id=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
     -i           interactive mode adds a yes/no 
@@ -67,6 +68,7 @@ import os
 import sys  
 import httplib2
 import json
+import csv
 from apiclient import discovery
 from oauth2client import file
 
@@ -98,7 +100,8 @@ def rain_command(arguments):
             print "  ", line
 
     elif arguments["--version"]:
-        not_implemented()
+        print "version 1.0"
+        
     elif arguments["login"]:
         try:
             os.system('cm-reservation-login')
@@ -130,12 +133,19 @@ def rain_command(arguments):
 
             print "add file"
             try:
-                with open(arguments["--file"]) as json_file:
+                with open(arguments["--file"]) as f:
+                    reader = csv.reader(f)
+                    for row in reader:
+                        print row
+                        '''with open(arguments["--file"]) as json_file:
                     json_data = json.load(json_file)
-                    reservation.add(json_data)
-            except:
-                print "File doesn't exist"
-            print reservation.get_all()
+                    for i in xrange(len(json_data['events'])):
+                        build_JSON(json_data['events']['event'+str(i)])'''
+                    #json_data  = build_JSON(json_data)
+                    #reservation.add(json_data)
+            except Exception, e:
+                print e
+            #print reservation.get_all()
         elif arguments["add"]:
 
             print "add"
@@ -251,7 +261,11 @@ def get_service_object():
     reservation = ReservationClient(service)
     return reservation
 
-
+def build_JSON(jsonData):
+    print "build json: ",jsonData
+    return jsonData
+    
+    
 if __name__ == '__main__':
     print(sys.argv)
     arguments = docopt(__doc__)
