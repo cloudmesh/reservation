@@ -50,33 +50,38 @@ Options:
 """
 
 from cloudmesh_install import config_file
-
-
-from datetime import datetime, timedelta
+from cloudmesh.config.ConfigDict import ConfigDict
 from docopt import docopt
-from reservation_client import ReservationClient
 import hostlist
-from pytimeparse.timeparse import timeparse
+from tzlocal import get_localzone
+
+from reservation_client import ReservationClient
+
+
 # from timestring import Range
 # from timestring import Date
 
 from cloudmesh_common.tables import parse_time_interval
 from cloudmesh_common.util import yn_choice
-import textwrap
-import argparse
 import os
 import sys  
 import httplib2
 import json
 from apiclient import discovery
 from oauth2client import file
-from oauth2client import client
-from oauth2client import tools
 
-
+import dateutil.tz as dtz
+import pytz
+import datetime as dt
+import collections
 
 def not_implemented():
     print "ERROR: not yet implemented"
+    username = ConfigDict(filename="~/.futuregrid/cloudmesh.yaml")["cloudmesh"]["profile"]["firstname"]
+    print username
+    # get local timezone
+    local_tz = get_localzone()
+    print local_tz
 
 def rain_command(arguments):
     if arguments["--rst"]:
@@ -93,16 +98,14 @@ def rain_command(arguments):
             print "  ", line
 
     elif arguments["--version"]:
-
         not_implemented()
     elif arguments["login"]:
         try:
             os.system('cm-reservation-login')
         except Exception, e:
-            print "Could not find the command cm-reservation-login. Make sure the cloudmesh code is properly installed."
-
+            print(
+                "Could not find the command cm-reservation-login. Make sure the cloudmesh code is properly installed.")
     else:
-        
         for list in ["HOSTS", "IDS"]:
             try:
                 expanded_list = hostlist.expand_hostlist(arguments[list])
@@ -113,7 +116,6 @@ def rain_command(arguments):
         #print(arguments)
 
         try:
-            
             reservation = get_service_object()
 
         except Exception, e:
@@ -190,15 +192,18 @@ def rain_command(arguments):
 
             print "Get all reservations from calendar"
             list = reservation.get_all()
+            #pprint(list)
             for value in list:
                 for key, value in value.iteritems():
                     if isinstance(value, dict):
                         for key, value in value.iteritems():
-                            print key,'\t', value
+                            print '{0:15} ==> {1:10}'.format(key, value)
+                            #print key,'\t', value
                     else:
-                        print key,'\t\t', value
+                        print '{0:15} ==> {1:10}'.format(key, value)
+                        #print key,'\t\t', value
                             #print value
-                        print "************************************************************"
+                print "************************************************************"
 
         elif arguments["reschedule"]:
             print "Reschedule reservation"
@@ -234,7 +239,7 @@ def rain_command(arguments):
 
 def get_service_object():
     '''Get calendar object'''
-    storage = file.Storage('reservation_config.dat')
+    storage = file.Storage(config_file('/cloudmesh_reservation.dat'))
     credentials = storage.get()
     # Create an httplib2.Http object to handle our HTTP requests and authorize it
     # with our good Credentials.

@@ -16,3 +16,6 @@ timestring
 apiclient
 cookiecutter
 urllib3
+tzlocal
+pytz
+python-dateutil
