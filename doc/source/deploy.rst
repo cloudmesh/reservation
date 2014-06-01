@@ -42,10 +42,11 @@ The directory structure is as follows::
                |-----reservation
                          |---reservation.py
                          |---reservation_client.py
-                         |---reservation_config.dat
-               |----- ~/.futuregrid/cloudmesh/
-                         |---client_secrets.json
+			 |---login.py
 
+  |----- ~/.futuregrid/cloudmesh/
+               |---client_secrets.json
+               |---cloudmesh_reservation.dat
 
 
 

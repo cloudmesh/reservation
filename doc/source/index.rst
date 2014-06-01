@@ -18,7 +18,7 @@ OpenStack Cloud in Vagrant
 
 .. toctree::
    :numbered:
-   :maxdepth: -1
+   :maxdepth: 1
 
    multi
    multiUsingChef
@@ -30,7 +30,7 @@ OpenStack Scheduler
 
 .. toctree::
    :numbered:
-   :maxdepth: -1
+   :maxdepth: 1
 
    scheduler 
 
@@ -42,12 +42,11 @@ Cloudmesh Reservation
    :numbered:
    :maxdepth: -1
 
-   progress
    introduction
    deploy
-   rest
-   api
+   manual
    man/man
+   rest
 
 **Indices and Lists**
 
