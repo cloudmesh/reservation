@@ -7,8 +7,8 @@ Usage:
     reservation --version
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
-                    LABEL
-                    HOSTS
+                    --label=LABEL
+                    --hosts=HOSTS
     reservation add --file=FILE
     reservation remove --reservation_id=RESERVATION_ID
     reservation remove_all
@@ -29,7 +29,6 @@ Usage:
     
 Arguments:
     ID        the unique ID of the reservation
-    LABEL     the label of a host
     
 Options:
     --label=LABEL  the label pf the reservation
@@ -68,6 +67,7 @@ import os
 import sys  
 import httplib2
 import json
+from json import JSONEncoder
 import csv
 from apiclient import discovery
 from oauth2client import file
@@ -76,6 +76,7 @@ import dateutil.tz as dtz
 import pytz
 import datetime as dt
 import collections
+from datetime import date
 
 def not_implemented():
     print "ERROR: not yet implemented"
@@ -147,13 +148,15 @@ def rain_command(arguments):
                 print e
             #print reservation.get_all()
         elif arguments["add"]:
-
+            '''Issue in docopt getting label and hosts'''
             print "add"
             (time_start, time_end) = parse_time_interval(arguments["--start"],
                                                          arguments["--end"])
+            json_data = build_JSON(time_start, time_end, arguments['--label'], arguments['--hosts'])
+            
             print "From:", time_start
             print "To  :", time_end
-
+            reservation.add(json_data)
         elif arguments["list"]:
 
             print "list"
@@ -261,8 +264,27 @@ def get_service_object():
     reservation = ReservationClient(service)
     return reservation
 
-def build_JSON(jsonData):
-    print "build json: ",jsonData
+def build_JSON(sTime, eTime, label, hosts):
+    configFile = ConfigDict(filename="~/.futuregrid/me.yaml")
+    jsonData = JSONEncoder().encode({
+                                    "summary": label,
+                                    "description":{
+                                        "hosts": hosts,
+                                        "kind":"vm-server",
+                                        "project":configFile["projects"]["default"],
+                                        "userid":configFile["profile"]["id"], 
+                                        "displayName":configFile["profile"]["firstname"], 
+                                        "email":configFile["profile"]["email"]
+                                    },
+                                    "start":{
+                                        "dateTime": sTime,
+                                        "timeZone": get_localzone()
+                                    },
+                                    "end":{
+                                        "dateTime": eTime,
+                                        "timeZone": get_localzone()
+                                    }
+    })    
     return jsonData
     
     
@@ -272,3 +294,4 @@ if __name__ == '__main__':
 
     rain_command(arguments)
     
+
