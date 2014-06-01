@@ -1,0 +1,5 @@
+pylint
+flake8
+flakeplus
+pep8
+autopep8
