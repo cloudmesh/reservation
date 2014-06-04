@@ -1,31 +1,25 @@
 #! /usr/bin/env python
 """
 Usage:
-    reservation -h | --help
+    reservation -h | --help | --rst
     reservation login
-    reservation --rst
     reservation --version
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
                     LABEL
                     HOSTS
     reservation add --file=FILE
-    reservation remove --reservation_id=RESERVATION_ID
-    reservation remove_all
-    reservation get_all
-    reservation get_from_label LABEL
-    reservation get_by_user --user_id=USER_ID
+    reservation remove --reservation=RESERVATION_ID
+    reservation remove --all
+    reservation get [--all]
+    reservation get --label=LABEL
+    reservation get --user=USER_ID
+    reservation get --reservation=RESERVATION_ID
     reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
-    reservation get_from_id --reservation_id=RESERVATION_ID
     reservation duration --reservation_id=RESERVATION_ID
     reservation list_by_project --proj_id=PROJ_ID
     reservation list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
-    reservation list [--start=TIME_START]
-                     [--end=TIME_END]
-                     [--format=FORMAT]
-    reservation id (LABELS|IDS)
-    reservation [-i] rm (LABELS|IDS)
-    reservation [-i] delete (LABELS|IDS)     
+    reservation id (LABELS|IDS)    
     
 Arguments:
     ID        the unique ID of the reservation
@@ -33,7 +27,7 @@ Arguments:
 Options:
     LABEL  the label pf the reservation
     -f FILE, --file=FILE  file to be specified
-    --reservation_id=RESERVATION_ID                RESERVATION_ID
+    --reservation=RESERVATION_ID                RESERVATION_ID
     HOSTS        SERVER NUMBERS
     --user_id=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
@@ -174,25 +168,25 @@ def rain_command(arguments):
 
             print "id"
             
-        elif arguments["remove_all"]:
+        elif arguments["remove"] and arguments["--all"]:
             print "Remove all reservations from calendar"
             reservation.remove_all()
             
         elif arguments["remove"]:
             print "Removed the reservation from calendar"
-            reservation.remove(arguments["--reservation_id"])
+            reservation.remove(arguments["--reservation"])
             
-        elif arguments["get_from_id"]:
+        elif arguments["get"] and arguments["--reservation"]:
             print "Reservation object from calendar by id"
-            print reservation.get_from_id(arguments["--reservation_id"])
+            print reservation.get_from_id(arguments["--reservation"])
             
-        elif arguments["get_from_label"]:
+        elif arguments["get"] and arguments["--label"]:
             print "Reservation object from calendar by label"
             print reservation.get_from_label(arguments["--label"])
             
-        elif arguments["get_by_user"]:
+        elif arguments["get"] and arguments["--user"]:
             print "Reservation object from calendar by user"
-            print reservation.get_by_user(arguments["--user_id"])
+            print reservation.get_by_user(arguments["--user"])
             
         elif arguments["list_by_project"]:
             print "Reservation object from calendar by project"
@@ -205,7 +199,7 @@ def rain_command(arguments):
                 print value
                 print "************************************************************"
             
-        elif arguments["get_all"]:
+        elif arguments["get"] and arguments["--all"]:
 
             print "Get all reservations from calendar"
             list = reservation.get_all()
