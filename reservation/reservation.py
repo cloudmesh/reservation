@@ -136,19 +136,20 @@ def rain_command(arguments):
 
             print "add file"
             try:
-                with open(arguments["--file"]) as f:
+                with open(os.path.join(sys.path[0], arguments["--file"])) as f:
                     reader = csv.reader(f)
                     for row in reader:
                         print row
-                        '''with open(arguments["--file"]) as json_file:
-                    json_data = json.load(json_file)
-                    for i in xrange(len(json_data['events'])):
-                        build_JSON(json_data['events']['event'+str(i)])'''
-                    #json_data  = build_JSON(json_data)
-                    #reservation.add(json_data)
+                        (time_start, time_end) = parse_time_interval(row[0],
+                                                         row[1])
+                        time_start = addSeparatorInTime(time_start)
+                        time_end = addSeparatorInTime(time_end)
+                        json_data = build_JSON(time_start, time_end, row[2], row[3])
+                        json_decoded = json.loads(json_data)
+                        reservation.add(json_decoded)
             except Exception, e:
                 print e
-            #print reservation.get_all()
+                
         elif arguments["add"]:
             '''Issue in docopt getting label and hosts'''
             print "add"
@@ -159,9 +160,6 @@ def rain_command(arguments):
             time_end = addSeparatorInTime(time_end)
             json_data = build_JSON(time_start, time_end, arguments['LABEL'], arguments['HOSTS'])
             json_decoded = json.loads(json_data)
-            print "From:", time_start
-            print "To  :", time_end
-            print json_decoded
             reservation.add(json_decoded)
         elif arguments["list"]:
 
