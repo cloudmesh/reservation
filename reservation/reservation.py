@@ -7,13 +7,13 @@ Usage:
     reservation --version
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
-                    --label=LABEL
-                    --hosts=HOSTS
+                    LABEL
+                    HOSTS
     reservation add --file=FILE
     reservation remove --reservation_id=RESERVATION_ID
     reservation remove_all
     reservation get_all
-    reservation get_from_label --label=LABEL
+    reservation get_from_label LABEL
     reservation get_by_user --user_id=USER_ID
     reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
     reservation get_from_id --reservation_id=RESERVATION_ID
@@ -31,10 +31,10 @@ Arguments:
     ID        the unique ID of the reservation
     
 Options:
-    --label=LABEL  the label pf the reservation
+    LABEL  the label pf the reservation
     -f FILE, --file=FILE  file to be specified
     --reservation_id=RESERVATION_ID                RESERVATION_ID
-    --hosts=HOSTS        SERVER NUMBERS
+    HOSTS        SERVER NUMBERS
     --user_id=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
     -i           interactive mode adds a yes/no 
@@ -76,7 +76,9 @@ import dateutil.tz as dtz
 import pytz
 import datetime as dt
 import collections
-from datetime import date
+from datetime import date, datetime
+from dateutil.tz import gettz
+from json.decoder import JSONDecoder
 
 def not_implemented():
     print "ERROR: not yet implemented"
@@ -99,7 +101,7 @@ def rain_command(arguments):
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
-
+    
     elif arguments["--version"]:
         print "version 1.0"
         
@@ -150,13 +152,17 @@ def rain_command(arguments):
         elif arguments["add"]:
             '''Issue in docopt getting label and hosts'''
             print "add"
+            
             (time_start, time_end) = parse_time_interval(arguments["--start"],
                                                          arguments["--end"])
-            json_data = build_JSON(time_start, time_end, arguments['--label'], arguments['--hosts'])
-            
+            time_start = addSeparatorInTime(time_start)
+            time_end = addSeparatorInTime(time_end)
+            json_data = build_JSON(time_start, time_end, arguments['LABEL'], arguments['HOSTS'])
+            json_decoded = json.loads(json_data)
             print "From:", time_start
             print "To  :", time_end
-            reservation.add(json_data)
+            print json_decoded
+            reservation.add(json_decoded)
         elif arguments["list"]:
 
             print "list"
@@ -205,6 +211,8 @@ def rain_command(arguments):
 
             print "Get all reservations from calendar"
             list = reservation.get_all()
+            with open('data.json', 'w') as outfile:
+                json.dump(list, outfile)
             #pprint(list)
             for value in list:
                 for key, value in value.iteritems():
@@ -249,6 +257,9 @@ def rain_command(arguments):
                         print "keeping %s" % label
             not_implemented()
 
+def addSeparatorInTime(time):
+    return time.replace(' ', 'T')
+    
 
 def get_service_object():
     '''Get calendar object'''
@@ -278,11 +289,11 @@ def build_JSON(sTime, eTime, label, hosts):
                                     },
                                     "start":{
                                         "dateTime": sTime,
-                                        "timeZone": get_localzone()
+                                        "timeZone": "America/New_York"
                                     },
                                     "end":{
                                         "dateTime": eTime,
-                                        "timeZone": get_localzone()
+                                        "timeZone": "America/New_York"
                                     }
     })    
     return jsonData
