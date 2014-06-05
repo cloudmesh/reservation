@@ -19,15 +19,11 @@ Usage:
     reservation remove --all
     reservation get [--all]
     reservation get --label=LABEL
-<<<<<<< HEAD
-    reservation get --user=USER_ID
-    reservation get --reservation=RESERVATION_ID
     reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
     reservation duration --reservation_id=RESERVATION_ID
     reservation list --proj_id=PROJ_ID
     reservation list --user=USER_ID
     reservation list --user=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
-=======
     reservation get --user=ID
     reservation get --reservation=ID    
     reservation list [LABEL]
@@ -41,8 +37,10 @@ Usage:
     reservation [-i] delete (LABELS|IDS)     
     reservation reschedule --reservation=ID --file=FILE
     reservation duration --reservation=ID
->>>>>>> ae91caf6f6816147726c3513d7bfafa3535d5293
-    reservation id (LABELS|IDS)    
+    reservation id (LABELS|IDS)
+    reservation find (-n RESOURCES)
+    		     [--start=TIME_START]
+                     [--end=TIME_END]     
     
 Arguments:
     ID        the unique ID of the reservation
@@ -279,7 +277,13 @@ def rain_command(arguments):
                     else:
                         print "keeping %s" % label
             not_implemented()
+        elif arguments["find"]:
+             find_resources(arguments)
 
+def find_resources(arguments):
+    print arguments
+	
+	
 def addSeparatorInTime(time):
     return time.replace(' ', 'T')
     
