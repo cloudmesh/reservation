@@ -17,8 +17,9 @@ Usage:
     reservation get --reservation=RESERVATION_ID
     reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
     reservation duration --reservation_id=RESERVATION_ID
-    reservation list_by_project --proj_id=PROJ_ID
-    reservation list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
+    reservation list --proj_id=PROJ_ID
+    reservation list --user=USER_ID
+    reservation list --user=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
     reservation id (LABELS|IDS)    
     
 Arguments:
@@ -29,7 +30,7 @@ Options:
     -f FILE, --file=FILE  file to be specified
     --reservation=RESERVATION_ID                RESERVATION_ID
     HOSTS        SERVER NUMBERS
-    --user_id=USER_ID                USER_ID
+    --user=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
     -i           interactive mode adds a yes/no 
                  question for each host specified
@@ -188,13 +189,21 @@ def rain_command(arguments):
             print "Reservation object from calendar by user"
             print reservation.get_by_user(arguments["--user"])
             
-        elif arguments["list_by_project"]:
+        elif arguments["list"] and arguments["--proj_id"]:
             print "Reservation object from calendar by project"
             print reservation.list_by_project(arguments["--proj_id"])
             
-        elif arguments["list_by_user_and_project"]:
+        elif arguments["list"] and arguments["--user"]:
+            print "Reservation object from calendar by user"
+            print reservation.list_by_user(arguments["--user"])
+            
+        elif arguments["list"] and arguments["--user"] and arguments["--proj_id"] and arguments["--start"] and arguments["--end"]:
             print "Lists all the users reservations made in a project from a start-time to a end time"
-            list = reservation.list_by_user_and_project(arguments["--user_id"], arguments["--proj_id"], arguments["--start"], arguments["--end"])
+            (time_start, time_end) = parse_time_interval(arguments["--start"],
+                                                         arguments["--end"])
+            time_start = addSeparatorInTime(time_start)
+            time_end = addSeparatorInTime(time_end)
+            list = reservation.list_by_user_and_project(arguments["--user_id"], arguments["--proj_id"], time_start, time_end)
             for value in list:
                 print value
                 print "************************************************************"

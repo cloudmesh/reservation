@@ -128,14 +128,14 @@ class ReservationClient(object):
                 desc = event['description'].replace("'", "\"")
                 d = json.loads(desc)
                 '''The start time is checked at both the places to know if the event was started between the stime and etime'''
-                if(d['userId'] == str(userId) and d['projId'] == str(projId) and event['start']['dateTime'] > sTime and event['start']['dateTime'] < eTime):
+                if(d['userId'] == str(userId) and d['project'] == str(projId) and event['start']['dateTime'] > sTime and event['start']['dateTime'] < eTime):
                     evt_list.append(event['id'])
             page_token = events.get('nextPageToken')
             if not page_token:
                 break
         return evt_list
 
-    def list_by_project(self, projId):
+    def list_by_project(self, proj):
         '''Lists all the reservations made in a particular project'''
         page_token = None
         evt_list = []
@@ -146,7 +146,25 @@ class ReservationClient(object):
                 desc = event['description'].replace("'", "\"")
                 d = json.loads(desc)
                 '''The start time is checked at both the places to know if the event was started between the stime and etime'''
-                if(d['projId'] == str(projId)):
+                if(d['project'] == str(proj)):
+                    evt_list.append(event['id'])
+            page_token = events.get('nextPageToken')
+            if not page_token:
+                break
+        return evt_list
+    
+    def list_by_user(self, userId):
+        '''Lists all the reservations made by a user'''
+        page_token = None
+        evt_list = []
+        while True:
+            events = self.service.events().list(
+                calendarId='primary', pageToken=page_token).execute()
+            for event in events['items']:
+                desc = event['description'].replace("'", "\"")
+                d = json.loads(desc)
+                '''The start time is checked at both the places to know if the event was started between the stime and etime'''
+                if(d['userid'] == str(userId)):
                     evt_list.append(event['id'])
             page_token = events.get('nextPageToken')
             if not page_token:
