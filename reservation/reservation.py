@@ -31,15 +31,17 @@ Usage:
     reservation [-i] rm (LABELS|IDS)
     reservation [-i] delete (LABELS|IDS)     
     reservation reschedule --reservation=ID --file=FILE
+    reservation duration --reservation=ID
+    reservation id (LABELS|IDS)    
     
 Arguments:
     ID        the unique ID of the reservation
     
 Options:
-    --label=LABEL  the label pf the reservation
+    LABEL  the label pf the reservation
     -f FILE, --file=FILE  file to be specified
-    --reservation_id=RESERVATION_ID                RESERVATION_ID
-    --hosts=HOSTS        SERVER NUMBERS
+    --reservation=RESERVATION_ID                RESERVATION_ID
+    HOSTS        SERVER NUMBERS
     --user_id=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
     -i           interactive mode adds a yes/no 
@@ -81,7 +83,9 @@ import dateutil.tz as dtz
 import pytz
 import datetime as dt
 import collections
-from datetime import date
+from datetime import date, datetime
+from dateutil.tz import gettz
+from json.decoder import JSONDecoder
 
 def not_implemented():
     print "ERROR: not yet implemented"
@@ -104,7 +108,7 @@ def rain_command(arguments):
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
-
+    
     elif arguments["--version"]:
         print "version 1.0"
         
@@ -139,29 +143,31 @@ def rain_command(arguments):
 
             print "add file"
             try:
-                with open(arguments["--file"]) as f:
+                with open(os.path.join(sys.path[0], arguments["--file"])) as f:
                     reader = csv.reader(f)
                     for row in reader:
                         print row
-                        '''with open(arguments["--file"]) as json_file:
-                    json_data = json.load(json_file)
-                    for i in xrange(len(json_data['events'])):
-                        build_JSON(json_data['events']['event'+str(i)])'''
-                    #json_data  = build_JSON(json_data)
-                    #reservation.add(json_data)
+                        (time_start, time_end) = parse_time_interval(row[0],
+                                                         row[1])
+                        time_start = addSeparatorInTime(time_start)
+                        time_end = addSeparatorInTime(time_end)
+                        json_data = build_JSON(time_start, time_end, row[2], row[3])
+                        json_decoded = json.loads(json_data)
+                        reservation.add(json_decoded)
             except Exception, e:
                 print e
-            #print reservation.get_all()
+                
         elif arguments["add"]:
             '''Issue in docopt getting label and hosts'''
             print "add"
+            
             (time_start, time_end) = parse_time_interval(arguments["--start"],
                                                          arguments["--end"])
-            json_data = build_JSON(time_start, time_end, arguments['--label'], arguments['--hosts'])
-            
-            print "From:", time_start
-            print "To  :", time_end
-            reservation.add(json_data)
+            time_start = addSeparatorInTime(time_start)
+            time_end = addSeparatorInTime(time_end)
+            json_data = build_JSON(time_start, time_end, arguments['LABEL'], arguments['HOSTS'])
+            json_decoded = json.loads(json_data)
+            reservation.add(json_decoded)
         elif arguments["list"]:
 
             print "list"
@@ -175,25 +181,25 @@ def rain_command(arguments):
 
             print "id"
             
-        elif arguments["remove_all"]:
+        elif arguments["remove"] and arguments["--all"]:
             print "Remove all reservations from calendar"
             reservation.remove_all()
             
         elif arguments["remove"]:
             print "Removed the reservation from calendar"
-            reservation.remove(arguments["--reservation_id"])
+            reservation.remove(arguments["--reservation"])
             
-        elif arguments["get_from_id"]:
+        elif arguments["get"] and arguments["--reservation"]:
             print "Reservation object from calendar by id"
-            print reservation.get_from_id(arguments["--reservation_id"])
+            print reservation.get_from_id(arguments["--reservation"])
             
-        elif arguments["get_from_label"]:
+        elif arguments["get"] and arguments["--label"]:
             print "Reservation object from calendar by label"
             print reservation.get_from_label(arguments["--label"])
             
-        elif arguments["get_by_user"]:
+        elif arguments["get"] and arguments["--user"]:
             print "Reservation object from calendar by user"
-            print reservation.get_by_user(arguments["--user_id"])
+            print reservation.get_by_user(arguments["--user"])
             
         elif arguments["list_by_project"]:
             print "Reservation object from calendar by project"
@@ -206,10 +212,12 @@ def rain_command(arguments):
                 print value
                 print "************************************************************"
             
-        elif arguments["get_all"]:
+        elif arguments["get"] and arguments["--all"]:
 
             print "Get all reservations from calendar"
             list = reservation.get_all()
+            with open('data.json', 'w') as outfile:
+                json.dump(list, outfile)
             #pprint(list)
             for value in list:
                 for key, value in value.iteritems():
@@ -254,6 +262,9 @@ def rain_command(arguments):
                         print "keeping %s" % label
             not_implemented()
 
+def addSeparatorInTime(time):
+    return time.replace(' ', 'T')
+    
 
 def get_service_object():
     '''Get calendar object'''
@@ -283,11 +294,11 @@ def build_JSON(sTime, eTime, label, hosts):
                                     },
                                     "start":{
                                         "dateTime": sTime,
-                                        "timeZone": get_localzone()
+                                        "timeZone": "America/New_York"
                                     },
                                     "end":{
                                         "dateTime": eTime,
-                                        "timeZone": get_localzone()
+                                        "timeZone": "America/New_York"
                                     }
     })    
     return jsonData
