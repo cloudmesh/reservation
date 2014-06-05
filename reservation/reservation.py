@@ -79,7 +79,6 @@ import httplib2
 import json
 from json import JSONEncoder
 import csv
-from apiclient import discovery
 from oauth2client import file
 
 import dateutil.tz as dtz
