@@ -2,17 +2,24 @@
 """
 Usage:
     reservation -h | --help | --rst
-    reservation login
     reservation --version
+    reservation login
+    reservation admin add [--start=TIME_START]
+                          [--end=TIME_END]
+                          [--user=ID]
+                          LABEL
+                          HOSTS
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
                     LABEL
                     HOSTS
     reservation add --file=FILE
-    reservation remove --reservation=RESERVATION_ID
+    reservation remove --user=ID    
+    reservation remove --reservation=ID
     reservation remove --all
     reservation get [--all]
     reservation get --label=LABEL
+<<<<<<< HEAD
     reservation get --user=USER_ID
     reservation get --reservation=RESERVATION_ID
     reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
@@ -20,6 +27,21 @@ Usage:
     reservation list --proj_id=PROJ_ID
     reservation list --user=USER_ID
     reservation list --user=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
+=======
+    reservation get --user=ID
+    reservation get --reservation=ID    
+    reservation list [LABEL]
+                     [--user_id=USER_ID]
+                     [--project_id=PROJ_ID]
+                     [--start=TIME_START]
+                     [--end=TIME_END]
+                     [--format=FORMAT]
+    reservation id (LABELS|IDS)
+    reservation [-i] rm (LABELS|IDS)
+    reservation [-i] delete (LABELS|IDS)     
+    reservation reschedule --reservation=ID --file=FILE
+    reservation duration --reservation=ID
+>>>>>>> ae91caf6f6816147726c3513d7bfafa3535d5293
     reservation id (LABELS|IDS)    
     
 Arguments:

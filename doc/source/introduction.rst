@@ -1,8 +1,6 @@
 Cloudmesh Reservation
 ======================================================================
 
-This is a project under development.
-
 Goal: Develop a reservation system for cloud virtual machines.
 
 Design Features
@@ -27,6 +25,9 @@ This documentation is located at:
 
 * http://cloudmesh.futuregrid.org/reservation
 
+Issues are located at:
+
+* https://github.com/cloudmesh/reservation/issues
 
 User calendar based scheduling of VMs
 ----------------------------------------------------------------------
