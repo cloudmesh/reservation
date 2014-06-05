@@ -17,7 +17,9 @@ def login_command(argv=None):
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
         parents=[tools.argparser])
-    CLIENT_SECRETS = config_file('/client_secrets.json')
+    #CLIENT_SECRETS = config_file('/client_secrets.json')
+    CLIENT_SECRETS = config_file('/reservation_client_secrets.json')
+    print ">>>>", CLIENT_SECRETS
     FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
       scope=[
           'https://www.googleapis.com/auth/calendar',
