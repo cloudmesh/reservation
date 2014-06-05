@@ -6,7 +6,6 @@ from cloudmesh_install import config_file
 import argparse
 import sys  
 import httplib2
-from apiclient import discovery
 from oauth2client import file
 from oauth2client import client
 from oauth2client import tools

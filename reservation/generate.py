@@ -1,7 +1,8 @@
 """
 Usage:
-    generate SERVERS RESERVATIONS DURATION
-
+    generate [--json|--table|--calendar] SERVERS RESERVATIONS DURATION
+    generate clean
+    
 Arguments:
     SERVERS       Number of servers for which we generate reservations
     RESERVATIONS  Number of reservations per server

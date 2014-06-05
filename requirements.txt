@@ -13,7 +13,6 @@ httplib2
 sphinxcontrib-exceltable
 pytimeparse
 timestring
-apiclient
 cookiecutter
 urllib3
 tzlocal

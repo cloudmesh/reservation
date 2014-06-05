@@ -9,37 +9,32 @@ Usage:
                           [--user=ID]
                           LABEL
                           HOSTS
+    reservation admin remove --user=USER_ID --reservation=RESERVATION_IDS
+    reservation admin add --file=FILE
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
                     LABEL
                     HOSTS
-    reservation add --file=FILE
-    reservation remove --user=ID    
-    reservation remove --reservation=ID
-    reservation remove --all
-    reservation get [--all]
-    reservation get --label=LABEL
-    reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
-    reservation duration --reservation_id=RESERVATION_ID
-    reservation list --proj_id=PROJ_ID
-    reservation list --user=USER_ID
-    reservation list --user=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
-    reservation get --user=ID
-    reservation get --reservation=ID    
-    reservation list [LABEL]
-                     [--user_id=USER_ID]
-                     [--project_id=PROJ_ID]
+    reservation add --file=FILE [--start=TIME_START]
+                                [--end=TIME_END]
+    reservation remove --reservation=IDS [--start=TIME_START]
+                                         [--end=TIME_END]
+    reservation remove --all [--start=TIME_START]
+                             [--end=TIME_END]
+    reservation list [--reservation=RESERVATION_IDS]   
+                     [--project=PROJECT_IDS]
+                     [--label=LABELS]
+                     [--user=USER_IDS]
+                     [--format=FORMAT]
                      [--start=TIME_START]
                      [--end=TIME_END]
-                     [--format=FORMAT]
-    reservation id (LABELS|IDS)
-    reservation [-i] rm (LABELS|IDS)
-    reservation [-i] delete (LABELS|IDS)     
+                     [--fileds=FIELDS]
     reservation reschedule --reservation=ID --file=FILE
-    reservation duration --reservation=ID
-    reservation id (LABELS|IDS)
-    reservation find (-n RESOURCES)
-    		     [--start=TIME_START]
+    reservation find -n RESOURCES -d DURATION
+    		         [--start=TIME_START]
+                     [--end=TIME_END]     
+    reservation find -s SERVERS -d DURATION
+    		         [--start=TIME_START]
                      [--end=TIME_END]     
     
 Arguments:
@@ -61,7 +56,7 @@ Options:
                            can be specified if the + sign is the first sign.
                            The duration will than be added to
                            the start time. [default: +1d]
-    --format=FORMAT        Format of the output json, cfg. [default:json]
+    --format=FORMAT        Format of the output table, json, cfg. [default: table]
 """
 
 from cloudmesh_install import config_file
