@@ -9,6 +9,7 @@ requests
 sphinx
 sphinx_bootstrap_theme
 google-api-python-client
+apiclient
 httplib2
 sphinxcontrib-exceltable
 pytimeparse
