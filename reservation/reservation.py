@@ -1,31 +1,36 @@
 #! /usr/bin/env python
 """
 Usage:
-    reservation -h | --help
-    reservation login
-    reservation --rst
+    reservation -h | --help | --rst
     reservation --version
+    reservation login
+    reservation admin add [--start=TIME_START]
+                          [--end=TIME_END]
+                          [--user=ID]
+                          LABEL
+                          HOSTS
     reservation add [--start=TIME_START]
                     [--end=TIME_END]
-                    --label=LABEL
-                    --hosts=HOSTS
+                    LABEL
+                    HOSTS
     reservation add --file=FILE
-    reservation remove --reservation_id=RESERVATION_ID
-    reservation remove_all
-    reservation get_all
-    reservation get_from_label --label=LABEL
-    reservation get_by_user --user_id=USER_ID
-    reservation reschedule --reservation_id=RESERVATION_ID --file=FILE
-    reservation get_from_id --reservation_id=RESERVATION_ID
-    reservation duration --reservation_id=RESERVATION_ID
-    reservation list_by_project --proj_id=PROJ_ID
-    reservation list_by_user_and_project --user_id=USER_ID --proj_id=PROJ_ID --start=TIME_START --end=TIME_END
-    reservation list [--start=TIME_START]
+    reservation remove --user=ID    
+    reservation remove --reservation=ID
+    reservation remove --all
+    reservation get [--all]
+    reservation get --label=LABEL
+    reservation get --user=ID
+    reservation get --reservation=ID    
+    reservation list [LABEL]
+                     [--user_id=USER_ID]
+                     [--project_id=PROJ_ID]
+                     [--start=TIME_START]
                      [--end=TIME_END]
                      [--format=FORMAT]
     reservation id (LABELS|IDS)
     reservation [-i] rm (LABELS|IDS)
     reservation [-i] delete (LABELS|IDS)     
+    reservation reschedule --reservation=ID --file=FILE
     
 Arguments:
     ID        the unique ID of the reservation
