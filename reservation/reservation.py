@@ -113,7 +113,7 @@ def rain_command(arguments):
             print "  ", line
     
     elif arguments["--version"]:
-        print "version 1.0"
+        print reservation.__version__
         
     elif arguments["login"]:
         try:
