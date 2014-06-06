@@ -1,3 +1,9 @@
+#
+# start mongo with
+#
+#    mongod --noauth --dbpath . --port 27777
+#
+
 from mongoengine import *
 import datetime
 
