@@ -1,0 +1,19 @@
+{
+	"summary": "reservation_number",
+	"description":{
+		"hosts": "xxx-xxx",
+		"kind":"vm-server",
+		"project":"project_name",
+		"userid":"user_id",
+		"displayName":"user_display_name",
+		"email":"user@email.id"
+	},
+	"start":{
+		"dateTime": "yyyy-mm-ddThh:mm:ss.000",
+		"timeZone": "America/New_York"
+	},
+	"end":{
+		"dateTime": "yyyy-mm-ddThh:mm:ss.000",
+		"timeZone": "America/New_York"
+	}
+}

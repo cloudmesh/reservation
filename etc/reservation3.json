@@ -1,0 +1,19 @@
+{
+	"summary": "reservation3",
+	"description":{
+		"hosts": "100-103",
+		"kind":"vm-server",
+		"project":"xyz",
+		"userid":"1002", 
+		"displayName":"User2", 
+		"email":"user2@indiana.edu"
+	},
+	"start":{
+		"dateTime": "2014-06-05T14:50:00.000",
+		"timeZone": "America/New_York"
+	},
+	"end":{
+		"dateTime": "2014-06-05T15:51:00.000",
+		"timeZone": "America/New_York"
+	}    
+}
