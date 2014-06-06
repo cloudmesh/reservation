@@ -13,17 +13,18 @@ class Reservation(Document):
     cm_id = StringField()
     label = StringField()
     summmary = StringField()
-    hosts = StringField()
+    host = StringField()
     user = StringField()
     project = StringField()
     start_time = DateTimeField()
     end_time = DateTimeField()
+    date_modified = DateTimeField(default=datetime.datetime.now)
 
     _order = [
         "label",
         "cm_id",
         "summmary",
-        "hosts",
+        "host",
         "user",
         "project",
         "start_time",
@@ -35,7 +36,7 @@ class Reservation(Document):
         print d
         r = ""
         for key in self._order:
-            r = r + key + ": " + d[key]
+            r = r + key + ": " + d[key] + " "
         return r
 
     
@@ -43,7 +44,7 @@ class Reservation(Document):
         d = {"label": self.label,
              "cm_id": self.cm_id,
              "summmary": self.summmary,
-             "hosts": self.hosts,
+             "host": self.host,
              "user": self.user,
              "project": self.project,
              "start_time": str(self.start_time),
@@ -56,7 +57,7 @@ db = connect('reservation', port=27777)
 reservation = Reservation(label="res-1",
                           cm_id="reservation-res-1",
                           summmary="Simple reservation",
-                          hosts="i[001-010]",
+                          host="i001",
                           user="gregor",
                           project="fg82",
                           start_time=datetime.datetime(
@@ -68,3 +69,10 @@ reservations = Reservation.objects(user="gregor")
 
 for reseravtion in reservations:
     print reservation
+
+print 70 * "="
+
+reservations = Reservation.objects(start_time__gte=datetime.datetime(2014, 8, 1, 01, 00, 00))
+for reseravtion in reservations:
+    print reservation
+

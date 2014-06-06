@@ -22,7 +22,7 @@ class ReservationClient(object):
         '''
         rsv = Researvation(reservation)
                 
-        if(check_overlap(self.service, reservation) == True):
+        if(check_overlap(self.service, reservation)):
             print "ERROR: Reservations overlap: cannot schedule at this time"
             return False
             # bug rase exception
@@ -33,7 +33,7 @@ class ReservationClient(object):
 
     def remove_all(self):
         '''Removes all the reservations from the calendar'''
-        for reservation in Reervations.objects:
+        for reservation in Rservation.objects:
             reservation.delete()
 
     def remove(self, id):
@@ -98,8 +98,9 @@ class ReservationClient(object):
 def check_overlap(reservation):
 
     t_start = reservation.start_time
-    t_end = reservation.end_tome
-    reservations = Reservatione(start_time __gt__ t_start, end_time _lt_ t_end 
+    t_end = reservation.end_time
+    reservations = Reservation(start_time __gt__ t_start, end_time _lt_ t_end )
+    
     return reservations.count() > 0
 
 def reschedule(self, cm_id, d):
