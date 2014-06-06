@@ -98,7 +98,7 @@ def not_implemented():
     local_tz = get_localzone()
     print local_tz
 
-def rain_command(arguments):
+def reservation_command(arguments):
     if arguments["--rst"]:
 
         print 70*"*"
@@ -325,6 +325,6 @@ if __name__ == '__main__':
     print(sys.argv)
     arguments = docopt(__doc__)
 
-    rain_command(arguments)
+    reservation_command(arguments)
     
 
