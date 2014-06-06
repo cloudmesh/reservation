@@ -1,6 +1,7 @@
 class Reservation:
 
     cm_id = TextField()
+    name = TextField()    
     label = TextField()
     summmary = TextField()
     hosts = TextField()
@@ -10,6 +11,7 @@ class Reservation:
     end_time = DateTimeField()
 
     _order = [
+        "name", 
         "label",
         "cm_id",
         "summmary",
@@ -28,7 +30,8 @@ class Reservation:
         return r
 
     def to_json(self):
-        d = {"label:", label,
+        d = {"name": name,
+             "label:", label,
              "cm_id:", cm_id,
              "summmary:", summmary,
              "hosts:", hosts,
