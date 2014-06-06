@@ -34,8 +34,7 @@ class ReservationClient(object):
     def remove_all(self):
         '''Removes all the reservations from the calendar'''
         for reservation in Reervations.objects:
-            print "deleteing", reservation.name
-            
+            reservation.delete()
 
     def remove(self, id):
         '''Removes a specific reservation from the calendar.
