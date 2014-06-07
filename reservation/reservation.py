@@ -332,7 +332,6 @@ def build_JSON(sTime, eTime, label, hosts):
 
 
 if __name__ == '__main__':
-    print(sys.argv)
     arguments = docopt(__doc__)
 
     reservation_command(arguments)
