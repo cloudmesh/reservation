@@ -12,6 +12,7 @@ google-api-python-client
 apiclient
 httplib2
 sphinxcontrib-exceltable
+sphinxcontrib-httpdomain
 pytimeparse
 timestring
 cookiecutter

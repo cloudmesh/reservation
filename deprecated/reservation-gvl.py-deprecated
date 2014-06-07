@@ -1,0 +1,302 @@
+#! /usr/bin/env python
+"""
+Usage:
+    reservation -h | --help | --rst
+    reservation --version
+    reservation login
+    reservation admin add [--start=TIME_START]
+                          [--end=TIME_END]
+                          [--user=ID]
+                          LABEL
+                          HOSTS
+    reservation add [--start=TIME_START]
+                    [--end=TIME_END]
+                    LABEL
+                    HOSTS
+    reservation add --file=FILE
+    reservation remove --user=ID    
+    reservation remove --reservation=ID
+    reservation remove --all
+    reservation get [--all]
+    reservation get --label=LABEL
+    reservation get --user=ID
+    reservation get --reservation=ID    
+    reservation list [LABEL]
+                     [--user_id=USER_ID]
+                     [--project_id=PROJ_ID]
+                     [--start=TIME_START]
+                     [--end=TIME_END]
+                     [--format=FORMAT]
+    reservation id (LABELS|IDS)
+    reservation [-i] rm (LABELS|IDS)
+    reservation [-i] delete (LABELS|IDS)     
+    reservation reschedule --reservation=ID --file=FILE
+    
+Arguments:
+    ID        the unique ID of the reservation
+    
+Options:
+    --label=LABEL  the label pf the reservation
+    -f FILE, --file=FILE  file to be specified
+    --reservation_id=RESERVATION_ID                RESERVATION_ID
+    --hosts=HOSTS        SERVER NUMBERS
+    --user_id=USER_ID                USER_ID
+    --proj_id=PROJ_ID                PROJ_ID
+    -i           interactive mode adds a yes/no 
+                 question for each host specified
+    --start=TIME_START     Start time of the reservation, in 
+                           YYYY/MM/DD HH:MM:SS format. [default: current_time]
+    --end=TIME_END         End time of the reservation, in 
+                           YYYY/MM/DD HH:MM:SS format. In addition a duration
+                           can be specified if the + sign is the first sign.
+                           The duration will than be added to
+                           the start time. [default: +1d]
+    --format=FORMAT        Format of the output json, cfg. [default:json]
+"""
+
+from cloudmesh_install import config_file
+from cloudmesh.config.ConfigDict import ConfigDict
+from docopt import docopt
+import hostlist
+from tzlocal import get_localzone
+
+from reservation_client import ReservationClient
+
+
+# from timestring import Range
+# from timestring import Date
+
+from cloudmesh_common.tables import parse_time_interval
+from cloudmesh_common.util import yn_choice
+import os
+import sys  
+import httplib2
+import json
+from json import JSONEncoder
+import csv
+from apiclient import discovery
+from oauth2client import file
+
+import dateutil.tz as dtz
+import pytz
+import datetime as dt
+import collections
+from datetime import date
+
+def not_implemented():
+    print "ERROR: not yet implemented"
+    username = ConfigDict(filename="~/.futuregrid/cloudmesh.yaml")["cloudmesh"]["profile"]["firstname"]
+    print username
+    # get local timezone
+    local_tz = get_localzone()
+    print local_tz
+
+def rain_command(arguments):
+    if arguments["--rst"]:
+
+        print 70*"*"
+        print "Manual Pages"
+        print 70*"*"
+        print
+        print "reservation"        
+        print 70*"="
+        print "\n::\n"        
+        lines = __doc__.split("\n")
+        for line in lines:
+            print "  ", line
+
+    elif arguments["--version"]:
+        print "version 1.0"
+        
+    elif arguments["login"]:
+        try:
+            os.system('cm-reservation-login')
+        except Exception, e:
+            print(
+                "Could not find the command cm-reservation-login. Make sure the cloudmesh code is properly installed.")
+    else:
+        for list in ["HOSTS", "IDS"]:
+            try:
+                expanded_list = hostlist.expand_hostlist(arguments[list])
+                arguments[list]=expanded_list
+            except:
+                pass
+
+        #print(arguments)
+
+        try:
+            reservation = get_service_object()
+
+        except Exception, e:
+            print "ERROR: could not connect to the calendar service"
+
+            print
+            print e
+            print
+            sys.exit(1)
+            
+        if arguments["add"] and arguments["--file"] is not None:
+
+            print "add file"
+            try:
+                with open(arguments["--file"]) as f:
+                    reader = csv.reader(f)
+                    for row in reader:
+                        print row
+                        '''with open(arguments["--file"]) as json_file:
+                    json_data = json.load(json_file)
+                    for i in xrange(len(json_data['events'])):
+                        build_JSON(json_data['events']['event'+str(i)])'''
+                    #json_data  = build_JSON(json_data)
+                    #reservation.add(json_data)
+            except Exception, e:
+                print e
+            #print reservation.get_all()
+        elif arguments["add"]:
+            '''Issue in docopt getting label and hosts'''
+            print "add"
+            (time_start, time_end) = parse_time_interval(arguments["--start"],
+                                                         arguments["--end"])
+            json_data = build_JSON(time_start, time_end, arguments['--label'], arguments['--hosts'])
+            
+            print "From:", time_start
+            print "To  :", time_end
+            reservation.add(json_data)
+        elif arguments["list"]:
+
+            print "list"
+
+            (time_start, time_end) = parse_time_interval(arguments["--start"],
+                                                         arguments["--end"])
+            print "From:", time_start
+            print "To  :", time_end
+
+        elif arguments["id"]:
+
+            print "id"
+            
+        elif arguments["remove_all"]:
+            print "Remove all reservations from calendar"
+            reservation.remove_all()
+            
+        elif arguments["remove"]:
+            print "Removed the reservation from calendar"
+            reservation.remove(arguments["--reservation_id"])
+            
+        elif arguments["get_from_id"]:
+            print "Reservation object from calendar by id"
+            print reservation.get_from_id(arguments["--reservation_id"])
+            
+        elif arguments["get_from_label"]:
+            print "Reservation object from calendar by label"
+            print reservation.get_from_label(arguments["--label"])
+            
+        elif arguments["get_by_user"]:
+            print "Reservation object from calendar by user"
+            print reservation.get_by_user(arguments["--user_id"])
+            
+        elif arguments["list_by_project"]:
+            print "Reservation object from calendar by project"
+            print reservation.list_by_project(arguments["--proj_id"])
+            
+        elif arguments["list_by_user_and_project"]:
+            print "Lists all the users reservations made in a project from a start-time to a end time"
+            list = reservation.list_by_user_and_project(arguments["--user_id"], arguments["--proj_id"], arguments["--start"], arguments["--end"])
+            for value in list:
+                print value
+                print "************************************************************"
+            
+        elif arguments["get_all"]:
+
+            print "Get all reservations from calendar"
+            list = reservation.get_all()
+            #pprint(list)
+            for value in list:
+                for key, value in value.iteritems():
+                    if isinstance(value, dict):
+                        for key, value in value.iteritems():
+                            print '{0:15} ==> {1:10}'.format(key, value)
+                            #print key,'\t', value
+                    else:
+                        print '{0:15} ==> {1:10}'.format(key, value)
+                        #print key,'\t\t', value
+                            #print value
+                print "************************************************************"
+
+        elif arguments["reschedule"]:
+            print "Reschedule reservation"
+            try:
+                with open(arguments["--file"]) as json_file:
+                    json_data = json.load(json_file)
+                    reservation.reschedule(arguments["--reservation_id"], json_data)
+            except:
+                print "File doesn't exist"
+                
+        elif arguments["duration"]:
+            print "Shows the duration of the reservation"
+            print reservation.duration(arguments["--reservation_id"])
+            
+
+        elif arguments["delete"] or arguments["rm"] :
+            """rain [-i] delete LABELS"""
+            """rain [-i] rm LABELS"""            
+
+            interactive = arguments["-i"]
+
+            print "delete", interactive
+
+            for label in arguments["LABELS"]:
+                if interactive:
+                    keep = yn_choice("Do you want to delete the reservation <%s>?" % label)
+                    if keep:
+                        print "delete %s" % label
+                    else:
+                        print "keeping %s" % label
+            not_implemented()
+
+
+def get_service_object():
+    '''Get calendar object'''
+    storage = file.Storage(config_file('/cloudmesh_reservation.dat'))
+    credentials = storage.get()
+    # Create an httplib2.Http object to handle our HTTP requests and authorize it
+    # with our good Credentials.
+    http = httplib2.Http()
+    http = credentials.authorize(http)
+    
+    # Construct the service object for the interacting with the Calendar API.
+    service = discovery.build('calendar', 'v3', http=http)
+    reservation = ReservationClient(service)
+    return reservation
+
+def build_JSON(sTime, eTime, label, hosts):
+    configFile = ConfigDict(filename="~/.futuregrid/me.yaml")
+    jsonData = JSONEncoder().encode({
+                                    "summary": label,
+                                    "description":{
+                                        "hosts": hosts,
+                                        "kind":"vm-server",
+                                        "project":configFile["projects"]["default"],
+                                        "userid":configFile["profile"]["id"], 
+                                        "displayName":configFile["profile"]["firstname"], 
+                                        "email":configFile["profile"]["email"]
+                                    },
+                                    "start":{
+                                        "dateTime": sTime,
+                                        "timeZone": get_localzone()
+                                    },
+                                    "end":{
+                                        "dateTime": eTime,
+                                        "timeZone": get_localzone()
+                                    }
+    })    
+    return jsonData
+    
+    
+if __name__ == '__main__':
+    print(sys.argv)
+    arguments = docopt(__doc__)
+
+    rain_command(arguments)
+    
+
