@@ -61,8 +61,8 @@ to be implemented. This class has the following methods
 
 Some methods need to implemented as indicated above. The others have a default implementation.
 
-The code can be found in **scripts/scheduler/ip_scheduler.py** in the **reservation project** (`github link
-<https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/ip_scheduler.py>`_).
+The code can be found in **scripts/scheduler/ip_scheduler.py** in the
+**reservation project** (`github link <https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/ip_scheduler.py>`_).
 
 Here the scheduler is implemented
 as a random node selector based on IP and hostname. This scheduler code must be placed in

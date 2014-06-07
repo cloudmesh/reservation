@@ -3,17 +3,17 @@ import json
 from mongoengine import connect
 from model import Reservation
 
+
 class ReservationClient(object):
 
     _collection_name = "cm_reservation"
     _db = None
-    
+
     def __init__(self, collection=None):
         if collection:
             self._db = connection(collection)
         else:
             self._db = connection(self._collection_name)
-            
 
     def add(self, reservation):
         '''Adds a reservation
@@ -21,7 +21,7 @@ class ReservationClient(object):
         :param reservation: a dict containing the reservation
         '''
         rsv = Researvation(reservation)
-                
+
         if(check_overlap(self.service, reservation)):
             print "ERROR: Reservations overlap: cannot schedule at this time"
             return False
@@ -29,7 +29,6 @@ class ReservationClient(object):
         else:
             rsv.save()
             return True
-
 
     def remove_all(self):
         '''Removes all the reservations from the calendar'''
@@ -42,7 +41,7 @@ class ReservationClient(object):
         :param id: the cm_id of the reservation 
         '''
         # find the reservation
-        # delete it 
+        # delete it
 
     def find_id(self, id):
         '''displays the reservation object
@@ -65,7 +64,6 @@ class ReservationClient(object):
         '''
         return Reservation.objects
 
-
     def find_label(self, label):
         '''Finds all reservations with a given label
 
@@ -73,8 +71,6 @@ class ReservationClient(object):
         '''
         reservations = Reservation.objects(label=label)
         return reservations
-
-
 
     def list_by_user_and_project(self, user, project, start_time, end_time):
         '''Lists all the users reservations made in a project from a
@@ -86,7 +82,6 @@ class ReservationClient(object):
                                  end_time__lt__ end_time)
         """
         return reservations
-
 
     def duration(self, cm_id):
         '''Shows the duration of the reservation'''
@@ -101,17 +96,18 @@ def check_overlap(reservation):
 
     t_start = reservation.start_time
     t_end = reservation.end_time
-    # reservations = Reservation(start_time __gt__ t_start, end_time _lt_ t_end )
-    
+    # reservations = Reservation(start_time __gt__ t_start, end_time _lt_
+    # t_end )
+
     return reservations.count() > 0
 
+
 def reschedule(self, cm_id, d):
-        '''Used to update or modify an old reservation.
-        Requires old reservation id and new reservation
-        object that will replace the old reservation'''
+    '''Used to update or modify an old reservation.
+    Requires old reservation id and new reservation
+    object that will replace the old reservation'''
 
-        reservation = cself.find(cm_id)
-        d["cm_id"] = cm_id
+    reservation = cself.find(cm_id)
+    d["cm_id"] = cm_id
 
-        Reservation.update(d)
-        
+    Reservation.update(d)

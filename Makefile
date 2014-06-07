@@ -104,6 +104,7 @@ clean:
 	rm -rf build dist *.egg-info *~ #*
 	cd doc; make clean
 	rm -rf *.egg-info
+	rm -rf doc/source/modules/*
 
 #############################################################################
 # SETUP SPHINX BUILD ENVIRONMENT

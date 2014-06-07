@@ -39,7 +39,6 @@ class Reservation(Document):
             r = r + key + ": " + d[key] + " "
         return r
 
-    
     def to_json(self):
         d = {"label": self.label,
              "cm_id": self.cm_id,
@@ -50,4 +49,3 @@ class Reservation(Document):
              "start_time": str(self.start_time),
              "end_time": str(self.end_time)}
         return d
-

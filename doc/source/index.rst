@@ -25,6 +25,8 @@ Cloudmesh Reservation
    man/man
    rest
 
+   modules/modules
+
 **Indices and Lists**
 
 * :ref:`genindex`

@@ -56,6 +56,7 @@ from model import Reservation
 from pytimeparse.timeparse import timeparse
 import datetime
 
+
 def generate(arguments):
 
     if arguments['clean']:
@@ -68,17 +69,17 @@ def generate(arguments):
         lines = __doc__.split("\n")
         for line in lines:
             print "  ", line
-        
+
     else:
 
         reservations = int(arguments["RESERVATIONS"])
-        duration = int( arguments["DURATION"])
+        duration = int(arguments["DURATION"])
         server_string = arguments["SERVERS"]
         servers = hostlist.expand_hostlist(server_string)
-	if first_time is "now":
-	   first_time = datetime.now()
-	else:
-	   first_time = timeparse(arguments("START"))
+        if first_time is "now":
+            first_time = datetime.now()
+        else:
+            first_time = timeparse(arguments("START"))
 
         print 70 * "="
         print "Servers:     ", servers
@@ -91,7 +92,7 @@ def generate(arguments):
         t_end = {}
         for s in xrange(0, len(servers)):
             t_start[s] = []
-            t_end[s] = []        
+            t_end[s] = []
             t_start[s].append(randint(0, duration))
             t_end[s].append(t_start[s][0] + randint(0, duration))
 
@@ -104,23 +105,23 @@ def generate(arguments):
             for n in range(0, reservations):
                 print s, n, t_start[s][n], t_end[s][n]
 
-        pprint ("start: " + str(t_start))
-        pprint ("end  : " + str(t_end))    
+        pprint("start: " + str(t_start))
+        pprint("end  : " + str(t_end))
 
         for s in range(0, len(servers)):
             for n in range(0, reservations):
                 cm_id = "cm_reservation-" + str(s) + "-" + str(n)
                 print "server={0}, cm_id={1}, start_time={2}, end_time={3}" \
-                  .format(servers[s], cm_id, str(t_start[s][n]), str(t_end[s][n]))
+                    .format(servers[s], cm_id, str(t_start[s][n]), str(t_end[s][n]))
                 r = Reservation(label="exp1",
                                 cm_id=cm_id,
-                                summary = "test1",
+                                summary="test1",
                                 host=servers[s],
                                 user="gregor",
                                 project="fg82",
-                                start_time=str(t_start[s][n]), 
+                                start_time=str(t_start[s][n]),
                                 end_time=str(t_end[s][n])
-                    )
+                                )
 
         print 70 * "A"
         reservations = Reservation.objects(user="gregor")
