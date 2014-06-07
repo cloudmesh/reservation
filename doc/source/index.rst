@@ -25,13 +25,17 @@ Cloudmesh Reservation
    man/man
    rest
 
+
+
+.. comment::
+
    modules/modules
 
-**Indices and Lists**
+   **Indices and Lists**
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
 
 
 OpenStack Cloud in Vagrant

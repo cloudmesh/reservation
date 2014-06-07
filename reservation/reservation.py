@@ -21,7 +21,7 @@ Usage:
                                          [--end=TIME_END]
     reservation remove --all [--start=TIME_START]
                              [--end=TIME_END]
-    reservation list [--reservation=RESERVATION_IDS]   
+    reservation list [--reservation=RESERVATION_IDS]
                      [--project=PROJECT_IDS]
                      [--label=LABELS]
                      [--user=USER_IDS]
@@ -32,14 +32,14 @@ Usage:
     reservation reschedule --reservation=ID --file=FILE
     reservation find -n RESOURCES -d DURATION
     		         [--start=TIME_START]
-                     [--end=TIME_END]     
+                     [--end=TIME_END]
     reservation find -s SERVERS -d DURATION
     		         [--start=TIME_START]
-                     [--end=TIME_END]     
-    
+                     [--end=TIME_END]<
+
 Arguments:
     ID        the unique ID of the reservation
-    
+
 Options:
     LABEL  the label pf the reservation
     -f FILE, --file=FILE  file to be specified
@@ -47,60 +47,37 @@ Options:
     HOSTS        SERVER NUMBERS
     --user=USER_ID                USER_ID
     --proj_id=PROJ_ID                PROJ_ID
-    -i           interactive mode adds a yes/no 
+    -i           interactive mode adds a yes/no
                  question for each host specified
-    --start=TIME_START     Start time of the reservation, in 
+    --start=TIME_START     Start time of the reservation, in
                            YYYY/MM/DD HH:MM:SS format. [default: current_time]
-    --end=TIME_END         End time of the reservation, in 
+    --end=TIME_END         End time of the reservation, in
                            YYYY/MM/DD HH:MM:SS format. In addition a duration
                            can be specified if the + sign is the first sign.
                            The duration will than be added to
                            the start time. [default: +1d]
-    --format=FORMAT        Format of the output table, json, cfg. [default: table]
+    --format=FORMAT        Format of the output table, json, cfg.
+                           [default: table]
 """
-
-from cloudmesh_install import config_file
 from cloudmesh.config.ConfigDict import ConfigDict
 from docopt import docopt
 import hostlist
 from tzlocal import get_localzone
-
-from reservation_client import ReservationClient
-
 
 # from timestring import Range
 # from timestring import Date
 
 from cloudmesh_common.tables import parse_time_interval
 from cloudmesh_common.util import yn_choice
-from cloudmesh_common.util import banner
 import os
 import sys
-import httplib2
 import json
 from json import JSONEncoder
 import csv
-from apiclient import discovery
-from oauth2client import file
-
-import dateutil.tz as dtz
-import pytz
-import datetime as dt
-import collections
-from datetime import date, datetime
-from dateutil.tz import gettz
-from json.decoder import JSONDecoder
 
 
 def not_implemented():
     print "ERROR: not yet implemented"
-    username = ConfigDict(
-        filename="~/.futuregrid/cloudmesh.yaml")["cloudmesh"]["profile"]["firstname"]
-    print username
-    # get local timezone
-    local_tz = get_localzone()
-    print local_tz
-
 
 def reservation_command(arguments):
     if arguments["--rst"]:
@@ -123,8 +100,8 @@ def reservation_command(arguments):
         try:
             os.system('cm-reservation-login')
         except Exception, e:
-            print(
-                "Could not find the command cm-reservation-login. Make sure the cloudmesh code is properly installed.")
+            print("Could not find the command cm-reservation-login. " + \
+                  "Make sure the cloudmesh code is properly installed.")
     else:
         for list in ["HOSTS", "IDS"]:
             try:
@@ -150,8 +127,8 @@ def reservation_command(arguments):
 
             print "add file"
             try:
-                with open(os.path.join(sys.path[0], arguments["--file"])) as f:
-                    reader = csv.reader(f)
+                with open(os.path.join(sys.path[0], arguments["--file"])) as file:
+                    reader = csv.reader(file)
                     for row in reader:
                         print row
                         (time_start, time_end) = parse_time_interval(row[0],
@@ -292,46 +269,31 @@ def addSeparatorInTime(time):
     return time.replace(' ', 'T')
 
 
-def get_service_object():
-    '''Get calendar object'''
-    storage = file.Storage(config_file('/cloudmesh_reservation.dat'))
-    credentials = storage.get()
-    # Create an httplib2.Http object to handle our HTTP requests and authorize it
-    # with our good Credentials.
-    http = httplib2.Http()
-    http = credentials.authorize(http)
-
-    # Construct the service object for the interacting with the Calendar API.
-    service = discovery.build('calendar', 'v3', http=http)
-    reservation = ReservationClient(service)
-    return reservation
-
-
-def build_JSON(sTime, eTime, label, hosts):
+def build_JSON(s_time, e_time, label, hosts):
     configFile = ConfigDict(filename="~/.futuregrid/me.yaml")
-    jsonData = JSONEncoder().encode({
-                                    "summary": label,
-                                    "description": {
-                                        "hosts": hosts,
-                                        "kind": "vm-server",
-                                        "project": configFile["projects"]["default"],
-                                        "userid": configFile["profile"]["id"],
-                                        "displayName": configFile["profile"]["firstname"],
-                                        "email": configFile["profile"]["email"]
-                                    },
-                                    "start": {
-                                        "dateTime": sTime,
-                                        "timeZone": "America/New_York"
-                                    },
-                                    "end": {
-                                        "dateTime": eTime,
-                                        "timeZone": "America/New_York"
-                                    }
-                                    })
+    jsonData = JSONEncoder().encode(
+        {
+            "summary": label,
+            "description": {
+                "hosts": hosts,
+                "kind": "vm-server",
+                "project": configFile["projects"]["default"],
+                "userid": configFile["profile"]["id"],
+                "displayName": configFile["profile"]["firstname"],
+                "email": configFile["profile"]["email"]
+            },
+            "start": {
+                "dateTime": s_time,
+                "timeZone": "America/New_York"
+            },
+            "end": {
+                "dateTime": e_time,
+                "timeZone": "America/New_York"
+            }
+        })
     return jsonData
 
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-
     reservation_command(arguments)
