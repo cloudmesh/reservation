@@ -41,6 +41,9 @@ Bugs:
     * list
     * the generation function does not yet have a start date
 
+See Also:
+    * https://pypi.python.org/pypi/pytimeparse/1.1.0
+
 """
 import sys
 from docopt import docopt
@@ -48,6 +51,8 @@ import hostlist
 from pprint import pprint
 from random import randint
 from model import Reservation
+from pytimeparse.timeparse import timeparse
+import datetime
 
 def generate(arguments):
 
@@ -62,11 +67,16 @@ def generate(arguments):
         duration = int( arguments["DURATION"])
         server_string = arguments["SERVERS"]
         servers = hostlist.expand_hostlist(server_string)
+	if first_time is "now":
+	   first_time = datetime.now()
+	else:
+	   first_time = timeparse(arguments("START"))
 
         print 70 * "="
-        print servers
-        print reservations
-        print duration
+        print "Servers:     ", servers
+        print "Reservations:", reservations
+        print "Duration:    ", duration
+        print "First date:  ", first_time
         print 70 * "="
 
         t_start = {}
