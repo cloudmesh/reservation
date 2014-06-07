@@ -11,7 +11,7 @@ class ReservationClient(object):
     def __init__(self, collection=None):
         if collection:
             self._db = connection(collection)
-        else
+        else:
             self._db = connection(self._collection_name)
             
 
@@ -79,10 +79,12 @@ class ReservationClient(object):
     def list_by_user_and_project(self, user, project, start_time, end_time):
         '''Lists all the users reservations made in a project from a
         start-time to a end time'''
+        """
         reservations = self.find(user=user,
                                  project=project,
-                                 start_time __gt__ start_time,
-                                 end_time __lt__ end_time)
+                                 start_time__gt__ start_time,
+                                 end_time__lt__ end_time)
+        """
         return reservations
 
 
@@ -99,7 +101,7 @@ def check_overlap(reservation):
 
     t_start = reservation.start_time
     t_end = reservation.end_time
-    reservations = Reservation(start_time __gt__ t_start, end_time _lt_ t_end )
+    # reservations = Reservation(start_time __gt__ t_start, end_time _lt_ t_end )
     
     return reservations.count() > 0
 
