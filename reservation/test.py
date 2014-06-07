@@ -3,13 +3,9 @@
 from model import Reservation
 import datetime
 from mongoengine import *
+from model import resrvation_connect
 
-try:
-    db = connect('reservation', port=27777)
-except Exception, e:
-    print "ERROR: could not establish a connection to mongo db"
-    print
-    print e
+db = reservation_connect()
 
 reservation = Reservation(label="res-1",
                           cm_id="reservation-res-1",

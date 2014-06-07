@@ -12,6 +12,12 @@ all:
 mongo:
 	bin/start.sh
 
+server:
+	python reservation/server.py
+
+test:
+	python reservation/test.py
+
 setup:
 	make -f Makefile setupbuild_ubuntu
 

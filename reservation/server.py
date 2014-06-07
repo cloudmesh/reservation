@@ -1,7 +1,26 @@
 #! /usr/bin/env python
-from flask import Flask
-app = Flask(__name__)
 
+
+from flask import Flask
+from flask import render_template
+from model import reservation_connect
+from model import Reservation
+
+db = reservation_connect()
+
+
+app = Flask(__name__)    
+app.debug = True
+
+
+@app.route('/')
+def home_page():
+    reservations = Reservation.objects()
+    for reservation in reservations:
+        print reservation
+    return render_template('index.html',
+                           order=Reservation._order,
+                           reservations=reservations)
 
 @app.route("/cm/v1.0/reservation/list")
 def route_reservation():
@@ -48,5 +67,4 @@ def route_reservation_add(label,resource,time_from,time_to):
     return "not implemented"
 
 
-if __name__ == "__main__":
-    app.run()
+app.run()

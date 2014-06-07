@@ -19,3 +19,4 @@ urllib3
 tzlocal
 pytz
 python-dateutil
+Flask-PyMongo

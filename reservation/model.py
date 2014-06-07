@@ -7,7 +7,15 @@
 from mongoengine import *
 import datetime
 
-
+def reservation_connect():
+    try:
+        db = connect('reservation', port=27777)
+        return db
+    except Exception, e:
+        print "ERROR: could not establish a connection to mongo db"
+        print
+        print e
+    
 class Reservation(Document):
 
     cm_id = StringField()

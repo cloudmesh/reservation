@@ -98,3 +98,27 @@ To clean the reservations (not yet implemented you can say)::
 
    ./reservation/generate.py clean
 
+Server
+----------------------------------------------------------------------
+
+A test server exists that interfaces via http routes to the backend
+system. To use it you need sto first start the mongo server in a
+terminal with the command describbed in the previous section::
+
+  make mongo
+
+Next you will need to start the server in a different terminal with::
+
+  make server
+
+Now the server and mongo db are started. we assume you have added some
+data with for example the test command in yet a different window::
+
+  make test
+
+Now you can open your web browser at::
+
+  http://127.0.0.1:5000
+
+To observe a list of reservations in table form 
+
