@@ -93,3 +93,28 @@ Download repository from github and setup sphinx for documentation::
  make sphinx
  make view
  
+Mongo
+----------------------------------------------------------------------
+
+To start the mongo db use the command
+
+::
+
+   make start
+
+This will start the db in ~/data. If the data directory is not
+existing, it will be created.
+
+
+To test the service, you can say::
+
+   ./reservation/test.py
+
+To generate some random schedules yo can use the gnerate command
+
+   use the include sphinx command to put the manual here
+
+To clean the reservations (not yet implemented you can say)::
+
+   ./reservation/generate.py clean
+

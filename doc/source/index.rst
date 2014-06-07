@@ -12,6 +12,25 @@ Cloudmesh Reservation for OpenStack
 
    If your name is missing please let us know and we will add it.
 
+Cloudmesh Reservation
+----------------------------------------------------------------------
+
+.. toctree::
+   :numbered:
+   :maxdepth: -1
+
+   introduction
+   deploy
+   manual
+   man/man
+   rest
+
+**Indices and Lists**
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
 
 OpenStack Cloud in Vagrant
 ----------------------------------------------------------------------
@@ -34,25 +53,6 @@ OpenStack Scheduler
 
    scheduler 
 
-
-Cloudmesh Reservation
-----------------------------------------------------------------------
-
-.. toctree::
-   :numbered:
-   :maxdepth: -1
-
-   introduction
-   deploy
-   manual
-   man/man
-   rest
-
-**Indices and Lists**
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 
 
