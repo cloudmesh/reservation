@@ -9,6 +9,15 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+mongo:
+	bin/start.sh
+
+server:
+	python reservation/server.py
+
+test:
+	python reservation/test.py
+
 setup:
 	make -f Makefile setupbuild_ubuntu
 
@@ -16,6 +25,9 @@ FILE=index
 
 watchdog:
 	watchmedo shell-command --patterns="*.rst" --recursive --command="make; open doc/build/html/$(FILE).html" . 
+
+c:
+	/usr/bin/google-chrome-stable doc/build/html/index.html
 
 f: 
 	firefox doc/build/html/index.html 
@@ -98,6 +110,7 @@ clean:
 	rm -rf build dist *.egg-info *~ #*
 	cd doc; make clean
 	rm -rf *.egg-info
+	rm -rf doc/source/modules/*
 
 #############################################################################
 # SETUP SPHINX BUILD ENVIRONMENT
