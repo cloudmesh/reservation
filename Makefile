@@ -9,6 +9,9 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+mongo:
+	bin/start.sh
+
 setup:
 	make -f Makefile setupbuild_ubuntu
 
