@@ -1,19 +1,20 @@
 #! /usr/bin/env python
 """
 Usage:
+    generate -h | --help | --rst
     generate clean
     generate SERVERS RESERVATIONS DURATION START
     generate list [--json|--table|--calendar]
 
 Arguments:
     SERVERS       Number of servers for which we generate 
-    		  reservations
+                  reservations
     RESERVATIONS  Number of reservations per server
     DURATION      The maximum duration of a reservation 
-    		  (determined randomly)
+    		      (determined randomly)
     START         The start date. if now is specified, the current
-    		  time is used, otherwise an offset is used in the
-    		  form of 1m, or 1h, or 1w[default: now]
+    		      time is used, otherwise an offset is used in the
+    		      form of 1m, or 1h, or 1w[default: now]
 
 Description:
 
@@ -57,10 +58,16 @@ import datetime
 
 def generate(arguments):
 
-    print arguments
-
     if arguments['clean']:
         print "ERROR: delete all entries is not yet implemented."
+    elif arguments["--rst"]:
+
+        print "generate"
+        print 70 * "="
+        print "\n::\n"
+        lines = __doc__.split("\n")
+        for line in lines:
+            print "  ", line
         
     else:
 
@@ -123,7 +130,6 @@ def generate(arguments):
             print reservation
 
 if __name__ == '__main__':
-    print(sys.argv)
     arguments = docopt(__doc__)
 
     generate(arguments)

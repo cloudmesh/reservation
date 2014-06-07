@@ -32,27 +32,6 @@ call in the main directory::
   python setup.py install
 
 
-Directory Structure of the project
-----------------------------------------------------------------------
-
-The directory structure is as follows::
-
-  -------reservation
-               |
-               |-----reservation
-                         |---reservation.py
-                         |---reservation_client.py
-			 |---login.py
-
-  |----- ~/.futuregrid/cloudmesh/
-               |---client_secrets.json
-               |---cloudmesh_reservation.dat
-
-
-
-
-
-
 Publishing the Documentation
 ----------------------------------------------------------------------
 
@@ -110,9 +89,10 @@ To test the service, you can say::
 
    ./reservation/test.py
 
-To generate some random schedules yo can use the gnerate command
+To generate some random schedules yo can use the gnerate command,
+which is documented in more detail in the manual page::
 
-   use the include sphinx command to put the manual here
+   put the location here
 
 To clean the reservations (not yet implemented you can say)::
 

@@ -178,5 +178,10 @@ pseudoxml:
 
 manpages:
 	mkdir -p source/man
-	../reservation/reservation.py --rst > source/man/man.rst
+	echo "************************************************************" > source/man/man.rst
+	echo "Manual Pages" >> source/man/man.rst
+	echo "************************************************************" >> source/man/man.rst
+	echo >> source/man/man.rst
+	../reservation/reservation.py --rst >> source/man/man.rst
+	../reservation/generate.py --rst >> source/man/man.rst
 	sphinx-apidoc -H "Modules and Classes" -o source/modules ../reservation

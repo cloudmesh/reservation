@@ -105,10 +105,6 @@ def not_implemented():
 def reservation_command(arguments):
     if arguments["--rst"]:
 
-        print 70 * "*"
-        print "Manual Pages"
-        print 70 * "*"
-        print
         print "reservation"
         print 70 * "="
         print "\n::\n"
@@ -132,8 +128,6 @@ def reservation_command(arguments):
                 arguments[list] = expanded_list
             except:
                 pass
-
-        # print(arguments)
 
         try:
             reservation = get_service_object()
@@ -332,7 +326,5 @@ def build_JSON(sTime, eTime, label, hosts):
 
 
 if __name__ == '__main__':
-    print(sys.argv)
     arguments = docopt(__doc__)
-
     reservation_command(arguments)
