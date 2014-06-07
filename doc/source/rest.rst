@@ -4,7 +4,7 @@ REST interfaces
 
 The Server has the following routes
 
-.. autoflask:: reservation.server:app
+.. autoflask:: reservation_server.server:app
    :undoc-static:
 
 

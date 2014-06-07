@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
-from model import Reservation
+from reservation.model import Reservation
 import datetime
 from mongoengine import *
-from model import reservation_connect
+from reservation.model import reservation_connect
 
 db = reservation_connect()
 

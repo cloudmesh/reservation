@@ -36,14 +36,6 @@ reservation.reservation_client module
     :undoc-members:
     :show-inheritance:
 
-reservation.test module
------------------------
-
-.. automodule:: reservation.test
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

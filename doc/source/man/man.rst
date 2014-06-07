@@ -33,7 +33,7 @@ reservation
                                             [--end=TIME_END]
        reservation remove --all [--start=TIME_START]
                                 [--end=TIME_END]
-       reservation list [--reservation=RESERVATION_IDS]   
+       reservation list [--reservation=RESERVATION_IDS]
                         [--project=PROJECT_IDS]
                         [--label=LABELS]
                         [--user=USER_IDS]
@@ -44,14 +44,14 @@ reservation
        reservation reschedule --reservation=ID --file=FILE
        reservation find -n RESOURCES -d DURATION
        		         [--start=TIME_START]
-                        [--end=TIME_END]     
+                        [--end=TIME_END]
        reservation find -s SERVERS -d DURATION
        		         [--start=TIME_START]
-                        [--end=TIME_END]     
-       
+                        [--end=TIME_END]<
+   
    Arguments:
        ID        the unique ID of the reservation
-       
+   
    Options:
        LABEL  the label pf the reservation
        -f FILE, --file=FILE  file to be specified
@@ -59,16 +59,17 @@ reservation
        HOSTS        SERVER NUMBERS
        --user=USER_ID                USER_ID
        --proj_id=PROJ_ID                PROJ_ID
-       -i           interactive mode adds a yes/no 
+       -i           interactive mode adds a yes/no
                     question for each host specified
-       --start=TIME_START     Start time of the reservation, in 
+       --start=TIME_START     Start time of the reservation, in
                               YYYY/MM/DD HH:MM:SS format. [default: current_time]
-       --end=TIME_END         End time of the reservation, in 
+       --end=TIME_END         End time of the reservation, in
                               YYYY/MM/DD HH:MM:SS format. In addition a duration
                               can be specified if the + sign is the first sign.
                               The duration will than be added to
                               the start time. [default: +1d]
-       --format=FORMAT        Format of the output table, json, cfg. [default: table]
+       --format=FORMAT        Format of the output table, json, cfg.
+                              [default: table]
    
 generate
 ======================================================================
