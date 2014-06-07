@@ -3,7 +3,7 @@
 from model import Reservation
 import datetime
 from mongoengine import *
-from model import resrvation_connect
+from model import reservation_connect
 
 db = reservation_connect()
 
