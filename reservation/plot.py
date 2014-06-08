@@ -50,7 +50,7 @@ def timeline_plot(out_filename):
     data: {data}
 
     #proc areadef
-       title: Evening television schedule
+       title: Cloudmesh Reservation
        rectangle: 1 1 10 {no_hosts}
        xscaletype: datetime YYYY/mm/dd.hh:mm
        #xrange: {tmin} {tmax}

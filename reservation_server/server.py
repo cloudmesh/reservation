@@ -7,6 +7,8 @@ from reservation.model import reservation_connect
 from reservation.model import Reservation
 from reservation.plot import timeline_plot
 
+from glob import glob
+
 
 app = Flask(__name__)    
 app.debug = True
@@ -18,11 +20,11 @@ def main():
 @app.route('/')
 def timeline():
 
-    filename="time-plot"
+    filename="static/time-plot"
+    
     print "TIMELINE", filename
     timeline_plot(filename)
-    return render_template('plot.html',
-                           filename=filename)
+    return render_template('plot.html')
 
     
 @app.route('/home')

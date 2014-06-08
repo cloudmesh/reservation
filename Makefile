@@ -9,11 +9,14 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+random:
+	cd reservation ; python generate.py clean; python generate.py i[01-10] 10 10 now
+
 mongo:
 	bin/start.sh
 
 server:
-	python reservation_server/server.py
+	cd reservation_server; python server.py
 
 test:
 	python setup.py install

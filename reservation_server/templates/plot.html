@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <html> <head>
 <title></title>
 </head>
@@ -6,10 +7,15 @@
 <body>
 <h1></h1>
 
-<img src="{{ url_for('static', filename=filename) }}.svg" alt="timeline plot">
+<img src="/static/time-plot.svg" alt="timeline plot">
 
+<A HREF="javascript:history.go(0)">Click to refresh the page</A>
+
+<FORM>
+<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
+</FORM>
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Sun Jun  8 02:15:49 EDT 2014 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Sun Jun  8 03:12:35 EDT 2014 <!-- hhmts end -->
 </body> </html>
