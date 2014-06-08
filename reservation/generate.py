@@ -52,15 +52,23 @@ from docopt import docopt
 import hostlist
 from pprint import pprint
 from random import randint
-from model import Reservation
 from pytimeparse.timeparse import timeparse
 import datetime
-
+from model import Reservation
+from model import reservation_connect
 
 def generate(arguments):
 
     if arguments['clean']:
-        print "ERROR: delete all entries is not yet implemented."
+
+        db = reservation_connect()
+        reservations = Reservation.objects({})
+        print "deleting:"
+        for reservation in reservations:
+            print reservation.label,
+            reservation.delete()
+        print
+        
     elif arguments["--rst"]:
 
         print "generate"
@@ -76,8 +84,8 @@ def generate(arguments):
         duration = int(arguments["DURATION"])
         server_string = arguments["SERVERS"]
         servers = hostlist.expand_hostlist(server_string)
-        if first_time is "now":
-            first_time = datetime.now()
+        if arguments["START"] in ["now"]:
+            first_time = datetime.datetime.now()
         else:
             first_time = timeparse(arguments("START"))
 
@@ -88,43 +96,64 @@ def generate(arguments):
         print "First date:  ", first_time
         print 70 * "="
 
+        db = reservation_connect()        
+
+        def random_delta(duration):
+            r = randint(0, duration)
+            return datetime.timedelta(seconds=timeparse("{0} h".format(r)))
+        
         t_start = {}
         t_end = {}
         for s in xrange(0, len(servers)):
             t_start[s] = []
             t_end[s] = []
-            t_start[s].append(randint(0, duration))
-            t_end[s].append(t_start[s][0] + randint(0, duration))
+            
+            t_start[s].append(first_time + random_delta(duration))
+            t_end[s].append(t_start[s][0] + random_delta(duration))
 
         for s in range(0, len(servers)):
             for n in range(1, reservations):
-                t_start[s].append(t_end[s][n - 1] + randint(0, duration))
-                t_end[s].append(t_start[s][n] + randint(0, duration))
+                t_start[s].append(t_end[s][n - 1] + random_delta(duration))
+                t_end[s].append(t_start[s][n] +  random_delta(duration))
+
+        #for s in range(0, len(servers)):
+        #    for n in range(0, reservations):
+        #        print s, n, t_start[s][n], t_end[s][n]
+
+        #pprint("start: " + str(t_start))
+        #pprint("end  : " + str(t_end))
 
         for s in range(0, len(servers)):
             for n in range(0, reservations):
-                print s, n, t_start[s][n], t_end[s][n]
+                entry = {
+                    "cm_id": "cm_reservation-{0}-{1}".format(s,n),
+                    "label": "exp-{0}-{1}".format(s,n),
+                    "summary": "task-{0}-{1}".format(s,n),
+                    "host": servers[s],
+                    "user": "gregor",
+                    "project" : "fg82",
+                    "start_time": str(t_start[s][n]),
+                    "end_time": str(t_end[s][n]),
+                    }
 
-        pprint("start: " + str(t_start))
-        pprint("end  : " + str(t_end))
-
-        for s in range(0, len(servers)):
-            for n in range(0, reservations):
-                cm_id = "cm_reservation-" + str(s) + "-" + str(n)
-                print "server={0}, cm_id={1}, start_time={2}, end_time={3}" \
-                    .format(servers[s], cm_id, str(t_start[s][n]), str(t_end[s][n]))
-                r = Reservation(label="exp1",
-                                cm_id=cm_id,
-                                summary="test1",
-                                host=servers[s],
-                                user="gregor",
-                                project="fg82",
-                                start_time=str(t_start[s][n]),
-                                end_time=str(t_end[s][n])
-                                )
+                print entry
+                r = Reservation(
+                    cm_id=entry["cm_id"],
+                    host=entry["host"],
+                    label=entry["label"],
+                    user=entry["user"],
+                    summary=entry["summary"],                    
+                    project=entry["project"],
+                    start_time=entry["start_time"],
+                    end_time=entry["end_time"]
+                    )
+                r.save()
 
         print 70 * "A"
-        reservations = Reservation.objects(user="gregor")
+        reservations = Reservation.objects()
+        print len(reservations)
+        for reservation in reservations:
+           pprint(reservation)
         print 70 * "B"
 
         for reservation in reservations:
