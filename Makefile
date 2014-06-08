@@ -10,7 +10,7 @@ all:
 	make -f Makefile sphinx
 
 random:
-	cd reservation ; python generate.py clean; python generate.py i[01-10] 10 10 now
+	cd reservation ; python generate.py clean; python generate.py i[01-05] 10 10 now
 
 mongo:
 	bin/start.sh
