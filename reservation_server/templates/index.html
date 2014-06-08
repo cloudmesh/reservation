@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Reservations</title>
+</head>
+
+<body>
+<h1>Reservations </h1>
+
+<table>
+     <tr>
+       {% for attribute in order %}
+            <th> {{ attribute }} </th>
+       {% endfor %}
+     </tr>
+     
+{% for reservation in reservations %}
+   <tr>
+       {% for attribute in order %}     
+          <td> {{ reservation[attribute] }} </td>
+       {% endfor %}
+   </tr>
+{% endfor %}
+</table>
+  
+<hr>
+<address>Cloudmesh</address>
+</body>
+</html>

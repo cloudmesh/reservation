@@ -5,7 +5,7 @@ from flask import Flask
 from flask import render_template
 from reservation.model import reservation_connect
 from reservation.model import Reservation
-
+from reservation.plot import timeline_plot
 
 
 app = Flask(__name__)    
@@ -16,22 +16,14 @@ def main():
     app.run()
 
 @app.route('/')
-def swimlane():
-    reservations = Reservation.objects()
-    data = []
-    for reservation in reservations:
-        data.append({"id": reservation.label,
-                     "start": reservation.start_time,
-                     "end": reservation.end_time,
-                     'desc': "abc",
-                     'class': 'past',
-                     'lane': reservation.host,
-                     })                   
-    print data
-    return render_template('timeline.html',
-                           order=Reservation._order,
-                           reservations=reservations,
-                           data=data)
+def timeline():
+
+    filename="time-plot"
+    print "TIMELINE", filename
+    timeline_plot(filename)
+    return render_template('plot.html',
+                           filename=filename)
+
     
 @app.route('/home')
 def home_page():

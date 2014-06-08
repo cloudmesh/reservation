@@ -10,7 +10,7 @@ import datetime
 from mongoengine import *
 from model import reservation_connect
 
-def main(arguments):
+def timeline_plot(arguments):
     db = reservation_connect()
 
 
@@ -93,6 +93,7 @@ def main(arguments):
     os.system("/usr/local/bin/pl {filename} -{format} -o {out}.{format} >& /dev/null".format(out=out_filename, filename=filename, format=format) )
     
 
+    print out_filename
 
 if __name__ == "__main__":
-    main(sys.argv[:1])
+    timeline_plot(sys.argv[:1])
