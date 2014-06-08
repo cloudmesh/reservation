@@ -5,11 +5,12 @@ import datetime
 from mongoengine import *
 from reservation.model import reservation_connect
 
+
 db = reservation_connect()
 
 reservation = Reservation(label="res-1",
                           cm_id="reservation-res-1",
-                          summmary="Simple reservation",
+                          summary="Simple reservation",
                           host="i001",
                           user="gregor",
                           project="fg82",

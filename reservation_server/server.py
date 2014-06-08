@@ -16,6 +16,24 @@ def main():
     app.run()
 
 @app.route('/')
+def swimlane():
+    reservations = Reservation.objects()
+    data = []
+    for reservation in reservations:
+        data.append({"id": reservation.label,
+                     "start": reservation.start_time,
+                     "end": reservation.end_time,
+                     'desc': "abc",
+                     'class': 'past',
+                     'lane': reservation.host,
+                     })                   
+    print data
+    return render_template('timeline.html',
+                           order=Reservation._order,
+                           reservations=reservations,
+                           data=data)
+    
+@app.route('/home')
 def home_page():
     reservations = Reservation.objects()
     for reservation in reservations:
@@ -69,5 +87,5 @@ def route_reservation_add(label,resource,time_from,time_to):
     return "not implemented"
 
 if __name__ == "__main__":
-    main():
+    main()
 
