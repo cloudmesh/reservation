@@ -10,7 +10,10 @@ import datetime
 from mongoengine import *
 from model import reservation_connect
 
-def timeline_plot(arguments):
+
+    
+def timeline_plot(out_filename):
+    format = "svg"
     db = reservation_connect()
 
 
@@ -81,19 +84,17 @@ def timeline_plot(arguments):
     #print script
 
     filename ="/tmp/ploticus.txt"    
-    try:
-        out_filename = arguments[0]
-    except:
-        out_filename ="out"
 
     with open(filename, "w") as file:
         file.write(script)
 
-    format = "eps"
+
     os.system("/usr/local/bin/pl {filename} -{format} -o {out}.{format} >& /dev/null".format(out=out_filename, filename=filename, format=format) )
     
 
-    print out_filename
 
 if __name__ == "__main__":
-    timeline_plot(sys.argv[:1])
+    filename = "out"
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+    timeline_plot(filename)
