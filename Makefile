@@ -9,6 +9,9 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+req:
+	pip install -r requirements.txt
+
 random:
 	cd reservation ; python generate.py clean; python generate.py i[01-05] 10 10 now
 
