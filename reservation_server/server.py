@@ -15,10 +15,6 @@ def main():
     db = reservation_connect()
     app.run()
 
-@app.route('/')
-def index():
-
-    return render_template('index.html')
 
 @app.route('/')
 def route_table():
