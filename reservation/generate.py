@@ -111,17 +111,18 @@ def generate(arguments):
             t_start[s].append(first_time + random_delta(duration))
             t_end[s].append(t_start[s][0] + random_delta(duration))
 
-        for s in range(0, len(servers)):
+        for s in range(0, len(servers)):        	
             for n in range(1, reservations):
                 t_start[s].append(t_end[s][n - 1] + random_delta(duration))
                 t_end[s].append(t_start[s][n] +  random_delta(duration))
 
-        #for s in range(0, len(servers)):
-        #    for n in range(0, reservations):
-        #        print s, n, t_start[s][n], t_end[s][n]
+        for s in range(0, len(servers)):
+            for n in range(0, reservations):
+                print s, n, t_start[s][n], t_end[s][n]
+                
 
-        #pprint("start: " + str(t_start))
-        #pprint("end  : " + str(t_end))
+        pprint("start: " + str(t_start))
+        pprint("end  : " + str(t_end))
 
         for s in range(0, len(servers)):
             for n in range(0, reservations):
