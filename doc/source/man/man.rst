@@ -112,6 +112,11 @@ generate
        generate list
            retiurns the list of reservations in the specified
            format. Thoe format can be list, table, or calendar
+           
+   Example:
+   
+       python generate.py i[01-03] 4 6 now
+   
    
    Bugs:
        Not implemented:
