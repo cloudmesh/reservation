@@ -20,3 +20,6 @@ tzlocal
 pytz
 python-dateutil
 Flask-PyMongo
+flask-bootstrap
+WTForms
+Flask-WTF

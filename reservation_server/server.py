@@ -7,19 +7,29 @@ from reservation.model import reservation_connect
 from reservation.model import Reservation
 from reservation.plot import timeline_plot
 
-from glob import glob
-
-
 app = Flask(__name__)    
 app.debug = True
+
 
 def main():
     db = reservation_connect()
     app.run()
 
 @app.route('/')
-def timeline():
+def index():
 
+    return render_template('index.html')
+
+@app.route('/1')
+def route_one():
+
+    return render_template('1.html')
+
+
+    
+@app.route('/time')
+def timeline():
+    """printing the timeline from mongodb"""
     filename="static/time-plot"
     
     print "TIMELINE", filename
@@ -27,12 +37,12 @@ def timeline():
     return render_template('plot.html')
 
     
-@app.route('/home')
-def home_page():
+@app.route('/table')
+def route_table():
     reservations = Reservation.objects()
     for reservation in reservations:
         print reservation
-    return render_template('index.html',
+    return render_template('table.html',
                            order=Reservation._order,
                            reservations=reservations)
 
