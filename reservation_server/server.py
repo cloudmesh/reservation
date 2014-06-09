@@ -20,11 +20,14 @@ def index():
 
     return render_template('index.html')
 
-@app.route('/1')
-def route_one():
-
-    return render_template('1.html')
-
+@app.route('/')
+def route_table():
+    reservations = Reservation.objects()
+    for reservation in reservations:
+        print reservation
+    return render_template('table.html',
+                           order=Reservation._order,
+                           reservations=reservations)
 
     
 @app.route('/time')
@@ -37,14 +40,6 @@ def timeline():
     return render_template('plot.html')
 
     
-@app.route('/table')
-def route_table():
-    reservations = Reservation.objects()
-    for reservation in reservations:
-        print reservation
-    return render_template('table.html',
-                           order=Reservation._order,
-                           reservations=reservations)
 
 @app.route("/cm/v1.0/reservation/list")
 def route_reservation():
