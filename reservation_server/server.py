@@ -37,6 +37,7 @@ def timeline():
     
     print "TIMELINE", filename
     timeline_plot(filename)
+    print "plot ok"
     return render_template('plot.html')
 
     
