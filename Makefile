@@ -19,7 +19,7 @@ mongo:
 	bin/start.sh
 
 server:
-	cd reservation_server; python server.py
+	python setup.py install ; cd reservation_server; python server.py
 
 test:
 	python setup.py install

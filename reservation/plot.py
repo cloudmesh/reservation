@@ -88,8 +88,15 @@ def timeline_plot(out_filename):
     with open(filename, "w") as file:
         file.write(script)
 
+    
+    if sys.platform in ["darwin"]:
+        ploticus = "/usr/local/bin/pl"
+    else:
+        ploticus = "/usr/bin/ploticus"
+    
+    command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename, filename=filename, format=format, ploticus=ploticus )
 
-    os.system("/usr/local/bin/pl {filename} -{format} -o {out}.{format} >& /dev/null".format(out=out_filename, filename=filename, format=format) )
+    os.system(command)
     
 
 
