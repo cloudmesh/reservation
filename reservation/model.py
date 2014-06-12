@@ -41,11 +41,7 @@ class Reservation(Document):
 
     def __str__(self):
         d = self.to_json()
-        print d
-        r = ""
-        # for key in self._order:
-        #    r = r + key + ": " + d[key] + " "
-        return r
+        return str(d)
 
     def to_json(self):
         d = {"label": self.label,
