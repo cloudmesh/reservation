@@ -73,22 +73,36 @@ class Reservation(Document):
         '''
         return Reservation.objects(label=label)
 
-    def list(self, user=None, project=None, startTime=None, endTime=None):
+    def list(self, hostlist=None, label=label, user=None, project=None, startTime=None, endTime=None):
         '''Lists all the users reservations made in a project from a
         start time to a end time'''
         try:
+            # if all are none than return everything
+
             if(user == None):
-                reservations = Reservation.objects(project=project,start_time__gte= startTime,end_time__lte= endTime)
+                reservations = Reservation.objects(project=project,
+                                                   start_time__gte=startTime,
+                                                   end_time__lte= endTime)
             elif(project == None):
-                reservations = Reservation.objects(user=user,start_time__gte= startTime,end_time__lte= endTime)
+                reservations = Reservation.objects(user=user,
+                                                   start_time__gte= startTime,
+                                                   end_time__lte= endTime)
             elif(startTime == None):
-                reservations = Reservation.objects(user=user, project=project, end_time__lte= endTime)
+                reservations = Reservation.objects(user=user,
+                                                   project=project,
+                                                   end_time__lte= endTime)
             elif(endTime == None):
-                reservations = Reservation.objects(user=user, project=project, start_time__gte= startTime)
+                reservations = Reservation.objects(user=user,
+                                                   project=project, s
+                                                   tart_time__gte= startTime)
             elif(user == None and project == None):
-                reservations = Reservation.objects(start_time__gte= startTime, end_time__lte= endTime)
+                reservations = Reservation.objects(start_time__gte= startTime,
+                                                   end_time__lte= endTime)
             else:
-                reservations = Reservation.objects(user=user,project=project,start_time__gte= startTime,end_time__lte= endTime)
+                reservations = Reservation.objects(user=user,
+                                                   project=project,
+                                                   start_time__gte= startTime,
+                                                   end_time__lte= endTime)
         except e:
             print "Query not possible. ", e    
         return reservations
@@ -119,6 +133,9 @@ class Reservation(Document):
         :param id: the cm_id
         '''
         return Reservation.objects(cm_id=id)
+
+    def add(self, label, user, project, startTime, endTime)::
+        pass
 
 if __name__ == "__main__":
     db = reservation_connect()
