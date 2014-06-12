@@ -122,3 +122,6 @@ Now you can open your web browser at::
 
 To observe a list of reservations in table form 
 
+To create a random reservation you can use::
+
+  make random

@@ -21,7 +21,6 @@ Cloudmesh Reservation
 
    introduction
    deploy
-   manual
    man/man
    rest
 
@@ -36,29 +35,6 @@ Cloudmesh Reservation
    * :ref:`genindex`
    * :ref:`modindex`
    * :ref:`search`
-
-
-OpenStack Cloud in Vagrant
-----------------------------------------------------------------------
-
-.. toctree::
-   :numbered:
-   :maxdepth: 1
-
-   multi
-   multiUsingChef
-   vagrant
-   devstack
-
-OpenStack Scheduler
-----------------------------------------------------------------------
-
-.. toctree::
-   :numbered:
-   :maxdepth: 1
-
-   scheduler 
-
 
 
 
