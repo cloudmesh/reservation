@@ -75,7 +75,7 @@ class Reservation(Document):
 
     def _list(self, **kwargs):
         print kwargs
-        reservations = Reservation.objects(kwargs)
+        reservations = Reservation.objects(__raw__=kwargs)
         # start_time__gte=start_time,
         #                                            end_time__lte= end_time)
         
@@ -159,7 +159,10 @@ if __name__ == "__main__":
     #reservation = Reservation().find_all()
     #print reservation
     #rsv = Reservation().duration("cm_reservation-2-7")
-    rsv = Reservation()._list(user="gregor", start_time="2014-06-16")
+    #rsv = Reservation.objects(user="gregor")
+    reservations = Reservation()
+    
+    rsv = reservations._list(user="gregor")
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
     if rsv is not None:
