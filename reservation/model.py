@@ -73,28 +73,37 @@ class Reservation(Document):
         '''
         return Reservation.objects(label=label)
 
-    def list(self, hostlist=None, label=label, user=None, project=None, startTime=None, endTime=None):
+    def _list(self, **kwargs):
+        print kwargs
+        reservations = Reservation.objects(kwargs)
+        # start_time__gte=start_time,
+        #                                            end_time__lte= end_time)
+        
+        return reservations
+        
+    def list(self, hostlist=None, label=label, user=None, project=None, start_time=None, end_time=None):
         '''Lists all the users reservations made in a project from a
         start time to a end time'''
+        reservations=None
         try:
             # if all are none than return everything
 
             if(user == None):
                 reservations = Reservation.objects(project=project,
-                                                   start_time__gte=startTime,
-                                                   end_time__lte= endTime)
+                                                   start_time__gte=start_time,
+                                                   end_time__lte= end_time)
             elif(project == None):
                 reservations = Reservation.objects(user=user,
-                                                   start_time__gte= startTime,
-                                                   end_time__lte= endTime)
-            elif(startTime == None):
+                                                   start_time__gte=start_time,
+                                                   end_time__lte=end_time)
+            elif(start_time == None):
                 reservations = Reservation.objects(user=user,
                                                    project=project,
                                                    end_time__lte= endTime)
-            elif(endTime == None):
+            elif(end_time == None):
                 reservations = Reservation.objects(user=user,
-                                                   project=project, s
-                                                   tart_time__gte= startTime)
+                                                   project=project,
+                                                   start_time__gte= startTime)
             elif(user == None and project == None):
                 reservations = Reservation.objects(start_time__gte= startTime,
                                                    end_time__lte= endTime)
@@ -103,7 +112,7 @@ class Reservation(Document):
                                                    project=project,
                                                    start_time__gte= startTime,
                                                    end_time__lte= endTime)
-        except e:
+        except Exception, e:
             print "Query not possible. ", e    
         return reservations
     
@@ -134,7 +143,7 @@ class Reservation(Document):
         '''
         return Reservation.objects(cm_id=id)
 
-    def add(self, label, user, project, startTime, endTime)::
+    def add(self, label, user, project, startTime, endTime):
         pass
 
 if __name__ == "__main__":
@@ -150,12 +159,13 @@ if __name__ == "__main__":
     #reservation = Reservation().find_all()
     #print reservation
     #rsv = Reservation().duration("cm_reservation-2-7")
-    rsv = Reservation().list("gregor", None, None, "2014-06-16")
+    rsv = Reservation()._list(user="gregor", start_time="2014-06-16")
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
-    for x in rsv:
-        print x
-        print 70 * "="
+    if rsv is not None:
+        for x in rsv:
+            print x
+            print 70 * "="
     # print Reservation(reservations)
     print 70 * "="
     "find_id function"
