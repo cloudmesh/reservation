@@ -73,54 +73,23 @@ class Reservation(Document):
         '''
         return Reservation.objects(label=label)
 
-    def _list(self, **kwargs):
-        print kwargs
-        reservations = Reservation.objects(__raw__=kwargs)
-        # start_time__gte=start_time,
-        #                                            end_time__lte= end_time)
-        
-        return reservations
-        
-    def list(self, hostlist=None, label=label, user=None, project=None, start_time=None, end_time=None):
+    def list(self, **kwargs):
         '''Lists all the users reservations made in a project from a
         start time to a end time'''
-        reservations=None
-        try:
-            # if all are none than return everything
-
-            if(user == None):
-                reservations = Reservation.objects(project=project,
-                                                   start_time__gte=start_time,
-                                                   end_time__lte= end_time)
-            elif(project == None):
-                reservations = Reservation.objects(user=user,
-                                                   start_time__gte=start_time,
-                                                   end_time__lte=end_time)
-            elif(start_time == None):
-                reservations = Reservation.objects(user=user,
-                                                   project=project,
-                                                   end_time__lte= endTime)
-            elif(end_time == None):
-                reservations = Reservation.objects(user=user,
-                                                   project=project,
-                                                   start_time__gte= startTime)
-            elif(user == None and project == None):
-                reservations = Reservation.objects(start_time__gte= startTime,
-                                                   end_time__lte= endTime)
-            else:
-                reservations = Reservation.objects(user=user,
-                                                   project=project,
-                                                   start_time__gte= startTime,
-                                                   end_time__lte= endTime)
-        except Exception, e:
-            print "Query not possible. ", e    
-        return reservations
-    
-    def duration(self, cm_id):
-        '''Oliver: this function needs to return the duration 
-        of the reservation by searching it from  the cm_id. 
-        In this case I think we could do something similar with find_id function '''
         
+        start_time ="1901-01-01"
+        end_time = "2100-12-31"
+        for key, value in kwargs.items():
+            if(key=="start_time"):
+                start_time = value
+                del kwargs[key]
+            if(key=="end_time"):
+                end_time = value
+                del kwargs[key]
+        reservations = Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time)
+        return reservations
+        
+    def duration(self, cm_id):
         '''Shows the duration of the reservation'''
 
         reservations = Reservation.objects(cm_id=cm_id)
@@ -162,7 +131,7 @@ if __name__ == "__main__":
     #rsv = Reservation.objects(user="gregor")
     reservations = Reservation()
     
-    rsv = reservations._list(user="gregor")
+    rsv = reservations.list(user="gregor", end_time="2014-06-13")
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
     if rsv is not None:
