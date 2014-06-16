@@ -75,17 +75,15 @@ class Reservation(Document):
 
     def list(self, **kwargs):
         '''Lists all the users reservations made in a project from a
-        start time to a end time'''
-        
+        start time to a end time'''        
         start_time ="1901-01-01"
         end_time = "2100-12-31"
-        for key, value in kwargs.items():
-            if(key=="start_time"):
-                start_time = value
-                del kwargs[key]
-            if(key=="end_time"):
-                end_time = value
-                del kwargs[key]
+        if("start_time" in kwargs):
+            start_time = kwargs['start_time']
+            del kwargs['start_time']
+        if("end_time" in kwargs):
+            end_time = kwargs['end_time']
+            del kwargs['end_time']
         reservations = Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time)
         return reservations
         
@@ -131,7 +129,7 @@ if __name__ == "__main__":
     #rsv = Reservation.objects(user="gregor")
     reservations = Reservation()
     
-    rsv = reservations.list(user="gregor", end_time="2014-06-13")
+    rsv = reservations.list(user="gregor", end_time="2014-06-18", host="m03", cm_id="cm_reservation-2-1")
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
     if rsv is not None:
