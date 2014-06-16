@@ -1,10 +1,15 @@
-#
-# start mongo with
-#
-#    mongod --noauth --dbpath . --port 27777
-#
+"""
+Usage:
+    reservation --label=ID
 
+Arguments:
+    --label=ID    label id reservation
+    
+Options:
+    
+"""
 from mongoengine import *
+from docopt import docopt
 import datetime
 
 def reservation_connect():
@@ -128,9 +133,20 @@ class Reservation(Document):
                 flag = True
                 break;
         return flag
+
+def test(arguments):
+    #print arguments["login"]
+    print "in here"
+    
 if __name__ == "__main__":
-    db = reservation_connect()
-    reservations = Reservation.objects({})
+    arguments = docopt(__doc__)
+    test(arguments)
+    #db = reservation_connect()
+    
+    print arguments
+    #reservation_command(arguments)
+    
+    #reservations = Reservation.objects({})
         
     "Delete all function tested"
     print 70 * "="
@@ -142,18 +158,18 @@ if __name__ == "__main__":
     #print reservation
     #rsv = Reservation().duration("cm_reservation-2-7")
     #rsv = Reservation.objects(user="gregor")
-    reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2014-06-18 21:06:16.642000", end_time="2014-06-20 21:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
+    #reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2014-06-18 21:06:16.642000", end_time="2014-06-20 21:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
     #reservations = Reservation()
     #reservations.delete_all()
     #rsv= reservations.list(user="Nat")
     
-    rsv = reservations.add()
+    #rsv = reservations.add()
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
-    if rsv is not None:
+    '''if rsv is not None:
         for x in rsv:
             print x
-            print 70 * "="
+            print 70 * "="'''#
     # print Reservation(reservations)
     print 70 * "="
     "find_id function"
