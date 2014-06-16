@@ -124,7 +124,7 @@ class Reservation(Document):
         start_time = datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S.%f")
         end_time = datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S.%f")
         for rsv in rsvs:
-            if((rsv['start_time'] <= start_time and rsv['end_time'] >= start_time) or (end_time <= rsv['end_time'] and rsv['start_time'] <= end_time)):
+            if((rsv['start_time'] <= start_time and rsv['end_time'] >= start_time and (self.host == rsv['host'])) or (end_time <= rsv['end_time'] and rsv['start_time'] <= end_time and (self.host == rsv['host']))):
                 flag = True
                 break;
         return flag
@@ -142,12 +142,12 @@ if __name__ == "__main__":
     #print reservation
     #rsv = Reservation().duration("cm_reservation-2-7")
     #rsv = Reservation.objects(user="gregor")
-    #reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2015-06-20 21:07:16.642000", end_time="2015-06-20 22:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
-    reservations = Reservation()
+    reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2014-06-18 21:06:16.642000", end_time="2014-06-20 21:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
+    #reservations = Reservation()
     #reservations.delete_all()
-    rsv= reservations.list(user="Nat")
+    #rsv= reservations.list(user="Nat")
     
-    #rsv = reservations.add()
+    rsv = reservations.add()
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
     if rsv is not None:
