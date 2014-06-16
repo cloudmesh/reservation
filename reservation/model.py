@@ -110,9 +110,24 @@ class Reservation(Document):
         '''
         return Reservation.objects(cm_id=id)
 
-    def add(self, label, user, project, startTime, endTime):
-        pass
-
+    def add(self):
+        if(self.check_overlap() == True):
+            print "Reservations overlap: cannot schedule at this time"
+        else:            
+            Reservation.save(self)
+            print "Reservation added successfully."
+            
+    def check_overlap(self):
+        #print self.start_time, self.end_time
+        flag = False
+        rsvs= self.list()
+        start_time = datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S.%f")
+        end_time = datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S.%f")
+        for rsv in rsvs:
+            if((rsv['start_time'] <= start_time and rsv['end_time'] >= start_time) or (end_time <= rsv['end_time'] and rsv['start_time'] <= end_time)):
+                flag = True
+                break;
+        return flag
 if __name__ == "__main__":
     db = reservation_connect()
     reservations = Reservation.objects({})
@@ -127,9 +142,12 @@ if __name__ == "__main__":
     #print reservation
     #rsv = Reservation().duration("cm_reservation-2-7")
     #rsv = Reservation.objects(user="gregor")
+    #reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2015-06-20 21:07:16.642000", end_time="2015-06-20 22:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
     reservations = Reservation()
+    #reservations.delete_all()
+    rsv= reservations.list(user="Nat")
     
-    rsv = reservations.list(user="gregor", end_time="2014-06-18", host="m03", cm_id="cm_reservation-2-1")
+    #rsv = reservations.add()
     #print rsv
     #Reservation().greaterThanStart("2014-06-16")
     if rsv is not None:
