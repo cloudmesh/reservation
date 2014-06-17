@@ -251,35 +251,3 @@ if __name__ == "__main__":
     db = reservation_connect()
     rain_arguments(arguments)
     
-    
-    #print arguments
-    #reservation_command(arguments)
-    
-    
-        
-    "Delete all function tested"
-    #print 70 * "="
-    #print reservations
-    #print 70 * "="
-    # reservations = Reservation().delete_all()
-    # reservations = Reservation().find_label("exp-0-0")
-    #reservation = Reservation().find_all()
-    #print reservation
-    #rsv = Reservation().duration("cm_reservation-2-7")
-    #rsv = Reservation.objects(user="gregor")
-    reservations = Reservation(label="oli-exp", user="Nat", project="fg82", start_time="2014-06-18 21:06:16.642000", end_time="2014-06-20 21:06:16.642000", cm_id="ol_reservation-1-6", host="ol02", summary="rubbish data")
-    #reservations = Reservation()
-    #reservations.delete_all()
-    
-    
-    #rsv = reservations.add()
-    #print rsv
-    #Reservation().greaterThanStart("2014-06-16")
-    '''if rsv is not None:
-        for x in rsv:
-            print x
-            print 70 * "="'''#
-    # print Reservation(reservations)
-    print 70 * "="
-    "find_id function"
-    
