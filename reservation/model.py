@@ -15,7 +15,14 @@ Usage:
     reservation duration [--cm_id=CM_ID]
     reservation delete [all]
                        [--cm_id=CM_ID]
+                       [--user=USER_ID]
+                       [--project=PROJECT_ID]
+                       [--label=STRING]
+                       [--start=TIME_START]
+                       [--end=TIME_END]
+                       [--host=HOST]
     reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
+    reservation addFile --file=FILE
     
 Arguments:
     --label=STRING    label id reservation
@@ -31,13 +38,16 @@ Arguments:
                            the start time. [default: 2100-12-31]
     --host=HOST            host number 
     --summary=SUMMARY        summary of the reservation
-    
+    --file=FILE            Adding multiple reservations from one file
 Options:
     
 """
 from mongoengine import *
 from docopt import docopt
 import datetime
+import sys
+import csv
+import os
 
 def reservation_connect():
     try:
@@ -143,19 +153,33 @@ class Reservation(Document):
 
         return delta
     
-    def delete_all(self):  # done    
+    def delete_all(self):
+        Reservation.drop_collection()
+    
+    def delete_selection(self, **kwargs):  # done    
+        start_time = datetime.datetime.now()
+        end_time = datetime.datetime.now()
+        if("start_time" in kwargs):
+            start_time = kwargs['start_time']
+            del kwargs['start_time']
+        if("end_time" in kwargs):
+            end_time = kwargs['end_time']
+            del kwargs['end_time']
+        if(kwargs["label"] is None):
+            del kwargs["label"]
+        if(kwargs["user"] is None):
+            del kwargs["user"]
+        if(kwargs["project"] is None):
+            del kwargs["project"]
+        if(kwargs["host"] is None):
+            del kwargs["host"]
+        if(kwargs["cm_id"] is None):
+            del kwargs["cm_id"]
         try:
-            Reservation.drop_collection()
-        except e:
+            Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time).delete()
+        except Exception as e:
             print "Error in delete all: ", e
             
-    def delete(self, id):
-        '''
-        Deletes the reservation based on the cm_id
-        '''
-        Reservation.delete(self, cm_id=id)
-        
-        
     def find_id(self, id):
         '''displays the reservation object
         :param id: the cm_id
@@ -173,8 +197,8 @@ class Reservation(Document):
         #print self.start_time, self.end_time
         flag = False
         rsvs= self.find_all()
-        start_time = datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S.%f")
-        end_time = datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S.%f")
+        start_time = datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S")
         for rsv in rsvs:
             if((rsv['start_time'] <= start_time and rsv['end_time'] >= start_time and (self.host == rsv['host'])) or (end_time <= rsv['end_time'] and rsv['start_time'] <= end_time and (self.host == rsv['host']))):
                 flag = True
@@ -203,16 +227,25 @@ def rain_arguments(arguments):
         reservations = Reservation()
         print reservations.duration(arguments["--cm_id"])
     elif(arguments["delete"]):
-        reservations = Reservation()
         if(arguments["all"]):
-            print reservations.delete_all()
-        elif(arguments["--cm_id"]):            
-            print reservations.delete(arguments["--cm_id"])
+            reservations = Reservation()
+            reservations.delete_all()
+        else:
+            reservations = Reservation()
+            reservations.delete_selection(cm_id=arguments["--cm_id"], user=arguments["--user"], project=arguments["--project"], label= arguments["--label"], start_time= arguments["--start"], end_time=arguments["--end"], host=arguments["--host"])
     elif(arguments["add"]):
         reservations = Reservation(label=arguments["--label"], user=arguments["--user"], project=arguments["--project"], start_time=arguments["--start"], end_time=arguments["--end"], cm_id=arguments["--cm_id"], host=arguments["--host"], summary=arguments["--summary"])
         reservations.add()
-        
-    
+    elif(arguments["addFile"] and arguments["--file"] is not None):
+        try:
+            with open(os.path.join(sys.path[0], arguments["--file"])) as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    reservations = Reservation(cm_id=row[0], label=row[1], user=row[2], project=row[3], start_time=row[4], end_time=row[5], host=row[6], summary=row[7])
+                    reservations.add()
+        except Exception as e:
+            print "Error in adding from file. ", e
+                    
 if __name__ == "__main__":
     arguments = docopt(__doc__)
     db = reservation_connect()
