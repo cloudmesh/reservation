@@ -21,6 +21,14 @@ Usage:
                        [--start=TIME_START]
                        [--end=TIME_END]
                        [--host=HOST]
+    reservation update [--cm_id=CM_ID]
+                       [--user=USER_ID]
+                       [--project=PROJECT_ID]
+                       [--label=STRING]
+                       [--start=TIME_START]
+                       [--end=TIME_END]
+                       [--host=HOST]
+                       [--summary=SUMMARY]
     reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
     reservation addFile --file=FILE
     
@@ -55,7 +63,6 @@ def reservation_connect():
         return db
     except Exception, e:
         print "ERROR: could not establish a connection to mongo db"
-        print
         print e
     
 class Reservation(Document):
@@ -180,6 +187,33 @@ class Reservation(Document):
         except Exception as e:
             print "Error in delete all: ", e
             
+    """def update_selection(self, **kwargs):  # done  
+        start_time ="1901-01-01"
+        end_time = "2100-12-31"
+        if("start_time" in kwargs):
+            start_time = kwargs['start_time']
+            del kwargs['start_time']
+        if("end_time" in kwargs):
+            end_time = kwargs['end_time']
+            del kwargs['end_time'] 
+        if(kwargs["label"] is None):
+            del kwargs["label"]
+        if(kwargs["user"] is None):
+            del kwargs["user"]
+        if(kwargs["project"] is None):
+            del kwargs["project"]
+        if(kwargs["host"] is None):
+            del kwargs["host"]
+        if(kwargs["cm_id"] is None):
+            del kwargs["cm_id"]
+        if(kwargs["summary"] is None):
+            del kwargs["summary"]
+        print kwargs
+        try:                                            
+            print Reservation.objects().update(set__user="nat")
+        except Exception as e:
+            #print "Error in update. ", e"""
+            
     def find_id(self, id):
         '''displays the reservation object
         :param id: the cm_id
@@ -245,6 +279,11 @@ def rain_arguments(arguments):
                     reservations.add()
         except Exception as e:
             print "Error in adding from file. ", e
+    elif(arguments["update"]):
+          reservations = Reservation()
+          reservations.update_selection(cm_id=arguments["--cm_id"], user=arguments["--user"], project=arguments["--project"], label= arguments["--label"], start_time= arguments["--start"], end_time=arguments["--end"], host=arguments["--host"], summary=arguments["--summary"])
+      
+    
                     
 if __name__ == "__main__":
     arguments = docopt(__doc__)

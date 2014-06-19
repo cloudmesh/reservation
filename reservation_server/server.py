@@ -37,10 +37,13 @@ def timeline():
 
     
 
-@app.route("/cm/v1.0/reservation/list")
-def route_reservation():
+@app.route("/list")
+def route_reservation():        
     """list the reservations"""
-    return "not implemented"
+    reservations = Reservation.objects()
+    for reservation in reservations:
+        print Reservation.objects(list())
+    return render_template('list.html', order=Reservation._order, reservations=reservations)
 
 @app.route("/cm/v1.0/reservation/list/<label>")
 def route_reservation_by_label(label):
