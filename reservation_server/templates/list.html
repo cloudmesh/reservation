@@ -1,0 +1,20 @@
+{% block content %}
+    <h2>Reservations</h2>
+
+<li>
+     <li>
+       {% for attribute in order %}
+            <li> {{ attribute }} </li>
+       {% endfor %}
+     </li>
+     
+{% for reservation in reservations %}
+   <li>
+       {% for attribute in order %}     
+          <li> {{ reservation[attribute] }} </li>
+       {% endfor %}
+   </li>
+{% endfor %}
+</li>
+  
+{% endblock content %}
