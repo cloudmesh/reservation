@@ -42,8 +42,7 @@ def route_reservation():
     """list the reservations"""
     reservations = Reservation.objects()
     for reservation in reservations:
-        print Reservation.objects(list())
-    return render_template('list.html', order=Reservation._order, reservations=reservations)
+        return render_template('list.html', order=Reservation.objects(list()))
 
 @app.route("/cm/v1.0/reservation/list/<label>")
 def route_reservation_by_label(label):
