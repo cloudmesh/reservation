@@ -8,7 +8,7 @@ Cloudmesh Reservation for OpenStack
 
 .. sidebar:: Authors
 
-   Gregor von Laszewski
+   Gregor von Laszewski, Oliver Lewis, Natiele Bohn
 
    If your name is missing please let us know and we will add it.
 
