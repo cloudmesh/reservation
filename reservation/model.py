@@ -56,6 +56,7 @@ import datetime
 import sys
 import csv
 import os
+import pprint
 
 def reservation_connect():
     try:
@@ -128,6 +129,10 @@ class Reservation(Document):
         start_time ="1901-01-01"
         end_time = "2100-12-31"
         #print "oliver ::",kwargs
+        #pp = pprint.PrettyPrinter()
+        #print "=" *70
+        #pp.pprint(kwargs)
+        print "\n\n"
         if("start_time" in kwargs):
             start_time = kwargs['start_time']
             del kwargs['start_time']
@@ -146,7 +151,10 @@ class Reservation(Document):
             del kwargs["summary"]
         if(kwargs["cm_id"] is None):
             del kwargs["cm_id"]
+        #pp.pprint(kwargs)
+        #print "laughing: ", start_time, "__", end_time
         reservations = Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time)
+        
         return reservations
         
     def duration(self, cm_id):
