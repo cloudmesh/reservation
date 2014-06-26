@@ -40,38 +40,38 @@ def timeline():
 
 @app.route("/find_user/<user>")
 def find_user(user):        
-    """list the reservations"""
+    """find the reservations by user"""
     rsv = Reservation()    
     return render_template('list.html', order=rsv.find_user(user))
 
-@app.route("/find_user/<cm_id>")
+@app.route("/find_cm_id/<cm_id>")
 def find_id(cm_id):        
-    """list the reservations"""
+    """find the reservations by cm_id"""
     rsv = Reservation()    
     return render_template('list.html', order=rsv.find_id(cm_id))
 
 @app.route("/duration/<cm_id>")
-def duration(cm_id):        
-    """list the reservations"""
-    rsv = Reservation()    
+def duration(cm_id):
+    """list the reservations by duration"""
+    rsv = Reservation()
     return render_template('list.html', order=rsv.duration(cm_id))
 
 @app.route("/find_label/<label>")
 def find_label(label):        
-    """list the reservations"""
+    """list the reservations by label"""
     rsv = Reservation()    
     return render_template('list.html', order=rsv.find_label(label))
 
 @app.route("/findall")
 def find_all():        
-    """list the reservations"""
+    """list all the reservations"""
     reservations = Reservation.objects()
     for reservation in reservations:
         return render_template('list.html', order=Reservation.objects(list()))
     
 @app.route("/delete_all")
 def delete_all():        
-    """list the reservations"""
+    """delete all the reservations"""
     rsv = Reservation()
     return render_template('list.html', order=rsv.delete_all())
 
@@ -79,50 +79,44 @@ def delete_all():
 def list():
     """list the reservations
 
-    :param label: the label of the reservation
+    as param it can get any of the arguments
     """
-    #label = "exp-1-9"
-    #reservations = Reservation.objects()
     rsv = Reservation()
     reservations = {}
     start_time ="1901-01-01"
     end_time = "2100-12-31"
-    #print 70 * "="
     if request.method=='GET':
         if(request.args.get("start") is not None):
             start_time = request.args.get("start")
         if(request.args.get("end") is not None):
             end_time = request.args.get("end") 
         reservations = rsv.list(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
-        #print reservations
-    #for reservation in reservations:
     return render_template('list.html', order=reservations)
 
 @app.route("/delete/", methods=['GET', 'POST'])
 def delete_selection():
-    """list the reservations
+    """delete a reservation
 
     :param label: the label of the reservation
     """
-    #label = "exp-1-9"
-    #reservations = Reservation.objects()
     rsv = Reservation()
     start_time ="1901-01-01"
     end_time = "2100-12-31"
-    #print 70 * "="
     if request.method=='GET':
         if(request.args.get("start") is not None):
             start_time = request.args.get("start")
         if(request.args.get("end") is not None):
             end_time = request.args.get("end") 
         rsv.delete_selection(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
-        #print reservations
-    #for reservation in reservations:
     reservations = rsv.find_all()
     return render_template('list.html', order=reservations)
    
 @app.route("/add/addFile", methods=['POST'])
 def add_submitFile():
+    """add a reservation uploading a csv file
+
+    :use a form to upload
+    """
     if request.method=='POST':
         file = request.files["file"]
         reader = csv.reader(file)
@@ -136,6 +130,8 @@ def add_submitFile():
 
 @app.route("/add/addSubmit", methods=['POST'])
 def add_submit():
+    """submit a new a reservation
+    """
     if request.method=='POST':
         reservations = Reservation(project=request.form["project"], cm_id=request.form["cm_id"], host=request.form["host"], end_time=request.form["end_time"], user=request.form["user"], start_time= request.form["start_time"], summary=request.form["summary"], label= request.form["label"])
         reservations.add()
@@ -147,14 +143,9 @@ def add_submit():
 
 @app.route("/add/")
 def route_reservation_add():
-    """add a reservation
+    """add a reservation: use a form to get info from the user
 
-    :param label: the label of the reservation
-    :param resource: the resource
-    :param time_from: the start time
-    :param time_to: the end time    
     """
-    print "in add"
     return render_template('add.html', order={})
 
 if __name__ == "__main__":
