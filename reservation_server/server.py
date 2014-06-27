@@ -65,15 +65,15 @@ def find_label(label):
 @app.route("/findall")
 def find_all():        
     """list all the reservations"""
-    reservations = Reservation.objects()
-    for reservation in reservations:
-        return render_template('list.html', order=Reservation.objects(list()))
+    rsv = Reservation()
+    return render_template('list.html', order=rsv.find_all())
     
 @app.route("/delete_all")
 def delete_all():        
     """delete all the reservations"""
     rsv = Reservation()
-    return render_template('list.html', order=rsv.delete_all())
+    rsv.delete_all()
+    return render_template('list.html', order=rsv.find_all())
 
 @app.route("/list/", methods=['GET', 'POST'])
 def list():
