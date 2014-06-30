@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form methods= ["GET", "POST"] action="/delete/">
+<h2>Delete reservation</h2><br/>
+	Cloudmesh Reservation ID: <input type="text" name="cm_id"><br/>
+	User Name:                <input type="text" name="user"><br/>
+	Project Name:             <input type="text" name="project"><br/>
+	Label: 			  <input type="text" name="label"><br/>
+	Host Machine: 		  <input type="text" name="host"><br/>
+	Start Time:  		  <input type="text" name="start_time"><br/>
+	End Time: 		  <input type="text" name="end_time"><br/>
+	Summary:  		  <input type="text" name="summary"><br/><br/>
+<button onclick="myFunction()">Delete</button>
+<script>
+function myFunction() {
+alert("Reservation deleted");
+}
+</script>
+</body>
+</html>
+</form>
