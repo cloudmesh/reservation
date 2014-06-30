@@ -18,7 +18,10 @@ def main():
     db = reservation_connect()
     app.run()
 
-
+@app.route('/homepage')
+def homepage():
+    return render_template('homepage.html')
+    
 @app.route('/')
 def route_table():
     reservations = Reservation.objects()
@@ -75,6 +78,16 @@ def delete_all():
     rsv.delete_all()
     return render_template('list.html', order=rsv.find_all())
 
+@app.route("/update/", methods=['GET', 'POST'])
+def update_selection():        
+    """delete all the reservations"""
+    if request.method=='GET':
+        fromObj = [request.args.keys()[0], request.args.values()[0]]
+        toObj = [request.args.keys()[1], request.args.values()[1]]
+    rsv = Reservation()
+    rsv.update_selection(fromObj, toObj)
+    return render_template('list.html', order=rsv.find_all())
+
 @app.route("/list/", methods=['GET', 'POST'])
 def list():
     """list the reservations
@@ -109,8 +122,8 @@ def delete_selection():
             end_time = request.args.get("end") 
         rsv.delete_selection(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
     reservations = rsv.find_all()
-    return render_template('list.html', order=reservations)
-   
+    return render_template('delete.html', order=reservations)
+       
 @app.route("/add/addFile", methods=['POST'])
 def add_submitFile():
     """add a reservation uploading a csv file

@@ -29,6 +29,14 @@ Usage:
                        [--end=TIME_END]
                        [--host=HOST]
                        [--summary=SUMMARY]
+                       [--cm_id=CM_ID]
+                       [--user=USER_ID]
+                       [--project=PROJECT_ID]
+                       [--label=STRING]
+                       [--start=TIME_START]
+                       [--end=TIME_END]
+                       [--host=HOST]
+                       [--summary=SUMMARY]
     reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
     reservation addFile --file=FILE
     
@@ -195,7 +203,7 @@ class Reservation(Document):
         except Exception as e:
             print "Error in delete all: ", e
             
-    """def update_selection(self, **kwargs):  # done  
+    def update_selection(self, **kwargs):  # done  
         start_time ="1901-01-01"
         end_time = "2100-12-31"
         if("start_time" in kwargs):
@@ -218,10 +226,152 @@ class Reservation(Document):
             del kwargs["summary"]
         print kwargs
         try:                                            
-            print Reservation.objects().update(set__user="nat")
+            print Reservation.objects(__raw__=kwargs)
         except Exception as e:
-            #print "Error in update. ", e"""
+            print "Error in update. ", e
             
+    '''def update_selection(self, fromObj, toObj):
+        #print fromObj, toObj
+        rsvs = {}
+        if("project" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(project=fromObj[1]).update(set__summary=toObj[1])
+        elif("cm_id" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(cm_id=fromObj[1]).update(set__summary=toObj[1])
+        elif("user" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(user=fromObj[1]).update(set__summary=toObj[1])
+        elif("host" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(host=fromObj[1]).update(set__summary=toObj[1])
+        elif("end_time" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(end_time=fromObj[1]).update(set__summary=toObj[1])
+        elif("start_time" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(start_time=fromObj[1]).update(set__summary=toObj[1])
+        elif("label" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(label=fromObj[1]).update(set__summary=toObj[1])
+        elif("summary" == fromObj[0]):
+            if("project" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__project=toObj[1])
+            elif("cm_id" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__cm_id=toObj[1])
+            elif("user" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__user=toObj[1])
+            elif("host" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__host=toObj[1])
+            elif("end_time" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__end_time=toObj[1])
+            elif("start_time" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__start_time=toObj[1])
+            elif("label" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__label=toObj[1])
+            elif("summary" == toObj[0]):
+                Reservation.objects(summary=fromObj[1]).update(set__summary=toObj[1])
+              
+        #print Reservation.objects(cm_id=fromObj[1])'''
+        
     def find_id(self, id):
         '''displays the reservation object
         :param id: the cm_id
@@ -287,11 +437,14 @@ def rain_arguments(arguments):
                     reservations.add()
         except Exception as e:
             print "Error in adding from file. ", e
-    elif(arguments["update"]):
+'''    elif(arguments["update"]):
           reservations = Reservation()
-          reservations.update_selection(cm_id=arguments["--cm_id"], user=arguments["--user"], project=arguments["--project"], label= arguments["--label"], start_time= arguments["--start"], end_time=arguments["--end"], host=arguments["--host"], summary=arguments["--summary"])
-      
-    
+          fromObj = [str(sys.argv[2]).split("=")[0].replace("--", ""),str(sys.argv[2]).split("=")[1]] 
+          toObj = [str(sys.argv[3]).split("=")[0].replace("--", ""),str(sys.argv[3]).split("=")[1]]
+          fromBody = {cm_id=101, project = 20, user = "oliver"}
+          toBody = {cm_id=101, project = 20, user = "oliver"}
+          reservations.update_selection(cm_id=fromObj[1],project=toObj[1])
+          print reservations.find_all()    '''
                     
 if __name__ == "__main__":
     arguments = docopt(__doc__)
