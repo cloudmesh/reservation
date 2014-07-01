@@ -1,14 +1,18 @@
+<h2>New reservation</h2>
+
 <form method="POST" action="addSubmit">
-<h2>New reservation</h2><br/>
-	Cloudmesh Reservation ID: <input type="text" name="cm_id"><br/>
-	User Name:                <input type="text" name="user"><br/>
-	Project Name:             <input type="text" name="project"><br/>
-	Label: 			  <input type="text" name="label"><br/>
-	Host Machine: 		  <input type="text" name="host"><br/>
-	Start Time:  		  <input type="text" name="start_time"><br/>
-	End Time: 		  <input type="text" name="end_time"><br/>
-	Summary:  		  <input type="text" name="summary"><br/><br/>
-	                          <input type="submit" value="Submit">
+<table>
+<tr><td> Cloudmesh Reservation ID: </td><td><input type="text" name="cm_id"></td></tr>
+<tr><td> User Name:                </td><td><input type="text" name="user"></td></tr>
+<tr><td> Project Name:             </td><td><input type="text" name="project"></td></tr>
+<tr><td> Label: 		   </td><td><input type="text" name="label"></td></tr>
+<tr><td> Host Machine: 		   </td><td><input type="text" name="host"></td></tr>
+<tr><td> Start Time:  		   </td><td><input type="text" name="start_time"></td></tr>
+<tr><td> End Time: 		   </td><td><input type="text" name="end_time"></td></tr>
+<tr><td> Summary:  		   </td><td><input type="text" name="summary"></td></tr>
+</table>
+
+<input type="submit" value="Submit">
 </form>
 OR upload file:	
 <form method="POST" action="addFile" enctype="multipart/form-data">
