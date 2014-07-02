@@ -18,11 +18,11 @@ def main():
     db = reservation_connect()
     app.run()
 
-@app.route('/homepage')
-def homepage():
-    return render_template('homepage.html')
-    
 @app.route('/')
+def homepage():
+    return render_template('index.html')
+    
+@app.route('/table')
 def route_table():
     reservations = Reservation.objects()
     for reservation in reservations:
