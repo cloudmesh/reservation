@@ -151,7 +151,9 @@ def add_submit():
     """
     if request.method=='POST':
         reservations = Reservation(project=request.form["project"], cm_id=request.form["cm_id"], host=request.form["host"], end_time=request.form["end_time"], user=request.form["user"], start_time= request.form["start_time"], summary=request.form["summary"], label= request.form["label"])
-        reservations.add()
+        str = reservations.add()
+        if str is not None:
+            return render_template('list.html', order=str)
     """list the reservations"""
     rsv = Reservation()
     reservations = rsv.find_all()
