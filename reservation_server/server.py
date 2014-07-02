@@ -43,11 +43,13 @@ def timeline():
     timeline_plot(filename)
     return render_template('plot.html')
 
-@app.route("/find_user/<user>")
-def find_user(user):        
-    """find the reservations by user"""
+@app.route("/find_user")
+def find_users():        
+    """find the reservations by user
+    *can be used in production mode
+    """
     rsv = Reservation()    
-    return render_template('list.html', order=rsv.find_user(user))
+    return render_template('finduser.html', order=rsv.find_user(user))
 
 @app.route("/find_cm_id/<cm_id>")
 def find_id(cm_id):        
