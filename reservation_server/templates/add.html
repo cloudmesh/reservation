@@ -1,3 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+
 <h2>New reservation</h2>
 
 <form method="POST" action="addSubmit">
@@ -19,3 +30,7 @@ OR upload file:
 	<input type="file" name="file" id="file">
 	<input type="submit" value="Submit">
 </form>
+
+{% endblock %}
+
+

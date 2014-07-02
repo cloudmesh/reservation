@@ -9,8 +9,10 @@ from reservation.plot import timeline_plot
 from reservation import model
 import datetime
 import csv
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)    
+Bootstrap(app)
 app.debug = True
 
 
