@@ -380,7 +380,14 @@ class Reservation(Document):
 
     def add(self):
         if(self.check_overlap() == True):
+            flag = True
             print "Reservations overlap: cannot schedule at this time"
+            while flag:
+                self.start_time = str(datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(minutes=30))
+                self.end_time = str(datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(minutes=30))
+                if(self.check_overlap()==False):
+                    flag = False
+            return "Reservations can be scheduled at :", str(self.start_time)
         else:            
             Reservation.save(self)
             print "Reservation added successfully."

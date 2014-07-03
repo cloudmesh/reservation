@@ -47,11 +47,13 @@ def timeline():
     timeline_plot(filename)
     return render_template('plot.html')
 
-@app.route("/find_user/<user>")
-def find_user(user):        
-    """find the reservations by user"""
+@app.route("/find_user")
+def find_users():        
+    """find the reservations by user
+    *can be used in production mode
+    """
     rsv = Reservation()    
-    return render_template('list.html', order=rsv.find_user(user))
+    return render_template('finduser.html', order=rsv.find_user(user))
 
 @app.route("/find_cm_id/<cm_id>")
 def find_id(cm_id):        
@@ -153,7 +155,9 @@ def add_submit():
     """
     if request.method=='POST':
         reservations = Reservation(project=request.form["project"], cm_id=request.form["cm_id"], host=request.form["host"], end_time=request.form["end_time"], user=request.form["user"], start_time= request.form["start_time"], summary=request.form["summary"], label= request.form["label"])
-        reservations.add()
+        str = reservations.add()
+        if str is not None:
+            return render_template('list.html', order=str)
     """list the reservations"""
     rsv = Reservation()
     reservations = rsv.find_all()
