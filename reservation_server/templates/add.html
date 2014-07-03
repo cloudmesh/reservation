@@ -1,13 +1,10 @@
 {% extends "layout.html" %}
 
-
-href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet" media="screen">
-
-
 {% block head %}
-   <link href="/static/css/bootstrap-combined.min.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" media="screen"
-   href="/static/css/bootstrap-datetimepicker.min.css">
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="../static/css/bootstrap-datetimepicker.min.css">
 {% endblock %}
 
 {% block content %}
@@ -17,7 +14,6 @@ href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="st
             <p class="lead">(A Cloudmesh Project)</p>
     </h1>
 
-    
 <form method="POST" action="addSubmit">
 <table>
 <tr><td> Cloudmesh Reservation ID: </td><td><input type="text" name="cm_id"></td></tr>
@@ -28,6 +24,7 @@ href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="st
 <tr>
 	<td> Start Time:  		   </td>
 	<td>
+	<body> 
 		<div id="datetimepicker1" class="input-append date">
 		      <input type="text" name="start_time"></input>
 		      <span class="add-on">
@@ -44,22 +41,22 @@ href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="st
 		      <span class="add-on">
 			<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 		      </span>
-		</div>
+		    </div>
 	</td>
 </tr>
 <tr><td> Summary:  		   </td><td><input type="text" name="summary"></td></tr>
 </table>
     <script type="text/javascript"
-     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+     src="../static/js/jquery.min.js">
     </script> 
     <script type="text/javascript"
-     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+     src="../static/js/bootstrap.min.js">
     </script>
     <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+     src="../static/js/bootstrap-datetimepicker.min.js">
     </script>
     <script type="text/javascript"
-     src="http://tarruda/js/bootstrap-datetimepicker.pt-BR.js">
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
     </script>
     <script type="text/javascript">
       $('#datetimepicker1').datetimepicker({
@@ -71,7 +68,7 @@ href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="st
         language: 'en-US'
       });
     </script>
-
+ </body>
 <input type="submit" value="Submit">
 </form>
 
@@ -83,4 +80,3 @@ OR upload file:
 </form>
 
 {% endblock %}
-
