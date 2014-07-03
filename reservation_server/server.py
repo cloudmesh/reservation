@@ -112,7 +112,11 @@ def list():
         if(request.args.get("end") is not None):
             end_time = request.args.get("end") 
         reservations = rsv.list(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
-    return render_template('list.html', order=reservations)
+        
+    return render_template('list.html', 
+                           order=Reservation._order,
+                           reservations=reservations)
+
 
 @app.route("/delete/", methods=['GET', 'POST'])
 def delete_selection():

@@ -1,19 +1,29 @@
+{% extends "layout.html" %}
+
 {% block content %}
+<br><p></p>
     <h2>Reservations</h2>
 
+          <div class="table-responsive">
+            <table class="table table-striped">
+	      <thead>
+		<tr>
+		  {% for attribute in order %}
+		  <th> {{ attribute }} </th>
+		  {% endfor %}
+		</tr>
+	      </thead>
+	      <tbody>
+		{% for reservation in reservations %}
+		<tr>
+		  {% for attribute in order %}     
+		    <td> {{ reservation[attribute] }} </td>
+		  {% endfor %}
+		</tr>
+	        {% endfor %}
+              </tbody>
+            </table>
+          </div>
 
-       {% for attribute in order %}
-            <li><p><em> {{ attribute }} </p></li>
-       {% endfor %}
-     <br>
-     
-{% for reservation in reservations %}
-       {% for attribute in order %}
-          <li><p><em> {{ reservation[attribute] }} </p></li>
-       {% endfor %}
-   <br>
-   <br>
-{% endfor %}
-</p></li>
   
-{% endblock content %}         
+{% endblock content %}
