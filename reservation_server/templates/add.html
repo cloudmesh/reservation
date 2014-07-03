@@ -1,21 +1,22 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}This is an example page{% endblock %}
+{% extends "layout.html" %}
+
+
+href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet" media="screen">
+
+
 {% block head %}
-   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+   <link href="/static/css/bootstrap-combined.min.css" rel="stylesheet">
    <link rel="stylesheet" type="text/css" media="screen"
-   href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-{% endblock %}
-{% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
+   href="/static/css/bootstrap-datetimepicker.min.css">
 {% endblock %}
 
 {% block content %}
 
-<h2>New reservation</h2>
+    <h1 class="page-header">
+            Reservation Dashboard
+            <p class="lead">(A Cloudmesh Project)</p>
+    </h1>
 
-<body>
     
 <form method="POST" action="addSubmit">
 <table>
@@ -73,7 +74,7 @@
 
 <input type="submit" value="Submit">
 </form>
-</body>
+
 <html>
 OR upload file:	
 <form method="POST" action="addFile" enctype="multipart/form-data">
