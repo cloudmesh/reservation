@@ -1,4 +1,4 @@
-{% extends "bootstrap/base.html" %}
+{% extends "layout.html" %}
 {% block title %}This is an example page{% endblock %}
 
 {% block navbar %}
@@ -9,16 +9,19 @@
 
 {% block content %}
 
-<h2>Reservation Homepage</h2>
+    <h1 class="page-header">
+            Reservation Dashboard
+            <p class="lead">(A Cloudmesh Project)</p>
+    </h1>
 
 <ul>
-<li><a href="http://127.0.0.1:5000/add"</a> Add a new reservation</li>
-<li><a href="http://127.0.0.1:5000/list"</a> List a reservation</li>
-<li><a href="http://127.0.0.1:5000/delete_all"</a> Delete all resource reservations</li>
-<li><a href="http://127.0.0.1:5000/delete"</a> Delete a reservation</li>
-<li><a href="http://127.0.0.1:5000/duration"</a> Look the duration of a reservation</li>
-<li><a href="http://127.0.0.1:5000/findall"</a> List all reservations</li>
-<li><a href="http://127.0.0.1:5000/find_cm_id"</a> Find a reservation seraching by Cloudmesh Resource ID</li>
+<li><a href="/add"</a>Add a new reservation</li>
+<li><a href="/list"</a>List a reservation</li>
+<li><a href="/delete_all"</a>Delete all resource reservations</li>
+<li><a href="/delete"</a>Delete a reservation</li>
+<li><a href="/duration"</a>Look the duration of a reservation</li>
+<li><a href="/findall"</a>List all reservations</li>
+<li><a href="/find_cm_id"</a>Find a reservation seraching by Cloudmesh Resource ID</li>
 </ul>
 
 {% endblock %}
