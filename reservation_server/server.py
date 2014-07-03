@@ -23,6 +23,10 @@ def main():
 @app.route('/')
 def homepage():
     return render_template('index.html')
+
+@app.route('/boot')
+def boot():
+    return render_template('boot.html')
     
 @app.route('/table')
 def route_table():
