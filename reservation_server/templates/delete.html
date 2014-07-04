@@ -1,6 +1,12 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="../static/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
+
+{% block content %}
 
 <h2>Delete reservation</h2>
 
@@ -24,6 +30,4 @@ alert("Reservation deleted");
 </script>
 </form>
 
-</body>
-</html>
-
+{% endblock %}

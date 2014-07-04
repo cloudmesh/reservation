@@ -37,7 +37,7 @@ def route_table():
                            reservations=reservations)
 
     
-@app.route('/time')
+@app.route('/chart')
 def timeline():
     """printing the timeline from mongodb"""
     filename="static/time-plot"
@@ -46,7 +46,7 @@ def timeline():
     timeline_plot(filename)
     return render_template('plot.html')
 
-@app.route("/find_user")
+@app.route("/find/user")
 def find_users():        
     """find the reservations by user
     *can be used in production mode
@@ -54,31 +54,31 @@ def find_users():
     rsv = Reservation()    
     return render_template('finduser.html', order=rsv.find_user(user))
 
-@app.route("/find_cm_id/<cm_id>")
+@app.route("/find/id/<cm_id>")
 def find_id(cm_id):        
     """find the reservations by cm_id"""
     rsv = Reservation()    
     return render_template('list.html', order=rsv.find_id(cm_id))
 
-@app.route("/duration/<cm_id>")
+@app.route("/list/duration/<cm_id>")
 def duration(cm_id):
     """list the reservations by duration"""
     rsv = Reservation()
     return render_template('list.html', order=rsv.duration(cm_id))
 
-@app.route("/find_label/<label>")
+@app.route("/find/label/<label>")
 def find_label(label):        
     """list the reservations by label"""
     rsv = Reservation()    
     return render_template('list.html', order=rsv.find_label(label))
 
-@app.route("/findall")
+@app.route("/find/all")
 def find_all():        
     """list all the reservations"""
     rsv = Reservation()
     return render_template('list.html', order=rsv.find_all())
     
-@app.route("/delete_all")
+@app.route("/delete/all")
 def delete_all():        
     """delete all the reservations"""
     rsv = Reservation()
@@ -161,7 +161,7 @@ def delete_selection():
     reservations = rsv.find_all()
     return render_template('delete.html', order=reservations)
        
-@app.route("/add/addFile", methods=['POST'])
+@app.route("/add/file", methods=['POST'])
 def add_submitFile():
     """add a reservation uploading a csv file
 
@@ -185,7 +185,7 @@ def add_submitFile():
     for reservation in reservations:
         return render_template('list.html', order=reservations)
 
-@app.route("/add/addSubmit", methods=['POST'])
+@app.route("/add/submit", methods=['POST'])
 def add_submit():
     """submit a new a reservation
     """
