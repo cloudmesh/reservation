@@ -32,8 +32,6 @@ def boot():
 @app.route('/table')
 def route_table():
     reservations = Reservation.objects()
-    for reservation in reservations:
-        print reservation
     return render_template('table.html',
                            order=Reservation._order,
                            reservations=reservations)
@@ -105,14 +103,31 @@ def list():
     """
     rsv = Reservation()
     reservations = {}
+
     start_time ="1901-01-01"
     end_time = "2100-12-31"
+    
     if request.method=='GET':
         if(request.args.get("start") is not None):
             start_time = request.args.get("start")
         if(request.args.get("end") is not None):
-            end_time = request.args.get("end") 
-        reservations = rsv.list(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
+            end_time = request.args.get("end")
+
+        cm_id = request.args.get("cm_id")
+        user = request.args.get("user")
+        project = request.args.get("project")
+        label = request.args.get("label")
+        host=request.args.get("host")
+        summary=request.args.get("summary")
+
+        reservations = rsv.list(cm_id=cm_id,
+                                user=user,
+                                project=project,
+                                label=label,
+                                start_time=start_time,
+                                end_time=end_time,
+                                host=host,
+                                summary=summary)
         
     return render_template('list.html', 
                            order=Reservation._order,
@@ -132,8 +147,17 @@ def delete_selection():
         if(request.args.get("start") is not None):
             start_time = request.args.get("start")
         if(request.args.get("end") is not None):
-            end_time = request.args.get("end") 
-        rsv.delete_selection(cm_id=request.args.get("cm_id"), user=request.args.get("user"), project=request.args.get("project"), label= request.args.get("label"), start_time= start_time, end_time=end_time, host=request.args.get("host"), summary=request.args.get("summary"))
+            end_time = request.args.get("end")
+            
+        rsv.delete_selection(cm_id=request.args.get("cm_id"),
+                             user=request.args.get("user"),
+                             project=request.args.get("project"),
+                             label= request.args.get("label"),
+                             start_time= start_time,
+                             end_time=end_time,
+                             host=request.args.get("host"),
+                             summary=request.args.get("summary"))
+        
     reservations = rsv.find_all()
     return render_template('delete.html', order=reservations)
        
@@ -147,7 +171,14 @@ def add_submitFile():
         file = request.files["file"]
         reader = csv.reader(file)
         for row in reader:
-            reservations = Reservation(cm_id=row[0], label=row[1], user=row[2], project=row[3], start_time=row[4], end_time=row[5], host=row[6], summary=row[7])
+            reservations = Reservation(cm_id=row[0],
+                                       label=row[1],
+                                       user=row[2],
+                                       project=row[3],
+                                       start_time=row[4],
+                                       end_time=row[5],
+                                       host=row[6],
+                                       summary=row[7])
             reservations.add()
     rsv = Reservation()
     reservations = rsv.find_all()
@@ -159,7 +190,14 @@ def add_submit():
     """submit a new a reservation
     """
     if request.method=='POST':
-        reservations = Reservation(project=request.form["project"], cm_id=request.form["cm_id"], host=request.form["host"], end_time=request.form["end_time"], user=request.form["user"], start_time= request.form["start_time"], summary=request.form["summary"], label= request.form["label"])
+        reservations = Reservation(project=request.form["project"],
+                                   cm_id=request.form["cm_id"],
+                                   host=request.form["host"],
+                                   end_time=request.form["end_time"],
+                                   user=request.form["user"],
+                                   start_time= request.form["start_time"],
+                                   summary=request.form["summary"],
+                                   label= request.form["label"])
         str = reservations.add()
         if str is not None:
             return render_template('list.html', order=str)
