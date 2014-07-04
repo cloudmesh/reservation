@@ -1,36 +1,47 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<br><p></p>
-    <h2>Reservations</h2>
 
+<h1>Reservations</h1>
 
-            <table id="example" class="display" cellspacing="0" >
-	      <thead>
-		<tr>
-		  {% for attribute in order %}
-		  <th> {{ attribute }} </th>
-		  {% endfor %}
-		  </tr>
-	      </thead>
-	      <tbody>
-		{% for reservation in reservations %}
-		<tr>
-		    {% for attribute in order %}     
-		    <td> {{ reservation[attribute] }} </td>
-		    {% endfor %}
-		  </tr>
-	        {% endfor %}
-              </tbody>
-            </table>
+<table id="example" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+    </thead>
+    
+  <tfoot>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+  </tfoot>
 
+  <tbody>
+    {% for reservation in reservations %}
+    <tr>
+      {% for attribute in order %}     
+      <td> {{ reservation[attribute] }} </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-	  <br>
-	  
-<script type="text/javascript" charset="utf8">
-$(document).ready(function() {
-    $('#example').dataTable();
-} );	  
+<script type="text/javascript" class="init">
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({ "aLengthMenu": [
+            [10, 50, 100, -1],
+            [, 50, 100, "All"]
+        ], 
+        "iDisplayLength" : -1 });
+ 
+    new $.fn.dataTable.FixedHeader( table );
+  } );
 </script>
-	  
-{% endblock content %}
+{% endblock %}

@@ -24,13 +24,6 @@ def main():
 def homepage():
     return render_template('index.html')
 
-@app.route('/a')
-def a_page():
-    reservations=Reservation.objects()
-    return render_template('a.html',
-                           order=Reservation._order,
-                           reservations=reservations)
-                           
 
 @app.route('/boot')
 def boot():
