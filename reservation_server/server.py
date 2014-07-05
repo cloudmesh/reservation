@@ -1,16 +1,22 @@
 #! /usr/bin/env python
 
-
+from docopt import docopt
 from flask import Flask, request
 from flask import render_template
 from reservation.model import reservation_connect
 from reservation.model import Reservation
+from reservation.generate import generate_from_string
 from reservation.plot import timeline_plot
 from reservation import model
 import datetime
 import csv
 from flask_bootstrap import Bootstrap
+import json
 
+#print json.dumps({'4': 5, '6': 7}, sort_keys=False,
+#                  indent=4, separators=(',', ': '))
+
+    
 app = Flask(__name__)    
 Bootstrap(app)
 app.debug = True
@@ -43,20 +49,69 @@ def list_table(data):
                             order=Reservation._order,
                             reservations=data)
     
+def entry_table(data):
+    """this method renders the reservation data in a table
+    :param data: The reservation data
+    :type data: search result from Reservation
+    """
+    try:
+        entry = data[0]
+    except:
+        return error('can not find the specified object')
+        
+    order = Reservation._order
+    return render_template('table.html',
+                            order=Reservation._order,
+                            reservation=data)
+
+@app.route('/error/<msg>')
+def error(msg):
+    return render_template('error.html',
+                            msg=msg)
+
 @app.route('/list')
 @app.route("/list/all")    
 def list():
     data = Reservation.objects()
     return list_table(data)
 
+
 @app.route("/list/user/<user>")
-def find_users(user):        
+def list_user_reservations(user):        
     """find the reservations by user
-    *can be used in production mode
+    :param user: the username
     """
     data = Reservation().find_user(user)
     return list_table(data)
 
+@app.route("/list/id/<id>")
+def find_reservation_by_id(id):        
+    """find the reservations by cm_id"""
+    data = Reservation().find_id(id)
+    return entry_table(data)
+
+@app.route("/list/label/<label>")
+def find_reservation_by_label(label):        
+    """list the reservations by label"""
+    data = Reservation().find_label(label)
+    return entry_table(data)
+
+@app.route("/delete/all")
+def delete_all():        
+    """delete all the reservations"""
+    Reservation().delete_all()
+    return list()
+
+@app.route("/random")
+def random_reservations():        
+    """delete all the reservations"""
+    generate_from_string("m[01-05] 10 10 now")
+    return list()
+
+
+# ######################################################################
+# ALL METHODS BELOW THIS ARE POSSIBLY WRONG
+# ######################################################################
 
 @app.route("/list/", methods=['GET', 'POST'])
 def list_fancy():
@@ -95,38 +150,11 @@ def list_fancy():
     return list_table(data)
 
 
-#
-# JSON CALLS
-# 
-
-@app.route("/find/id/<id>")
-def find_id(cm_id):        
-    """find the reservations by cm_id"""
-    data = Reservation().find_id(id)
-    return list_table(data)
-
-#
-# THE FOLLOWING FUNCTIONS ARE WRONG
-#
-
 @app.route("/list/duration/<cm_id>")
 def duration(id):
     """list the reservations by duration"""
     data = Reservation().duration(id)
     return list_table(data)
-
-@app.route("/find/label/<label>")
-def find_label(label):        
-    """list the reservations by label"""
-    data = Reservation().label(label)
-    return list_table(data)
-
-@app.route("/delete/all")
-def delete_all():        
-    """delete all the reservations"""
-    reservation = Reservation()
-    reservation.delete_all()
-    return {}
 
 @app.route("/update/", methods=['GET', 'POST'])
 def update_selection():        

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Reservation</h1>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <td>Attribute</td>
+      <td>Value</td>      
+    </tr>
+  </thead>
+  <tbody>
+    {% for attribute in order %}     
+    <tr>
+      <td> {{ attribute }}</td>
+      <td> {{ reservation[attribute] }} </td>
+    </tr>
+    {% endfor %}    
+  </tbody>
+</table>
+<br>
+
+<script type="text/javascript" class="init">
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({ "aLengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "All"]
+        ], 
+        "iDisplayLength" : -1 });
+ 
+    new $.fn.dataTable.FixedHeader( table );
+  } );
+</script>
+{% endblock %}
