@@ -24,85 +24,48 @@ def main():
 def homepage():
     return render_template('index.html')
 
-
-@app.route('/boot')
-def boot():
-    return render_template('boot.html')
-    
-@app.route('/table')
-def route_table():
-    reservations = Reservation.objects()
-    return render_template('table.html',
-                           order=Reservation._order,
-                           reservations=reservations)
-
-    
 @app.route('/chart')
 def timeline():
     """printing the timeline from mongodb"""
     filename="static/time-plot"
-    
     print "TIMELINE", filename
     timeline_plot(filename)
     return render_template('plot.html')
 
-@app.route("/find/user")
-def find_users():        
+
+def list_table(data):
+    """this method renders the reservation data in a table
+    :param data: The reservation data
+    :type data: search result from Reservation
+    """ 
+    order = Reservation._order
+    return render_template('list.html',
+                            order=Reservation._order,
+                            reservations=data)
+    
+@app.route('/list')
+@app.route("/list/all")    
+def list():
+    data = Reservation.objects()
+    return list_table(data)
+
+@app.route("/list/user/<user>")
+def find_users(user):        
     """find the reservations by user
     *can be used in production mode
     """
-    rsv = Reservation()    
-    return render_template('finduser.html', order=rsv.find_user(user))
+    data = Reservation().find_user(user)
+    return list_table(data)
 
-@app.route("/find/id/<cm_id>")
-def find_id(cm_id):        
-    """find the reservations by cm_id"""
-    rsv = Reservation()    
-    return render_template('list.html', order=rsv.find_id(cm_id))
-
-@app.route("/list/duration/<cm_id>")
-def duration(cm_id):
-    """list the reservations by duration"""
-    rsv = Reservation()
-    return render_template('list.html', order=rsv.duration(cm_id))
-
-@app.route("/find/label/<label>")
-def find_label(label):        
-    """list the reservations by label"""
-    rsv = Reservation()    
-    return render_template('list.html', order=rsv.find_label(label))
-
-@app.route("/find/all")
-def find_all():        
-    """list all the reservations"""
-    rsv = Reservation()
-    return render_template('list.html', order=rsv.find_all())
-    
-@app.route("/delete/all")
-def delete_all():        
-    """delete all the reservations"""
-    rsv = Reservation()
-    rsv.delete_all()
-    return render_template('list.html', order=rsv.find_all())
-
-@app.route("/update/", methods=['GET', 'POST'])
-def update_selection():        
-    """delete all the reservations"""
-    if request.method=='GET':
-        fromObj = [request.args.keys()[0], request.args.values()[0]]
-        toObj = [request.args.keys()[1], request.args.values()[1]]
-    rsv = Reservation()
-    rsv.update_selection(fromObj, toObj)
-    return render_template('list.html', order=rsv.find_all())
 
 @app.route("/list/", methods=['GET', 'POST'])
-def list():
+def list_fancy():
     """list the reservations
 
     as param it can get any of the arguments
     """
-    rsv = Reservation()
-    reservations = {}
+    reservations = Reservation()
+    data = {}
 
     start_time ="1901-01-01"
     end_time = "2100-12-31"
@@ -120,7 +83,7 @@ def list():
         host=request.args.get("host")
         summary=request.args.get("summary")
 
-        reservations = rsv.list(cm_id=cm_id,
+        data = reservations.list(cm_id=cm_id,
                                 user=user,
                                 project=project,
                                 label=label,
@@ -129,10 +92,53 @@ def list():
                                 host=host,
                                 summary=summary)
         
-    return render_template('list.html', 
-                           order=Reservation._order,
-                           reservations=reservations)
+    return list_table(data)
 
+
+#
+# JSON CALLS
+# 
+
+@app.route("/find/id/<id>")
+def find_id(cm_id):        
+    """find the reservations by cm_id"""
+    data = Reservation().find_id(id)
+    return list_table(data)
+
+#
+# THE FOLLOWING FUNCTIONS ARE WRONG
+#
+
+@app.route("/list/duration/<cm_id>")
+def duration(id):
+    """list the reservations by duration"""
+    data = Reservation().duration(id)
+    return list_table(data)
+
+@app.route("/find/label/<label>")
+def find_label(label):        
+    """list the reservations by label"""
+    data = Reservation().label(label)
+    return list_table(data)
+
+@app.route("/delete/all")
+def delete_all():        
+    """delete all the reservations"""
+    reservation = Reservation()
+    reservation.delete_all()
+    return {}
+
+@app.route("/update/", methods=['GET', 'POST'])
+def update_selection():        
+    """delete all the reservations"""
+    if request.method=='GET':
+        fromObj = [request.args.keys()[0], request.args.values()[0]]
+        toObj = [request.args.keys()[1], request.args.values()[1]]
+    reservations = Reservation()
+    reservations.update_selection(fromObj, toObj)
+    data = reservations.all()
+    order = reservations._order
+    return render_template('list.html', order=order, reservation=data)
 
 @app.route("/delete/", methods=['GET', 'POST'])
 def delete_selection():
@@ -140,7 +146,7 @@ def delete_selection():
 
     :param label: the label of the reservation
     """
-    rsv = Reservation()
+    reservations = Reservation()
     start_time ="1901-01-01"
     end_time = "2100-12-31"
     if request.method=='GET':
@@ -149,7 +155,7 @@ def delete_selection():
         if(request.args.get("end") is not None):
             end_time = request.args.get("end")
             
-        rsv.delete_selection(cm_id=request.args.get("cm_id"),
+        reservations.delete_selection(cm_id=request.args.get("cm_id"),
                              user=request.args.get("user"),
                              project=request.args.get("project"),
                              label= request.args.get("label"),
@@ -158,9 +164,11 @@ def delete_selection():
                              host=request.args.get("host"),
                              summary=request.args.get("summary"))
         
-    reservations = rsv.find_all()
-    return render_template('delete.html', order=reservations)
-       
+    return list()
+
+#
+# THIS METHOD DOES NOT WORK
+#
 @app.route("/add/file", methods=['POST'])
 def add_submitFile():
     """add a reservation uploading a csv file
@@ -180,11 +188,12 @@ def add_submitFile():
                                        host=row[6],
                                        summary=row[7])
             reservations.add()
-    rsv = Reservation()
-    reservations = rsv.find_all()
-    for reservation in reservations:
-        return render_template('list.html', order=reservations)
 
+    return list()
+
+#
+# THIS METHOD DOES NOT WORK
+#
 @app.route("/add/submit", methods=['POST'])
 def add_submit():
     """submit a new a reservation
@@ -201,12 +210,13 @@ def add_submit():
         str = reservations.add()
         if str is not None:
             return render_template('list.html', order=str)
-    """list the reservations"""
-    rsv = Reservation()
-    reservations = rsv.find_all()
-    for reservation in reservations:
-        return render_template('list.html', order=reservations)
 
+    """list the reservations"""
+    return list()
+
+#
+# THIS METHOD DOES NOT WORK
+#
 @app.route("/add/")
 def route_reservation_add():
     """add a reservation: use a form to get info from the user
