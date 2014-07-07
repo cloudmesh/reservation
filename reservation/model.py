@@ -64,6 +64,7 @@ import datetime
 import sys
 import csv
 import os
+import json
 import pprint
 
 def reservation_connect():
@@ -110,7 +111,7 @@ class Reservation(Document):
              "project": self.project,
              "start_time": str(self.start_time),
              "end_time": str(self.end_time)}
-        return d
+        return json.dumps(d)
            
     def find_user(self, username):
         '''Selects all the reservations made by a user
@@ -170,7 +171,7 @@ class Reservation(Document):
 
         reservations = Reservation.objects(cm_id=cm_id)
         delta = 0
-        print reservations
+        #print reservations
         for x in reservations:
              delta = x.end_time - x.start_time
 
