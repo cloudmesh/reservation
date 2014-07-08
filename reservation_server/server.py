@@ -1,9 +1,8 @@
 #! /usr/bin/env python
 
 from docopt import docopt
-from flask import Flask, request, Response
+from flask import Flask, request
 from flask import render_template
-from flask.ext.restful import reqparse, abort, Api, Resource
 from reservation.model import reservation_connect
 from reservation.model import Reservation
 from reservation.generate import generate_from_string
@@ -13,86 +12,15 @@ import datetime
 import csv
 from flask_bootstrap import Bootstrap
 import json
-from flask import jsonify
-
 
 #print json.dumps({'4': 5, '6': 7}, sort_keys=False,
 #                  indent=4, separators=(',', ': '))
 
     
-app = Flask(__name__)   
-api = Api(app) 
+app = Flask(__name__)    
 Bootstrap(app)
 app.debug = True
 
-
-class RestDeleteAll(Resource):
-    def get(self):
-        Reservation().delete_all()
-        resp = Response(list(), status=200, mimetype='text/html')
-        return resp
-    
-class List(Resource):
-    def get(self):
-        data = Reservation.objects()
-        resp = Response(list_table(data), status=200, mimetype='text/html')
-        return resp
-    
-class Add(Resource):
-    def get(self):
-        resp = Response(render_template('add.html', order={}), status=200, mimetype='text/html')
-        return resp
-
-class AddSubmit(Resource):
-    """submit a new a reservation
-    """
-    def post(self):
-        reservations = Reservation(project=request.form["project"],
-                                   cm_id=request.form["cm_id"],
-                                   host=request.form["host"],
-                                   end_time=request.form["end_time"],
-                                   user=request.form["user"],
-                                   start_time= request.form["start_time"],
-                                   summary=request.form["summary"],
-                                   label= request.form["label"])
-        str = reservations.add()
-        if str is not None:
-            print str
-            resp = Response(list_table(str), status=200, mimetype='text/html')
-            return resp
-
-        """list the reservations"""
-        resp = Response(list(), status=200, mimetype='text/html')
-        return resp
-    
-class AddSubmitFile(Resource):
-    """add a reservation uploading a csv file
-
-    :use a form to upload
-    """
-    def post(self):
-        file = request.files["file"]
-        reader = csv.reader(file)
-        for row in reader:
-            reservations = Reservation(cm_id=row[0],
-                                       label=row[1],
-                                       user=row[2],
-                                       project=row[3],
-                                       start_time=row[4],
-                                       end_time=row[5],
-                                       host=row[6],
-                                       summary=row[7])
-            reservations.add()
-
-        """list the reservations"""
-        resp = Response(list(), status=200, mimetype='text/html')
-        return resp
-
-api.add_resource(RestDeleteAll, '/delete/all')
-api.add_resource(List, '/list')
-api.add_resource(Add, '/add/')
-api.add_resource(AddSubmit, '/add/submit')
-api.add_resource(AddSubmitFile, '/add/file')
 
 def main():
     db = reservation_connect()
@@ -100,7 +28,7 @@ def main():
 
 @app.route('/')
 def homepage():
-    return 
+    return render_template('index.html')
 
 @app.route('/chart')
 def timeline():
@@ -110,9 +38,6 @@ def timeline():
     timeline_plot(filename)
     return render_template('plot.html')
 
-def list():
-    data = Reservation.objects()
-    return list_table(data)
 
 def list_table(data):
     """this method renders the reservation data in a table
@@ -144,8 +69,11 @@ def error(msg):
     return render_template('error.html',
                             msg=msg)
 
-    
-
+@app.route('/list')
+@app.route("/list/all")    
+def list():
+    data = Reservation.objects()
+    return list_table(data)
 
 
 @app.route("/list/user/<user>")
@@ -168,11 +96,11 @@ def find_reservation_by_label(label):
     data = Reservation().find_label(label)
     return entry_table(data)
 
-'''@app.route("/delete/all")
+@app.route("/delete/all")
 def delete_all():        
     """delete all the reservations"""
     Reservation().delete_all()
-    return list()'''
+    return list()
 
 @app.route("/random")
 def random_reservations():        
@@ -184,6 +112,9 @@ def random_reservations():
 # ######################################################################
 # ALL METHODS BELOW THIS ARE POSSIBLY WRONG
 # ######################################################################
+
+# /find/<time_start/<time_end>/<user>/
+
 
 @app.route("/list/", methods=['GET', 'POST'])
 def list_fancy():
@@ -222,13 +153,11 @@ def list_fancy():
     return list_table(data)
 
 
-@app.route("/duration/<id>")
+@app.route("/list/duration/<cm_id>")
 def duration(id):
     """list the reservations by duration"""
     data = Reservation().duration(id)
-    #print data 
-    return render_template('list.html', order=str(data))
-
+    return list_table(data)
 
 @app.route("/update/", methods=['GET', 'POST'])
 def update_selection():        
@@ -265,10 +194,33 @@ def delete_selection():
                              end_time=end_time,
                              host=request.args.get("host"),
                              summary=request.args.get("summary"))
-        
-    return list()
+        for reservation in reservations:
+        	list()
+        	return render_template('delete.html', order=reservations.delete_selection())'''
 
-'''@app.route("/add/file", methods=['POST'])
+    return render_template('delete.html', order={})
+
+@app.route("/delete/deleted", methods=['POST'])
+def delete_deleted():
+    """submit a new a reservation
+    """
+    if request.method=='POST':
+        reservations = Reservation(project=request.form["project"],
+                                   cm_id=request.form["cm_id"],
+                                   host=request.form["host"],
+                                   end_time=request.form["end_time"],
+                                   user=request.form["user"],
+                                   start_time= request.form["start_time"],
+                                   summary=request.form["summary"],
+                                   label= request.form["label"])
+        str = reservations.delete_selection()
+        if str is not None:
+            return list()'''
+
+#
+# THIS METHOD DOES NOT WORK
+#
+@app.route("/add/file", methods=['POST'])
 def add_submitFile():
     """add a reservation uploading a csv file
 
@@ -288,9 +240,12 @@ def add_submitFile():
                                        summary=row[7])
             reservations.add()
 
-    return list()'''
+    return list()
 
-'''@app.route("/add/submit", methods=['POST'])
+#
+# THIS METHOD DOES NOT WORK
+#
+@app.route("/add/submit", methods=['POST'])
 def add_submit():
     """submit a new a reservation
     """
@@ -308,14 +263,17 @@ def add_submit():
             return render_template('list.html', order=str)
 
     """list the reservations"""
-    return list()'''
+    return list()
 
-'''@app.route("/add/")
+#
+# THIS METHOD DOES NOT WORK
+#
+@app.route("/add/")
 def route_reservation_add():
     """add a reservation: use a form to get info from the user
 
     """
-    return render_template('add.html', order={})'''
+    return render_template('add.html', order={})
 
 if __name__ == "__main__":
     main()
