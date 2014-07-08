@@ -196,8 +196,8 @@ def delete_selection():
                              summary=request.args.get("summary"))
         for reservation in reservations:
         	list()
-        	return render_template('delete.html', order=reservations.delete_selection())'''
-
+        	return render_template('delete.html', order=reservations.delete_selection())
+    '''
     return render_template('delete.html', order={})
 
 @app.route("/delete/deleted", methods=['POST'])
