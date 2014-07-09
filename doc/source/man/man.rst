@@ -67,6 +67,7 @@ reservation
                               the start time. [default: +1d]
        --format=FORMAT        Format of the output table, json, cfg.
                               [default: table]
+                              
    
 generate
 ======================================================================

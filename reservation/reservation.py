@@ -58,6 +58,7 @@ Options:
                            the start time. [default: +1d]
     --format=FORMAT        Format of the output table, json, cfg.
                            [default: table]
+                           
 """
 from cloudmesh.config.ConfigDict import ConfigDict
 from docopt import docopt
