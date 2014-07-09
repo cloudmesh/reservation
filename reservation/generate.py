@@ -78,7 +78,7 @@ def generate(arguments):
         print "generate"
         print 70 * "="
         print "\n::\n"
-        lines = __doc__.split("\n")
+        lines = generate.__doc__.split("\n")
         for line in lines:
             print "  ", line
 
