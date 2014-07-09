@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1 class="page-header">
+            Reservation Dashboard
+            <p class="lead">(A Cloudmesh Project)</p>
+    </h1>
+{% block head %}
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="../static/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
+    
+<form method="POST" action="submit">
+<table>
+<tr><td> Cloudmesh Reservation ID: </td><td><input type="text" name="cm_id"></td></tr>
+<tr><td> User Name:                </td><td><input type="text" name="user"></td></tr>
+<tr><td> Project Name:             </td><td><input type="text" name="project"></td></tr>
+<tr><td> Label: 		   </td><td><input type="text" name="label"></td></tr>
+<tr><td> Host Machine: 		   </td><td><input type="text" name="host"></td></tr>
+<tr>
+	<td> Start Time:  		   </td>
+	<td> 
+		<div id="datetimepicker1" class="input-append date">
+		      <input type="text" name="start_time"></input>
+		      <span class="add-on">
+			<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+		      </span>
+		    </div>
+	</td>
+</tr>
+<tr>
+	<td> End Time: 		   </td>
+	<td>
+		<div id="datetimepicker2" class="input-append date">
+		      <input type="text" name="end_time"></input>
+		      <span class="add-on">
+			<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+		      </span>
+		    </div>
+	</td>
+</tr>
+<tr><td> Summary:  		   </td><td><input type="text" name="summary"></td></tr>
+</table>
+    <script type="text/javascript"
+     src="../static/js/jquery.min.js">
+    </script> 
+    <script type="text/javascript"
+     src="../static/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="../static/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+    <script type="text/javascript">
+      $('#datetimepicker1').datetimepicker({
+        format: 'yyyy-MM-dd hh:mm:ss',
+        language: 'en-US'
+      });
+       $('#datetimepicker2').datetimepicker({
+        format: 'yyyy-MM-dd hh:mm:ss',
+        language: 'en-US'
+      });
+    </script>
+<input type="submit" value="submit">
+<script>
+}
+</script>
+</form>
+
+{% endblock %}
