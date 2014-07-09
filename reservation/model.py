@@ -64,7 +64,6 @@ import datetime
 import sys
 import csv
 import os
-import json
 import pprint
 
 def reservation_connect():
@@ -111,7 +110,7 @@ class Reservation(Document):
              "project": self.project,
              "start_time": str(self.start_time),
              "end_time": str(self.end_time)}
-        return json.dumps(d)
+        return d
            
     def find_user(self, username):
         '''Selects all the reservations made by a user
@@ -131,40 +130,6 @@ class Reservation(Document):
         :param label: the label
         '''
         return Reservation.objects(label=label)
-
-    def list(self, **kwargs):
-        '''Lists all the users reservations made in a project from a
-        start time to a end time'''        
-        start_time ="1901-01-01"
-        end_time = "2100-12-31"
-        #print "oliver ::",kwargs
-        #pp = pprint.PrettyPrinter()
-        #print "=" *70
-        #pp.pprint(kwargs)
-        print "\n\n"
-        if("start_time" in kwargs):
-            start_time = kwargs['start_time']
-            del kwargs['start_time']
-        if("end_time" in kwargs):
-            end_time = kwargs['end_time']
-            del kwargs['end_time']
-        if(kwargs["label"] is None):
-            del kwargs["label"]
-        if(kwargs["user"] is None):
-            del kwargs["user"]
-        if(kwargs["project"] is None):
-            del kwargs["project"]
-        if(kwargs["host"] is None):
-            del kwargs["host"]
-        if(kwargs["summary"] is None):
-            del kwargs["summary"]
-        if(kwargs["cm_id"] is None):
-            del kwargs["cm_id"]
-        #pp.pprint(kwargs)
-        #print "laughing: ", start_time, "__", end_time
-        reservations = Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time)
-        
-        return reservations
         
     def duration(self, cm_id):
         '''Shows the duration of the reservation'''
@@ -177,28 +142,42 @@ class Reservation(Document):
 
         return delta
     
-    def delete_all(self):
-        Reservation.drop_collection()
-    
-    def delete_selection(self, **kwargs):  # done    
-        start_time = datetime.datetime.now()
-        end_time = datetime.datetime.now()
+    def list(self, **kwargs):
+        '''Lists all the users reservations made in a project from a
+        start time to a end time'''        
+        start_time ="1901-01-01"
+        end_time = "2100-12-31"
+        empty_keys = [k for k,v in kwargs.iteritems() if not v]
+        for k in empty_keys:
+            del kwargs[k]
         if("start_time" in kwargs):
             start_time = kwargs['start_time']
             del kwargs['start_time']
         if("end_time" in kwargs):
             end_time = kwargs['end_time']
             del kwargs['end_time']
-        if(kwargs["label"] is None):
-            del kwargs["label"]
-        if(kwargs["user"] is None):
-            del kwargs["user"]
-        if(kwargs["project"] is None):
-            del kwargs["project"]
-        if(kwargs["host"] is None):
-            del kwargs["host"]
-        if(kwargs["cm_id"] is None):
-            del kwargs["cm_id"]
+        '''test change'''
+        #pp.pprint(kwargs)
+        #print "laughing: ", start_time, "__", end_time
+        reservations = Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time)
+        
+        return reservations
+    
+    def delete_all(self):
+        Reservation.drop_collection()
+    
+    def delete_selection(self, **kwargs):  # done    
+        start_time ="1901-01-01"
+        end_time = "2100-12-31"
+        empty_keys = [k for k,v in kwargs.iteritems() if not v]
+        for k in empty_keys:
+            del kwargs[k]
+        if("start_time" in kwargs):
+            start_time = kwargs['start_time']
+            del kwargs['start_time']
+        if("end_time" in kwargs):
+            end_time = kwargs['end_time']
+            del kwargs['end_time']
         try:
             Reservation.objects(__raw__=kwargs, start_time__gte=start_time, end_time__lte=end_time).delete()
         except Exception as e:
@@ -207,25 +186,15 @@ class Reservation(Document):
     def update_selection(self, **kwargs):  # done  
         start_time ="1901-01-01"
         end_time = "2100-12-31"
+        empty_keys = [k for k,v in kwargs.iteritems() if not v]
+        for k in empty_keys:
+            del kwargs[k]
         if("start_time" in kwargs):
             start_time = kwargs['start_time']
             del kwargs['start_time']
         if("end_time" in kwargs):
             end_time = kwargs['end_time']
-            del kwargs['end_time'] 
-        if(kwargs["label"] is None):
-            del kwargs["label"]
-        if(kwargs["user"] is None):
-            del kwargs["user"]
-        if(kwargs["project"] is None):
-            del kwargs["project"]
-        if(kwargs["host"] is None):
-            del kwargs["host"]
-        if(kwargs["cm_id"] is None):
-            del kwargs["cm_id"]
-        if(kwargs["summary"] is None):
-            del kwargs["summary"]
-        print kwargs
+            del kwargs['end_time']
         try:                                            
             print Reservation.objects(__raw__=kwargs)
         except Exception as e:
