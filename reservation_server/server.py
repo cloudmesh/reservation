@@ -171,11 +171,28 @@ def update_selection():
     order = reservations._order
     return render_template('list.html', order=order, reservation=data)
 
-@app.route("/delete/", methods=['GET', 'POST'])
+@app.route("/delete/", methods=['POST'])
 def delete_selection():
     """delete a reservation
 
     :param label: the label of the reservation
+    :type label: String
+    :param start_time: bla bla
+    :type start_time: Datetime
+    :param end_time: bla bla
+    :type end_time: Datetime    
+    :param cm_id: bla bla
+    :type cm_id: String
+    :param user: bla bla
+    :type user: String
+    :param project: bla bla
+    :type project: String
+    :param label: bla bla
+    :type label: String
+    :param host: bla bla                        
+    :type host: String
+    :param summary: whay do we search on the summary?????
+    :type summary: NOT SURE WHY WE ALLO PASSING IN TEH SUMMARY SEEMS A BUG, BUT MAYBE YOU CAN EXPLAIN
     """
     reservations = Reservation()
     start_time ="1901-01-01"
