@@ -100,7 +100,7 @@ def timeline_plot(out_filename):
     command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename, filename=filename, format=format, ploticus=ploticus )
 
     os.system(command)
-    return true
+    return True
 
 
 if __name__ == "__main__":
