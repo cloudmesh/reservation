@@ -14,7 +14,8 @@ import csv
 from flask_bootstrap import Bootstrap
 import json
 from flask import jsonify
-
+from random import randint
+ 
 
 #print json.dumps({'4': 5, '6': 7}, sort_keys=False,
 # indent=4, separators=(',', ': '))
@@ -182,8 +183,10 @@ def timeline():
     filename="static/time-plot"
     print "TIMELINE", filename
 
+    random_number = randint(1,100000000)
+    
     if timeline_plot(filename):
-        return render_template('plot.html')        
+        return render_template('plot.html',number=random_number)        
     else:
         return error('No Reservation data found.')
 
