@@ -1,4 +1,4 @@
-reservation_server/static/time-plot.svg
+reservation_server/static/*.svg
 .DS_Store
 .settings*
 *.pid
