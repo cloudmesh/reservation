@@ -173,8 +173,8 @@ def main():
     app.run()
 
 @app.route('/')
-def homepage():
-    return
+def index():
+    return render_template('index.html')
 
 @app.route('/chart')
 def timeline():
