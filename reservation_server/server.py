@@ -181,8 +181,11 @@ def timeline():
     """printing the timeline from mongodb"""
     filename="static/time-plot"
     print "TIMELINE", filename
-    timeline_plot(filename)
-    return render_template('plot.html')
+
+    if timeline_plot(filename):
+        return render_template('plot.html')        
+    else:
+        return error('No Reservation data found.')
 
 def list():
     data = Reservation.objects()

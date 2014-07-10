@@ -22,6 +22,9 @@ def timeline_plot(out_filename):
     hosts = set()
     times = set()
 
+    if reservations.count() == 0:
+        return False
+    
     data = []
     for reservation in reservations:
         hosts.add(reservation["host"])
@@ -97,7 +100,7 @@ def timeline_plot(out_filename):
     command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename, filename=filename, format=format, ploticus=ploticus )
 
     os.system(command)
-    
+    return true
 
 
 if __name__ == "__main__":
