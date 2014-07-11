@@ -14,6 +14,8 @@ def reservation_connect():
 def shell_command_reservation(arguments):
     """
     Usage:
+        reservation --rst
+        reservation --version
         reservation find [all]
                          [--user=USER_ID]
                          [--label=ID]
@@ -44,14 +46,7 @@ def shell_command_reservation(arguments):
                            [--host=HOST]
                            [--summary=SUMMARY]
                            [--cm_id=CM_ID]
-        reservation add --cm_id=CM_ID
-                        --user=USER_ID
-                        --project=PROJECT_ID
-                        --label=STRING
-                        --start=TIME_START
-                        --end=TIME_END
-                        --host=HOST
-                        --summary=SUMMARY
+        reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
         reservation addFile --file=FILE
 
     Options:
@@ -73,7 +68,7 @@ def shell_command_reservation(arguments):
         --file=FILE           Adding multiple reservations from one file
 
 
-"""
+    """
 
     #print arguments["login"]
     if arguments["--rst"]:
