@@ -88,7 +88,7 @@ def shell_command_reservation(arguments):
         print "reservation"
         print 70 * "="
         print "\n::\n"
-        lines = __doc__.split("\n")
+        lines = shell_command_reservation.__doc__.split("\n")
         for line in lines:
             print "  ", line
 
