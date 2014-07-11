@@ -21,6 +21,7 @@ Cloudmesh Reservation
 
    introduction
    deploy
+   tests
    man/man
    rest
 
