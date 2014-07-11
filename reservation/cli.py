@@ -1,6 +1,8 @@
 from model import Reservation
 from mongoengine import *
 from docopt import docopt
+import pprint
+import json
 
 def reservation_connect():
     try:
@@ -11,6 +13,11 @@ def reservation_connect():
         print e
         return None
     
+def printRsv(rsvs):
+    for rsv in rsvs:
+        print rsv
+        print 140 * "="
+        
 
 def shell_command_reservation(arguments):
     """
@@ -98,20 +105,20 @@ def shell_command_reservation(arguments):
                                end_time=arguments["--end"],
                                host=arguments["--host"],
                                summary=arguments["--summary"])
-        for x in rsv:
-            print x
-            print 70 * "="
+        printRsv(rsv)
 
     elif(arguments["find"]):
         reservations = Reservation()
         if(arguments["all"]):
-            print reservations.find_all()
+            printRsv(reservations.find_all())
         elif(arguments["--user"]):
-            print reservations.find_user(arguments["--user"])
+            printRsv(reservations.find_user(arguments["--user"]))
         elif(arguments["--label"]):
-            print reservations.find_label(arguments["--label"])
+            printRsv(reservations.find_label(arguments["--label"]))
         elif(arguments["--cm_id"]):
-            print reservations.find_id(arguments["--cm_id"])
+            printRsv(reservations.find_id(arguments["--cm_id"]))
+        else:
+            printRsv( reservations.find_all())
     elif(arguments["duration"]):
         reservations = Reservation()
         print reservations.duration(arguments["--cm_id"])
