@@ -47,7 +47,7 @@ def shell_command_reservation(arguments):
                            [--summary=SUMMARY]
                            [--cm_id=CM_ID]
         reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
-        reservation addFile --file=FILE
+        reservation add --file=FILE
 
     Options:
         --rst                 print an rst manul page
@@ -128,31 +128,35 @@ def shell_command_reservation(arguments):
                                           end_time=arguments["--end"],
                                           host=arguments["--host"])
     elif(arguments["add"]):
-        reservations = Reservation(label=arguments["--label"],
-                                   user=arguments["--user"],
-                                   project=arguments["--project"],
-                                   start_time=arguments["--start"],
-                                   end_time=arguments["--end"],
-                                   cm_id=arguments["--cm_id"],
-                                   host=arguments["--host"],
-                                   summary=arguments["--summary"])
-        reservations.add()
-    elif(arguments["addFile"] and arguments["--file"] is not None):
-        try:
-            with open(os.path.join(sys.path[0], arguments["--file"])) as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    reservations = Reservation(cm_id=row[0],
-                                               label=row[1],
-                                               user=row[2],
-                                               project=row[3],
-                                               start_time=row[4],
-                                               end_time=row[5],
-                                               host=row[6],
-                                               summary=row[7])
-                    reservations.add()
-        except Exception as e:
-            print "Error in adding from file. ", e
+
+        if arguments["--file"] is None:
+
+            
+            reservations = Reservation(label=arguments["--label"],
+                                    user=arguments["--user"],
+                                    project=arguments["--project"],
+                                    start_time=arguments["--start"],
+                                    end_time=arguments["--end"],
+                                    cm_id=arguments["--cm_id"],
+                                    host=arguments["--host"],
+                                    summary=arguments["--summary"])
+            reservations.add()
+        else:
+            try:
+                with open(os.path.join(sys.path[0], arguments["--file"])) as file:
+                    reader = csv.reader(file)
+                    for row in reader:
+                        reservations = Reservation(cm_id=row[0],
+                                                label=row[1],
+                                                user=row[2],
+                                                project=row[3],
+                                                start_time=row[4],
+                                                end_time=row[5],
+                                                host=row[6],
+                                                summary=row[7])
+                        reservations.add()
+            except Exception as e:
+                print "Error in adding from file. ", e
 '''    elif(arguments["update"]):
           reservations = Reservation()
           fromObj = [str(sys.argv[2]).split("=")[0].replace("--", ""),str(sys.argv[2]).split("=")[1]] 
