@@ -8,8 +8,6 @@ requests
 sphinx
 sphinx_bootstrap_theme
 google-api-python-client
-apiclient
-httplib2
 sphinxcontrib-exceltable
 sphinxcontrib-httpdomain
 pytimeparse
@@ -25,3 +23,4 @@ WTForms
 Flask-WTF
 sphinxcontrib-webmocks
 Flask-RESTful
+CMD3
