@@ -1,5 +1,5 @@
 from cmd3.shell import function_command
-from cloudmesh_reservation.submit import shell_command_reservation
+from reservation.cli import shell_command_reservation
 
 class cm_shell_reservation:
     
