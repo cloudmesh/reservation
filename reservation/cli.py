@@ -9,6 +9,7 @@ def reservation_connect():
     except Exception, e:
         print "ERROR: could not establish a connection to mongo db"
         print e
+        return None
     
 
 def shell_command_reservation(arguments):
