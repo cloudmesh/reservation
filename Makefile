@@ -9,6 +9,9 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+test:
+	nosetests -v
+
 req:
 	pip install -r requirements.txt
 
