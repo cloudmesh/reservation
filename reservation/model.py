@@ -348,13 +348,16 @@ class Reservation(Document):
         '''
         return Reservation.objects(cm_id=id)
 
+    def time_string(date_time):
+        return datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
+            
     def add(self):
         if(self.check_overlap() == True):
             flag = True
             print "Reservations overlap: cannot schedule at this time"
             while flag:
-                self.start_time = str(datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(minutes=30))
-                self.end_time = str(datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(minutes=30))
+                self.start_time = str(self.time_string(self.start_time) + datetime.timedelta(minutes=30))
+                self.end_time = str(self.time_string(self.end_time)+ datetime.timedelta(minutes=30))
                 if(self.check_overlap()==False):
                     flag = False
             return "Reservations can be scheduled at :", str(self.start_time)
@@ -366,10 +369,15 @@ class Reservation(Document):
         #print self.start_time, self.end_time
         flag = False
         rsvs= self.find_all()
-        start_time = datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
-        end_time = datetime.datetime.strptime(self.end_time, "%Y-%m-%d %H:%M:%S")
+        start_time = self.time_string(self.start_time)
+        end_time = self.time_string(self.end_time)
         for rsv in rsvs:
-            if((rsv['start_time'] <= start_time and rsv['end_time'] >= start_time and (self.host == rsv['host'])) or (end_time <= rsv['end_time'] and rsv['start_time'] <= end_time and (self.host == rsv['host']))):
+            if((rsv['start_time'] <= start_time and
+                rsv['end_time'] >= start_time and
+                (self.host == rsv['host'])) or
+                (end_time <= rsv['end_time']
+                 and rsv['start_time'] <= end_time
+                and (self.host == rsv['host']))):
                 flag = True
                 break;
         return flag
@@ -378,7 +386,14 @@ def rain_arguments(arguments):
     #print arguments["login"]
     if(arguments["list"]):
         reservations = Reservation()
-        rsv= reservations.list(cm_id=arguments["--cm_id"], user=arguments["--user"], project=arguments["--project"], label= arguments["--label"], start_time= arguments["--start"], end_time=arguments["--end"], host=arguments["--host"], summary=arguments["--summary"])
+        rsv= reservations.list(cm_id=arguments["--cm_id"],
+                               user=arguments["--user"],
+                               project=arguments["--project"],
+                               label= arguments["--label"],
+                               start_time= arguments["--start"],
+                               end_time=arguments["--end"],
+                               host=arguments["--host"],
+                               summary=arguments["--summary"])
         for x in rsv:
             print x
             print 70 * "="
@@ -401,9 +416,22 @@ def rain_arguments(arguments):
             reservations.delete_all()
         else:
             reservations = Reservation()
-            reservations.delete_selection(cm_id=arguments["--cm_id"], user=arguments["--user"], project=arguments["--project"], label= arguments["--label"], start_time= arguments["--start"], end_time=arguments["--end"], host=arguments["--host"])
+            reservations.delete_selection(cm_id=arguments["--cm_id"],
+                                          user=arguments["--user"],
+                                          project=arguments["--project"],
+                                          label= arguments["--label"],
+                                          start_time= arguments["--start"],
+                                          end_time=arguments["--end"],
+                                          host=arguments["--host"])
     elif(arguments["add"]):
-        reservations = Reservation(label=arguments["--label"], user=arguments["--user"], project=arguments["--project"], start_time=arguments["--start"], end_time=arguments["--end"], cm_id=arguments["--cm_id"], host=arguments["--host"], summary=arguments["--summary"])
+        reservations = Reservation(label=arguments["--label"],
+                                   user=arguments["--user"],
+                                   project=arguments["--project"],
+                                   start_time=arguments["--start"],
+                                   end_time=arguments["--end"],
+                                   cm_id=arguments["--cm_id"],
+                                   host=arguments["--host"],
+                                   summary=arguments["--summary"])
         reservations.add()
     elif(arguments["addFile"] and arguments["--file"] is not None):
         try:
