@@ -9,14 +9,21 @@ MANUALDIR=`pwd`
 all:
 	make -f Makefile sphinx
 
+req:
+	pip install -r requirements.txt
+
+random:
+	cd reservation ; python generate.py clean; python generate.py m[01-05] 10 10 now
+
 mongo:
 	bin/start.sh
 
 server:
-	python reservation/server.py
+	python setup.py install ; cd reservation_server; python server.py
 
 test:
-	python reservation/test.py
+	python setup.py install
+	python reservation_test/test.py
 
 setup:
 	make -f Makefile setupbuild_ubuntu
