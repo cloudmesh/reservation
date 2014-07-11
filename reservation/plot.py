@@ -97,7 +97,10 @@ def timeline_plot(out_filename):
     else:
         ploticus = "/usr/bin/ploticus"
     
-    command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename, filename=filename, format=format, ploticus=ploticus )
+    command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename,
+                                                                         filename=filename,
+                                                                         format=format,
+                                                                         ploticus=ploticus)
 
     os.system(command)
     return True

@@ -438,7 +438,14 @@ def rain_arguments(arguments):
             with open(os.path.join(sys.path[0], arguments["--file"])) as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    reservations = Reservation(cm_id=row[0], label=row[1], user=row[2], project=row[3], start_time=row[4], end_time=row[5], host=row[6], summary=row[7])
+                    reservations = Reservation(cm_id=row[0],
+                                               label=row[1],
+                                               user=row[2],
+                                               project=row[3],
+                                               start_time=row[4],
+                                               end_time=row[5],
+                                               host=row[6],
+                                               summary=row[7])
                     reservations.add()
         except Exception as e:
             print "Error in adding from file. ", e
