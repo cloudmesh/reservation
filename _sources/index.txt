@@ -3,51 +3,39 @@
 
 .. _s-manual:
 
-|image0|  Cloudmesh Reservation for OpenStack
+Cloudmesh Reservation for OpenStack
 ================================================
 
 .. sidebar:: Authors
 
-   Gregor von Laszewski
+   Gregor von Laszewski, Oliver Lewis, Natiele Bohn
 
    If your name is missing please let us know and we will add it.
 
-**Design Documentation**
+Cloudmesh Reservation
+----------------------------------------------------------------------
 
 .. toctree::
    :numbered:
    :maxdepth: -1
 
    introduction
-   multi
-   multiUsingChef
    deploy
-   rest
-   api
+   tests
    man/man
+   rest
 
-**Indices and Lists**
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
-**Progress Reports**
+.. comment::
 
-.. toctree::
-   :numbered:
-   :maxdepth: -1
+   modules/modules
 
-   progress
+   **Indices and Lists**
 
-**Appendix**
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
 
-.. toctree::
-   :numbered:
-   :maxdepth: -1
 
-   vagrant
-   devstack
-
-.. |image0| image:: /images/fg-logo-md.png
 

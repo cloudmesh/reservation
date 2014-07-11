@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>HTTP Routing Table &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+
+    <script type="text/javascript">
+      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+    </script>
+
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh Reservation</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Cloudmesh Reservation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#design-features">1.1. Design Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#user-calendar-based-scheduling-of-vms">1.2. User calendar based scheduling of VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#a-system-wide-reservation-system-for-clouds">1.3. A system wide reservation system for clouds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">2. Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#virtualenv">2.1. Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#requirements">2.2. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#install">2.3. Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">2.4. Publishing the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html#steps-in-a-nutshell">2.4.1. Steps in a nutshell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#mongo">2.5. Mongo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#server">2.6. Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">3. Nosetests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man/man.html">4. Manual Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">4.1. reservation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#generate">4.2. generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">5. REST interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-python-rest">5.1. References for Python REST</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+
+   <h1>HTTP Routing Table</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-/add"><strong>/add</strong></a> | 
+   <a href="#cap-/chart"><strong>/chart</strong></a> | 
+   <a href="#cap-/delete"><strong>/delete</strong></a> | 
+   <a href="#cap-/duration"><strong>/duration</strong></a> | 
+   <a href="#cap-/list"><strong>/list</strong></a> | 
+   <a href="#cap-/random"><strong>/random</strong></a> | 
+   <a href="#cap-/static"><strong>/static</strong></a> | 
+   <a href="#cap-/update"><strong>/update</strong></a>
+   </div>
+
+   <table class="indextable modindextable" cellspacing="0" cellpadding="2">
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/add"><td></td><td>
+       <strong>/add</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--add-"><tt class="xref">GET /add/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--add-file"><tt class="xref">POST /add/file</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--add-submit"><tt class="xref">POST /add/submit</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/chart"><td></td><td>
+       <strong>/chart</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--chart"><tt class="xref">GET /chart</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/delete"><td></td><td>
+       <strong>/delete</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--delete-"><tt class="xref">GET /delete/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--delete-all"><tt class="xref">GET /delete/all</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--delete-submit"><tt class="xref">POST /delete/submit</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/duration"><td></td><td>
+       <strong>/duration</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--duration-"><tt class="xref">GET /duration/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/list"><td></td><td>
+       <strong>/list</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--list-"><tt class="xref">GET /list/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--list-"><tt class="xref">POST /list/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--list-id-(id)"><tt class="xref">GET /list/id/(id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--list-label-(label)"><tt class="xref">GET /list/label/(label)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--list-submit"><tt class="xref">POST /list/submit</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--list-user-(user)"><tt class="xref">GET /list/user/(user)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/random"><td></td><td>
+       <strong>/random</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--random-"><tt class="xref">GET /random/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/static"><td></td><td>
+       <strong>/static</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--static-bootstrap-(path-filename)"><tt class="xref">GET /static/bootstrap/(path:filename)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/update"><td></td><td>
+       <strong>/update</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#get--update-"><tt class="xref">GET /update/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="rest.html#post--update-"><tt class="xref">POST /update/</tt></a></td><td>
+       <em></em></td></tr>
+   </table>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Cloudmesh, please contact Gregor von Laszewski about this manual..<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

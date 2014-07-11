@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reservation.generate &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><img src="../../_static/fg-logo-white-24x36.png">
+          Cloudmesh Reservation</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">1. Cloudmesh Reservation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#design-features">1.1. Design Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#user-calendar-based-scheduling-of-vms">1.2. User calendar based scheduling of VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#a-system-wide-reservation-system-for-clouds">1.3. A system wide reservation system for clouds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">2. Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#virtualenv">2.1. Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#requirements">2.2. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#install">2.3. Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#publishing-the-documentation">2.4. Publishing the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../deploy.html#steps-in-a-nutshell">2.4.1. Steps in a nutshell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#mongo">2.5. Mongo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deploy.html#server">2.6. Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tests.html">3. Nosetests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/man.html">4. Manual Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/man.html#reservation">4.1. reservation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/man.html#generate">4.2. generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">5. REST interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rest.html#references-for-python-rest">5.1. References for Python REST</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <h1>Source code for reservation.generate</h1><div class="highlight"><pre>
+<span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
+<span class="kn">import</span> <span class="nn">hostlist</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">pytimeparse.timeparse</span> <span class="kn">import</span> <span class="n">timeparse</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">Reservation</span>
+<span class="kn">from</span> <span class="nn">cli</span> <span class="kn">import</span> <span class="n">reservation_connect</span>
+
+<div class="viewcode-block" id="generate_from_string"><a class="viewcode-back" href="../../modules/reservation.html#reservation.generate.generate_from_string">[docs]</a><span class="k">def</span> <span class="nf">generate_from_string</span><span class="p">(</span><span class="n">arguments</span><span class="p">):</span>
+    <span class="n">docopt_args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="n">generate</span><span class="o">.</span><span class="n">__doc__</span><span class="p">,</span><span class="s">&quot;m[01-05] 10 10 now&quot;</span><span class="p">)</span>
+    <span class="n">generate</span><span class="p">(</span><span class="n">docopt_args</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="generate"><a class="viewcode-back" href="../../modules/reservation.html#reservation.generate.generate">[docs]</a><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">arguments</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Usage:</span>
+<span class="sd">        generate -h | --help | --rst</span>
+<span class="sd">        generate clean</span>
+<span class="sd">        generate SERVERS RESERVATIONS DURATION START</span>
+<span class="sd">        generate list [--json|--table|--calendar]</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        SERVERS       Number of servers for which we generate </span>
+<span class="sd">                      reservations</span>
+<span class="sd">        RESERVATIONS  Number of reservations per server</span>
+<span class="sd">        DURATION      The maximum duration of a reservation </span>
+<span class="sd">                      (determined randomly)</span>
+<span class="sd">        START         The start date. if now is specified, the current</span>
+<span class="sd">                      time is used, otherwise an offset is used in the</span>
+<span class="sd">                      form of 1m, or 1h, or 1w[default: now]</span>
+
+<span class="sd">    Description:</span>
+
+<span class="sd">        This program generates a number of reservations so they can be</span>
+<span class="sd">        used to test the reservation package.</span>
+
+<span class="sd">        generate clean</span>
+<span class="sd">            deletes all reservations from the reservation database</span>
+
+<span class="sd">        generate SERVERS RESERVATIONS DURATION</span>
+<span class="sd">            generates a number of reservations where the servers are</span>
+<span class="sd">            specified as hostlist (e.g. i[001-003]. The reservations</span>
+<span class="sd">            specifies how many reservations there will be for each</span>
+<span class="sd">            server. The duration is a random number between [0,duration]</span>
+<span class="sd">            that specified not only a duration, but also the time delta</span>
+<span class="sd">            between two reservations on the same host.</span>
+
+<span class="sd">        generate list</span>
+<span class="sd">            retiurns the list of reservations in the specified</span>
+<span class="sd">            format. Thoe format can be list, table, or calendar</span>
+
+<span class="sd">    Bugs:</span>
+<span class="sd">        Not implemented:</span>
+
+<span class="sd">        * clean </span>
+<span class="sd">        * list</span>
+<span class="sd">        * the generation function does not yet have a start date</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        * https://pypi.python.org/pypi/pytimeparse/1.1.0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">arguments</span><span class="p">[</span><span class="s">&#39;clean&#39;</span><span class="p">]:</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="n">reservation_connect</span><span class="p">()</span>
+        <span class="n">reservations</span> <span class="o">=</span> <span class="n">Reservation</span><span class="o">.</span><span class="n">objects</span><span class="p">({})</span>
+        <span class="k">print</span> <span class="s">&quot;deleting:&quot;</span>
+        <span class="k">for</span> <span class="n">reservation</span> <span class="ow">in</span> <span class="n">reservations</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">reservation</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+            <span class="n">reservation</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">print</span>
+        
+    <span class="k">elif</span> <span class="n">arguments</span><span class="p">[</span><span class="s">&quot;--rst&quot;</span><span class="p">]:</span>
+
+        <span class="k">print</span> <span class="s">&quot;generate&quot;</span>
+        <span class="k">print</span> <span class="mi">70</span> <span class="o">*</span> <span class="s">&quot;=&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">::</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">generate</span><span class="o">.</span><span class="n">__doc__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;  &quot;</span><span class="p">,</span> <span class="n">line</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">reservations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s">&quot;RESERVATIONS&quot;</span><span class="p">])</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s">&quot;DURATION&quot;</span><span class="p">])</span>
+        <span class="n">server_string</span> <span class="o">=</span> <span class="n">arguments</span><span class="p">[</span><span class="s">&quot;SERVERS&quot;</span><span class="p">]</span>
+        <span class="n">servers</span> <span class="o">=</span> <span class="n">hostlist</span><span class="o">.</span><span class="n">expand_hostlist</span><span class="p">(</span><span class="n">server_string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="p">[</span><span class="s">&quot;START&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;now&quot;</span><span class="p">]:</span>
+            <span class="n">first_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first_time</span> <span class="o">=</span> <span class="n">timeparse</span><span class="p">(</span><span class="n">arguments</span><span class="p">(</span><span class="s">&quot;START&quot;</span><span class="p">))</span>
+
+        <span class="k">print</span> <span class="mi">70</span> <span class="o">*</span> <span class="s">&quot;=&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;Servers:     &quot;</span><span class="p">,</span> <span class="n">servers</span>
+        <span class="k">print</span> <span class="s">&quot;Reservations:&quot;</span><span class="p">,</span> <span class="n">reservations</span>
+        <span class="k">print</span> <span class="s">&quot;Duration:    &quot;</span><span class="p">,</span> <span class="n">duration</span>
+        <span class="k">print</span> <span class="s">&quot;First date:  &quot;</span><span class="p">,</span> <span class="n">first_time</span>
+        <span class="k">print</span> <span class="mi">70</span> <span class="o">*</span> <span class="s">&quot;=&quot;</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="n">reservation_connect</span><span class="p">()</span>        
+
+        <span class="k">def</span> <span class="nf">random_delta</span><span class="p">(</span><span class="n">duration</span><span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">timeparse</span><span class="p">(</span><span class="s">&quot;{0} h&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+        
+        <span class="n">t_start</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">t_end</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">servers</span><span class="p">)):</span>
+            <span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            
+            <span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_time</span> <span class="o">+</span> <span class="n">random_delta</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+            <span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">random_delta</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">servers</span><span class="p">)):</span>        	
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">reservations</span><span class="p">):</span>
+                <span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">random_delta</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+                <span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span>  <span class="n">random_delta</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">servers</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">reservations</span><span class="p">):</span>
+                <span class="k">print</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span><span class="p">],</span> <span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+                
+
+        <span class="n">pprint</span><span class="p">(</span><span class="s">&quot;start: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t_start</span><span class="p">))</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="s">&quot;end  : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t_end</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">servers</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">reservations</span><span class="p">):</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s">&quot;cm_id&quot;</span><span class="p">:</span> <span class="s">&quot;cm_reservation-{0}-{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">n</span><span class="p">),</span>
+                    <span class="s">&quot;label&quot;</span><span class="p">:</span> <span class="s">&quot;exp-{0}-{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">n</span><span class="p">),</span>
+                    <span class="s">&quot;summary&quot;</span><span class="p">:</span> <span class="s">&quot;task-{0}-{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">n</span><span class="p">),</span>
+                    <span class="s">&quot;host&quot;</span><span class="p">:</span> <span class="n">servers</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
+                    <span class="s">&quot;user&quot;</span><span class="p">:</span> <span class="s">&quot;gregor&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;project&quot;</span> <span class="p">:</span> <span class="s">&quot;fg82&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;start_time&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">t_start</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span><span class="p">]),</span>
+                    <span class="s">&quot;end_time&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">t_end</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">n</span><span class="p">]),</span>
+                    <span class="p">}</span>
+
+                <span class="k">print</span> <span class="n">entry</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">Reservation</span><span class="p">(</span>
+                    <span class="n">cm_id</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;cm_id&quot;</span><span class="p">],</span>
+                    <span class="n">host</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">],</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;label&quot;</span><span class="p">],</span>
+                    <span class="n">user</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span>
+                    <span class="n">summary</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;summary&quot;</span><span class="p">],</span>                    
+                    <span class="n">project</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;project&quot;</span><span class="p">],</span>
+                    <span class="n">start_time</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;start_time&quot;</span><span class="p">],</span>
+                    <span class="n">end_time</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;end_time&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="k">print</span> <span class="mi">70</span> <span class="o">*</span> <span class="s">&quot;A&quot;</span>
+        <span class="n">reservations</span> <span class="o">=</span> <span class="n">Reservation</span><span class="o">.</span><span class="n">objects</span><span class="p">()</span>
+        <span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">reservations</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reservation</span> <span class="ow">in</span> <span class="n">reservations</span><span class="p">:</span>
+           <span class="n">pprint</span><span class="p">(</span><span class="n">reservation</span><span class="p">)</span>
+        <span class="k">print</span> <span class="mi">70</span> <span class="o">*</span> <span class="s">&quot;B&quot;</span>
+
+        <span class="k">for</span> <span class="n">reservation</span> <span class="ow">in</span> <span class="n">reservations</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">reservation</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="n">generate</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
+    <span class="n">generate</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Cloudmesh, please contact Gregor von Laszewski about this manual..<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

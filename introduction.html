@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
-    <link rel="next" title="2. Multiworker Devstack for Vagarnt" href="multi.html" />
+    <link rel="next" title="2. Deployment" href="deploy.html" />
     <link rel="prev" title="Cloudmesh Reservation for OpenStack" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -71,70 +71,32 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">1. Cloudmesh Reservation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#design-features">1.1. Design Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code">1.2. Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#user-calanedar-based-scheduling-of-vms">1.3. User calanedar based scheduling of VMs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#a-system-wide-reservation-system-for-clouds">1.4. A system wide reservation system for clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-calendar-based-scheduling-of-vms">1.2. User calendar based scheduling of VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-system-wide-reservation-system-for-clouds">1.3. A system wide reservation system for clouds</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="multi.html">2. Multiworker Devstack for Vagarnt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="multi.html#multi-node-openstack-install">2.1. Multi-Node OpenStack Install</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#prerequisits">2.1.1. Prerequisits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#setup">2.1.2. Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#something-else">2.1.3. SOMETHING ELSE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#shell-scripts">2.1.4. Shell Scripts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#controller-install-controller-sh">2.1.4.1. Controller - install-controller.sh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#compute-install-compute-sh">2.1.4.2. Compute - install-compute.sh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#vagrantfile">2.1.4.3. Vagrantfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">2. Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#virtualenv">2.1. Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#requirements">2.2. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#install">2.3. Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">2.4. Publishing the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deploy.html#steps-in-a-nutshell">2.4.1. Steps in a nutshell</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#mongo">2.5. Mongo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#server">2.6. Server</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">3. Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">3.1. OpenStack Distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">3.2. Multi-Node OpenStack Install</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="deploy.html">4. Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#virtualenv">4.1. Virtualenv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#requirements">4.2. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#install">4.3. Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#directory-structure-of-the-project">4.4. Directory Structure of the project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#publishing-the-documentation">4.5. Publishing the Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploy.html#steps-in-a-nutshell">4.6. Steps in a nutshell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">3. Nosetests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man/man.html">4. Manual Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">4.1. reservation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#generate">4.2. generate</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rest.html">5. REST interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-rest">5.1. References for REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-python-rest">5.1. References for Python REST</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">6. Python API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#workflow">6.1. WorkFlow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#sample-code">6.2. Sample code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#creating-3-events">6.2.1. Creating 3 events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#select-all-events">6.2.2. Select all events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#removing-a-specific-event-using-a-label">6.2.3. Removing a specific event using a label</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="man/man.html">7. Manual Pages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">7.1. reservation</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="progress.html">1. Progress</a></li>
-<li class="toctree-l1"><a class="reference internal" href="progress.html#list-of-tasks">2. List of tasks</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">1. Vagrant</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">1.1. Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">1.2. Commands</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="devstack.html">2. DevStack</a></li>
 </ul>
 </ul>
 </li>
@@ -150,9 +112,8 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">1. Cloudmesh Reservation</a><ul>
 <li><a class="reference internal" href="#design-features">1.1. Design Features</a></li>
-<li><a class="reference internal" href="#code">1.2. Code</a></li>
-<li><a class="reference internal" href="#user-calanedar-based-scheduling-of-vms">1.3. User calanedar based scheduling of VMs</a></li>
-<li><a class="reference internal" href="#a-system-wide-reservation-system-for-clouds">1.4. A system wide reservation system for clouds</a></li>
+<li><a class="reference internal" href="#user-calendar-based-scheduling-of-vms">1.2. User calendar based scheduling of VMs</a></li>
+<li><a class="reference internal" href="#a-system-wide-reservation-system-for-clouds">1.3. A system wide reservation system for clouds</a></li>
 </ul>
 </li>
 </ul>
@@ -168,7 +129,7 @@
     </a>
   </li>
   <li>
-    <a href="multi.html" title="Next Chapter: 2. Multiworker Devstack for Vagarnt"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">2. Multiworker D... &raquo;</span>
+    <a href="deploy.html" title="Next Chapter: 2. Deployment"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">2. Deployment &raquo;</span>
     </a>
   </li>
               
@@ -204,41 +165,122 @@
       
   <div class="section" id="cloudmesh-reservation">
 <h1>1. Cloudmesh Reservation<a class="headerlink" href="#cloudmesh-reservation" title="Permalink to this headline">¶</a></h1>
-<p>This is a project under development.</p>
-<p>Goal: Develop a reservation system for cloud virtual machines.</p>
-<div class="section" id="design-features">
-<h2>1.1. Design Features<a class="headerlink" href="#design-features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>REST interface</li>
-<li>Commandline interface</li>
-<li>User Service: Users can schedule vms based on their own schedule</li>
-<li>Admin Service: Custom OpenTSack scheduler interfaceing with
-reservations</li>
-</ul>
-<p>The system will provide two unique services discussed next.</p>
-</div>
-<div class="section" id="code">
-<h2>1.2. Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
-<p>The code is located at:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Goal:</th><td class="field-body"><p class="first">Develop a reservation system for the provisioning of virtual
+machines with the possibility to also use it for bare metal
+provisioning.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Abstract:</th><td class="field-body"><p class="first">Cloudmesh Resource Reservation is being developed to create and
+manage reservations inside Cloudmesh. Cloudmesh is a project that
+includes the ability to conduct bare metal provisioning. It is
+important that this is supported in a multiuser environment. We will
+be developing for this a time based reservation system in which
+users will have access to resources based on time slices. This
+project will develop such a reservation system as a commandline tool
+and also as a GUI (if time permits while leveraging the work done by
+von Laszewski for this project). As a result we will have a simple
+commandline tool that allows the administrator or user to choose a
+reservation or query the system to find a suitable
+reservation. Limits will be put in place so that users do not
+reserve too many resources and block the systems while not allowing
+others to use it. The system will have an abstract plugin that
+allows the integration of a real bare metal provisioning. However,
+for this project, we will simulate it and focus only on the
+management of the reservation itself and not how they are used or
+how machines are leveraged for the actual bare metal
+provisioning. Convenient tables and views are developed as part of
+the GUI development which is doable as the GUI framework is already
+included in the project developed by von Laszewski.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><p class="first">resource reservation, provisioning, baremetal, virtual machines</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body"><p class="first">Gregor von Laszewski, Oliver Lewis Natiele Bohn</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Code:</th><td class="field-body"><p class="first">The code and documentation of this project are maintained in github
+at:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/cloudmesh/reservation">https://github.com/cloudmesh/reservation</a></li>
 </ul>
-<p>This documentation is located at:</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Documentation:</th><td class="field-body"><p class="first">This documentation is located at:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://cloudmesh.futuregrid.org/reservation">http://cloudmesh.futuregrid.org/reservation</a></li>
 </ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Issues:</th><td class="field-body"><p class="first">Issues are located are located at:</p>
+<ul class="last simple">
+<li><a class="reference external" href="https://github.com/cloudmesh/reservation/issues">https://github.com/cloudmesh/reservation/issues</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="design-features">
+<h2>1.1. Design Features<a class="headerlink" href="#design-features" title="Permalink to this headline">¶</a></h2>
+<p>The design features of the reservation framework include a number of
+convenient interfaces. They include the following</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">REST:</th><td class="field-body">A REST interface is provided to provide easy accessibility of the
+functionality through a variety of frameworks and different
+programming languages</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Commandline:</th><td class="field-body">A commandline interface is provides to integrate the reservation
+framework easily into scripting environments and allow access from
+a traditional compute terminal.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Command Shell:</th><td class="field-body">A command shell is provided to allow the integration with cloudmesh
+so that the reservation framework can easily leverage the rich
+commandline set fro managing virtual machines. Furthermore it
+allows to script repeatable experiments more easily while
+leveraging the state that is contained in the command shell.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Portal:</th><td class="field-body">A Web service framework is provided to allow easy access via a
+portal framework. The service can either be hosted in a shared
+environment or run stand allone on a users computer.</td>
+</tr>
+</tbody>
+</table>
+<p>In addition the framework allows the exposure of admin and user
+controlled features of the service:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">User Services:</th><td class="field-body"><p class="first">Users can schedule vm&#8217;s and bare metal resources based on their own
+scheduling requests</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Admin Services:</th><td class="field-body"><p class="first">Administrators can grant access to specific resources to useres and
+projects.</p>
+<p class="last">Administrators can furthermore include custom schedulers into the
+reservation framework to either automatize finding of suitable
+reservations or to adaot them to lead to better resource
+utilization.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The system will provide two unique services discussed next.</p>
 </div>
-<div class="section" id="user-calanedar-based-scheduling-of-vms">
-<h2>1.3. User calanedar based scheduling of VMs<a class="headerlink" href="#user-calanedar-based-scheduling-of-vms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="user-calendar-based-scheduling-of-vms">
+<h2>1.2. User calendar based scheduling of VMs<a class="headerlink" href="#user-calendar-based-scheduling-of-vms" title="Permalink to this headline">¶</a></h2>
 <p>The first is a user side service, that allows users to use a calendar
 service to schedule the creation and management of virtual machines.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">is this covered by heat?</p>
-</div>
 </div>
 <div class="section" id="a-system-wide-reservation-system-for-clouds">
-<h2>1.4. A system wide reservation system for clouds<a class="headerlink" href="#a-system-wide-reservation-system-for-clouds" title="Permalink to this headline">¶</a></h2>
+<h2>1.3. A system wide reservation system for clouds<a class="headerlink" href="#a-system-wide-reservation-system-for-clouds" title="Permalink to this headline">¶</a></h2>
 <p>The second service allows users to submit their reservations to a
 global service managing also other users reservation. This service is
 useful in case of resource starvation or the need to setup special

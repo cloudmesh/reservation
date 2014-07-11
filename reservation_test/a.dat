@@ -1,0 +1,42 @@
+#proc getdata
+data:
+   NBC	8:00	9:00	"Wind\non Water"
+   NBC  9:00	9:30	"Encore!\nEncore!"
+   NBC  9:30	10:00	"Conrad\nBloom"
+   NBC	10:00	11:00	"Trinity"
+   ABC	8:00	8:30	"Secret\nLives"
+   ABC	8:30	9:00	"Sports\nNight"
+   ABC	9:00	11:00	"Movie of the Week"
+   CBS	8:00	8:30	"Cosby"
+   CBS	8:30	9:00	"Kids say..."
+   CBS	9:00	10:00	"Charmed"
+   CBS	10:00	11:00	"To have\nand to Hold"
+
+#proc areadef
+   title: Evening television schedule
+   rectangle: 1 1 5 2
+   xscaletype: time
+   xrange: 08:00 11:00
+   yscaletype: categories
+   ycategories: 
+	NBC
+	ABC
+	CBS
+
+#proc xaxis
+   stubs: inc 1 hours
+
+#proc yaxis
+   stubs: categories
+
+#proc bars
+   clickmapurl: @CGI?channel=@@1&starttime=@@2&endtime=@@3&title=@@4
+   color: powderblue2
+   axis: x
+   locfield: 1
+   segmentfields: 2 3
+   labelfield: 4
+   longwayslabel: yes
+   labeldetails: size=6
+
+

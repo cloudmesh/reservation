@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+
+
+{% block title %}This is an example page{% endblock %}
+
+{% block content %}
+  <h1>Hello, Bootstrap</h1>
+
+<table>
+<tr><td>From</td><td><input type="text" type="text" class="form-control-simple" width="100px"></td></tr>
+<tr><td>To</td><td><input type="text" type="text" class="form-control-simple" width="100px"></td></tr>  
+</table>
+
+<div class="input-daterange input-group" id="datepicker">
+    <input type="text" class="input-sm form-control" name="start" />
+    <span class="input-group-addon">to</span>
+    <input type="text" class="input-sm form-control" name="end" />
+</div>
+
+
+<script>
+$('.form-control').datepicker({
+});
+</script>
+
+
+{% endblock %}
+

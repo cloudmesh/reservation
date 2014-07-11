@@ -1,0 +1,21 @@
+Metadata-Version: 1.0
+Name: cm-reservation
+Version: 0.7.dev363.g9395c69
+Summary: A tool to simplify managing multiple clouds including bare metal provisioning
+Home-page: http://github.org/cloudmesh/reservation
+Author: Cloudmesh Team
+Author-email: laszewski@gmail.com
+License: UNKNOWN
+Description: Cloudmesh Reservation
+        ======================================================================
+        i
+        This is a project under development.
+        
+        Goal: Develop a reservation system for cloud virtual machines.
+        
+        The documentation is maintained at
+        
+        * http://cloudmesh.github.io/reservation
+        
+        
+Platform: UNKNOWN

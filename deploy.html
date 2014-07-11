@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Deployment &mdash; Cloudmesh 0.1 documentation</title>
+    <title>2. Deployment &mdash; Cloudmesh 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,8 +31,8 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
-    <link rel="next" title="5. REST interfaces" href="rest.html" />
-    <link rel="prev" title="3. Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks" href="multiUsingChef.html" />
+    <link rel="next" title="3. Nosetests" href="tests.html" />
+    <link rel="prev" title="1. Cloudmesh Reservation" href="introduction.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -71,70 +71,32 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Cloudmesh Reservation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#design-features">1.1. Design Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#code">1.2. Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#user-calanedar-based-scheduling-of-vms">1.3. User calanedar based scheduling of VMs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#a-system-wide-reservation-system-for-clouds">1.4. A system wide reservation system for clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#user-calendar-based-scheduling-of-vms">1.2. User calendar based scheduling of VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#a-system-wide-reservation-system-for-clouds">1.3. A system wide reservation system for clouds</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="multi.html">2. Multiworker Devstack for Vagarnt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="multi.html#multi-node-openstack-install">2.1. Multi-Node OpenStack Install</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#prerequisits">2.1.1. Prerequisits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#setup">2.1.2. Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#something-else">2.1.3. SOMETHING ELSE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi.html#shell-scripts">2.1.4. Shell Scripts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#controller-install-controller-sh">2.1.4.1. Controller - install-controller.sh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#compute-install-compute-sh">2.1.4.2. Compute - install-compute.sh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multi.html#vagrantfile">2.1.4.3. Vagrantfile</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">2. Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#virtualenv">2.1. Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">2.2. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">2.3. Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-the-documentation">2.4. Publishing the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#steps-in-a-nutshell">2.4.1. Steps in a nutshell</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#mongo">2.5. Mongo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server">2.6. Server</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">3. Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">3.1. OpenStack Distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">3.2. Multi-Node OpenStack Install</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">4. Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#virtualenv">4.1. Virtualenv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">4.2. Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install">4.3. Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#directory-structure-of-the-project">4.4. Directory Structure of the project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#publishing-the-documentation">4.5. Publishing the Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#steps-in-a-nutshell">4.6. Steps in a nutshell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">3. Nosetests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man/man.html">4. Manual Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">4.1. reservation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man/man.html#generate">4.2. generate</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rest.html">5. REST interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-rest">5.1. References for REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html#references-for-python-rest">5.1. References for Python REST</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">6. Python API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#workflow">6.1. WorkFlow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#sample-code">6.2. Sample code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#creating-3-events">6.2.1. Creating 3 events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#select-all-events">6.2.2. Select all events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#removing-a-specific-event-using-a-label">6.2.3. Removing a specific event using a label</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="man/man.html">7. Manual Pages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="man/man.html#reservation">7.1. reservation</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="progress.html">1. Progress</a></li>
-<li class="toctree-l1"><a class="reference internal" href="progress.html#list-of-tasks">2. List of tasks</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="vagrant.html">1. Vagrant</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">1.1. Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">1.2. Commands</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="devstack.html">2. DevStack</a></li>
 </ul>
 </ul>
 </li>
@@ -148,13 +110,16 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">4. Deployment</a><ul>
-<li><a class="reference internal" href="#virtualenv">4.1. Virtualenv</a></li>
-<li><a class="reference internal" href="#requirements">4.2. Requirements</a></li>
-<li><a class="reference internal" href="#install">4.3. Install</a></li>
-<li><a class="reference internal" href="#directory-structure-of-the-project">4.4. Directory Structure of the project</a></li>
-<li><a class="reference internal" href="#publishing-the-documentation">4.5. Publishing the Documentation</a></li>
-<li><a class="reference internal" href="#steps-in-a-nutshell">4.6. Steps in a nutshell</a></li>
+<li><a class="reference internal" href="#">2. Deployment</a><ul>
+<li><a class="reference internal" href="#virtualenv">2.1. Virtualenv</a></li>
+<li><a class="reference internal" href="#requirements">2.2. Requirements</a></li>
+<li><a class="reference internal" href="#install">2.3. Install</a></li>
+<li><a class="reference internal" href="#publishing-the-documentation">2.4. Publishing the Documentation</a><ul>
+<li><a class="reference internal" href="#steps-in-a-nutshell">2.4.1. Steps in a nutshell</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mongo">2.5. Mongo</a></li>
+<li><a class="reference internal" href="#server">2.6. Server</a></li>
 </ul>
 </li>
 </ul>
@@ -166,11 +131,11 @@
               
                 
   <li>
-    <a href="multiUsingChef.html" title="Previous Chapter: 3. Deploying Openstack with multiple Workers using Vagrant and Chef using Cookbooks"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; 3. Deploying Ope...</span>
+    <a href="introduction.html" title="Previous Chapter: 1. Cloudmesh Reservation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; 1. Cloudmesh Res...</span>
     </a>
   </li>
   <li>
-    <a href="rest.html" title="Next Chapter: 5. REST interfaces"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">5. REST interfac... &raquo;</span>
+    <a href="tests.html" title="Next Chapter: 3. Nosetests"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">3. Nosetests &raquo;</span>
     </a>
   </li>
               
@@ -205,43 +170,48 @@
     <div class="col-md-12">
       
   <div class="section" id="deployment">
-<h1>4. Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id1">2. Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title">.</p>
+<div class="contents last topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#deployment" id="id1">Deployment</a><ul>
+<li><a class="reference internal" href="#virtualenv" id="id2">Virtualenv</a></li>
+<li><a class="reference internal" href="#requirements" id="id3">Requirements</a></li>
+<li><a class="reference internal" href="#install" id="id4">Install</a></li>
+<li><a class="reference internal" href="#publishing-the-documentation" id="id5">Publishing the Documentation</a><ul>
+<li><a class="reference internal" href="#steps-in-a-nutshell" id="id6">Steps in a nutshell</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mongo" id="id7">Mongo</a></li>
+<li><a class="reference internal" href="#server" id="id8">Server</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="virtualenv">
-<h2>4.1. Virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h2>
-<p>set up virtualenv as documented in the main cloudmesh documentation</p>
-<p>put link here
-TBD</p>
+<h2><a class="toc-backref" href="#id2">2.1. Virtualenv</a><a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Set up <a class="reference external" href="http://cloudmesh.futuregrid.org/cloudmesh/developer.html#virtualenv">virtual env as described in the main cloudmesh documentation</a>.</p>
 </div>
 <div class="section" id="requirements">
-<h2>4.2. Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">2.2. Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>After you have set up virtualenv, you install the requirements with:</p>
 <div class="highlight-python"><div class="highlight"><pre>pip install -r requirements.txt
 </pre></div>
 </div>
 </div>
 <div class="section" id="install">
-<h2>4.3. Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">2.3. Install</a><a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
 <p>As the reservation interface is not yet uploaded to pip, you need to
 call in the main directory:</p>
 <div class="highlight-python"><div class="highlight"><pre>python setup.py install
 </pre></div>
 </div>
 </div>
-<div class="section" id="directory-structure-of-the-project">
-<h2>4.4. Directory Structure of the project<a class="headerlink" href="#directory-structure-of-the-project" title="Permalink to this headline">¶</a></h2>
-<p>The directory structure is as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>-------reservation
-             |
-             |-----reservation
-                       |---reservation.py
-                       |---cm_reservation.py
-             |-----etc
-                       |---researvation_config.json
-</pre></div>
-</div>
-</div>
 <div class="section" id="publishing-the-documentation">
-<h2>4.5. Publishing the Documentation<a class="headerlink" href="#publishing-the-documentation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">2.4. Publishing the Documentation</a><a class="headerlink" href="#publishing-the-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Developers have the ability to change the documentation in the:</p>
 <div class="highlight-python"><div class="highlight"><pre>./doc/source
 </pre></div>
@@ -266,9 +236,8 @@ upon request from a developer. Please make sure that
 <strong>all</strong> commits are merged and in the repository. Also
 the documentation has to be checked with a local make.</p>
 </div>
-</div>
 <div class="section" id="steps-in-a-nutshell">
-<h2>4.6. Steps in a nutshell<a class="headerlink" href="#steps-in-a-nutshell" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">2.4.1. Steps in a nutshell</a><a class="headerlink" href="#steps-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
 <p>Download repository from github and setup sphinx for documentation:</p>
 <div class="highlight-python"><div class="highlight"><pre>mkdir ~/github
 git clone https://github.com/cloudmesh/reservation.git
@@ -279,6 +248,56 @@ pip install sphinx
 pip install -r requirements.txt
 make sphinx
 make view
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mongo">
+<h2><a class="toc-backref" href="#id7">2.5. Mongo</a><a class="headerlink" href="#mongo" title="Permalink to this headline">¶</a></h2>
+<p>To start the mongo db use the command</p>
+<div class="highlight-python"><div class="highlight"><pre>make start
+</pre></div>
+</div>
+<p>This will start the db in ~/data. If the data directory is not
+existing, it will be created.</p>
+<p>To test the service, you can say:</p>
+<div class="highlight-python"><div class="highlight"><pre>./reservation/test.py
+</pre></div>
+</div>
+<p>To generate some random schedules yo can use the gnerate command,
+which is documented in more detail in the manual page:</p>
+<div class="highlight-python"><div class="highlight"><pre>put the location here
+</pre></div>
+</div>
+<p>To clean the reservations (not yet implemented you can say):</p>
+<div class="highlight-python"><div class="highlight"><pre>./reservation/generate.py clean
+</pre></div>
+</div>
+</div>
+<div class="section" id="server">
+<h2><a class="toc-backref" href="#id8">2.6. Server</a><a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<p>A test server exists that interfaces via http routes to the backend
+system. To use it you need sto first start the mongo server in a
+terminal with the command describbed in the previous section:</p>
+<div class="highlight-python"><div class="highlight"><pre>make mongo
+</pre></div>
+</div>
+<p>Next you will need to start the server in a different terminal with:</p>
+<div class="highlight-python"><div class="highlight"><pre>make server
+</pre></div>
+</div>
+<p>Now the server and mongo db are started. we assume you have added some
+data with for example the test command in yet a different window:</p>
+<div class="highlight-python"><div class="highlight"><pre>make test
+</pre></div>
+</div>
+<p>Now you can open your web browser at:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://127.0.0.1:5000
+</pre></div>
+</div>
+<p>To observe a list of reservations in table form</p>
+<p>To create a random reservation you can use:</p>
+<div class="highlight-python"><div class="highlight"><pre>make random
 </pre></div>
 </div>
 </div>

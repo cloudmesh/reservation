@@ -1,0 +1,71 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+{%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}{% endblock title %}</title>
+
+    {%- block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- endblock metas %}
+
+    {%- block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datepicker.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}" />
+    {%- endblock styles %}
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-datepicker.js') }}"></script>
+
+    <script type="text/javascript">
+    $('.datepicker').datepicker()
+    </script>	
+    {%- endblock scripts %}
+
+
+
+    {%- endblock head %}
+  </head>
+  <body{% block body_attribs %}{% endblock body_attribs %}>
+    {% block body -%}
+    <h1> Gregor </h1>
+    {% block navbar %}
+ <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+                    <a class="brand" href="/"> <img src="/static/img/fg-logo-md-litejazz.png" height="40" width="45"> Cloud Mesh </a>
+                    <div class="nav-collapse collapse">
+
+                        <p class="navbar-text pull-right">
+
+                        	LOGED IN
+
+                        </p>
+
+                        <ul class="nav">
+                            <li> A</li>
+                            <li> B</li>			    
+			    
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+
+    {%- endblock navbar %}
+    {% block content -%}
+    {%- endblock content %}
+
+    {%- endblock body %}
+  </body>
+{%- endblock html %}
+</html>
+{% endblock doc -%}

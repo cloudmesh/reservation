@@ -4,18 +4,34 @@ reservation package
 Submodules
 ----------
 
-reservation.cm_reservation module
----------------------------------
+reservation.cli module
+----------------------
 
-.. automodule:: reservation.cm_reservation
+.. automodule:: reservation.cli
     :members:
     :undoc-members:
     :show-inheritance:
 
-reservation.reservation_client module
--------------------------------------
+reservation.generate module
+---------------------------
 
-.. automodule:: reservation.reservation_client
+.. automodule:: reservation.generate
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+reservation.model module
+------------------------
+
+.. automodule:: reservation.model
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+reservation.plot module
+-----------------------
+
+.. automodule:: reservation.plot
     :members:
     :undoc-members:
     :show-inheritance:
