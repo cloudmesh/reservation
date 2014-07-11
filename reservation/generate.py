@@ -7,7 +7,7 @@ from random import randint
 from pytimeparse.timeparse import timeparse
 import datetime
 from model import Reservation
-from model import reservation_connect
+from cli import reservation_connect
 
 def generate_from_string(arguments):
     docopt_args = docopt(generate.__doc__,"m[01-05] 10 10 now")

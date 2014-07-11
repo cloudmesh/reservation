@@ -8,7 +8,7 @@ import os
 from model import Reservation
 import datetime
 from mongoengine import *
-from model import reservation_connect
+from cli import reservation_connect
 
 
     

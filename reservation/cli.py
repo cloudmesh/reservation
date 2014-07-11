@@ -80,8 +80,24 @@ def rain_command(arguments):
 
 """
 
-        #print arguments["login"]
-    if(arguments["list"]):
+    #print arguments["login"]
+    if arguments["--rst"]:
+
+        print 70 * "*"
+        print "Manual Pages"
+        print 70 * "*"
+        print
+        print "reservation"
+        print 70 * "="
+        print "\n::\n"
+        lines = __doc__.split("\n")
+        for line in lines:
+            print "  ", line
+
+    elif arguments["--version"]:
+        print reservation.__version__
+
+    elif(arguments["list"]):
         reservations = Reservation()
         rsv= reservations.list(cm_id=arguments["--cm_id"],
                                user=arguments["--user"],
@@ -94,6 +110,7 @@ def rain_command(arguments):
         for x in rsv:
             print x
             print 70 * "="
+
     elif(arguments["find"]):
         reservations = Reservation()
         if(arguments["all"]):

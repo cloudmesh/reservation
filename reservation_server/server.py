@@ -4,7 +4,7 @@ from docopt import docopt
 from flask import Flask, request, Response
 from flask import render_template
 from flask.ext.restful import reqparse, abort, Api, Resource
-from reservation.model import reservation_connect
+from reservation.cli import reservation_connect
 from reservation.model import Reservation
 from reservation.generate import generate_from_string
 from reservation.plot import timeline_plot
