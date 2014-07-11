@@ -54,11 +54,9 @@ def shell_command_reservation(arguments):
                         --summary=SUMMARY
         reservation addFile --file=FILE
 
-    Arguments:
+    Options:
         --rst                 print an rst manul page
         --version             print the version
-        
-    Options:
         --label=STRING        label id reservation
         --cm_id=CM_ID         reservation cloudmesh id
         --user=USER_ID        user id
