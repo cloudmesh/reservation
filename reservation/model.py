@@ -279,7 +279,7 @@ class Reservation(Document):
         '''
         return Reservation.objects(cm_id=id)
 
-    def time_string(date_time):
+    def time_string(self, date_time):
         return datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
             
     def add(self):

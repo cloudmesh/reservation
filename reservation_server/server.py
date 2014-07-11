@@ -15,7 +15,7 @@ from flask_bootstrap import Bootstrap
 import json
 from flask import jsonify
 from random import randint
- 
+import hostlist
 
 #print json.dumps({'4': 5, '6': 7}, sort_keys=False,
 # indent=4, separators=(',', ': '))
@@ -123,16 +123,16 @@ class AddSubmit(Resource):
 """
     def post(self):
         expanded_list = hostlist.expand_hostlist(request.form["host"])
-        print expanded_list
-        reservations = Reservation(project=request.form["project"],
-                                   cm_id=request.form["cm_id"],
-                                   host=request.form["host"],
-                                   end_time=request.form["end_time"],
-                                   user=request.form["user"],
-                                   start_time= request.form["start_time"],
-                                   summary=request.form["summary"],
-                                   label= request.form["label"])
-        str = reservations.add()
+        for element in expanded_list:
+            reservations = Reservation(project=request.form["project"],
+                                       cm_id=request.form["cm_id"],
+                                       host=element,
+                                       end_time=request.form["end_time"],
+                                       user=request.form["user"],
+                                       start_time= request.form["start_time"],
+                                       summary=request.form["summary"],
+                                       label= request.form["label"])
+            str = reservations.add()
         if str is not None:
             print str
             resp = Response(list_table(str), status=200, mimetype='text/html')
