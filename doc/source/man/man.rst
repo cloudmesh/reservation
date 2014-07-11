@@ -9,66 +9,62 @@ reservation
 ::
 
    
-   Usage:
-       reservation -h | --help | --rst
-       reservation --version
-       reservation login
-       reservation admin add [--start=TIME_START]
-                             [--end=TIME_END]
-                             [--user=ID]
-                             LABEL
-                             HOSTS
-       reservation admin remove --user=USER_ID --reservation=RESERVATION_IDS
-       reservation admin add --file=FILE
-       reservation add [--start=TIME_START]
-                       [--end=TIME_END]
-                       LABEL
-                       HOSTS
-       reservation add --file=FILE [--start=TIME_START]
-                                   [--end=TIME_END]
-       reservation remove --reservation=IDS [--start=TIME_START]
-                                            [--end=TIME_END]
-       reservation remove --all [--start=TIME_START]
-                                [--end=TIME_END]
-       reservation list [--reservation=RESERVATION_IDS]
-                        [--project=PROJECT_IDS]
-                        [--label=LABELS]
-                        [--user=USER_IDS]
-                        [--format=FORMAT]
-                        [--start=TIME_START]
-                        [--end=TIME_END]
-                        [--fileds=FIELDS]
-       reservation reschedule --reservation=ID --file=FILE
-       reservation find -n RESOURCES -d DURATION
-       		         [--start=TIME_START]
-                        [--end=TIME_END]
-       reservation find -s SERVERS -d DURATION
-       		         [--start=TIME_START]
-                        [--end=TIME_END]<
+       Usage:
+           reservation --rst
+           reservation --version
+           reservation find [all]
+                            [--user=USER_ID]
+                            [--label=ID]
+                            [--cm_id=ID]
+           reservation list [--cm_id=CM_ID]
+                            [--user=USER_ID]
+                            [--project=PROJECT_ID]
+                            [--label=STRING]
+                            [--start=TIME_START]
+                            [--end=TIME_END]
+                            [--host=HOST]
+                            [--summary=SUMMARY]
+           reservation duration [--cm_id=CM_ID]
+           reservation delete [all]
+                              [--cm_id=CM_ID]
+                              [--user=USER_ID]
+                              [--project=PROJECT_ID]
+                              [--label=STRING]
+                              [--start=TIME_START]
+                              [--end=TIME_END]
+                              [--host=HOST]
+           reservation update [--cm_id=CM_ID]
+                              [--user=USER_ID]
+                              [--project=PROJECT_ID]
+                              [--label=STRING]
+                              [--start=TIME_START]
+                              [--end=TIME_END]
+                              [--host=HOST]
+                              [--summary=SUMMARY]
+                              [--cm_id=CM_ID]
+           reservation add --cm_id=CM_ID --user=USER_ID --project=PROJECT_ID --label=STRING --start=TIME_START --end=TIME_END --host=HOST --summary=SUMMARY
+           reservation add --file=FILE
    
-   Arguments:
-       ID        the unique ID of the reservation
+       Options:
+           --rst                 print an rst manul page
+           --version             print the version
+           --label=STRING        label id reservation
+           --cm_id=CM_ID         reservation cloudmesh id
+           --user=USER_ID        user id
+           --project=PROJECT_ID  project id
+           --start=TIME_START    Start time of the reservation, in
+                                 YYYY/MM/DD HH:MM:SS format. [default: 1901-01-01]
+           --end=TIME_END        End time of the reservation, in
+                                 YYYY/MM/DD HH:MM:SS format. In addition a duration
+                                 can be specified if the + sign is the first sign.
+                                 The duration will than be added to
+                                 the start time. [default: 2100-12-31]
+           --host=HOST           host number 
+           --summary=SUMMARY     summary of the reservation
+           --file=FILE           Adding multiple reservations from one file
    
-   Options:
-       LABEL  the label pf the reservation
-       -f FILE, --file=FILE  file to be specified
-       --reservation=RESERVATION_ID                RESERVATION_ID
-       HOSTS        SERVER NUMBERS
-       --user=USER_ID                USER_ID
-       --proj_id=PROJ_ID                PROJ_ID
-       -i           interactive mode adds a yes/no
-                    question for each host specified
-       --start=TIME_START     Start time of the reservation, in
-                              YYYY/MM/DD HH:MM:SS format. [default: current_time]
-       --end=TIME_END         End time of the reservation, in
-                              YYYY/MM/DD HH:MM:SS format. In addition a duration
-                              can be specified if the + sign is the first sign.
-                              The duration will than be added to
-                              the start time. [default: +1d]
-       --format=FORMAT        Format of the output table, json, cfg.
-                              [default: table]
-                              
    
+       
 generate
 ======================================================================
 
