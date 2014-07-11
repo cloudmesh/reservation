@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Reservations</h1>
+    
+<form method="POST" action="submit">
+<table>
+<tr><td> Cloudmesh Reservation ID: </td><td><input type="text" name="cm_id"></td></tr>
+</table>
+
+<input type="submit" value="Submit">
+</form>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+    </thead>
+    
+  <tfoot>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for reservation in reservations %}
+    <tr>
+      {% for attribute in order %}     
+      <td> {{ reservation[attribute] }} </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript" class="init">
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({ "aLengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "All"]
+        ], 
+        "iDisplayLength" : -1 });
+ 
+    new $.fn.dataTable.FixedHeader( table );
+  } );
+<input type="button" name="Search" value="GO!!" onclick="doSearch(this.form.Query);"/>
+</script>
+{% endblock%}

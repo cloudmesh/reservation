@@ -71,8 +71,8 @@ class Reservation(Document):
         for x in reservations:
              delta = x.end_time - x.start_time
 
-        return delta
-    
+	return delta
+           
     def list(self, **kwargs):
         '''Lists all the users reservations made in a project from a
         start time to a end time'''        

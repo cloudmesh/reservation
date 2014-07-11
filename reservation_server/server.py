@@ -42,7 +42,30 @@ class List(Resource):
         data = Reservation.objects()
         resp = Response(list_table(data), status=200, mimetype='text/html')
         return resp
-
+        
+class Duration(Resource):
+    """List the reservations by duration
+    
+:param cm_id: Cloudmesh Resource ID
+:type cm_id: String
+""" 
+    def get(self):
+    	data = Reservation.objects()
+    	order = Reservation._order
+    	resp = Response(render_template('duration.html',
+                            order=Reservation._order,
+                            reservations=data), status=200, mimetype='text/html')
+        return resp
+        
+class DurationSubmit(Resource):        
+    def post(self):
+    	reservations = Reservation()
+        data = reservations.duration(cm_id=request.form["cm_id"])
+        if data is not None:
+	    print data    
+	    resp = Response(data, status=200, mimetype='text/html')
+	    return resp
+            
 class ListBySelection(Resource):
     """List the reservations: as param it can get any of the arguments
 
@@ -222,6 +245,8 @@ api.add_resource(Delete, '/delete/')
 api.add_resource(DeleteSubmit, '/delete/submit')
 api.add_resource(AddSubmit, '/add/submit')
 api.add_resource(AddSubmitFile, '/add/file')
+api.add_resource(Duration, '/duration/')
+api.add_resource(DurationSubmit, '/duration/submit')
 
 def main():
     db = reservation_connect()
@@ -386,7 +411,7 @@ def list_fancy():
     return list_table(data)
 
 
-@app.route("/duration/<id>")
+'''@app.route("/duration/<id>")
 def duration(id):
     """List the reservations by duration
     
@@ -395,7 +420,7 @@ def duration(id):
 """
     data = Reservation().duration(id)
     #print data
-    return render_template('list.html', order=str(data))
+    return render_template('list.html', order=str(data))'''
 
 
 @app.route("/update/", methods=['GET', 'POST'])
