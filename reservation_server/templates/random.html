@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Reservations</h1>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+    </thead>
+    
+  <tfoot>
+    <tr>
+      {% for attribute in order %}
+      <th> {{ attribute }} </th>
+      {% endfor %}
+    </tr>
+  </tfoot>
+
+  <tbody>
+    {% for reservation in reservations %}
+    <tr>
+      {% for attribute in order %}     
+      <td> {{ reservation[attribute] }} </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript" class="init">
+  $(document).ready(function() {
+
+    var table = $('#example').DataTable({ "aLengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "All"]
+        ], 
+        "iDisplayLength" : -1 });
+ 
+    new $.fn.dataTable.FixedHeader( table );
+  } );
+<input type="button" name="Search" value="GO!!" onclick="doSearch(this.form.Query);"/>
+</script>
+{% endblock %}

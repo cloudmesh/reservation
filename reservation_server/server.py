@@ -206,10 +206,18 @@ class AddSubmitFile(Resource):
         resp = Response(list(), status=200, mimetype='text/html')
         return resp
 
+class Random_reservations(Resource):
+	def get(self):
+		"""Randomically create reservations"""
+		generate_from_string("m[01-05] 10 10 now")
+		resp = Response(randomlist(), status=200, mimetype='text/html')
+		return resp 
+
 api.add_resource(RestDeleteAll, '/delete/all')
 api.add_resource(List, '/list/')
 api.add_resource(ListBySelection, '/list/submit')
 api.add_resource(Add, '/add/')
+api.add_resource(Random_reservations, '/random/')
 api.add_resource(Delete, '/delete/')
 api.add_resource(DeleteSubmit, '/delete/submit')
 api.add_resource(AddSubmit, '/add/submit')
@@ -239,6 +247,10 @@ def timeline():
 def list():
     data = Reservation.objects()
     return list_table(data)
+    
+def randomlist():
+    data = Reservation.objects()
+    return list_random(data)
 
 def list_table(data):
     """this method renders the reservation data in a table
@@ -247,6 +259,16 @@ def list_table(data):
 """
     order = Reservation._order
     return render_template('list.html',
+                            order=Reservation._order,
+                            reservations=data)
+    
+def list_random(data):
+    """this method renders the reservation data in a table
+:param data: The reservation data
+:type data: search result from Reservation
+"""
+    order = Reservation._order
+    return render_template('random.html',
                             order=Reservation._order,
                             reservations=data)
     
@@ -302,11 +324,11 @@ def delete_all():
 Reservation().delete_all()
 return list()'''
 
-@app.route("/random")
+'''@app.route("/random")
 def random_reservations():
     """Randomically create reservations"""
     generate_from_string("m[01-05] 10 10 now")
-    return list()
+    return random()'''
 
 
 # ######################################################################
