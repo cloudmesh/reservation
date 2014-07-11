@@ -44,13 +44,6 @@ def shell_command_reservation(arguments):
                            [--host=HOST]
                            [--summary=SUMMARY]
                            [--cm_id=CM_ID]
-                           [--user=USER_ID]
-                           [--project=PROJECT_ID]
-                           [--label=STRING]
-                           [--start=TIME_START]
-                           [--end=TIME_END]
-                           [--host=HOST]
-                           [--summary=SUMMARY]
         reservation add --cm_id=CM_ID
                         --user=USER_ID
                         --project=PROJECT_ID
@@ -62,21 +55,25 @@ def shell_command_reservation(arguments):
         reservation addFile --file=FILE
 
     Arguments:
-        --label=STRING    label id reservation
-        --cm_id=CM_ID    reservation cloudmesh id
-        --user=USER_ID    user id
-        --project=PROJECT_ID    project id
-        --start=TIME_START     Start time of the reservation, in
-                               YYYY/MM/DD HH:MM:SS format. [default: 1901-01-01]
-        --end=TIME_END         End time of the reservation, in
-                               YYYY/MM/DD HH:MM:SS format. In addition a duration
-                               can be specified if the + sign is the first sign.
-                               The duration will than be added to
-                               the start time. [default: 2100-12-31]
-        --host=HOST            host number 
-        --summary=SUMMARY        summary of the reservation
-        --file=FILE            Adding multiple reservations from one file
+        --rst                 print an rst manul page
+        --version             print the version
+        
     Options:
+        --label=STRING        label id reservation
+        --cm_id=CM_ID         reservation cloudmesh id
+        --user=USER_ID        user id
+        --project=PROJECT_ID  project id
+        --start=TIME_START    Start time of the reservation, in
+                              YYYY/MM/DD HH:MM:SS format. [default: 1901-01-01]
+        --end=TIME_END        End time of the reservation, in
+                              YYYY/MM/DD HH:MM:SS format. In addition a duration
+                              can be specified if the + sign is the first sign.
+                              The duration will than be added to
+                              the start time. [default: 2100-12-31]
+        --host=HOST           host number 
+        --summary=SUMMARY     summary of the reservation
+        --file=FILE           Adding multiple reservations from one file
+
 
 """
 
