@@ -42,6 +42,49 @@ class List(Resource):
         data = Reservation.objects()
         resp = Response(list_table(data), status=200, mimetype='text/html')
         return resp
+
+class ListBySelection(Resource):
+    """List the reservations: as param it can get any of the arguments
+
+:param start_time: The time a reservation starts
+:type start_time: Datetime
+:param end_time: The time a reservation ends
+:type end_time: Datetime
+:param cm_id: The cloudmesh resource ID
+:type cm_id: String
+:param user: The name of the user (username)
+:type user: String
+:param project: The reservation project
+:type project: String
+:param host: The host machine of the reservation
+:type host: String
+:param label: The label of the reservation
+:type label: String
+:param summary: Breaf description of the reason to make this reservation
+:type summary: String"""
+    def post(self):
+        reservations = Reservation()
+        data = {}
+    
+        start_time ="1901-01-01"
+        end_time = "2100-12-31"
+        if(request.form["start_time"] is not None):
+            start_time = request.form["start_time"]
+        if(request.form["end_time"] is not None):
+            end_time = request.form["end_time"]
+
+
+        data = reservations.list(project=request.form["project"],
+                                   cm_id=request.form["cm_id"],
+                                   host=request.form["host"],
+                                   end_time=request.form["end_time"],
+                                   user=request.form["user"],
+                                   start_time= request.form["start_time"],
+                                   summary=request.form["summary"],
+                                   label= request.form["label"])
+        
+        resp = Response(list_table(data), status=200, mimetype='text/html')
+        return resp
     
 class Add(Resource):
     """Uses REST framework to add new reservations. It calls the add template that generates a form to add new reservations. 
@@ -79,6 +122,8 @@ class AddSubmit(Resource):
 :type summary: String
 """
     def post(self):
+        expanded_list = hostlist.expand_hostlist(request.form["host"])
+        print expanded_list
         reservations = Reservation(project=request.form["project"],
                                    cm_id=request.form["cm_id"],
                                    host=request.form["host"],
@@ -162,7 +207,8 @@ class AddSubmitFile(Resource):
         return resp
 
 api.add_resource(RestDeleteAll, '/delete/all')
-api.add_resource(List, '/list')
+api.add_resource(List, '/list/')
+api.add_resource(ListBySelection, '/list/submit')
 api.add_resource(Add, '/add/')
 api.add_resource(Delete, '/delete/')
 api.add_resource(DeleteSubmit, '/delete/submit')
