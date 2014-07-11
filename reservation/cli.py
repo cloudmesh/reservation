@@ -11,7 +11,7 @@ def reservation_connect():
         print e
     
 
-def rain_command(arguments):
+def shell_command_reservation(arguments):
     """
     Usage:
         reservation find [all]
@@ -44,13 +44,6 @@ def rain_command(arguments):
                            [--host=HOST]
                            [--summary=SUMMARY]
                            [--cm_id=CM_ID]
-                           [--user=USER_ID]
-                           [--project=PROJECT_ID]
-                           [--label=STRING]
-                           [--start=TIME_START]
-                           [--end=TIME_END]
-                           [--host=HOST]
-                           [--summary=SUMMARY]
         reservation add --cm_id=CM_ID
                         --user=USER_ID
                         --project=PROJECT_ID
@@ -61,22 +54,24 @@ def rain_command(arguments):
                         --summary=SUMMARY
         reservation addFile --file=FILE
 
-    Arguments:
-        --label=STRING    label id reservation
-        --cm_id=CM_ID    reservation cloudmesh id
-        --user=USER_ID    user id
-        --project=PROJECT_ID    project id
-        --start=TIME_START     Start time of the reservation, in
-                               YYYY/MM/DD HH:MM:SS format. [default: 1901-01-01]
-        --end=TIME_END         End time of the reservation, in
-                               YYYY/MM/DD HH:MM:SS format. In addition a duration
-                               can be specified if the + sign is the first sign.
-                               The duration will than be added to
-                               the start time. [default: 2100-12-31]
-        --host=HOST            host number 
-        --summary=SUMMARY        summary of the reservation
-        --file=FILE            Adding multiple reservations from one file
     Options:
+        --rst                 print an rst manul page
+        --version             print the version
+        --label=STRING        label id reservation
+        --cm_id=CM_ID         reservation cloudmesh id
+        --user=USER_ID        user id
+        --project=PROJECT_ID  project id
+        --start=TIME_START    Start time of the reservation, in
+                              YYYY/MM/DD HH:MM:SS format. [default: 1901-01-01]
+        --end=TIME_END        End time of the reservation, in
+                              YYYY/MM/DD HH:MM:SS format. In addition a duration
+                              can be specified if the + sign is the first sign.
+                              The duration will than be added to
+                              the start time. [default: 2100-12-31]
+        --host=HOST           host number 
+        --summary=SUMMARY     summary of the reservation
+        --file=FILE           Adding multiple reservations from one file
+
 
 """
 
@@ -172,10 +167,11 @@ def rain_command(arguments):
           reservations.update_selection(cm_id=fromObj[1],project=toObj[1])
           print reservations.find_all()    '''
 
+def main():
+    arguments = docopt(shell_command_reservation.__doc__)
+    db = reservation_connect()
+    shell_command_reservation(arguments)
                                 
 if __name__ == "__main__":
-    arguments = docopt(rain_command.__doc__)
-    db = reservation_connect()
-    rain_command(arguments)
-    
+    main()
 
