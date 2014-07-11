@@ -11,7 +11,7 @@ def reservation_connect():
         print e
     
 
-def rain_command(arguments):
+def shell_command_reservation(arguments):
     """
     Usage:
         reservation find [all]
@@ -172,10 +172,11 @@ def rain_command(arguments):
           reservations.update_selection(cm_id=fromObj[1],project=toObj[1])
           print reservations.find_all()    '''
 
+def main():
+    arguments = docopt(shell_command_reservation.__doc__)
+    db = reservation_connect()
+    shell_command_reservation(arguments)
                                 
 if __name__ == "__main__":
-    arguments = docopt(rain_command.__doc__)
-    db = reservation_connect()
-    rain_command(arguments)
-    
+    main()
 
