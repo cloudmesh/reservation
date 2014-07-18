@@ -63,7 +63,7 @@ class DurationSubmit(Resource):
         data = reservations.duration(cm_id=request.form["cm_id"])
         if data is not None:
 	    print data    
-	    resp = Response(data, status=200, mimetype='text/html')
+	    resp = Response(str(data), status=200, mimetype='text/html')
 	    return resp
             
 class ListBySelection(Resource):
