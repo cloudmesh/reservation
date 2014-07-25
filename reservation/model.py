@@ -313,6 +313,7 @@ class Reservation(Document):
             print "Reservation added successfully."
             
     def check_overlap(self):
+        """checks if the reservation conflicts/overlaps with another reservation"""
         #print self.start_time, self.end_time
         flag = False
         rsvs= self.find_all()
