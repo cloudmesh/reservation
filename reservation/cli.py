@@ -144,15 +144,15 @@ def shell_command_reservation(arguments):
         _print_reservations(reservations, arguments["--format"])
             
     elif(arguments["duration"]):
-        reservations = Reservation()
-        print reservations.duration(arguments["--cm_id"])
+        db = Reservation()
+        print db.duration(arguments["--cm_id"])
     elif(arguments["delete"]):
         if(arguments["all"]):
-            reservations = Reservation()
-            reservations.delete_all()
+            db = Reservation()
+            db.delete_all()
         else:
-            reservations = Reservation()
-            reservations.delete_selection(cm_id=arguments["--cm_id"],
+            db = Reservation()
+            db.delete_selection(cm_id=arguments["--cm_id"],
                                           user=arguments["--user"],
                                           project=arguments["--project"],
                                           label= arguments["--label"],
@@ -164,15 +164,15 @@ def shell_command_reservation(arguments):
         if arguments["--file"] is None:
 
             
-            reservations = Reservation(label=arguments["--label"],
-                                    user=arguments["--user"],
-                                    project=arguments["--project"],
-                                    start_time=arguments["--start"],
-                                    end_time=arguments["--end"],
-                                    cm_id=arguments["--cm_id"],
-                                    host=arguments["--host"],
-                                    summary=arguments["--summary"])
-            reservations.add()
+            db = Reservation(label=arguments["--label"],
+                             user=arguments["--user"],
+                             project=arguments["--project"],
+                             start_time=arguments["--start"],
+                             end_time=arguments["--end"],
+                             cm_id=arguments["--cm_id"],
+                             host=arguments["--host"],
+                             summary=arguments["--summary"])
+            db.add()
         else:
             try:
                 with open(os.path.join(sys.path[0], arguments["--file"])) as file:
@@ -186,7 +186,7 @@ def shell_command_reservation(arguments):
                                                 end_time=row[5],
                                                 host=row[6],
                                                 summary=row[7])
-                        reservations.add()
+                        db.add()
             except Exception as e:
                 print "Error in adding from file. ", e
 '''
@@ -196,8 +196,8 @@ def shell_command_reservation(arguments):
           toObj = [str(sys.argv[3]).split("=")[0].replace("--", ""),str(sys.argv[3]).split("=")[1]]
           fromBody = {cm_id=101, project = 20, user = "oliver"}
           toBody = {cm_id=101, project = 20, user = "oliver"}
-          reservations.update_selection(cm_id=fromObj[1],project=toObj[1])
-          print reservations.find_all()
+          db.update_selection(cm_id=fromObj[1],project=toObj[1])
+          print db.find_all()
 '''
         
 def main():
