@@ -1,7 +1,11 @@
 #! /usr/bin/env python
 """
 Usage:
-    plot.py   
+    plot.py  filename
+
+Description:
+    prints the reservations contained in the database into an image in svg format
+
 """
 import sys
 import os
@@ -12,9 +16,14 @@ from cli import reservation_connect
 
 
     
-def timeline_plot(out_filename):
-    """prints a chart in svg format into the file with the specified filename"""
-    format = "svg"
+def timeline_plot(filename, format="svg"):
+    """prints a chart in svg format into the file with the specified filename
+
+    :param filename: the filename to which we write the image
+    :type filename: String
+    :param format: the format of the image, for example svg
+    :type format: String    
+    """
     db = reservation_connect()
 
 
@@ -87,9 +96,9 @@ def timeline_plot(out_filename):
 
     #print script
 
-    filename ="/tmp/ploticus.txt"    
+    script_filename ="/tmp/ploticus.txt"    
 
-    with open(filename, "w") as file:
+    with open(script_filename, "w") as file:
         file.write(script)
 
     
@@ -98,8 +107,8 @@ def timeline_plot(out_filename):
     else:
         ploticus = "/usr/bin/ploticus"
     
-    command = "{ploticus} {filename} -{format} -o {out}.{format}".format(out=out_filename,
-                                                                         filename=filename,
+    command = "{ploticus} {script_filename} -{format} -o {filename}.{format}".format(filename=filename,
+                                                                         script_filename=script_filename,
                                                                          format=format,
                                                                          ploticus=ploticus)
 
