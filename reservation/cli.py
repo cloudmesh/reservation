@@ -14,12 +14,12 @@ def reservation_connect():
         print e
         return None
     
-def printRsv(rsvs):
+def _print_reservations(reservations):
     """prints a reservation"""
-    for rsv in rsvs:
-        print rsv
-        print 140 * "="
-        
+    reservation_list = []
+    for reservation in reservations:
+        print reservation_list.append(reservation.to_json())
+    print json.dumps(reservation_list, indent=4)
 
 def shell_command_reservation(arguments):
     """
@@ -107,20 +107,20 @@ def shell_command_reservation(arguments):
                                end_time=arguments["--end"],
                                host=arguments["--host"],
                                summary=arguments["--summary"])
-        printRsv(rsv)
+        _print_reservations(rsv)
 
     elif(arguments["find"]):
         reservations = Reservation()
         if(arguments["all"]):
-            printRsv(reservations.find_all())
+            _print_reservations(reservations.find_all())
         elif(arguments["--user"]):
-            printRsv(reservations.find_user(arguments["--user"]))
+            _print_reservations(reservations.find_user(arguments["--user"]))
         elif(arguments["--label"]):
-            printRsv(reservations.find_label(arguments["--label"]))
+            _print_reservations(reservations.find_label(arguments["--label"]))
         elif(arguments["--cm_id"]):
-            printRsv(reservations.find_id(arguments["--cm_id"]))
+            _print_reservations(reservations.find_id(arguments["--cm_id"]))
         else:
-            printRsv( reservations.find_all())
+            _print_reservations(reservations.find_all())
     elif(arguments["duration"]):
         reservations = Reservation()
         print reservations.duration(arguments["--cm_id"])
