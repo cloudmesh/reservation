@@ -8,16 +8,19 @@ import pprint
 class Reservation(Document):
     """The reservation object which includes the attribute:
 
-    cm_id = StringField()
-    label = StringField()
-    summary = StringField()
-    host = StringField()
-    user = StringField()
-    project = StringField()
-    start_time = DateTimeField()
-    end_time = DateTimeField()
+    * cm_id = StringField()
+    * label = StringField()
+    * summary = StringField()
+    * host = StringField()
+    * user = StringField()
+    * project = StringField()
+    * start_time = DateTimeField()
+    * end_time = DateTimeField()
 
-    and an _order attribute
+    and
+
+    * _order
+    which is a list in which order the above attributes are supposed to be.
     """
     
     cm_id = StringField()

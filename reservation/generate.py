@@ -18,51 +18,55 @@ def generate_from_string(arguments):
     
 def generate(arguments):
     """
-    Usage:
-        generate -h | --help | --rst
-        generate clean
-        generate SERVERS RESERVATIONS DURATION START
-        generate list [--json|--table|--calendar]
+    ::
+    
+        Usage:
+            generate -h | --help | --rst
+            generate clean
+            generate SERVERS RESERVATIONS DURATION START
+            generate list [--json|--table|--calendar]
 
-    Arguments:
-        SERVERS       Number of servers for which we generate 
-                      reservations
-        RESERVATIONS  Number of reservations per server
-        DURATION      The maximum duration of a reservation 
-                      (determined randomly)
-        START         The start date. if now is specified, the current
-                      time is used, otherwise an offset is used in the
-                      form of 1m, or 1h, or 1w[default: now]
+        Arguments:
+            SERVERS       Number of servers for which we generate 
+                          reservations
 
-    Description:
+            RESERVATIONS  Number of reservations per server
 
-        This program generates a number of reservations so they can be
-        used to test the reservation package.
+            DURATION      The maximum duration of a reservation 
+                          (determined randomly)
 
-        generate clean
-            deletes all reservations from the reservation database
+            START         The start date. if now is specified, the current
+                          time is used, otherwise an offset is used in the
+                          form of 1m, or 1h, or 1w[default: now]
 
-        generate SERVERS RESERVATIONS DURATION
-            generates a number of reservations where the servers are
-            specified as hostlist (e.g. i[001-003]. The reservations
-            specifies how many reservations there will be for each
-            server. The duration is a random number between [0,duration]
-            that specified not only a duration, but also the time delta
-            between two reservations on the same host.
+        Description:
+            This program generates a number of reservations so they can be
+            used to test the reservation package.
 
-        generate list
-            retiurns the list of reservations in the specified
-            format. Thoe format can be list, table, or calendar
+            generate clean
+                deletes all reservations from the reservation database
 
-    Bugs:
-        Not implemented:
+            generate SERVERS RESERVATIONS DURATION
+                generates a number of reservations where the servers are
+                specified as hostlist (e.g. i[001-003]. The reservations
+                specifies how many reservations there will be for each
+                server. The duration is a random number between [0,duration]
+                that specified not only a duration, but also the time delta
+                between two reservations on the same host.
 
-        * clean 
-        * list
-        * the generation function does not yet have a start date
+            generate list
+                retiurns the list of reservations in the specified
+                format. Thoe format can be list, table, or calendar
 
-    See Also:
-        * https://pypi.python.org/pypi/pytimeparse/1.1.0
+        Bugs:
+            Not implemented:
+
+            * clean 
+            * list
+            * the generation function does not yet have a start date
+
+        See Also:
+            * https://pypi.python.org/pypi/pytimeparse/1.1.0
 
     """
 
