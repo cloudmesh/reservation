@@ -42,10 +42,12 @@ class Reservation(Document):
     ]
 
     def __str__(self):
+        """converst a reservation to a string"""
         d = self.to_json()
         return str(d)
 
     def to_json(self):
+        """converst the reservation to a json dict object"""
         d = {"label": self.label,
              "cm_id": self.cm_id,
              "summary": self.summary,
@@ -60,6 +62,7 @@ class Reservation(Document):
         '''Selects all the reservations made by a user
 
         :param username: the user name
+        :type username: String
         '''
         return Reservation.objects(user=username)
 
@@ -72,11 +75,16 @@ class Reservation(Document):
         '''Finds all reservations with a given label
 
         :param label: the label
+        :type label: String        
         '''
         return Reservation.objects(label=label)
         
     def duration(self, cm_id):
-        '''Shows the duration of the reservation'''
+        '''Shows the duration of the reservation
+
+        :param cm_id: the cloudmesh id for this reservation
+        :param type: String
+        '''
 
         reservations = Reservation.objects(cm_id=cm_id)
         delta = 0
@@ -88,7 +96,12 @@ class Reservation(Document):
            
     def list(self, **kwargs):
         '''Lists all the users reservations made in a project from a
-        start time to a end time'''        
+        start time to a end time
+
+        :param kwargs: the arguments to the list function include 'start_time', 'end_time', __raw__
+        '''
+        # TODO: this needs to be better documented
+        # TODO: It says users reservation, but users is not an explicit parameter
         start_time ="1901-01-01"
         end_time = "2100-12-31"
         empty_keys = [k for k,v in kwargs.iteritems() if not v]
@@ -108,9 +121,18 @@ class Reservation(Document):
         return reservations
     
     def delete_all(self):
+        """deletes all reservation"""
+        # TODO: BUG is it correct that the collection is deleted, or do we need to remove the reservations. Wht is if we store other things in the collection?
         Reservation.drop_collection()
     
-    def delete_selection(self, **kwargs):  # done    
+    def delete_selection(self, **kwargs):  # done
+        '''deletes all the users reservations made in a project from a
+        start time to a end time
+
+        :param kwargs: the arguments to the list function include 'start_time', 'end_time', __raw__
+        '''
+        # TODO: this needs to be better documented
+        # TODO: It says users reservation, but users is not an explicit parameter
         start_time ="1901-01-01"
         end_time = "2100-12-31"
         empty_keys = [k for k,v in kwargs.iteritems() if not v]
@@ -128,6 +150,13 @@ class Reservation(Document):
             print "Error in delete all: ", e
             
     def update_selection(self, **kwargs):  # done  
+        '''update all the reservations made in a project from a
+        start time to a end time
+
+        :param kwargs: the arguments to the list function include 'start_time', 'end_time', __raw__
+        '''
+        # TODO: this needs to be better documented
+        # TODO: It says users reservation, but users is not an explicit parameter
         start_time ="1901-01-01"
         end_time = "2100-12-31"
         empty_keys = [k for k,v in kwargs.iteritems() if not v]
@@ -289,11 +318,17 @@ class Reservation(Document):
     def find_id(self, id):
         '''displays the reservation object
         :param id: the cm_id
+        :type id: String
         '''
         return Reservation.objects(cm_id=id)
 
     def time_string(self, date_time):
-        """ returns a formated datatime object as string %Y-%m-%d %H:%M:%S """
+        """ returns a formated datatime object as string %Y-%m-%d %H:%M:%S
+
+        :param date_time: the datatime to be returned as string
+        :type date_time: datetime
+        """
+        
         return datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
             
     def add(self):
