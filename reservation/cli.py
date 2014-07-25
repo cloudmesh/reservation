@@ -18,7 +18,7 @@ def _print_reservations(reservations):
     """prints a reservation"""
     reservation_list = []
     for reservation in reservations:
-        print reservation_list.append(reservation.to_json())
+        reservation_list.append(reservation.to_json())
     print json.dumps(reservation_list, indent=4)
 
 def shell_command_reservation(arguments):
