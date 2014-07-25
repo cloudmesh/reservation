@@ -13,6 +13,7 @@ from cli import reservation_connect
 
     
 def timeline_plot(out_filename):
+    """prints a chart in svg format into the file with the specified filename"""
     format = "svg"
     db = reservation_connect()
 

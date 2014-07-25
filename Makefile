@@ -12,6 +12,10 @@ all:
 test:
 	nosetests -v
 
+wrongtest:
+	python setup.py install
+	python reservation_test/test.py
+
 req:
 	pip install -r requirements.txt
 
@@ -24,9 +28,6 @@ mongo:
 server:
 	python setup.py install ; cd reservation_server; python server.py
 
-test:
-	python setup.py install
-	python reservation_test/test.py
 
 setup:
 	make -f Makefile setupbuild_ubuntu

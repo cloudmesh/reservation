@@ -5,6 +5,7 @@ import pprint
 import json
 
 def reservation_connect():
+    """establishes connection to the reservation server"""
     try:
         db = connect('reservation', port=27777)
         return db
@@ -14,6 +15,7 @@ def reservation_connect():
         return None
     
 def printRsv(rsvs):
+    """prints a reservation"""
     for rsv in rsvs:
         print rsv
         print 140 * "="
@@ -74,8 +76,6 @@ def shell_command_reservation(arguments):
         --host=HOST           host number 
         --summary=SUMMARY     summary of the reservation
         --file=FILE           Adding multiple reservations from one file
-
-
     """
 
     #print arguments["login"]
@@ -165,14 +165,17 @@ def shell_command_reservation(arguments):
                         reservations.add()
             except Exception as e:
                 print "Error in adding from file. ", e
-'''    elif(arguments["update"]):
+'''
+    elif(arguments["update"]):
           reservations = Reservation()
           fromObj = [str(sys.argv[2]).split("=")[0].replace("--", ""),str(sys.argv[2]).split("=")[1]] 
           toObj = [str(sys.argv[3]).split("=")[0].replace("--", ""),str(sys.argv[3]).split("=")[1]]
           fromBody = {cm_id=101, project = 20, user = "oliver"}
           toBody = {cm_id=101, project = 20, user = "oliver"}
           reservations.update_selection(cm_id=fromObj[1],project=toObj[1])
-          print reservations.find_all()    '''
+          print reservations.find_all()
+'''
+        
 
 def main():
     arguments = docopt(shell_command_reservation.__doc__)

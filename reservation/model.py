@@ -6,7 +6,20 @@ import os
 import pprint
 
 class Reservation(Document):
+    """The reservation object which includes the attribute:
 
+    cm_id = StringField()
+    label = StringField()
+    summary = StringField()
+    host = StringField()
+    user = StringField()
+    project = StringField()
+    start_time = DateTimeField()
+    end_time = DateTimeField()
+
+    and an _order attribute
+    """
+    
     cm_id = StringField()
     label = StringField()
     summary = StringField()
@@ -280,12 +293,15 @@ class Reservation(Document):
         return Reservation.objects(cm_id=id)
 
     def time_string(self, date_time):
+        """ returns a formated datatime object as string %Y-%m-%d %H:%M:%S """
         return datetime.datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S")
             
     def add(self):
+        """adds the reservation if it is not having a conflict/overlap with another reservation"""
         if(self.check_overlap() == True):
             flag = True
             print "Reservations overlap: cannot schedule at this time"
+            # TODO: why is there a while loop?
             while flag:
                 self.start_time = str(self.time_string(self.start_time) + datetime.timedelta(minutes=30))
                 self.end_time = str(self.time_string(self.end_time)+ datetime.timedelta(minutes=30))

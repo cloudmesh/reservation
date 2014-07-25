@@ -62,8 +62,6 @@ reservation
            --host=HOST           host number 
            --summary=SUMMARY     summary of the reservation
            --file=FILE           Adding multiple reservations from one file
-   
-   
        
 generate
 ======================================================================

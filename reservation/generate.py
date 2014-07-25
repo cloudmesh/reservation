@@ -10,6 +10,9 @@ from model import Reservation
 from cli import reservation_connect
 
 def generate_from_string(arguments):
+    """a test function to generate from a stung. the arguments is
+    ignored. Please check with the source code.
+    """
     docopt_args = docopt(generate.__doc__,"m[01-05] 10 10 now")
     generate(docopt_args)
     
