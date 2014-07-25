@@ -3,6 +3,7 @@ from mongoengine import *
 from docopt import docopt
 import pprint
 import json
+from cloudmesh_common.tables import array_dict_table_printer
 
 def reservation_connect():
     """establishes connection to the reservation server"""
@@ -14,13 +15,26 @@ def reservation_connect():
         print e
         return None
     
-def _print_reservations(reservations):
+def _print_reservations(reservations, format="table"):
     """prints a reservation"""
     reservation_list = []
     for reservation in reservations:
         reservation_list.append(reservation.to_json())
-    print json.dumps(reservation_list, indent=4)
-
+    if format == "json":
+        print json.dumps(reservation_list, indent=4)
+    if format == "table":
+        print array_dict_table_printer(reservation_list,
+                                       ["cm_id",
+                                        "label",
+                                        "project",
+                                        "user",
+                                        "host",
+                                        "start_time",
+                                        "end_time",
+                                        "summary",
+                                        ]
+                                       )
+                
 def shell_command_reservation(arguments):
     """
       ::
@@ -40,6 +54,7 @@ def shell_command_reservation(arguments):
                              [--end=TIME_END]
                              [--host=HOST]
                              [--summary=SUMMARY]
+                             [--format=FORMAT]
             reservation duration [--cm_id=CM_ID]
             reservation delete [all]
                                [--cm_id=CM_ID]
@@ -78,6 +93,8 @@ def shell_command_reservation(arguments):
             --host=HOST           host number 
             --summary=SUMMARY     summary of the reservation
             --file=FILE           Adding multiple reservations from one file
+            --format=FORMAT       Format is either table or jaon
+                                  [default: table]
     """
 
     #print arguments["login"]
@@ -107,7 +124,7 @@ def shell_command_reservation(arguments):
                                end_time=arguments["--end"],
                                host=arguments["--host"],
                                summary=arguments["--summary"])
-        _print_reservations(rsv)
+        _print_reservations(rsv, arguments["--format"])
 
     elif(arguments["find"]):
         reservations = Reservation()
