@@ -23,6 +23,8 @@ def printRsv(rsvs):
 
 def shell_command_reservation(arguments):
     """
+      ::
+      
         Usage:
             reservation --rst
             reservation --version
