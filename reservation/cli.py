@@ -46,6 +46,7 @@ def shell_command_reservation(arguments):
                              [--user=USER_ID]
                              [--label=ID]
                              [--cm_id=ID]
+                             [--format=FORMAT]                             
             reservation list [--cm_id=CM_ID]
                              [--user=USER_ID]
                              [--project=PROJECT_ID]
@@ -115,8 +116,8 @@ def shell_command_reservation(arguments):
         print reservation.__version__
 
     elif(arguments["list"]):
-        reservations = Reservation()
-        rsv= reservations.list(cm_id=arguments["--cm_id"],
+        db = Reservation()
+        reservations = db.list(cm_id=arguments["--cm_id"],
                                user=arguments["--user"],
                                project=arguments["--project"],
                                label= arguments["--label"],
@@ -124,20 +125,24 @@ def shell_command_reservation(arguments):
                                end_time=arguments["--end"],
                                host=arguments["--host"],
                                summary=arguments["--summary"])
-        _print_reservations(rsv, arguments["--format"])
+        _print_reservations(reservations, arguments["--format"])
 
     elif(arguments["find"]):
-        reservations = Reservation()
+        db = Reservation()
+        
         if(arguments["all"]):
-            _print_reservations(reservations.find_all())
+            reservations = db.find_all()
         elif(arguments["--user"]):
-            _print_reservations(reservations.find_user(arguments["--user"]))
+            reservations = db.find_user(arguments["--user"])
         elif(arguments["--label"]):
-            _print_reservations(reservations.find_label(arguments["--label"]))
+            reservations = db.find_label(arguments["--label"])
         elif(arguments["--cm_id"]):
-            _print_reservations(reservations.find_id(arguments["--cm_id"]))
+            reservations = db.find_id(arguments["--cm_id"])
         else:
-            _print_reservations(reservations.find_all())
+            reservations = db.find_all()
+
+        _print_reservations(reservations, arguments["--format"])
+            
     elif(arguments["duration"]):
         reservations = Reservation()
         print reservations.duration(arguments["--cm_id"])
